@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Kontakt | Anfrage senden | SE Handwerk</title>
+  <meta name="description" content="Kontaktieren Sie SE Handwerk für Bodenarbeiten, Wohnungsübergabe oder Montage. Anfrage per Formular oder E-Mail. Raum Heilbronn & Stuttgart.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sehandwerk.de/kontakt">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Kontakt | Anfrage senden | SE Handwerk">
+  <meta property="og:description" content="Kontaktieren Sie SE Handwerk für Bodenarbeiten, Wohnungsübergabe oder Montage. Anfrage per Formular oder E-Mail. Raum Heilbronn & Stuttgart.">
+  <meta property="og:url" content="https://sehandwerk.de/kontakt">
+  <meta property="og:site_name" content="SE Handwerk">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo-icon-dark.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="SE Handwerk">
+        <img src="assets/logo-white.png" alt="SE Handwerk">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#leistungen">Leistungen</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="kontakt.html">Kontakt</a></li>
+      </ul>
+      <a href="#kontakt-form" class="btn btn-primary nav-cta">Anfrage senden</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Navigation"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html#leistungen" onclick="closeMobile()">Leistungen</a></li>
+      <li><a href="ueber-uns.html" onclick="closeMobile()">Über uns</a></li>
+      <li><a href="index.html#blog" onclick="closeMobile()">Blog</a></li>
+      <li><a href="#kontakt-form" class="btn btn-primary" onclick="closeMobile()" style="text-align:center;justify-content:center;">Anfrage senden</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== SCROLL PROGRESS ===== -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ===== PAGE HEADER ===== -->
+  <section class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="index.html">Startseite</a> / Kontakt</div>
+      <h1 class="section-title">Kontakt & Anfrage</h1>
+      <p class="section-subtitle">Schildern Sie uns Ihr Projekt — wir melden uns innerhalb von 24 Stunden mit einem verbindlichen Preis.</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT CONTENT ===== -->
+  <section class="section" id="kontakt-form">
+    <div class="container">
+      <div class="contact-page-grid">
+
+        <!-- LEFT COLUMN: Info -->
+        <div class="contact-page-info">
+          <h2>So erreichen Sie uns</h2>
+
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <a href="mailto:kontakt@se-handwerk.de">kontakt@se-handwerk.de</a>
+          </div>
+
+          <div class="contact-detail">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>Raum Heilbronn, Stuttgart, Mannheim & Umgebung</span>
+          </div>
+
+          <p>Sie können uns jederzeit per E-Mail oder über das Formular kontaktieren. Wir melden uns in der Regel innerhalb von 24 Stunden.</p>
+
+          <h2>Was wir für Ihre Anfrage brauchen</h2>
+          <p>Damit wir Ihnen schnell einen verbindlichen Preis nennen können:</p>
+          <ul>
+            <li>Art der Arbeit (Boden, Übergabe, Montage oder Sonstiges)</li>
+            <li>Fotos vom Raum oder Projekt</li>
+            <li>Ihre Postleitzahl (für die Anfahrt)</li>
+            <li>Gewünschter Termin (falls vorhanden)</li>
+          </ul>
+        </div>
+
+        <!-- RIGHT COLUMN: Form -->
+        <div class="contact-form-wrap">
+          <h3>Anfrage senden</h3>
+          <form action="https://formsubmit.co/kontakt@sehandwerk.de" method="POST">
+            <input type="hidden" name="_subject" value="Neue Anfrage über SE Handwerk Kontaktseite">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_next" value="https://sehandwerk.de/danke">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="Name" required placeholder="Ihr Name">
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail *</label>
+                <input type="email" id="email" name="E-Mail" required placeholder="ihre@email.de">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Telefon</label>
+                <input type="tel" id="phone" name="Telefon" placeholder="Für Rückruf">
+              </div>
+              <div class="form-group">
+                <label for="plz">PLZ / Ort</label>
+                <input type="text" id="plz" name="PLZ-Ort" placeholder="z.B. 74076 Heilbronn">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="service">Gewünschte Leistung</label>
+              <select id="service" name="Leistung">
+                <option value="">Bitte wählen...</option>
+                <option value="Bodenarbeiten">Bodenarbeiten (Laminat / Vinyl)</option>
+                <option value="Wohnungsübergabe">Wohnungsübergabe</option>
+                <option value="Montage & Reparatur">Montage & Reparatur</option>
+                <option value="Sportgeräte-Montage">Sportgeräte-Montage (Kraftstation etc.)</option>
+                <option value="Sonstiges">Sonstiges</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message">Ihr Projekt *</label>
+              <textarea id="message" name="Nachricht" required placeholder="Beschreiben Sie kurz Ihr Projekt. Was soll gemacht werden? Gerne auch Fotos per E-Mail nachsenden."></textarea>
+            </div>
+
+            <button type="submit" class="form-submit">Anfrage absenden</button>
+            <p class="form-note">Wir melden uns innerhalb von 24 Stunden. Ihre Daten werden nur zur Bearbeitung Ihrer Anfrage verwendet.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/logo-white.png" alt="SE Handwerk">
+          </div>
+          <p>Ihr zuverlässiger Handwerksbetrieb im Raum Heilbronn & Stuttgart. Bodenarbeiten, Wohnungsübergabe, Montage — sauber, planbar, transparent.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Schwerpunkte</h4>
+          <ul>
+            <li><a href="bodenarbeiten.html">Bodenarbeiten</a></li>
+            <li><a href="wohnungsuebergabe.html">Wohnungsübergabe</a></li>
+            <li><a href="kraftstation-montage.html">Montage & Reparatur</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Mehr</h4>
+          <ul>
+            <li><a href="kraftstation-montage.html">Kraftstation Montage</a></li>
+            <li><a href="power-rack-montage.html">Power Rack Montage</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="kontakt.html">Anfrage senden</a></li>
+            <li><a href="mailto:kontakt@se-handwerk.de">E-Mail</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Said & Tuzcuoglu GbR — SE Handwerk | Raum Heilbronn</p>
+        <p><a href="impressum.html" style="color:rgba(255,255,255,0.5);">Impressum</a> · <a href="datenschutz.html" style="color:rgba(255,255,255,0.5);">Datenschutz</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // ========== NAV & SCROLL PROGRESS ==========
+    const nav = document.getElementById('nav');
+    const scrollProgress = document.getElementById('scrollProgress');
+
+    function updateScroll() {
+      const s = window.scrollY;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0) scrollProgress.style.width = ((s / h) * 100) + '%';
+      nav.classList.toggle('scrolled', s > 20);
+    }
+    window.addEventListener('scroll', updateScroll, { passive: true });
+
+    // ========== MOBILE MENU ==========
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+    function closeMobile() { mobileMenu.classList.remove('active'); }
+
+    // ========== SMOOTH ANCHOR ==========
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const t = document.querySelector(href);
+        if (t) {
+          e.preventDefault();
+          const top = t.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

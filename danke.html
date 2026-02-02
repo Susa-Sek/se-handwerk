@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Anfrage erhalten | SE Handwerk</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="assets/logo-icon-dark.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="SE Handwerk">
+        <img src="assets/logo-white.png" alt="SE Handwerk">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#leistungen">Leistungen</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="index.html#blog">Blog</a></li>
+        <li><a href="index.html#kontakt">Kontakt</a></li>
+      </ul>
+      <a href="index.html#kontakt" class="btn btn-primary nav-cta">Anfrage senden</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Navigation"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="index.html#leistungen" onclick="closeMobile()">Leistungen</a></li>
+      <li><a href="ueber-uns.html" onclick="closeMobile()">Über uns</a></li>
+      <li><a href="index.html#blog" onclick="closeMobile()">Blog</a></li>
+      <li><a href="index.html#kontakt" class="btn btn-primary" onclick="closeMobile()" style="text-align:center;justify-content:center;">Anfrage senden</a></li>
+    </ul>
+  </div>
+
+  <!-- ===== CONFIRMATION ===== -->
+  <section class="hero" style="min-height:80vh;display:flex;align-items:center;">
+    <div class="container" style="text-align:center;">
+      <div style="width:80px;height:80px;border-radius:50%;background:rgba(200,150,46,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 28px;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#C8962E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+      </div>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;color:#fff;margin-bottom:16px;">Anfrage erhalten!</h1>
+      <p style="font-size:1.1rem;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 20px;line-height:1.7;">
+        Vielen Dank für Ihre Nachricht. Wir melden uns innerhalb von 24 Stunden mit einem Angebot bei Ihnen.
+      </p>
+      <p style="font-size:0.95rem;color:rgba(255,255,255,0.5);margin-bottom:36px;">
+        Falls Sie Fotos Ihres Projekts oder Raums haben, senden Sie diese gerne per E-Mail an <a href="mailto:kontakt@sehandwerk.de" style="color:#C8962E;">kontakt@sehandwerk.de</a>.
+      </p>
+      <a href="index.html" class="btn btn-primary">Zurück zur Startseite</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/logo-white.png" alt="SE Handwerk">
+          </div>
+          <p>Ihr zuverlässiger Handwerksbetrieb im Raum Heilbronn & Stuttgart. Bodenarbeiten, Wohnungsübergabe, Montage — sauber, planbar, transparent.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Schwerpunkte</h4>
+          <ul>
+            <li><a href="bodenarbeiten.html">Bodenarbeiten</a></li>
+            <li><a href="wohnungsuebergabe.html">Wohnungsübergabe</a></li>
+            <li><a href="kraftstation-montage.html">Montage & Reparatur</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Mehr</h4>
+          <ul>
+            <li><a href="kraftstation-montage.html">Kraftstation Montage</a></li>
+            <li><a href="power-rack-montage.html">Power Rack Montage</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="index.html#blog">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="index.html#kontakt">Anfrage senden</a></li>
+            <li><a href="mailto:kontakt@sehandwerk.de">E-Mail</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>Said & Tuzcuoglu GbR — SE Handwerk | Raum Heilbronn</p>
+        <p><a href="impressum.html" style="color:rgba(255,255,255,0.5);">Impressum</a> · <a href="datenschutz.html" style="color:rgba(255,255,255,0.5);">Datenschutz</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+    function closeMobile() { mobileMenu.classList.remove('active'); }
+  </script>
+</body>
+</html>

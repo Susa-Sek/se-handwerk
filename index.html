@@ -3,1069 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SE Handwerk – Ihr zuverlässiger Handwerksbetrieb im Raum Heilbronn & Stuttgart. Bodenarbeiten, Malerarbeiten, Montage. Faire Preise, transparente Angebote.">
-  <title>SE Handwerk – Zuverlässig. Transparent. Fair.</title>
+
+  <title>SE Handwerk — Bodenarbeiten, Wohnungsübergabe & Montage | Heilbronn & Stuttgart</title>
+  <meta name="description" content="SE Handwerk — Ihr zuverlässiger Handwerksbetrieb im Raum Heilbronn & Stuttgart. Bodenarbeiten, Wohnungsübergabe, Montage & Reparatur. Faire Preise, transparente Angebote.">
+  <meta name="keywords" content="Handwerk Heilbronn, Bodenarbeiten Stuttgart, Laminat verlegen, Vinyl verlegen, Wohnungsübergabe, Montage, SE Handwerk">
+  <meta name="author" content="SE Handwerk">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://sehandwerk.de/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="SE Handwerk — Bodenarbeiten, Wohnungsübergabe & Montage | Heilbronn & Stuttgart">
+  <meta property="og:description" content="Ihr zuverlässiger Handwerksbetrieb im Raum Heilbronn & Stuttgart. Bodenarbeiten, Wohnungsübergabe, Montage — faire Preise, transparente Angebote.">
+  <meta property="og:url" content="https://sehandwerk.de/">
+  <meta property="og:site_name" content="SE Handwerk">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "SE Handwerk",
+    "description": "Zuverlässiger Handwerksbetrieb im Raum Heilbronn und Stuttgart. Bodenarbeiten, Wohnungsübergabe und Montage — transparent, fair und termingerecht.",
+    "url": "https://sehandwerk.de",
+    "areaServed": [
+      {"@type": "City", "name": "Heilbronn"},
+      {"@type": "City", "name": "Stuttgart"},
+      {"@type": "City", "name": "Mannheim"}
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Steinsfeldstr. 21",
+      "addressLocality": "Bretzfeld",
+      "postalCode": "74626",
+      "addressRegion": "Baden-Württemberg",
+      "addressCountry": "DE"
+    },
+    "email": "kontakt@sehandwerk.de",
+    "priceRange": "$$",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Handwerksleistungen",
+      "itemListElement": [
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Bodenarbeiten", "description": "Laminat & Vinyl verlegen, Sockelleisten, Untergrundvorbereitung"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Wohnungsübergabe", "description": "Komplett-Service: Böden, Wände, Kleinreparaturen aus einer Hand"}},
+        {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Montage & Reparatur", "description": "Möbelmontage, Sportgeräte-Aufbau, Instandsetzungen und handwerkliche Kleinarbeiten"}}
+      ]
+    }
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    /* ========== RESET & BASE ========== */
-    *, *::before, *::after {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary: #1B3A4B;
-      --primary-light: #2D5F7A;
-      --accent: #E8A838;
-      --accent-hover: #D4952E;
-      --text: #1a1a1a;
-      --text-light: #555;
-      --text-muted: #777;
-      --bg: #ffffff;
-      --bg-alt: #F7F5F2;
-      --bg-dark: #1B3A4B;
-      --border: #e0dcd7;
-      --shadow: 0 2px 16px rgba(0,0,0,0.06);
-      --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
-      --radius: 12px;
-      --radius-sm: 8px;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      color: var(--text);
-      background: var(--bg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    img {
-      max-width: 100%;
-      display: block;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    /* ========== UTILITY ========== */
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    .section {
-      padding: 96px 0;
-    }
-
-    .section-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--accent);
-      margin-bottom: 12px;
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 800;
-      line-height: 1.2;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-
-    .section-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-light);
-      max-width: 600px;
-      line-height: 1.7;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      font-size: 1rem;
-      font-weight: 600;
-      border-radius: var(--radius-sm);
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      font-family: inherit;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(232,168,56,0.35);
-    }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-    }
-
-    .btn-outline:hover {
-      background: var(--primary);
-      color: #fff;
-    }
-
-    .btn-white {
-      background: #fff;
-      color: var(--primary);
-    }
-
-    .btn-white:hover {
-      background: var(--bg-alt);
-      transform: translateY(-1px);
-    }
-
-    /* ========== NAV ========== */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 100;
-      background: rgba(255,255,255,0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      transition: box-shadow 0.3s ease;
-    }
-
-    .nav.scrolled {
-      box-shadow: var(--shadow);
-    }
-
-    .nav-inner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 72px;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.35rem;
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .nav-logo .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--primary);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-weight: 800;
-      font-size: 1.1rem;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-light);
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-cta {
-      padding: 10px 24px;
-      font-size: 0.9rem;
-    }
-
-    .mobile-toggle {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 8px;
-    }
-
-    .mobile-toggle span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: var(--primary);
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-
-    /* ========== HERO ========== */
-    .hero {
-      padding: 160px 0 100px;
-      background: linear-gradient(160deg, #f8f6f3 0%, #eef3f7 100%);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(232,168,56,0.08) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(27,58,75,0.08);
-      padding: 8px 16px;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 24px;
-    }
-
-    .hero-badge .dot {
-      width: 8px;
-      height: 8px;
-      background: #34C759;
-      border-radius: 50%;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.2rem);
-      font-weight: 800;
-      line-height: 1.15;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-
-    .hero h1 span {
-      color: var(--accent);
-    }
-
-    .hero-desc {
-      font-size: 1.15rem;
-      color: var(--text-light);
-      line-height: 1.7;
-      margin-bottom: 36px;
-      max-width: 480px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .hero-visual {
-      position: relative;
-    }
-
-    .hero-card {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: var(--shadow-lg);
-      padding: 48px;
-      position: relative;
-    }
-
-    .hero-card-icon {
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-light));
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-    .hero-card h3 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-
-    .hero-card p {
-      color: var(--text-light);
-      font-size: 0.95rem;
-      margin-bottom: 24px;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .hero-stat {
-      background: var(--bg-alt);
-      border-radius: var(--radius-sm);
-      padding: 16px;
-      text-align: center;
-    }
-
-    .hero-stat .number {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .hero-stat .label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-    }
-
-    .floating-badge {
-      position: absolute;
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 14px 20px;
-      box-shadow: var(--shadow-lg);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.85rem;
-      font-weight: 600;
-    }
-
-    .floating-badge.top-right {
-      top: -20px;
-      right: -20px;
-      color: #34C759;
-    }
-
-    .floating-badge.bottom-left {
-      bottom: -16px;
-      left: -16px;
-      color: var(--accent);
-    }
-
-    /* ========== TRUST BAR ========== */
-    .trust-bar {
-      padding: 40px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .trust-items {
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      font-weight: 500;
-    }
-
-    .trust-item svg {
-      width: 20px;
-      height: 20px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    /* ========== SERVICES ========== */
-    .services {
-      background: var(--bg);
-    }
-
-    .services-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .services-header .section-subtitle {
-      margin: 0 auto;
-    }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    .service-card {
-      background: var(--bg-alt);
-      border-radius: var(--radius);
-      padding: 36px;
-      transition: all 0.3s ease;
-      border: 1px solid transparent;
-    }
-
-    .service-card:hover {
-      background: #fff;
-      border-color: var(--border);
-      box-shadow: var(--shadow);
-      transform: translateY(-4px);
-    }
-
-    .service-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--primary);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .service-card h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-
-    .service-card p {
-      color: var(--text-light);
-      font-size: 0.92rem;
-      line-height: 1.6;
-    }
-
-    .service-card ul {
-      list-style: none;
-      margin-top: 16px;
-    }
-
-    .service-card ul li {
-      font-size: 0.88rem;
-      color: var(--text-light);
-      padding: 4px 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .service-card ul li::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--accent);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    /* ========== PRICING ========== */
-    .pricing {
-      background: var(--bg-alt);
-    }
-
-    .pricing-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .pricing-header .section-subtitle {
-      margin: 0 auto;
-    }
-
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      max-width: 800px;
-      margin: 0 auto 48px;
-    }
-
-    .price-card {
-      background: #fff;
-      border-radius: var(--radius);
-      padding: 32px;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-    }
-
-    .price-card:hover {
-      box-shadow: var(--shadow);
-      border-color: var(--accent);
-    }
-
-    .price-card h4 {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-
-    .price-card .price {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--accent);
-      margin-bottom: 6px;
-    }
-
-    .price-card .price-unit {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--text-muted);
-    }
-
-    .price-card .price-note {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-      line-height: 1.5;
-    }
-
-    .pricing-note {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-      background: #fff;
-      padding: 24px 32px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border);
-    }
-
-    .pricing-note p {
-      font-size: 0.95rem;
-      color: var(--text-light);
-      line-height: 1.6;
-    }
-
-    .pricing-note strong {
-      color: var(--primary);
-    }
-
-    /* ========== PROCESS ========== */
-    .process {
-      background: var(--bg);
-    }
-
-    .process-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .process-header .section-subtitle {
-      margin: 0 auto;
-    }
-
-    .process-steps {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-    }
-
-    .process-step {
-      text-align: center;
-      position: relative;
-    }
-
-    .process-step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 32px;
-      right: -16px;
-      width: 32px;
-      height: 2px;
-      background: var(--border);
-    }
-
-    .step-number {
-      width: 64px;
-      height: 64px;
-      border-radius: 50%;
-      background: var(--bg-alt);
-      border: 2px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      font-size: 1.3rem;
-      font-weight: 800;
-      color: var(--primary);
-      transition: all 0.3s ease;
-    }
-
-    .process-step:hover .step-number {
-      background: var(--primary);
-      color: #fff;
-      border-color: var(--primary);
-    }
-
-    .process-step h4 {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--primary);
-      margin-bottom: 8px;
-    }
-
-    .process-step p {
-      font-size: 0.88rem;
-      color: var(--text-light);
-      line-height: 1.5;
-    }
-
-    /* ========== REGION ========== */
-    .region {
-      background: var(--bg-alt);
-    }
-
-    .region-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .region-text .section-subtitle {
-      margin-bottom: 32px;
-    }
-
-    .region-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .region-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .region-item svg {
-      width: 18px;
-      height: 18px;
-      color: var(--accent);
-      flex-shrink: 0;
-    }
-
-    .region-visual {
-      background: var(--primary);
-      border-radius: var(--radius);
-      padding: 48px;
-      color: #fff;
-    }
-
-    .region-visual h3 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .region-visual p {
-      color: rgba(255,255,255,0.75);
-      line-height: 1.6;
-      margin-bottom: 24px;
-    }
-
-    .region-highlight {
-      display: flex;
-      gap: 24px;
-    }
-
-    .region-highlight-item {
-      text-align: center;
-    }
-
-    .region-highlight-item .number {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent);
-    }
-
-    .region-highlight-item .label {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.6);
-      margin-top: 4px;
-    }
-
-    /* ========== CTA ========== */
-    .cta {
-      background: var(--bg-dark);
-      padding: 96px 0;
-    }
-
-    .cta-content {
-      text-align: center;
-      max-width: 640px;
-      margin: 0 auto;
-    }
-
-    .cta-content .section-title {
-      color: #fff;
-      margin-bottom: 16px;
-    }
-
-    .cta-content p {
-      color: rgba(255,255,255,0.7);
-      font-size: 1.1rem;
-      line-height: 1.7;
-      margin-bottom: 36px;
-    }
-
-    .cta-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    .cta-info {
-      margin-top: 40px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      display: flex;
-      justify-content: center;
-      gap: 48px;
-      flex-wrap: wrap;
-    }
-
-    .cta-info-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255,255,255,0.6);
-      font-size: 0.9rem;
-    }
-
-    .cta-info-item svg {
-      width: 18px;
-      height: 18px;
-      color: var(--accent);
-    }
-
-    /* ========== FOOTER ========== */
-    .footer {
-      background: #142D3B;
-      padding: 48px 0 24px;
-    }
-
-    .footer-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-bottom: 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #fff;
-    }
-
-    .footer-logo .logo-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--primary-light);
-      border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent);
-      font-weight: 800;
-      font-size: 0.95rem;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .footer-links a {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.85rem;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: #fff;
-    }
-
-    .footer-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .footer-bottom p {
-      color: rgba(255,255,255,0.35);
-      font-size: 0.8rem;
-    }
-
-    /* ========== MOBILE MENU ========== */
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 72px;
-      left: 0;
-      right: 0;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow-lg);
-      z-index: 99;
-      padding: 24px;
-    }
-
-    .mobile-menu.active {
-      display: block;
-    }
-
-    .mobile-menu ul {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .mobile-menu a {
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--text);
-      display: block;
-      padding: 8px 0;
-    }
-
-    /* ========== RESPONSIVE ========== */
-    @media (max-width: 968px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 48px;
-      }
-
-      .hero-visual {
-        max-width: 480px;
-      }
-
-      .services-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .process-steps {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 40px;
-      }
-
-      .process-step:not(:last-child)::after {
-        display: none;
-      }
-
-      .region-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .section {
-        padding: 64px 0;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .mobile-toggle {
-        display: flex;
-      }
-
-      .hero {
-        padding: 120px 0 72px;
-      }
-
-      .services-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .pricing-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .process-steps {
-        grid-template-columns: 1fr;
-        max-width: 320px;
-        margin: 0 auto;
-      }
-
-      .trust-items {
-        gap: 24px;
-      }
-
-      .floating-badge {
-        display: none;
-      }
-
-      .cta-info {
-        flex-direction: column;
-        align-items: center;
-        gap: 16px;
-      }
-
-      .footer-content {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .footer-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 16px;
-      }
-
-      .footer-bottom {
-        flex-direction: column;
-        text-align: center;
-      }
-
-      .region-list {
-        grid-template-columns: 1fr;
-      }
-
-      .region-highlight {
-        flex-direction: column;
-        gap: 16px;
-      }
-    }
-  </style>
+  <link rel="icon" type="image/png" href="assets/logo-icon-dark.png">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-  <!-- ========== NAVIGATION ========== -->
+  <!-- ===== NAVIGATION ===== -->
   <nav class="nav" id="nav">
     <div class="container nav-inner">
-      <a href="#" class="nav-logo">
-        <div class="logo-icon">SE</div>
-        Handwerk
+      <a href="/" class="nav-logo" aria-label="SE Handwerk">
+        <img src="assets/logo-white.png" alt="SE Handwerk">
       </a>
       <ul class="nav-links">
         <li><a href="#leistungen">Leistungen</a></li>
         <li><a href="#preise">Preise</a></li>
-        <li><a href="#ablauf">Ablauf</a></li>
-        <li><a href="#region">Einsatzgebiet</a></li>
+        <li><a href="ueber-uns.html">Über uns</a></li>
+        <li><a href="#blog">Blog</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
       </ul>
       <a href="#kontakt" class="btn btn-primary nav-cta">Anfrage senden</a>
-      <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Navigation"><span></span><span></span><span></span></button>
     </div>
   </nav>
 
-  <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
       <li><a href="#leistungen" onclick="closeMobile()">Leistungen</a></li>
       <li><a href="#preise" onclick="closeMobile()">Preise</a></li>
-      <li><a href="#ablauf" onclick="closeMobile()">Ablauf</a></li>
-      <li><a href="#region" onclick="closeMobile()">Einsatzgebiet</a></li>
+      <li><a href="ueber-uns.html" onclick="closeMobile()">Über uns</a></li>
+      <li><a href="#blog" onclick="closeMobile()">Blog</a></li>
       <li><a href="#kontakt" class="btn btn-primary" onclick="closeMobile()" style="text-align:center;justify-content:center;">Anfrage senden</a></li>
     </ul>
   </div>
 
-  <!-- ========== HERO ========== -->
+  <!-- ===== SCROLL PROGRESS ===== -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ===== HERO ===== -->
   <section class="hero">
     <div class="container hero-content">
       <div class="hero-grid">
         <div>
-          <div class="hero-badge">
-            <span class="dot"></span>
-            Jetzt Termine verfügbar
-          </div>
+          <div class="hero-badge"><span class="dot"></span> Termine verfügbar</div>
           <h1>Handwerk mit <span>Klartext.</span><br>Keine Überraschungen.</h1>
           <p class="hero-desc">
-            Wir verlegen Böden, streichen Wände und montieren — im Raum Heilbronn & Stuttgart.
+            Wir verlegen Böden, erledigen Wohnungsübergaben und montieren — im Raum Heilbronn & Stuttgart.
             Faire Preise, transparente Angebote, zuverlässige Umsetzung.
           </p>
           <div class="hero-buttons">
             <a href="#kontakt" class="btn btn-primary">
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
               Kostenlos anfragen
             </a>
-            <a href="#leistungen" class="btn btn-outline">Leistungen ansehen</a>
+            <a href="#leistungen" class="btn btn-outline-light">Leistungen ansehen</a>
           </div>
         </div>
         <div class="hero-visual">
           <div class="hero-card">
-            <div class="hero-card-icon">
-              <svg width="32" height="32" fill="none" stroke="#E8A838" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <h3>Ihr Projekt, fair kalkuliert</h3>
-            <p>Transparente m²-Preise, keine versteckten Kosten. Erst besichtigen, dann anbieten.</p>
-            <div class="hero-stats">
-              <div class="hero-stat">
-                <div class="number">ab 11€</div>
-                <div class="label">pro m² Boden</div>
+            <h3>Warum SE Handwerk?</h3>
+            <div class="hero-services-list">
+              <div class="hero-service-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Festpreis vor Arbeitsbeginn
               </div>
-              <div class="hero-stat">
-                <div class="number">75€</div>
-                <div class="label">Besichtigung*</div>
+              <div class="hero-service-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Antwort innerhalb 24 Stunden
               </div>
-            </div>
-            <p style="font-size:0.75rem;color:var(--text-muted);margin-top:12px;">*Wird bei Auftragserteilung vollständig verrechnet</p>
-            <div class="floating-badge top-right">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
-              Gewerbe angemeldet
-            </div>
-            <div class="floating-badge bottom-left">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/></svg>
-              Rechnung inkl. MwSt.
+              <div class="hero-service-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Sauber, termingerecht, mit Rechnung
+              </div>
+              <div class="hero-service-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                Heilbronn, Stuttgart & Umgebung
+              </div>
             </div>
           </div>
         </div>
@@ -1073,7 +136,7 @@
     </div>
   </section>
 
-  <!-- ========== TRUST BAR ========== -->
+  <!-- ===== TRUST BAR ===== -->
   <section class="trust-bar">
     <div class="container">
       <div class="trust-items">
@@ -1082,11 +145,11 @@
           Gewerbe angemeldet
         </div>
         <div class="trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
           Faire Festpreise
         </div>
         <div class="trust-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           Fotos vorab = keine Überraschungen
         </div>
         <div class="trust-item">
@@ -1097,104 +160,88 @@
     </div>
   </section>
 
-  <!-- ========== SERVICES ========== -->
-  <section class="section services" id="leistungen">
+  <!-- ===== SCHWERPUNKT 1: BODENARBEITEN ===== -->
+  <section class="showcase-section alt-bg" id="leistungen">
     <div class="container">
-      <div class="services-header">
-        <div class="section-label">Leistungen</div>
-        <h2 class="section-title">Was wir für Sie erledigen</h2>
-        <p class="section-subtitle">Vom Bodenbelag bis zur Wohnungsübergabe — alles aus einer Hand, sauber und termingerecht.</p>
-      </div>
-      <div class="services-grid">
-        <!-- Card 1 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" fill="none" stroke="#E8A838" stroke-width="2" viewBox="0 0 24 24"><rect x="1" y="1" width="22" height="22" rx="2"/><line x1="1" y1="8" x2="23" y2="8"/><line x1="1" y1="15" x2="23" y2="15"/><line x1="8" y1="1" x2="8" y2="23"/><line x1="16" y1="1" x2="16" y2="23"/></svg>
-          </div>
-          <h3>Bodenarbeiten</h3>
-          <p>Unser Schwerpunkt — professionell und passgenau verlegt.</p>
-          <ul>
-            <li>Laminat verlegen</li>
-            <li>Klick-Vinyl verlegen</li>
-            <li>Vinylboden mit Trittschalldämmung</li>
-            <li>Sockelleisten montieren</li>
-          </ul>
+      <div class="showcase-grid">
+        <div class="showcase-image">
+          <img src="assets/bodenarbeiten.jpg" alt="Laminat und Vinyl Bodenbelag in modernem Wohnraum" loading="lazy">
         </div>
-        <!-- Card 2 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" fill="none" stroke="#E8A838" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5"/><path d="M5 12l7-7 7 7"/><rect x="3" y="19" width="18" height="2" rx="1"/></svg>
-          </div>
-          <h3>Untergrundvorbereitung</h3>
-          <p>Bevor der neue Boden kommt — wir machen den Untergrund belegreif.</p>
-          <ul>
-            <li>Alte Beläge entfernen</li>
-            <li>Teppich, Kork, Fliesen raus</li>
-            <li>Klebereste entfernen</li>
-            <li>Schleifen & Anschleifen</li>
+        <div class="showcase-text">
+          <div class="section-label">Schwerpunkt</div>
+          <h3>Bodenarbeiten — Laminat & Vinyl, professionell verlegt</h3>
+          <p>Vom Altbelag-Rückbau bis zur fertigen Sockelleiste. Wir verlegen Ihren neuen Boden passgenau und sauber — ohne Überraschungen bei der Rechnung.</p>
+          <ul class="showcase-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Klick-Laminat & Klick-Vinyl</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Trittschalldämmung & Dampfsperre</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Sockelleisten auf Gehrung</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Untergrundvorbereitung & Altbelag-Entsorgung</li>
           </ul>
-        </div>
-        <!-- Card 3 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" fill="none" stroke="#E8A838" stroke-width="2" viewBox="0 0 24 24"><path d="M2 22l1-1h18l1 1"/><path d="M6 18V2"/><path d="M18 18V2"/><path d="M6 2h12"/><path d="M6 6h12"/><path d="M6 10h12"/></svg>
+          <div class="showcase-price">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            ab 16 €/m² — transparente Richtwerte
           </div>
-          <h3>Malerarbeiten</h3>
-          <p>Saubere Wände für Renovierungen und Wohnungsübergaben.</p>
-          <ul>
-            <li>Wände streichen (weiß/neutral)</li>
-            <li>Renovierungsanstriche</li>
-            <li>Übergabe-Service</li>
-            <li>Kleinere Ausbesserungen</li>
-          </ul>
-        </div>
-        <!-- Card 4 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" fill="none" stroke="#E8A838" stroke-width="2" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <h3>Montage & Reparatur</h3>
-          <p>Vom Möbelaufbau bis zur kleinen Instandsetzung.</p>
-          <ul>
-            <li>Möbelmontage</li>
-            <li>Kleine Reparaturen</li>
-            <li>Instandsetzungen</li>
-            <li>Handwerkliche Kleinarbeiten</li>
-          </ul>
-        </div>
-        <!-- Card 5 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" fill="none" stroke="#E8A838" stroke-width="2" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <h3>Wohnungsübergabe</h3>
-          <p>Komplett-Service für Mietwohnungen — alles für die saubere Übergabe.</p>
-          <ul>
-            <li>Böden erneuern</li>
-            <li>Wände frisch streichen</li>
-            <li>Kleinreparaturen</li>
-            <li>Übergabefertig machen</li>
-          </ul>
-        </div>
-        <!-- Card 6 -->
-        <div class="service-card">
-          <div class="service-icon">
-            <svg width="26" height="26" fill="none" stroke="#E8A838" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3>Flexibel & Zuverlässig</h3>
-          <p>Auch bei kurzfristigen Anfragen und besonderen Anforderungen.</p>
-          <ul>
-            <li>Wasserschaden-Nacharbeiten</li>
-            <li>Kurzfristige Einsätze</li>
-            <li>Wochenend-Termine möglich</li>
-            <li>Privat & gewerblich</li>
-          </ul>
+          <a href="bodenarbeiten.html" class="btn btn-outline btn-sm">Mehr zu Bodenarbeiten <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== PRICING ========== -->
+  <!-- ===== SCHWERPUNKT 2: WOHNUNGSÜBERGABE ===== -->
+  <section class="showcase-section">
+    <div class="container">
+      <div class="showcase-grid showcase-reverse">
+        <div class="showcase-image">
+          <img src="assets/wohnungsuebergabe.jpg" alt="Renovierte Wohnung mit neuem Boden und frisch gestrichenen Wänden" loading="lazy">
+        </div>
+        <div class="showcase-text">
+          <div class="section-label">Schwerpunkt</div>
+          <h3>Wohnungsübergabe — alles aus einer Hand</h3>
+          <p>Mietwohnung zurückgeben? Wir machen sie übergabefertig. Böden, Wände, Kleinreparaturen — ein Ansprechpartner, ein Termin, eine Rechnung.</p>
+          <ul class="showcase-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Böden erneuern (Laminat, Vinyl)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Wände & Decken streichen</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dübellöcher, Risse, Kleinreparaturen</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Ein Ansprechpartner für alles</li>
+          </ul>
+          <div class="showcase-price">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            Pauschalangebot nach Besichtigung
+          </div>
+          <a href="wohnungsuebergabe.html" class="btn btn-outline btn-sm">Mehr zur Übergabe <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCHWERPUNKT 3: MONTAGE & REPARATUR ===== -->
+  <section class="showcase-section alt-bg">
+    <div class="container">
+      <div class="showcase-grid">
+        <div class="showcase-image">
+          <img src="assets/montage.jpg" alt="Werkzeug und Montageanleitung für professionellen Aufbau" loading="lazy">
+        </div>
+        <div class="showcase-text">
+          <div class="section-label">Schwerpunkt</div>
+          <h3>Montage & Reparatur — Möbel, Geräte, Instandsetzung</h3>
+          <p>Von der Küchenmontage bis zum Kraftstation-Aufbau. Wir bringen eigenes Werkzeug mit und hinterlassen eine saubere Baustelle.</p>
+          <ul class="showcase-features">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Möbelmontage & Küchen</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Sportgeräte-Aufbau (Kraftstationen, Power Racks)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Kleinreparaturen & Instandsetzung</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Eigenes Werkzeug, ordentliche Rechnung</li>
+          </ul>
+          <div class="showcase-price">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            ab 300 € — Festpreis nach Absprache
+          </div>
+          <a href="kraftstation-montage.html" class="btn btn-outline btn-sm">Mehr zu Montage <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PREISE ===== -->
   <section class="section pricing" id="preise">
     <div class="container">
       <div class="pricing-header">
@@ -1205,39 +252,36 @@
       <div class="pricing-grid">
         <div class="price-card">
           <h4>Laminat verlegen</h4>
-          <div class="price">11 – 15 €</div>
+          <div class="price">16 – 24 €</div>
           <div class="price-unit">pro m²</div>
-          <div class="price-note">Bei kleinen Flächen ca. 15–16 € / m² (Rüst- & Anfahrtsaufwand)</div>
+          <div class="price-note">Bei kleinen Flächen ca. 22–26 €/m² (Rüst- & Anfahrtsaufwand)</div>
         </div>
         <div class="price-card">
           <h4>Klick-Vinyl verlegen</h4>
-          <div class="price">11 – 14 €</div>
+          <div class="price">17 – 22 €</div>
           <div class="price-unit">pro m²</div>
           <div class="price-note">Preis abhängig von Untergrund, Zuschnitt & Raumaufteilung</div>
         </div>
         <div class="price-card">
           <h4>Sockelleisten montieren</h4>
-          <div class="price">4 – 5 €</div>
+          <div class="price">6 – 8 €</div>
           <div class="price-unit">pro laufender Meter</div>
           <div class="price-note">Exakte Länge wird nach Besichtigung bestimmt</div>
         </div>
         <div class="price-card">
           <h4>Untergrund schleifen</h4>
-          <div class="price">6 – 9 €</div>
+          <div class="price">10 – 14 €</div>
           <div class="price-unit">pro m²</div>
           <div class="price-note">Nur wenn nötig — wird immer transparent kommuniziert</div>
         </div>
       </div>
       <div class="pricing-note">
-        <p>
-          <strong>Besichtigung: 75 € Anfahrtspauschale</strong> — wird bei Auftragserteilung vollständig verrechnet.
-          Alternativ können Sie uns vorab Fotos senden, damit wir Ihnen eine realistische Einschätzung geben können.
-        </p>
+        <p><strong>Besichtigung: 89 € Anfahrtspauschale</strong> — wird bei Auftragserteilung vollständig verrechnet. Alternativ können Sie uns vorab Fotos senden.</p>
       </div>
     </div>
   </section>
 
-  <!-- ========== PROCESS ========== -->
+  <!-- ===== ABLAUF ===== -->
   <section class="section process" id="ablauf">
     <div class="container">
       <div class="process-header">
@@ -1249,12 +293,12 @@
         <div class="process-step">
           <div class="step-number">1</div>
           <h4>Anfrage</h4>
-          <p>Schreiben Sie uns oder rufen Sie an. Schildern Sie kurz Ihr Projekt und senden Sie uns gerne Fotos.</p>
+          <p>Schreiben Sie uns oder senden Sie Fotos. Schildern Sie kurz Ihr Projekt.</p>
         </div>
         <div class="process-step">
           <div class="step-number">2</div>
           <h4>Einschätzung</h4>
-          <p>Wir prüfen Ihre Angaben und geben Ihnen eine erste Preiseinschätzung — oder vereinbaren einen Besichtigungstermin.</p>
+          <p>Wir prüfen Ihre Angaben und geben eine erste Preiseinschätzung — oder vereinbaren einen Besichtigungstermin.</p>
         </div>
         <div class="process-step">
           <div class="step-number">3</div>
@@ -1270,7 +314,7 @@
     </div>
   </section>
 
-  <!-- ========== REGION ========== -->
+  <!-- ===== EINSATZGEBIET ===== -->
   <section class="section region" id="region">
     <div class="container">
       <div class="region-content">
@@ -1315,10 +359,10 @@
         </div>
         <div class="region-visual">
           <h3>Standortflexibel im Einsatz</h3>
-          <p>Wir sind in der gesamten Region Baden-Württemberg unterwegs. Bei Projekten in der Nähe kombinieren wir Besichtigung und Baustelle — das spart Zeit und Kosten für alle.</p>
+          <p>Wir sind in der gesamten Region unterwegs. Bei Projekten in der Nähe kombinieren wir Besichtigung und Baustelle.</p>
           <div class="region-highlight">
             <div class="region-highlight-item">
-              <div class="number">75€</div>
+              <div class="number">89€</div>
               <div class="label">Anfahrtspauschale</div>
             </div>
             <div class="region-highlight-item">
@@ -1331,104 +375,307 @@
     </div>
   </section>
 
-  <!-- ========== CTA ========== -->
-  <section class="cta" id="kontakt">
+  <!-- ===== KONTAKT ===== -->
+  <section class="section contact" id="kontakt">
     <div class="container">
-      <div class="cta-content">
-        <div class="section-label">Kontakt</div>
-        <h2 class="section-title">Projekt besprechen?</h2>
-        <p>Schreiben Sie uns eine Nachricht oder rufen Sie direkt an. Schildern Sie kurz Ihr Vorhaben — wir melden uns zeitnah mit einer Einschätzung.</p>
-        <div class="cta-buttons">
-          <a href="tel:+4900000000" class="btn btn-primary" style="font-size:1.1rem;">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            Jetzt anrufen
-          </a>
-          <a href="mailto:kontakt@se-handwerk.de" class="btn btn-white">
-            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-            E-Mail schreiben
-          </a>
+      <div class="section-label">Kontakt</div>
+      <h2 class="section-title">Projekt besprechen? Jetzt anfragen.</h2>
+      <div class="contact-grid" style="margin-top:40px;">
+        <div class="contact-info">
+          <p>Schildern Sie uns kurz Ihr Vorhaben. Wir melden uns mit einem verbindlichen Preis — keine Überraschungen.</p>
+          <h3>So erreichen Sie uns</h3>
+          <div class="contact-methods">
+            <a href="mailto:kontakt@sehandwerk.de" class="contact-method">
+              <div class="contact-method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact-method-text">
+                <strong>E-Mail</strong>
+                <span>kontakt@sehandwerk.de</span>
+              </div>
+            </a>
+            <div class="contact-method">
+              <div class="contact-method-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact-method-text">
+                <strong>Einsatzgebiet</strong>
+                <span>Heilbronn, Stuttgart, Mannheim & Umgebung</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="cta-info">
-          <div class="cta-info-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Raum Heilbronn & Stuttgart
-          </div>
-          <div class="cta-info-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Schnelle Rückmeldung
-          </div>
-          <div class="cta-info-item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Fotos vorab per WhatsApp
-          </div>
+        <div class="contact-form-wrap">
+          <h3>Anfrage senden</h3>
+          <form action="https://formsubmit.co/kontakt@sehandwerk.de" method="POST">
+            <input type="hidden" name="_subject" value="Neue Anfrage über SE Handwerk Website">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="text" name="_honey" style="display:none">
+            <input type="hidden" name="_next" value="https://sehandwerk.de/danke">
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Name *</label>
+                <input type="text" id="name" name="Name" required placeholder="Ihr Name">
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail *</label>
+                <input type="email" id="email" name="E-Mail" required placeholder="ihre@email.de">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="phone">Telefon</label>
+                <input type="tel" id="phone" name="Telefon" placeholder="Für Rückruf">
+              </div>
+              <div class="form-group">
+                <label for="plz">PLZ / Ort</label>
+                <input type="text" id="plz" name="PLZ-Ort" placeholder="z.B. 74076 Heilbronn">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="service">Gewünschte Leistung</label>
+              <select id="service" name="Leistung">
+                <option value="">Bitte wählen...</option>
+                <option value="Bodenarbeiten">Bodenarbeiten (Laminat / Vinyl)</option>
+                <option value="Wohnungsübergabe">Wohnungsübergabe</option>
+                <option value="Montage & Reparatur">Montage & Reparatur</option>
+                <option value="Sportgeräte-Montage">Sportgeräte-Montage (Kraftstation etc.)</option>
+                <option value="Sonstiges">Sonstiges</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="message">Ihr Projekt *</label>
+              <textarea id="message" name="Nachricht" required placeholder="Beschreiben Sie kurz Ihr Projekt. Was soll gemacht werden? Gerne auch Fotos per E-Mail nachsenden."></textarea>
+            </div>
+            <button type="submit" class="form-submit">Anfrage absenden</button>
+            <p class="form-note">Wir melden uns innerhalb von 24 Stunden. Ihre Daten werden nur zur Bearbeitung Ihrer Anfrage verwendet.</p>
+          </form>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== FOOTER ========== -->
+  <!-- ===== BLOG ===== -->
+  <section class="section blog" id="blog">
+    <div class="container">
+      <div class="blog-header">
+        <div class="section-label">Ratgeber</div>
+        <h2 class="section-title">Tipps rund um Handwerk & Montage</h2>
+        <p class="section-subtitle">Praktisches Wissen aus unserer täglichen Arbeit.</p>
+      </div>
+      <div class="blog-grid">
+
+        <a href="blog/laminat-oder-vinyl.html" class="blog-card">
+          <div class="blog-card-img">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="1" y="1" width="22" height="22" rx="2"/><line x1="1" y1="8" x2="23" y2="8"/><line x1="1" y1="15" x2="23" y2="15"/><line x1="8" y1="1" x2="8" y2="23"/><line x1="16" y1="1" x2="16" y2="23"/></svg>
+            <span class="blog-card-tag">Bodenarbeiten</span>
+          </div>
+          <div class="blog-card-body">
+            <h3>Laminat oder Vinyl — welcher Bodenbelag passt zu Ihnen?</h3>
+            <p>Beide Beläge sind beliebt, aber nicht für jeden Raum gleich geeignet. Wir erklären die wichtigsten Unterschiede.</p>
+            <span class="read-more">Weiterlesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+          </div>
+        </a>
+
+        <a href="blog/wohnungsuebergabe.html" class="blog-card">
+          <div class="blog-card-img" style="background:#344242;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            <span class="blog-card-tag">Übergabe</span>
+          </div>
+          <div class="blog-card-body">
+            <h3>Wohnungsübergabe stressfrei meistern — so gelingt die Rückgabe</h3>
+            <p>Böden, Wände, Kleinreparaturen: Was Vermieter erwarten und wie Sie Ihre Wohnung ohne Stress übergabefertig machen.</p>
+            <span class="read-more">Weiterlesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+          </div>
+        </a>
+
+        <a href="blog/kraftstation-seilzug-schief.html" class="blog-card">
+          <div class="blog-card-img" style="background:#3A3A2D;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+            <span class="blog-card-tag">Montage</span>
+          </div>
+          <div class="blog-card-body">
+            <h3>Seilzug schief? Die häufigsten Probleme beim Kraftstation-Aufbau</h3>
+            <p>Warum der Seilzug klemmt, Gewichte hängen bleiben und was Sie dagegen tun können.</p>
+            <span class="read-more">Weiterlesen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-logo">
-          <div class="logo-icon">SE</div>
-          Handwerk
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <img src="assets/logo-white.png" alt="SE Handwerk">
+          </div>
+          <p>Ihr zuverlässiger Handwerksbetrieb im Raum Heilbronn & Stuttgart. Bodenarbeiten, Wohnungsübergabe, Montage — sauber, planbar, transparent.</p>
         </div>
-        <ul class="footer-links">
-          <li><a href="#leistungen">Leistungen</a></li>
-          <li><a href="#preise">Preise</a></li>
-          <li><a href="#ablauf">Ablauf</a></li>
-          <li><a href="#region">Einsatzgebiet</a></li>
-          <li><a href="#kontakt">Kontakt</a></li>
-        </ul>
+        <div class="footer-col">
+          <h4>Schwerpunkte</h4>
+          <ul>
+            <li><a href="bodenarbeiten.html">Bodenarbeiten</a></li>
+            <li><a href="wohnungsuebergabe.html">Wohnungsübergabe</a></li>
+            <li><a href="kraftstation-montage.html">Montage & Reparatur</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Mehr</h4>
+          <ul>
+            <li><a href="kraftstation-montage.html">Kraftstation Montage</a></li>
+            <li><a href="power-rack-montage.html">Power Rack Montage</a></li>
+            <li><a href="ueber-uns.html">Über uns</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><a href="#kontakt">Anfrage senden</a></li>
+            <li><a href="mailto:kontakt@sehandwerk.de">E-Mail</a></li>
+          </ul>
+        </div>
       </div>
       <div class="footer-bottom">
-        <p>SE Handwerk GbR — Emre & Sulieman | Raum Heilbronn</p>
-        <p>Alle Preise verstehen sich zzgl. Material, sofern nicht anders angegeben.</p>
+        <p>SE Handwerk | Raum Heilbronn</p>
+        <p><a href="impressum.html" style="color:rgba(255,255,255,0.5);">Impressum</a> · <a href="datenschutz.html" style="color:rgba(255,255,255,0.5);">Datenschutz</a></p>
       </div>
     </div>
   </footer>
 
-  <!-- ========== SCRIPTS ========== -->
+  <!-- ===== SCRIPTS ===== -->
   <script>
-    // Nav scroll effect
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 20);
+    // ========== HERO ENTRANCE ==========
+    window.addEventListener('load', () => {
+      document.querySelector('.hero-badge')?.classList.add('animate');
+      document.querySelector('.hero h1')?.classList.add('animate');
+      document.querySelector('.hero-desc')?.classList.add('animate');
+      document.querySelector('.hero-buttons')?.classList.add('animate');
+      document.querySelector('.hero-visual')?.classList.add('animate');
     });
 
-    // Mobile menu toggle
+    // ========== NAV & SCROLL PROGRESS ==========
+    const nav = document.getElementById('nav');
+    const scrollProgress = document.getElementById('scrollProgress');
+
+    function updateScroll() {
+      const s = window.scrollY;
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      if (h > 0) scrollProgress.style.width = ((s / h) * 100) + '%';
+      nav.classList.toggle('scrolled', s > 20);
+    }
+    window.addEventListener('scroll', updateScroll, { passive: true });
+
+    // ========== MOBILE MENU ==========
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
+    mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
+    function closeMobile() { mobileMenu.classList.remove('active'); }
 
-    mobileToggle.addEventListener('click', () => {
-      mobileMenu.classList.toggle('active');
-    });
+    // ========== SCROLL REVEALS ==========
+    const revealObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('revealed');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    function closeMobile() {
-      mobileMenu.classList.remove('active');
+    function setupReveals() {
+      document.querySelectorAll('.showcase-image').forEach(el => {
+        const isReverse = el.closest('.showcase-reverse');
+        el.classList.add('reveal', isReverse ? 'from-right' : 'from-left');
+        revealObs.observe(el);
+      });
+      document.querySelectorAll('.showcase-text').forEach(el => {
+        const isReverse = el.closest('.showcase-reverse');
+        el.classList.add('reveal', isReverse ? 'from-left' : 'from-right');
+        revealObs.observe(el);
+      });
+
+      document.querySelectorAll('.trust-item').forEach((el, i) => {
+        el.classList.add('reveal', 'from-bottom');
+        el.style.transitionDelay = (i * 0.08) + 's';
+        revealObs.observe(el);
+      });
+
+      document.querySelectorAll('.price-card').forEach((el, i) => {
+        el.classList.add('reveal', 'from-bottom');
+        el.style.transitionDelay = (i * 0.1) + 's';
+        revealObs.observe(el);
+      });
+
+      document.querySelectorAll('.process-step').forEach((el, i) => {
+        el.classList.add('reveal', 'from-bottom');
+        el.style.transitionDelay = (i * 0.12) + 's';
+        revealObs.observe(el);
+      });
+
+      document.querySelectorAll('.region-item').forEach((el, i) => {
+        el.classList.add('reveal', 'from-bottom');
+        el.style.transitionDelay = (i * 0.06) + 's';
+        revealObs.observe(el);
+      });
+
+      document.querySelectorAll('.blog-card').forEach((el, i) => {
+        el.classList.add('reveal', 'from-bottom');
+        el.style.transitionDelay = (i * 0.1) + 's';
+        revealObs.observe(el);
+      });
+
+      document.querySelectorAll('.section-title, .section-label, .section-subtitle').forEach(el => {
+        if (el.closest('.hero')) return;
+        el.classList.add('reveal', 'from-bottom');
+        revealObs.observe(el);
+      });
+
+      document.querySelectorAll('.contact-method').forEach((el, i) => {
+        el.classList.add('reveal', 'from-left');
+        el.style.transitionDelay = (i * 0.08) + 's';
+        revealObs.observe(el);
+      });
+
+      const fw = document.querySelector('.contact-form-wrap');
+      if (fw) { fw.classList.add('reveal', 'from-right'); revealObs.observe(fw); }
+
+      const rv = document.querySelector('.region-visual');
+      if (rv) { rv.classList.add('reveal', 'from-right'); revealObs.observe(rv); }
+
+      const pn = document.querySelector('.pricing-note');
+      if (pn) { pn.classList.add('reveal', 'from-bottom'); revealObs.observe(pn); }
     }
+    setupReveals();
 
-    // Smooth reveal on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
+    // ========== NAV ACTIVE HIGHLIGHT ==========
+    const sections = document.querySelectorAll('section[id]');
+    const navLinksAll = document.querySelectorAll('.nav-links a[href^="#"]');
+    const secObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          navLinksAll.forEach(l => l.style.color = '');
+          const a = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+          if (a) a.style.color = '#fff';
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.3 });
+    sections.forEach(s => secObs.observe(s));
 
-    document.querySelectorAll('.service-card, .price-card, .process-step, .region-item').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
+    // ========== SMOOTH ANCHOR ==========
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === '#') return;
+        const t = document.querySelector(href);
+        if (t) {
+          e.preventDefault();
+          const top = t.getBoundingClientRect().top + window.scrollY - 80;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
     });
   </script>
 </body>
