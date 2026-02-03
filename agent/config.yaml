@@ -1,0 +1,198 @@
+# ============================================================
+# SE HANDWERK - Akquise-Agent Konfiguration
+# ============================================================
+
+firma:
+  name: "SE Handwerk"
+  region_schwerpunkt: "Heilbronn"
+
+# ----------------------------------------------------------
+# SUCHGEBIET: Nur 100 km um Heilbronn
+# ----------------------------------------------------------
+suchgebiet:
+  aktiv: true
+  zentrum: "Heilbronn"
+  radius_km: 100
+  max_alter_stunden: 5
+
+# ----------------------------------------------------------
+# REGIONEN mit Scoring-Gewichtung
+# ----------------------------------------------------------
+regionen:
+  heilbronn:
+    score: 30
+    plz_prefixes: ["74", "741", "743"]
+    keywords: ["Heilbronn", "Neckarsulm", "Weinsberg", "Bad Friedrichshall", "Lauffen", "Brackenheim", "Öhringen", "Neuenstadt"]
+  umkreis_100km:
+    score: 20
+    plz_prefixes: ["70", "71", "72", "69"]
+    keywords: ["Stuttgart", "Ludwigsburg", "Heidelberg", "Mannheim", "Schwäbisch Hall", "Würzburg"]
+  rest_bw:
+    score: 10
+    plz_prefixes: []
+    keywords: ["Baden-Württemberg", "BW"]
+
+# ----------------------------------------------------------
+# SUCHBEGRIFFE pro Kategorie
+# ----------------------------------------------------------
+suchbegriffe:
+  boden:
+    - "Laminat verlegen"
+    - "Vinyl verlegen"
+    - "Klickvinyl"
+    - "Vinylboden verlegen"
+    - "Boden erneuern"
+    - "Bodenleger gesucht"
+    - "Wohnung renovieren Boden"
+    - "Laminat legen"
+    - "Bodenbelag verlegen"
+    - "Sockelleisten montieren"
+    - "Trittschalldämmung"
+    - "alten Boden entfernen"
+    - "Teppich entfernen"
+  montage:
+    - "Möbel montieren"
+    - "Möbelaufbau"
+    - "IKEA Aufbau"
+    - "IKEA Montage"
+    - "Schrank aufbauen"
+    - "Küche aufbauen"
+    - "Möbelmontage"
+    - "Homegym aufbauen"
+    - "Fitnessgerät montieren"
+    - "Power Rack aufbauen"
+    - "Squat Rack montieren"
+    - "Sportgerät Montage"
+    - "Rack montieren"
+  uebergabe:
+    - "Wohnungsübergabe"
+    - "Auszugsrenovierung"
+    - "Wohnung renovieren Auszug"
+    - "Renovierung vor Auszug"
+    - "Übergaberenovierung"
+    - "Wohnung streichen Übergabe"
+    - "Kleinreparaturen Wohnung"
+    - "Wohnung instand setzen"
+    - "Vermieter Renovierung"
+    - "Mietwohnung renovieren"
+
+# ----------------------------------------------------------
+# AUSSCHLUSSKRITERIEN
+# ----------------------------------------------------------
+ausschluesse:
+  leistungen:
+    - "Fliesen legen"
+    - "Fliesen verlegen"
+    - "Fliesenleger"
+    - "Estrich"
+    - "Trockenbau"
+    - "Dacharbeiten"
+    - "Dachdecker"
+    - "Elektroinstallation"
+    - "Elektriker"
+    - "Sanitär"
+    - "Klempner"
+    - "Heizung"
+    - "Gartenbau"
+    - "Landschaftsbau"
+    - "Fenster einbauen"
+    - "Rohbau"
+  begriffe_billig:
+    - "günstigster"
+    - "billigster"
+    - "unter 5 euro"
+    - "kostenlos"
+    - "umsonst"
+    - "geschenkt"
+
+# ----------------------------------------------------------
+# SCORING
+# ----------------------------------------------------------
+scoring:
+  gruen_min: 70
+  gelb_min: 40
+  rot_max: 39
+  gewichtung:
+    region: 30
+    leistung: 40
+    qualitaet: 30
+
+# ----------------------------------------------------------
+# SCRAPER-EINSTELLUNGEN
+# ----------------------------------------------------------
+scraper:
+  intervall_minuten: 30
+  max_ergebnisse_pro_suche: 20
+  request_delay_sekunden: [2, 5]
+  max_retries: 3
+  timeout_sekunden: 30
+
+kleinanzeigen:
+  enabled: true
+  basis_url: "https://www.kleinanzeigen.de"
+  radius_km: 100
+
+myhammer:
+  enabled: false
+  basis_url: "https://www.myhammer.de"
+
+google:
+  enabled: true
+  max_results: 10
+  site_filter:
+    - "nebenan.de"
+    - "kleinanzeigen.de"
+    - "myhammer.de"
+
+facebook:
+  enabled: false
+  gruppen_urls: []
+
+# ----------------------------------------------------------
+# NEUE KANÄLE: nebenan.de + markt.de
+# ----------------------------------------------------------
+nebenan:
+  enabled: false
+  basis_url: "https://www.nebenan.de"
+  max_ergebnisse: 20
+
+markt:
+  enabled: false
+  basis_url: "https://www.markt.de"
+  radius_km: 100
+  max_ergebnisse: 20
+
+# ----------------------------------------------------------
+# KI-AGENTEN (OpenAI)
+# ----------------------------------------------------------
+ki:
+  enabled: true
+  openai_modell: "gpt-4o-mini"           # Standard für Suche & Outreach
+  strategie_modell: "gpt-4o"             # Besseres Modell für Strategie
+  fallback_auf_regeln: true              # Bei API-Fehler regelbasiert weiter
+  kosten_limit_tag_euro: 1.00            # Tägliches Kostenlimit
+  max_anfragen_pro_minute: 20
+
+  strategie:
+    intervall: "taeglich"                # Wie oft Strategie analysiert wird
+    auto_anwenden: false                 # Vorschläge erst via Telegram bestätigen
+
+  bewertung:
+    batch_groesse: 5                     # Listings pro API-Call
+    max_tokens: 500
+
+  outreach:
+    max_tokens: 800
+    stil_pro_plattform: true             # Nachricht an Plattform anpassen
+    follow_up_nach_tagen: 3
+
+# ----------------------------------------------------------
+# TELEGRAM & DATENBANK
+# ----------------------------------------------------------
+telegram:
+  tages_zusammenfassung_uhrzeit: "20:00"
+  max_nachrichten_pro_stunde: 10
+
+datenbank:
+  pfad: "se_handwerk.db"
+  cleanup_tage: 30

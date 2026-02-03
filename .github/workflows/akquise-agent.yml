@@ -26,23 +26,25 @@ jobs:
           name: se-handwerk-db
         continue-on-error: true
 
-      - name: DB in Projektordner legen
+      - name: DB in agent-Ordner legen
         if: success()
         run: |
-          if [ -f se-handwerk-db/se_handwerk.db ]; then mv se-handwerk-db/se_handwerk.db .; fi
+          if [ -f se-handwerk-db/se_handwerk.db ]; then mv se-handwerk-db/se_handwerk.db agent/; fi
 
       - name: Abhängigkeiten installieren
-        run: pip install -r requirements.txt
+        run: pip install -r agent/requirements.txt
 
       - name: Akquise-Agent ausführen (einmal)
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        working-directory: agent
         run: python main.py --einmal
 
       - name: DB für nächsten Lauf speichern
         uses: actions/upload-artifact@v4
         with:
           name: se-handwerk-db
-          path: se_handwerk.db
+          path: agent/se_handwerk.db
           retention-days: 90
