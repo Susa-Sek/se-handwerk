@@ -1,0 +1,50 @@
+# SE Handwerk Akquise-Agent – regelmäßiger Lauf (kostenlos)
+# Läuft alle 2 Stunden; DB wird zwischen Läufen gespeichert.
+name: Akquise-Agent
+
+on:
+  schedule:
+    # Alle 2 Stunden (spart kostenlose Minuten; bei öffentlichem Repo kannst du z.B. "*/30 * * * *" für 30 Min. nutzen)
+    - cron: "0 */2 * * *"
+  workflow_dispatch:  # Manueller Start: Actions → Akquise-Agent → Run workflow
+
+jobs:
+  run-agent:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v4
+
+      - name: Python einrichten
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Vorherige DB wiederherstellen (falls vorhanden)
+        uses: actions/download-artifact@v4
+        with:
+          name: se-handwerk-db
+        continue-on-error: true
+
+      - name: DB in agent-Ordner legen
+        if: success()
+        run: |
+          if [ -f se-handwerk-db/se_handwerk.db ]; then mv se-handwerk-db/se_handwerk.db agent/; fi
+
+      - name: Abhängigkeiten installieren
+        run: pip install -r agent/requirements.txt
+
+      - name: Akquise-Agent ausführen (einmal)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        working-directory: agent
+        run: python main.py --einmal
+
+      - name: DB für nächsten Lauf speichern
+        uses: actions/upload-artifact@v4
+        with:
+          name: se-handwerk-db
+          path: agent/se_handwerk.db
+          retention-days: 90

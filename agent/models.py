@@ -69,7 +69,18 @@ class Bewertungsergebnis:
     ausgeschlossen: bool = False
     ausschluss_grund: Optional[str] = None
     antwort_vorschlag: Optional[str] = None
+    ki_begruendung: str = ""
 
     @property
     def ist_relevant(self) -> bool:
         return not self.ausgeschlossen and self.prioritaet != Prioritaet.ROT
+
+
+@dataclass
+class StrategiePlan:
+    """Ergebnis der KI-Strategieanalyse."""
+    neue_suchbegriffe: list[str]
+    deaktivierte_begriffe: list[str]
+    plattform_empfehlungen: list[dict]
+    begruendung: str
+    datum: datetime

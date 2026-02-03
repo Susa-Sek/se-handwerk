@@ -163,6 +163,30 @@ markt:
   max_ergebnisse: 20
 
 # ----------------------------------------------------------
+# KI-AGENTEN (OpenAI)
+# ----------------------------------------------------------
+ki:
+  enabled: true
+  openai_modell: "gpt-4o-mini"           # Standard für Suche & Outreach
+  strategie_modell: "gpt-4o"             # Besseres Modell für Strategie
+  fallback_auf_regeln: true              # Bei API-Fehler regelbasiert weiter
+  kosten_limit_tag_euro: 1.00            # Tägliches Kostenlimit
+  max_anfragen_pro_minute: 20
+
+  strategie:
+    intervall: "taeglich"                # Wie oft Strategie analysiert wird
+    auto_anwenden: false                 # Vorschläge erst via Telegram bestätigen
+
+  bewertung:
+    batch_groesse: 5                     # Listings pro API-Call
+    max_tokens: 500
+
+  outreach:
+    max_tokens: 800
+    stil_pro_plattform: true             # Nachricht an Plattform anpassen
+    follow_up_nach_tagen: 3
+
+# ----------------------------------------------------------
 # TELEGRAM & DATENBANK
 # ----------------------------------------------------------
 telegram:

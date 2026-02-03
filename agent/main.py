@@ -27,6 +27,10 @@ sys.path.insert(0, str(ROOT))
 
 from database import Database
 from filter.scorer import Scorer
+from ki.client import KIClient
+from ki.strategie_agent import StrategieAgent
+from ki.such_agent import SuchAgent
+from ki.outreach_agent import OutreachAgent
 from models import Bewertungsergebnis, Prioritaet, Quelle
 from notifications.telegram_bot import TelegramNotifier
 from responses.generator import ResponseGenerator
@@ -39,8 +43,9 @@ from scrapers.markt import MarktScraper
 from utils.date_parser import ist_nicht_aelter_als_stunden
 from utils.logger import setup_logger
 
-# .env laden
-load_dotenv(ROOT / ".env")
+# .env laden (liegt im Projekt-Root, eine Ebene über agent/)
+PROJEKT_ROOT = ROOT.parent
+load_dotenv(PROJEKT_ROOT / ".env")
 
 logger = setup_logger("se_handwerk.main")
 
@@ -57,9 +62,24 @@ class AkquiseAgent:
         self.scrapers = self._init_scrapers()
         self._running = True
 
+        # KI-Agenten initialisieren
+        self.ki_enabled = self.config.get("ki", {}).get("enabled", False)
+        if self.ki_enabled:
+            self.ki_client = KIClient(self.config)
+            self.strategie_agent = StrategieAgent(self.ki_client, self.config)
+            self.such_agent = SuchAgent(self.ki_client, self.config)
+            self.outreach_agent = OutreachAgent(self.ki_client, self.config)
+            logger.info(f"KI-Agenten aktiviert (Client verfügbar: {self.ki_client.ist_verfuegbar})")
+        else:
+            self.ki_client = None
+            self.strategie_agent = None
+            self.such_agent = None
+            self.outreach_agent = None
+
         logger.info("=" * 50)
         logger.info("SE Handwerk Akquise-Agent gestartet")
         logger.info(f"Aktive Scraper: {[s.name for s in self.scrapers]}")
+        logger.info(f"KI-Agenten: {'aktiviert' if self.ki_enabled else 'deaktiviert'}")
         logger.info("=" * 50)
 
     def _load_config(self, pfad: str) -> dict:
@@ -125,6 +145,20 @@ class AkquiseAgent:
         logger.info("-" * 40)
         logger.info(f"Starte Durchlauf: {datetime.now().strftime('%H:%M:%S')}")
 
+        # 1. StrategieAgent (1x täglich)
+        if self.ki_enabled and self.strategie_agent and self.strategie_agent.soll_ausfuehren():
+            try:
+                logger.info("→ KI-Strategie-Analyse...")
+                statistik = self.db.statistik_heute()
+                bisherige = self.db.top_listings_heute(50)
+                plan = self.strategie_agent.analysieren(statistik, bisherige)
+                if plan:
+                    # Vorschläge via Telegram senden (nicht automatisch anwenden)
+                    self._strategie_vorschlag_senden(plan)
+            except Exception as e:
+                logger.error(f"Fehler bei Strategie-Agent: {e}")
+
+        # 2. Scraper holen Listings (wie bisher)
         suchbegriffe = self._get_suchbegriffe()
         regionen = self._get_regionen()
         neue_ergebnisse = 0
@@ -153,30 +187,45 @@ class AkquiseAgent:
                             f"älter als {max_alter}h entfernt, {len(listings)} übrig"
                         )
 
-                for listing in listings:
-                    if self.db.existiert(listing.url_hash):
-                        continue
+                # 3. Dedup via Database (wie bisher)
+                neue_listings = [l for l in listings if not self.db.existiert(l.url_hash)]
+                if not neue_listings:
+                    continue
 
-                    ergebnis = self.scorer.bewerten(listing)
+                # 4. SuchAgent bewertet neue Listings per GPT (mit Fallback)
+                if self.ki_enabled and self.such_agent:
+                    logger.info(f"  → KI-Bewertung für {len(neue_listings)} neue Listings...")
+                    ergebnisse = self.such_agent.suchen_und_bewerten(neue_listings)
+                else:
+                    ergebnisse = [self.scorer.bewerten(l) for l in neue_listings]
 
+                for ergebnis in ergebnisse:
+                    # 5. OutreachAgent erstellt Nachrichten für relevante Leads
                     if ergebnis.ist_relevant:
-                        ergebnis.antwort_vorschlag = self.response_gen.generieren(
-                            ergebnis
-                        )
+                        if self.ki_enabled and self.outreach_agent:
+                            ergebnis.antwort_vorschlag = self.outreach_agent.nachricht_erstellen(
+                                ergebnis
+                            )
+                        else:
+                            ergebnis.antwort_vorschlag = self.response_gen.generieren(
+                                ergebnis
+                            )
 
+                    # 7. Database speichern (inkl. KI-Begründung)
                     self.db.speichern(
-                        url_hash=listing.url_hash,
-                        url=listing.url,
-                        titel=listing.titel,
-                        beschreibung=listing.beschreibung,
-                        ort=listing.ort,
-                        quelle=listing.quelle.value,
+                        url_hash=ergebnis.listing.url_hash,
+                        url=ergebnis.listing.url,
+                        titel=ergebnis.listing.titel,
+                        beschreibung=ergebnis.listing.beschreibung,
+                        ort=ergebnis.listing.ort,
+                        quelle=ergebnis.listing.quelle.value,
                         kategorie=ergebnis.kategorie.value,
                         score=ergebnis.score_gesamt,
                         prioritaet=ergebnis.prioritaet.value,
                         antwort_vorschlag=ergebnis.antwort_vorschlag or "",
                     )
 
+                    # 6. Telegram-Benachrichtigung mit KI-Nachricht + Score + Begründung
                     if ergebnis.ist_relevant:
                         self.telegram.senden_sync(ergebnis)
                         neue_ergebnisse += 1
@@ -185,6 +234,12 @@ class AkquiseAgent:
             except Exception as e:
                 logger.error(f"Fehler bei Scraper {scraper.name}: {e}")
                 fehler += 1
+
+        # Token-Verbrauch loggen
+        if self.ki_enabled and self.ki_client and self.ki_client.ist_verfuegbar:
+            verbrauch = self.ki_client.token_verbrauch_heute()
+            if verbrauch:
+                logger.info(f"KI-Token-Verbrauch heute: {verbrauch}")
 
         logger.info(
             f"Durchlauf beendet: {neue_ergebnisse} neue relevante Ergebnisse, "
@@ -202,6 +257,40 @@ class AkquiseAgent:
                 )
             except Exception:
                 pass
+
+    def _strategie_vorschlag_senden(self, plan):
+        """Sendet Strategie-Vorschläge via Telegram."""
+        import asyncio
+
+        text = (
+            "🧠 <b>KI-Strategie-Vorschlag</b>\n\n"
+            f"<b>Neue Suchbegriffe:</b>\n"
+        )
+        for b in plan.neue_suchbegriffe[:5]:
+            text += f"  + {b}\n"
+        if plan.deaktivierte_begriffe:
+            text += f"\n<b>Vorschlag deaktivieren:</b>\n"
+            for b in plan.deaktivierte_begriffe[:5]:
+                text += f"  - {b}\n"
+        if plan.plattform_empfehlungen:
+            text += f"\n<b>Plattform-Empfehlungen:</b>\n"
+            for p in plan.plattform_empfehlungen[:3]:
+                text += f"  → {p.get('name', '?')}: {p.get('begruendung', '')[:80]}\n"
+        if plan.begruendung:
+            text += f"\n<i>{plan.begruendung[:300]}</i>"
+
+        try:
+            if self.telegram.bot and self.telegram.chat_id:
+                asyncio.run(
+                    self.telegram.bot.send_message(
+                        chat_id=self.telegram.chat_id,
+                        text=text,
+                        parse_mode="HTML",
+                    )
+                )
+                logger.info("Strategie-Vorschlag via Telegram gesendet")
+        except Exception as e:
+            logger.error(f"Fehler beim Senden des Strategie-Vorschlags: {e}")
 
     def tages_zusammenfassung_senden(self):
         """Sendet die tägliche Zusammenfassung."""

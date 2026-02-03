@@ -8,18 +8,18 @@ So baust du neue Quellen (z.B. nebenan.de, markt.de, lokale Portale) ein. Das Sy
 
 | Kanal        | Datei                    | Config-Schlüssel | Status        |
 |-------------|--------------------------|------------------|---------------|
-| Kleinanzeigen | `scrapers/kleinanzeigen.py` | `kleinanzeigen`  | aktiv         |
-| Google (Site-Suche) | `scrapers/google_search.py` | `google`   | aktiv         |
-| MyHammer    | `scrapers/myhammer.py`    | `myhammer`       | deaktiviert (403) |
-| Facebook    | `scrapers/facebook.py`   | `facebook`       | deaktiviert   |
+| Kleinanzeigen | `agent/scrapers/kleinanzeigen.py` | `kleinanzeigen`  | aktiv         |
+| Google (Site-Suche) | `agent/scrapers/google_search.py` | `google`   | aktiv         |
+| MyHammer    | `agent/scrapers/myhammer.py`    | `myhammer`       | deaktiviert (403) |
+| Facebook    | `agent/scrapers/facebook.py`   | `facebook`       | deaktiviert   |
 
 ---
 
 ## Neuen Kanal in 4 Schritten hinzufügen
 
-### 1. Quelle in `models.py` eintragen
+### 1. Quelle in `agent/models.py` eintragen
 
-In **models.py** in der Enum **Quelle** einen neuen Wert ergänzen:
+In **agent/models.py** in der Enum **Quelle** einen neuen Wert ergänzen:
 
 ```python
 class Quelle(Enum):
@@ -34,7 +34,7 @@ class Quelle(Enum):
 
 ### 2. Neuen Scraper anlegen
 
-Neue Datei im Ordner **scrapers/** z.B. `nebenan.py` (oder `markt.py`, `lokalo.py` usw.).
+Neue Datei im Ordner **agent/scrapers/** z.B. `nebenan.py` (oder `markt.py`, `lokalo.py` usw.).
 
 **Basis-Template** – anpassen an die echte Such-URL und das HTML/API der Seite:
 
@@ -128,7 +128,7 @@ Die Methode **`alle_suchen(suchbegriffe, regionen)`** erbt du von **BaseScraper*
 
 ---
 
-### 3. Config in `config.yaml` ergänzen
+### 3. Config in `agent/config.yaml` ergänzen
 
 Neuen Abschnitt für den Kanal anlegen (z.B. nach `kleinanzeigen`):
 
@@ -144,9 +144,9 @@ Wenn du **nur Heilbronn/100 km** nutzt, bekommt dein Scraper in **`suchen(suchbe
 
 ---
 
-### 4. Scraper in `main.py` registrieren
+### 4. Scraper in `agent/main.py` registrieren
 
-In **main.py**:
+In **agent/main.py**:
 
 1. Oben den neuen Scraper importieren:
 
@@ -181,9 +181,9 @@ Rechtlich und technisch: Nutzungsbedingungen und Robots.txt der jeweiligen Seite
 
 ## Kurz-Checkliste für einen neuen Kanal
 
-1. **models.py**: `Quelle.NEUKANAL = "neukanal"`
-2. **scrapers/neukanal.py**: Klasse von `BaseScraper`, `name` + `suchen()` + Parsing zu `Listing`.
-3. **config.yaml**: Abschnitt `neukanal:` mit `enabled: true` und URLs/Parametern.
-4. **main.py**: `from scrapers.neukanal import NeukanalScraper` und in `_init_scrapers()` prüfen `if config.get("neukanal", {}).get("enabled"): scrapers.append(NeukanalScraper(self.config))`.
+1. **agent/models.py**: `Quelle.NEUKANAL = "neukanal"`
+2. **agent/scrapers/neukanal.py**: Klasse von `BaseScraper`, `name` + `suchen()` + Parsing zu `Listing`.
+3. **agent/config.yaml**: Abschnitt `neukanal:` mit `enabled: true` und URLs/Parametern.
+4. **agent/main.py**: `from scrapers.neukanal import NeukanalScraper` und in `_init_scrapers()` prüfen `if config.get("neukanal", {}).get("enabled"): scrapers.append(NeukanalScraper(self.config))`.
 
-Danach: `python main.py --einmal` testen; in den Logs siehst du den neuen Scraper und seine Ergebnisse.
+Danach: `cd agent && python main.py --einmal` testen; in den Logs siehst du den neuen Scraper und seine Ergebnisse.
