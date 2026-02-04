@@ -4,6 +4,7 @@ import json
 from datetime import datetime
 from typing import Optional
 
+from database import Database
 from ki.client import KIClient
 from models import StrategiePlan
 from utils.logger import setup_logger
@@ -23,7 +24,8 @@ Antworte IMMER als JSON mit folgender Struktur:
     "plattform_empfehlungen": [
         {"name": "Plattformname", "url": "https://...", "begruendung": "Warum relevant"}
     ],
-    "begruendung": "Zusammenfassung der Analyse und Empfehlungen"
+    "begruendung": "Zusammenfassung der Analyse und Empfehlungen",
+    "konfidenz": 0.75
 }
 
 Regeln:
@@ -32,6 +34,7 @@ Regeln:
 - Berücksichtige saisonale Trends (Umzug=Frühling/Sommer, Renovierung=Herbst)
 - Keine Begriffe für Leistungen die SE Handwerk NICHT anbietet (Fliesen, Elektro, Sanitär, Dach)
 - Plattform-Empfehlungen nur für deutsche Handwerker-Portale
+- Konfidenz: 0.0-1.0, wie sicher du dir bei den Empfehlungen bist
 """
 
 
@@ -39,14 +42,16 @@ class StrategieAgent:
     """Autonomer KI-Agent für Suchstrategie.
 
     Entscheidet welche Plattformen, Suchbegriffe und Regionen
-    die besten Leads bringen.
+    die besten Leads bringen. Nutzt lern_metriken aus der DB.
     """
 
-    def __init__(self, ki_client: KIClient, config: dict):
+    def __init__(self, ki_client: KIClient, config: dict, db: Optional[Database] = None):
         self.ki = ki_client
         self.config = config
-        self._modell = config.get("ki", {}).get("strategie_modell", "gpt-4o")
+        self.db = db
+        self._modell = config.get("ki", {}).get("strategie_modell", "claude-sonnet-4-20250514")
         self._letzter_lauf: Optional[datetime] = None
+        self._auto_anwenden = config.get("ki", {}).get("strategie", {}).get("auto_anwenden", False)
 
     def soll_ausfuehren(self) -> bool:
         """Prüft ob die Strategie-Analyse heute schon gelaufen ist."""
@@ -95,6 +100,19 @@ class StrategieAgent:
                 f"{len(plan.deaktivierte_begriffe)} deaktiviert, "
                 f"{len(plan.plattform_empfehlungen)} Plattform-Empfehlungen"
             )
+
+            # Audit-Log
+            if self.db:
+                self.db.aktion_loggen(
+                    agent_name="strategie_agent",
+                    aktion="plan_erstellt",
+                    details=plan.begruendung[:200],
+                    daten_json={
+                        "neue": plan.neue_suchbegriffe,
+                        "deaktiviert": plan.deaktivierte_begriffe,
+                    },
+                )
+
         return plan
 
     def plattformen_bewerten(self) -> Optional[list[dict]]:
@@ -164,12 +182,46 @@ class StrategieAgent:
             return []
 
     def _build_prompt(self, statistik: dict, ergebnisse: list, aktuelle_begriffe: list) -> str:
-        """Baut den User-Prompt für die Analyse."""
-        # Erfolgsraten berechnen
+        """Baut den User-Prompt für die Analyse – nutzt echte Metriken aus der DB."""
+        # Erfolgsraten aus lern_metriken laden (falls DB verfügbar)
+        metriken_text = ""
+        if self.db:
+            try:
+                zusammenfassung = self.db.metriken_zusammenfassung(tage=7)
+
+                # Suchbegriff-Metriken
+                sb_metriken = zusammenfassung.get("suchbegriffe", [])
+                if sb_metriken:
+                    metriken_text += "\nErfolgsmetriken Suchbegriffe (letzte 7 Tage):\n"
+                    for m in sb_metriken[:15]:
+                        rate = (m["relevant"] / max(1, m["gesamt"])) * 100 if m["gesamt"] else 0
+                        metriken_text += f"  {m['schluessel']}: {m['gesamt']} Treffer, {m['relevant']} relevant ({rate:.0f}%)\n"
+
+                # Plattform-Metriken
+                pf_metriken = zusammenfassung.get("plattformen", [])
+                if pf_metriken:
+                    metriken_text += "\nErfolgsmetriken Plattformen (letzte 7 Tage):\n"
+                    for m in pf_metriken[:10]:
+                        rate = (m["relevant"] / max(1, m["gesamt"])) * 100 if m["gesamt"] else 0
+                        metriken_text += f"  {m['schluessel']}: {m['gesamt']} Ergebnisse, {m['relevant']} relevant ({rate:.0f}%)\n"
+
+                # Scrape-Log Statistik
+                scrape_stats = self.db.scrape_log_statistik(tage=7)
+                if scrape_stats:
+                    metriken_text += "\nScrape-Protokoll (letzte 7 Tage):\n"
+                    for s in scrape_stats[:10]:
+                        metriken_text += (
+                            f"  {s['plattform_name']}: {s['scrapes']} Scrapes, "
+                            f"{s.get('ergebnisse_gesamt') or 0} Ergebnisse, "
+                            f"{s.get('fehler') or 0} Fehler\n"
+                        )
+            except Exception as e:
+                logger.debug(f"Metriken konnten nicht geladen werden: {e}")
+
+        # Fallback: Erfolgsraten aus Tages-Listings berechnen
         erfolg_pro_begriff = {}
         for e in ergebnisse:
             titel = e.get("titel", "").lower()
-            score = e.get("score", 0)
             for begriff in aktuelle_begriffe:
                 if begriff.lower() in titel:
                     if begriff not in erfolg_pro_begriff:
@@ -187,18 +239,27 @@ class StrategieAgent:
             9: "Herbst", 10: "Herbst", 11: "Herbst",
         }.get(monat, "unbekannt")
 
-        return (
+        prompt = (
             f"Aktuelle Jahreszeit: {jahreszeit} (Monat {monat})\n\n"
             f"Tagesstatistik:\n"
             f"- Gesamt: {statistik.get('gesamt', 0)} Listings\n"
-            f"- Grün (≥70): {statistik.get('gruen', 0)}\n"
+            f"- Gruen (>=70): {statistik.get('gruen', 0)}\n"
             f"- Gelb (40-69): {statistik.get('gelb', 0)}\n"
             f"- Rot (<40): {statistik.get('rot', 0)}\n\n"
             f"Aktuelle Suchbegriffe: {json.dumps(aktuelle_begriffe, ensure_ascii=False)}\n\n"
-            f"Erfolgsraten pro Begriff:\n"
-            f"{json.dumps(erfolg_pro_begriff, ensure_ascii=False, indent=2)}\n\n"
-            f"Analysiere die Daten und erstelle einen optimierten Suchplan."
         )
+
+        if metriken_text:
+            prompt += f"ECHTE ERFOLGSMETRIKEN (aus Datenbank):{metriken_text}\n\n"
+
+        if erfolg_pro_begriff:
+            prompt += (
+                f"Tages-Erfolgsraten pro Begriff:\n"
+                f"{json.dumps(erfolg_pro_begriff, ensure_ascii=False, indent=2)}\n\n"
+            )
+
+        prompt += "Analysiere die Daten und erstelle einen optimierten Suchplan."
+        return prompt
 
     def _parse_antwort(self, antwort: str) -> Optional[StrategiePlan]:
         """Parst die JSON-Antwort in einen StrategiePlan."""

@@ -48,7 +48,7 @@ class OutreachAgent:
     def __init__(self, ki_client: KIClient, config: dict):
         self.ki = ki_client
         self.config = config
-        self._modell = config.get("ki", {}).get("openai_modell", "gpt-4o-mini")
+        self._modell = config.get("ki", {}).get("modell", "claude-3-haiku-20240307")
         self._max_tokens = config.get("ki", {}).get("outreach", {}).get("max_tokens", 800)
         self._stil_pro_plattform = config.get("ki", {}).get("outreach", {}).get("stil_pro_plattform", True)
         self._follow_up_tage = config.get("ki", {}).get("outreach", {}).get("follow_up_nach_tagen", 3)

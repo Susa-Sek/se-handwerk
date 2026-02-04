@@ -7,7 +7,19 @@
       "Bash(python -c:*)",
       "Bash(python:*)",
       "Bash(powershell -Command \"Get-Content ''C:\\\\Users\\\\sulie\\\\OneDrive\\\\Dokumente\\\\Claude Code Test Workflows\\\\se-handwerk\\\\se_handwerk.log'' -Tail 60\")",
-      "Bash(timeout /t 30 /nobreak)"
+      "Bash(timeout /t 30 /nobreak)",
+      "Bash(git pull:*)",
+      "Bash(del \"C:\\\\Users\\\\sulie\\\\OneDrive\\\\Dokumente\\\\Claude Code Test Workflows\\\\SE-handwerk\\\\agent\\\\se_handwerk.db\")",
+      "Bash(find:*)",
+      "Bash(git ls-tree:*)",
+      "Bash(gh api:*)",
+      "Bash(npm --version:*)",
+      "Bash(npx vercel:*)",
+      "WebFetch(domain:se-handwerk-m0ku1la4b-suliemansaidbusiness-2828s-projects.vercel.app)",
+      "WebFetch(domain:se-handwerk.vercel.app)",
+      "WebFetch(domain:se-handwerk-suliemansaidbusiness-2828s-projects.vercel.app)",
+      "WebFetch(domain:www.sehandwerk.de)",
+      "Bash(findstr:*)"
     ]
   }
 }

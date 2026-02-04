@@ -1,11 +1,13 @@
-"""Zentraler OpenAI-Client für alle KI-Agenten."""
+"""Zentraler Anthropic-Client für alle KI-Agenten."""
 
+import json
 import os
+import re
 import time
-from datetime import datetime, date
+from datetime import date
 from typing import Optional
 
-from openai import OpenAI, APIError, RateLimitError, APIConnectionError
+import anthropic
 
 from utils.logger import setup_logger
 
@@ -13,17 +15,17 @@ logger = setup_logger("se_handwerk.ki.client")
 
 
 class KIClient:
-    """Zentraler OpenAI-Client mit Retry, Rate-Limit und Token-Tracking."""
+    """Zentraler Anthropic-Client mit Retry, Rate-Limit und Token-Tracking."""
 
     def __init__(self, config: dict):
         self.config = config
         self.ki_config = config.get("ki", {})
-        api_key = os.getenv("OPENAI_API_KEY")
+        api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
-            logger.warning("OPENAI_API_KEY nicht gesetzt – KI-Funktionen deaktiviert")
+            logger.warning("ANTHROPIC_API_KEY nicht gesetzt – KI-Funktionen deaktiviert")
             self._client = None
         else:
-            self._client = OpenAI(api_key=api_key)
+            self._client = anthropic.Anthropic(api_key=api_key)
 
         self._max_anfragen_pro_minute = self.ki_config.get("max_anfragen_pro_minute", 20)
         self._kosten_limit_tag = self.ki_config.get("kosten_limit_tag_euro", 1.0)
@@ -53,7 +55,7 @@ class KIClient:
             return None
 
         if not modell:
-            modell = self.ki_config.get("openai_modell", "gpt-4o-mini")
+            modell = self.ki_config.get("modell", "claude-3-haiku-20240307")
 
         # Rate-Limit prüfen
         self._rate_limit_warten()
@@ -72,49 +74,91 @@ class KIClient:
             )
             return None
 
+        # Bei json_mode den System-Prompt ergänzen
+        effektiver_system_prompt = system_prompt
+        if json_mode:
+            effektiver_system_prompt += "\n\nAntworte AUSSCHLIESSLICH mit validem JSON. Kein Text davor oder danach."
+
         try:
-            kwargs = {
-                "model": modell,
-                "messages": [
-                    {"role": "system", "content": system_prompt},
+            response = self._client.messages.create(
+                model=modell,
+                max_tokens=max_tokens,
+                system=effektiver_system_prompt,
+                messages=[
                     {"role": "user", "content": user_prompt},
                 ],
-                "max_tokens": max_tokens,
-                "temperature": 0.7,
-            }
-
-            if json_mode:
-                kwargs["response_format"] = {"type": "json_object"}
-
-            response = self._client.chat.completions.create(**kwargs)
+            )
 
             # Token-Verbrauch tracken
             usage = response.usage
             if usage:
-                self._token_tracking(agent_name, usage.prompt_tokens, usage.completion_tokens)
+                self._token_tracking(agent_name, usage.input_tokens, usage.output_tokens)
 
-            antwort = response.choices[0].message.content
-            logger.debug(
-                f"KI-Anfrage OK ({agent_name}): {usage.total_tokens if usage else '?'} Tokens"
-            )
+            antwort = response.content[0].text
+            total = (usage.input_tokens + usage.output_tokens) if usage else "?"
+            logger.debug(f"KI-Anfrage OK ({agent_name}): {total} Tokens")
+
+            # Bei json_mode: JSON aus der Antwort extrahieren
+            if json_mode:
+                antwort = self._json_extrahieren(antwort)
+
             return antwort
 
-        except RateLimitError as e:
-            logger.warning(f"OpenAI Rate-Limit: {e} – warte 30s")
+        except anthropic.RateLimitError as e:
+            logger.warning(f"Anthropic Rate-Limit: {e} – warte 30s")
             time.sleep(30)
             return self.anfrage(system_prompt, user_prompt, modell, json_mode, max_tokens, agent_name)
 
-        except APIConnectionError as e:
-            logger.error(f"OpenAI Verbindungsfehler: {e}")
+        except anthropic.APIConnectionError as e:
+            logger.error(f"Anthropic Verbindungsfehler: {e}")
             return None
 
-        except APIError as e:
-            logger.error(f"OpenAI API-Fehler: {e}")
+        except anthropic.APIError as e:
+            logger.error(f"Anthropic API-Fehler: {e}")
             return None
 
         except Exception as e:
             logger.error(f"Unerwarteter KI-Fehler: {e}")
             return None
+
+    def _json_extrahieren(self, text: str) -> str:
+        """Extrahiert JSON aus Antworttext, falls Claude es in Text einbettet."""
+        text = text.strip()
+
+        # Schon valides JSON?
+        try:
+            json.loads(text)
+            return text
+        except (json.JSONDecodeError, ValueError):
+            pass
+
+        # JSON aus Markdown-Codeblock extrahieren
+        match = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", text, re.DOTALL)
+        if match:
+            kandidat = match.group(1).strip()
+            try:
+                json.loads(kandidat)
+                return kandidat
+            except (json.JSONDecodeError, ValueError):
+                pass
+
+        # Erstes { ... } oder [ ... ] Paar finden
+        for start_char, end_char in [('{', '}'), ('[', ']')]:
+            start = text.find(start_char)
+            if start == -1:
+                continue
+            # Von hinten das letzte passende Zeichen suchen
+            end = text.rfind(end_char)
+            if end > start:
+                kandidat = text[start:end + 1]
+                try:
+                    json.loads(kandidat)
+                    return kandidat
+                except (json.JSONDecodeError, ValueError):
+                    pass
+
+        logger.warning("Konnte kein JSON aus der Antwort extrahieren")
+        return text
 
     def _rate_limit_warten(self):
         """Wartet falls nötig, um Rate-Limit einzuhalten."""
@@ -130,28 +174,29 @@ class KIClient:
                 time.sleep(wartezeit)
         self._anfrage_timestamps.append(time.time())
 
-    def _token_tracking(self, agent_name: str, prompt_tokens: int, completion_tokens: int):
+    def _token_tracking(self, agent_name: str, input_tokens: int, output_tokens: int):
         """Trackt Token-Verbrauch pro Agent."""
         if agent_name not in self._token_verbrauch:
             self._token_verbrauch[agent_name] = {
-                "prompt_tokens": 0,
-                "completion_tokens": 0,
+                "input_tokens": 0,
+                "output_tokens": 0,
                 "anfragen": 0,
             }
-        self._token_verbrauch[agent_name]["prompt_tokens"] += prompt_tokens
-        self._token_verbrauch[agent_name]["completion_tokens"] += completion_tokens
+        self._token_verbrauch[agent_name]["input_tokens"] += input_tokens
+        self._token_verbrauch[agent_name]["output_tokens"] += output_tokens
         self._token_verbrauch[agent_name]["anfragen"] += 1
 
     def _tages_kosten_ueberschritten(self) -> bool:
         """Schätzt ob das Tageslimit überschritten wurde."""
-        # Grobe Kostenschätzung: gpt-4o-mini ~$0.15/1M input, ~$0.60/1M output
-        gesamt_prompt = sum(
-            d["prompt_tokens"] for d in self._token_verbrauch.values()
+        # Kostenschätzung Claude Haiku: $0.80/1M input, $4.00/1M output
+        # Claude Sonnet: $3.00/1M input, $15.00/1M output
+        gesamt_input = sum(
+            d["input_tokens"] for d in self._token_verbrauch.values()
         )
-        gesamt_completion = sum(
-            d["completion_tokens"] for d in self._token_verbrauch.values()
+        gesamt_output = sum(
+            d["output_tokens"] for d in self._token_verbrauch.values()
         )
-        kosten_usd = (gesamt_prompt * 0.00000015) + (gesamt_completion * 0.0000006)
+        kosten_usd = (gesamt_input * 0.0000008) + (gesamt_output * 0.000004)
         kosten_eur = kosten_usd * 0.93  # Grobe USD→EUR Umrechnung
         return kosten_eur >= self._kosten_limit_tag
 

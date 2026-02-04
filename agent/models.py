@@ -13,6 +13,7 @@ class Quelle(Enum):
     FACEBOOK = "facebook"
     NEBENAN = "nebenan"
     MARKT = "markt"
+    DYNAMISCH = "dynamisch"
 
 
 class Kategorie(Enum):
@@ -33,6 +34,33 @@ class Status(Enum):
     GESEHEN = "gesehen"
     BEANTWORTET = "beantwortet"
     UEBERSPRUNGEN = "uebersprungen"
+
+
+class PlattformStatus(Enum):
+    VORGESCHLAGEN = "vorgeschlagen"
+    GENEHMIGT = "genehmigt"
+    AKTIV = "aktiv"
+    DEAKTIVIERT = "deaktiviert"
+    FEHLGESCHLAGEN = "fehlgeschlagen"
+
+
+class PlattformTyp(Enum):
+    STATISCH = "statisch"
+    DYNAMISCH = "dynamisch"
+    ENTDECKT = "entdeckt"
+
+
+class EntscheidungTyp(Enum):
+    PLATTFORM_NEU = "plattform_neu"
+    STRATEGIE_PLAN = "strategie_plan"
+    SUCHBEGRIFF_AENDERUNG = "suchbegriff_aenderung"
+
+
+class EntscheidungStatus(Enum):
+    OFFEN = "offen"
+    GENEHMIGT = "genehmigt"
+    ABGELEHNT = "abgelehnt"
+    ABGELAUFEN = "abgelaufen"
 
 
 @dataclass
@@ -84,3 +112,29 @@ class StrategiePlan:
     plattform_empfehlungen: list[dict]
     begruendung: str
     datum: datetime
+
+
+@dataclass
+class PlattformConfig:
+    """Konfiguration einer dynamisch entdeckten Plattform."""
+    name: str
+    basis_url: str
+    typ: str = "entdeckt"
+    scraper_config: Optional[dict] = None
+    status: str = "vorgeschlagen"
+    entdeckt_von: Optional[str] = None
+    erfolgsrate: float = 0.0
+    gesamt_listings: int = 0
+    relevante_listings: int = 0
+
+
+@dataclass
+class Entscheidung:
+    """Eine offene Nutzer-Entscheidung."""
+    typ: str
+    titel: str
+    beschreibung: str = ""
+    daten_json: Optional[dict] = None
+    status: str = "offen"
+    id: Optional[int] = None
+    telegram_message_id: Optional[int] = None

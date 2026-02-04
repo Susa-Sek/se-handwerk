@@ -21,16 +21,16 @@ suchgebiet:
 regionen:
   heilbronn:
     score: 30
-    plz_prefixes: ["74", "741", "743"]
-    keywords: ["Heilbronn", "Neckarsulm", "Weinsberg", "Bad Friedrichshall", "Lauffen", "Brackenheim", "Öhringen", "Neuenstadt"]
+    plz_prefixes: ["740", "741", "743", "742"]
+    keywords: ["Heilbronn", "Neckarsulm", "Weinsberg", "Bad Friedrichshall", "Lauffen", "Brackenheim", "Öhringen", "Neuenstadt", "Bad Rappenau", "Eppingen", "Bad Wimpfen", "Obersulm"]
   umkreis_100km:
     score: 20
-    plz_prefixes: ["70", "71", "72", "69"]
-    keywords: ["Stuttgart", "Ludwigsburg", "Heidelberg", "Mannheim", "Schwäbisch Hall", "Würzburg"]
-  rest_bw:
+    plz_prefixes: ["70", "71", "69", "68", "75"]
+    keywords: ["Stuttgart", "Ludwigsburg", "Heidelberg", "Mannheim", "Schwäbisch Hall", "Pforzheim", "Esslingen", "Karlsruhe", "Mosbach", "Sinsheim", "Bretten", "Backnang", "Waiblingen"]
+  umkreis_rand:
     score: 10
-    plz_prefixes: []
-    keywords: ["Baden-Württemberg", "BW"]
+    plz_prefixes: ["73", "72"]
+    keywords: ["Göppingen", "Schwäbisch Gmünd", "Aalen", "Würzburg", "Kirchheim"]
 
 # ----------------------------------------------------------
 # SUCHBEGRIFFE pro Kategorie
@@ -163,12 +163,12 @@ markt:
   max_ergebnisse: 20
 
 # ----------------------------------------------------------
-# KI-AGENTEN (OpenAI)
+# KI-AGENTEN (Anthropic Claude)
 # ----------------------------------------------------------
 ki:
   enabled: true
-  openai_modell: "gpt-4o-mini"           # Standard für Suche & Outreach
-  strategie_modell: "gpt-4o"             # Besseres Modell für Strategie
+  modell: "claude-3-haiku-20240307"               # Standard für Suche & Outreach
+  strategie_modell: "claude-sonnet-4-20250514"   # Besseres Modell für Strategie
   fallback_auf_regeln: true              # Bei API-Fehler regelbasiert weiter
   kosten_limit_tag_euro: 1.00            # Tägliches Kostenlimit
   max_anfragen_pro_minute: 20
@@ -186,13 +186,29 @@ ki:
     stil_pro_plattform: true             # Nachricht an Plattform anpassen
     follow_up_nach_tagen: 3
 
+  kanal_agent:
+    intervall: "woechentlich"            # Wie oft neue Plattformen gesucht werden
+    max_neue_pro_woche: 3                # Max. neue Plattformen pro Woche
+    auto_testen: true                    # Automatisch Such-Seiten testen + Selektoren generieren
+    genehmigung_erforderlich: true       # Nutzer muss neue Plattform genehmigen
+
 # ----------------------------------------------------------
 # TELEGRAM & DATENBANK
 # ----------------------------------------------------------
 telegram:
   tages_zusammenfassung_uhrzeit: "20:00"
   max_nachrichten_pro_stunde: 10
+  interaktiv: true                       # Bidirektionaler Bot mit Inline-Keyboards
+  entscheidung_timeout_stunden: 48       # Offene Entscheidungen nach X Stunden ablaufen lassen
 
 datenbank:
   pfad: "se_handwerk.db"
   cleanup_tage: 30
+
+# ----------------------------------------------------------
+# LERN-AGENT: Feedback-Loop & Auto-Optimierung
+# ----------------------------------------------------------
+lernen:
+  metriken_aggregation: "nach_durchlauf" # Wann Metriken aggregiert werden
+  auto_deaktivierung_tage: 14           # Suchbegriffe/Plattformen ohne Erfolg nach X Tagen vorschlagen
+  min_erfolgsrate_plattform: 0.05       # Plattformen unter 5% Erfolgsrate zur Deaktivierung vorschlagen

@@ -63,7 +63,7 @@ class SuchAgent:
     def __init__(self, ki_client: KIClient, config: dict):
         self.ki = ki_client
         self.config = config
-        self._modell = config.get("ki", {}).get("openai_modell", "gpt-4o-mini")
+        self._modell = config.get("ki", {}).get("modell", "claude-3-haiku-20240307")
         self._batch_groesse = config.get("ki", {}).get("bewertung", {}).get("batch_groesse", 5)
         self._max_tokens = config.get("ki", {}).get("bewertung", {}).get("max_tokens", 500)
         self._fallback_scorer = Scorer(config)

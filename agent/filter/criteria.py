@@ -25,22 +25,70 @@ class Criteria:
         for billig in self._ausschluss_billig:
             if billig in text:
                 return True, f"Billig-Anfrage: {billig}"
-        bw_indikatoren = [
-            "heilbronn", "stuttgart", "ludwigsburg", "mannheim",
-            "heidelberg", "karlsruhe", "freiburg", "ulm", "tübingen",
-            "reutlingen", "esslingen", "pforzheim", "baden",
-            "württemberg", "sachsenheim", "neckarsulm", "weinsberg",
-        ]
         ort_lower = listing.ort.lower()
-        if ort_lower and not any(ind in ort_lower for ind in bw_indikatoren):
-            nicht_bw = [
-                "berlin", "hamburg", "münchen", "köln", "frankfurt",
-                "düsseldorf", "dortmund", "essen", "bremen", "dresden",
-                "leipzig", "hannover", "nürnberg",
-            ]
-            for stadt in nicht_bw:
-                if stadt in ort_lower:
-                    return True, f"Region außerhalb BW: {listing.ort}"
+        if not ort_lower:
+            return False, None
+
+        # Städte/Regionen im 100km-Umkreis um Heilbronn
+        im_umkreis_100km = [
+            # Kernregion (0-30km)
+            "heilbronn", "neckarsulm", "weinsberg", "bad friedrichshall",
+            "lauffen", "brackenheim", "öhringen", "neuenstadt",
+            "bad rappenau", "eppingen", "schwaigern", "obersulm",
+            "erlenbach", "gundelsheim", "möckmühl", "bad wimpfen",
+            "jagsthausen", "widdern", "langenbrettach", "untergruppenbach",
+            "abstatt", "beilstein", "ilsfeld", "talheim", "flein",
+            "leingarten", "nordheim", "cleebronn",
+            # 30-70km
+            "stuttgart", "ludwigsburg", "schwäbisch hall", "crailsheim",
+            "esslingen", "waiblingen", "fellbach", "leonberg",
+            "kornwestheim", "bietigheim", "sachsenheim", "vaihingen",
+            "mühlacker", "bretten", "künzelsau", "gaildorf",
+            "backnang", "winnenden", "schorndorf", "marbach",
+            "böblingen", "sindelfingen", "mosbach", "sinsheim",
+            # 70-100km
+            "heidelberg", "mannheim", "karlsruhe", "pforzheim",
+            "schwäbisch gmünd", "aalen", "ellwangen",
+            "würzburg", "tauberbischofsheim", "wertheim",
+            "göppingen", "kirchheim", "nürtingen",
+        ]
+
+        # Harter Ausschluss: Städte die definitiv zu weit weg sind
+        zu_weit_weg = [
+            # Andere Bundesländer
+            "berlin", "hamburg", "münchen", "köln", "frankfurt",
+            "düsseldorf", "dortmund", "essen", "bremen", "dresden",
+            "leipzig", "hannover", "nürnberg", "rostock", "kiel",
+            "lübeck", "potsdam", "erfurt", "magdeburg", "saarbrücken",
+            "mainz", "wiesbaden", "kassel", "braunschweig", "bielefeld",
+            "münster", "augsburg", "regensburg", "chemnitz", "halle",
+            "bochum", "duisburg", "bonn", "aachen", "krefeld",
+            "mönchengladbach", "gelsenkirchen", "oberhausen",
+            # BW aber >100km von Heilbronn
+            "freiburg", "konstanz", "ulm", "friedrichshafen",
+            "ravensburg", "tuttlingen", "villingen", "donaueschingen",
+            "rottweil", "offenburg", "lahr", "lörrach", "waldshut",
+            "sigmaringen", "biberach",
+        ]
+
+        for stadt in zu_weit_weg:
+            if stadt in ort_lower:
+                return True, f"Zu weit entfernt (>100km): {listing.ort}"
+
+        # Wenn Ort bekannt und im Umkreis → OK
+        if any(ind in ort_lower for ind in im_umkreis_100km):
+            return False, None
+
+        # PLZ-Check: 74xxx (Heilbronn), 70-71xxx (Stuttgart/LB), 69xxx (HD/MA)
+        import re
+        plz_match = re.search(r'\b(\d{5})\b', ort_lower)
+        if plz_match:
+            plz = plz_match.group(1)
+            erlaubte_prefixe = ["74", "70", "71", "69", "68", "75", "72", "73"]
+            if plz[:2] in erlaubte_prefixe:
+                return False, None
+            return True, f"PLZ außerhalb Einzugsgebiet: {plz} ({listing.ort})"
+
         return False, None
 
     def kategorie_erkennen(self, listing: Listing) -> Kategorie:

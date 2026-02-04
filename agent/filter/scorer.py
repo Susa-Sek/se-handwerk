@@ -63,7 +63,7 @@ class Scorer:
         max_punkte = self.gewichtung.get("region", 30)
         ort = listing.ort.lower()
         if not ort:
-            return max_punkte // 3
+            return 0
         for region_name, region_data in self.regionen.items():
             region_score = region_data.get("score", 0)
             keywords = [kw.lower() for kw in region_data.get("keywords", [])]
@@ -73,7 +73,7 @@ class Scorer:
             for prefix in plz_prefixes:
                 if prefix in ort:
                     return region_score
-        return 5
+        return 0
 
     def _score_leistung(self, listing: Listing, kategorie: Kategorie) -> int:
         max_punkte = self.gewichtung.get("leistung", 40)
