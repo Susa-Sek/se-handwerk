@@ -13,11 +13,11 @@ The codebase is entirely in German (variable names, config keys, comments, UI te
 ```
 SE-handwerk/
 ├── website/              ← Static landing page (HTML/CSS, deployed to Vercel)
-│   ├── index.html, *.html
+│   ├── index.html, *.html (bodenarbeiten, kontakt, ueber-uns, etc.)
 │   ├── styles.css
 │   ├── vercel.json
-│   ├── assets/
-│   └── blog/
+│   ├── assets/           ← Logos and photos
+│   └── blog/             ← 11 blog post HTML files
 │
 ├── agent/                ← Python agent (scraping + KI-Bewertung + Telegram)
 │   ├── main.py           ← Orchestrator – steuert alle 3 KI-Agenten
@@ -32,13 +32,17 @@ SE-handwerk/
 │   ├── filter/
 │   ├── responses/
 │   ├── notifications/
-│   └── utils/
+│   └── utils/            ← date_parser.py, logger.py
 │
 ├── .env                  ← TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, OPENAI_API_KEY
 ├── .github/workflows/
 ├── CLAUDE.md
-└── ERWEITERN.md
+├── ERWEITERN.md          ← Guide: adding new scrapers
+├── TRIGGER.md            ← Guide: running the agent (manual, cron, webhooks)
+└── HOSTING.md            ← Guide: free hosting options (GitHub Actions, PythonAnywhere)
 ```
+
+> **Note:** The repository root also contains legacy copies of `main.py`, `models.py`, `database.py`, `config.yaml`, `requirements.txt`, and `scrapers/`/`filter/`/etc. directories from before the `agent/` restructuring. These root-level files are **outdated** — the `agent/` directory is the authoritative source.
 
 ## Commands
 
