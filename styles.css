@@ -866,6 +866,99 @@ a { text-decoration: none; color: inherit; }
 }
 .about-image img { width: 100%; height: 100%; object-fit: cover; border-radius: var(--radius); }
 
+/* Team Intro */
+.team-intro {
+  display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: start;
+}
+.team-intro-content h2 {
+  font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 20px;
+}
+.lead-text {
+  font-size: 1.05rem; line-height: 1.7; color: var(--primary); margin-bottom: 16px;
+}
+.team-cards {
+  display: grid; grid-template-columns: 1fr; gap: 20px;
+}
+.team-member-card {
+  background: white; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 28px; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.team-member-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+.team-member-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  color: white; font-size: 1.8rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+.team-member-card h4 {
+  font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 4px;
+}
+.team-member-card p {
+  font-size: 0.9rem; color: var(--text-light); margin: 0;
+}
+
+/* Mission Content */
+.mission-content {
+  max-width: 800px; margin: 0 auto; text-align: left;
+}
+.mission-content h2 {
+  font-size: 1.8rem; font-weight: 700; color: var(--primary); margin-bottom: 20px;
+}
+.mission-content .lead-text {
+  font-size: 1.05rem; line-height: 1.7; color: var(--primary); margin-bottom: 16px;
+}
+.mission-content p {
+  font-size: 0.95rem; color: var(--text-light); line-height: 1.8;
+}
+
+/* Services Overview Grid */
+.services-overview-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px;
+}
+.service-overview-card {
+  background: white; border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 32px; text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+.service-overview-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+  border-color: var(--accent);
+}
+.service-overview-icon {
+  width: 56px; height: 56px; border-radius: 12px;
+  background: var(--bg-alt); display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+}
+.service-overview-icon svg {
+  width: 28px; height: 28px; color: var(--accent);
+}
+.service-overview-card h3 {
+  font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 12px;
+}
+.service-overview-card h3 a {
+  color: var(--primary);
+}
+.service-overview-card h3 a:hover {
+  color: var(--accent);
+}
+.service-overview-card p {
+  font-size: 0.9rem; color: var(--text-light); line-height: 1.7; margin-bottom: 20px;
+}
+.service-overview-card .btn {
+  margin-top: auto;
+}
+
+/* Region Content Simple */
+.region-content-simple {
+  text-align: center;
+}
+
 /* ========== CONTACT PAGE (standalone) ========== */
 .contact-page-grid {
   display: grid; grid-template-columns: 1fr 2fr; gap: 56px; align-items: start;
@@ -991,6 +1084,8 @@ a { text-decoration: none; color: inherit; }
   .problem-grid { grid-template-columns: 1fr; }
   .warum-grid { grid-template-columns: repeat(2, 1fr); }
   .reviews-grid { grid-template-columns: 1fr; }
+  .team-intro { grid-template-columns: 1fr; gap: 40px; }
+  .services-overview-grid { grid-template-columns: 1fr; gap: 24px; }
 }
 
 @media (max-width: 768px) {
