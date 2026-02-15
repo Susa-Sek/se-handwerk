@@ -2,10 +2,12 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --primary: #2D3A3A;
-  --primary-light: #3A4848;
+  --primary: #1E3A5F;
+  --primary-light: #2C4A6F;
+  --primary-dark: #152938;
   --accent: #C8962E;
   --accent-hover: #B5842A;
+  --success: #34C759;
   --text: #1a1a1a;
   --text-light: #555;
   --text-muted: #888;
@@ -212,6 +214,213 @@ a { text-decoration: none; color: inherit; }
 .trust-items { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
 .trust-item { display: flex; align-items: center; gap: 10px; color: var(--text-muted); font-size: 0.9rem; font-weight: 500; }
 .trust-item svg { width: 20px; height: 20px; color: var(--accent); flex-shrink: 0; }
+
+/* ========== HERO BENEFITS ========== */
+.hero-benefits {
+  display: flex;
+  gap: 24px;
+  margin-top: 28px;
+  flex-wrap: wrap;
+}
+.hero-benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.85);
+  font-size: 0.88rem;
+  font-weight: 500;
+}
+.hero-benefit-item svg {
+  color: var(--success);
+  width: 20px;
+  height: 20px;
+}
+
+/* ========== PROBLEM SECTION ========== */
+.problem-section {
+  padding: 80px 0;
+  background: var(--bg-alt);
+}
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 900px;
+  margin: 40px auto;
+}
+.problem-card {
+  background: var(--bg);
+  padding: 28px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  text-align: center;
+}
+.problem-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+}
+.problem-card h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.problem-card p {
+  font-size: 0.88rem;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+.problem-closing {
+  text-align: center;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-top: 32px;
+}
+
+/* ========== WARUM SECTION ========== */
+.warum-section {
+  padding: 60px 0;
+  background: var(--bg);
+}
+.warum-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
+  max-width: 1000px;
+  margin: 40px auto 0;
+}
+.warum-item {
+  text-align: center;
+  padding: 20px;
+}
+.warum-item-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  background: rgba(200,150,46,0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+.warum-item h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 8px;
+}
+.warum-item p {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* ========== REVIEWS SECTION ========== */
+.reviews-section {
+  padding: 80px 0;
+  background: #F5F6F8;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+  max-width: 900px;
+  margin: 40px auto 0;
+}
+.review-card {
+  background: var(--bg);
+  padding: 32px;
+  border-radius: var(--radius);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid var(--border);
+}
+.review-stars {
+  color: #FFB800;
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+  letter-spacing: 2px;
+}
+.review-text {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+.review-author strong {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.review-author span {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+/* ========== CTA FINAL ========== */
+.cta-final {
+  padding: 80px 0;
+  background: linear-gradient(160deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  text-align: center;
+}
+.cta-final h2 {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.cta-final p {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  margin-bottom: 28px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cta-final .btn {
+  padding: 16px 36px;
+  font-size: 1.05rem;
+}
+
+/* ========== PRICING FOOTER NOTE ========== */
+.pricing-footer-note {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  max-width: 600px;
+  margin: 32px auto 0;
+  padding: 20px;
+  background: var(--bg-alt);
+  border-radius: var(--radius-sm);
+}
+
+/* ========== SCHWERPUNKTE HIERARCHIE ========== */
+/* Hauptleistungen prominenter */
+.showcase-section.hauptleistung .showcase-text h3 {
+  font-size: clamp(1.5rem, 3.5vw, 1.9rem);
+  font-weight: 900;
+}
+.showcase-section.hauptleistung .section-label {
+  font-size: 0.9rem;
+  letter-spacing: 2.5px;
+}
+
+/* Weitere Leistungen kleiner */
+.showcase-section.weitere .showcase-text h3 {
+  font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+}
+.showcase-section.weitere .section-label {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+.showcase-section.weitere .showcase-image {
+  opacity: 0.85;
+}
 
 /* ========== SERVICE CARDS (Homepage) ========== */
 .services-grid {
@@ -779,6 +988,9 @@ a { text-decoration: none; color: inherit; }
   .service-detail-grid { grid-template-columns: 1fr; }
   .service-sidebar { position: static; }
   .quick-info-grid { grid-template-columns: 1fr; gap: 20px; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .warum-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
@@ -799,4 +1011,8 @@ a { text-decoration: none; color: inherit; }
   .services-grid { grid-template-columns: 1fr; }
   .contact-form-wrap { padding: 24px; }
   .page-header { padding: 100px 0 36px; }
+  .hero-benefits { flex-direction: column; gap: 12px; }
+  .problem-grid { grid-template-columns: 1fr; }
+  .warum-grid { grid-template-columns: 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
 }
