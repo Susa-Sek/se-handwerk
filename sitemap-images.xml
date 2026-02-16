@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Haupt-Logo-Dateien -->
+  <url>
+    <loc>https://sehandwerk.de/</loc>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/logo.png</image:loc>
+      <image:title>SE Handwerk Logo</image:title>
+      <image:caption>Offizielles Logo von SE Handwerk - Handwerk zum Festpreis</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/logo-white.png</image:loc>
+      <image:title>SE Handwerk Logo (Weiß)</image:title>
+      <image:caption>Weißes SE Handwerk Logo für dunkle Hintergründe</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/logo-dark.png</image:loc>
+      <image:title>SE Handwerk Logo (Dunkel)</image:title>
+      <image:caption>Dunkles SE Handwerk Logo für helle Hintergründe</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/logo-icon.png</image:loc>
+      <image:title>SE Handwerk Icon</image:title>
+      <image:caption>SE Handwerk Icon für Favicon und UI-Elemente</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/logo-icon-dark.png</image:loc>
+      <image:title>SE Handwerk Icon (Dunkel)</image:title>
+      <image:caption>Dunkles SE Handwerk Icon für Meta-Tags und Social Media</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/logo-icon-white.png</image:loc>
+      <image:title>SE Handwerk Icon (Weiß)</image:title>
+      <image:caption>Weißes SE Handwerk Icon für dunkle Hintergründe</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Service-Bilder -->
+  <url>
+    <loc>https://sehandwerk.de/bodenarbeiten.html</loc>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/bodenarbeiten.jpg</image:loc>
+      <image:title>Laminat und Vinyl Bodenbelag</image:title>
+      <image:caption>Professionell verlegter Laminat und Vinyl Bodenbelag in einem modernen Wohnraum - SE Handwerk Service</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://sehandwerk.de/wohnungsuebergabe.html</loc>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/wohnungsuebergabe.jpg</image:loc>
+      <image:title>Wohnungsübergabe Renovierung</image:title>
+      <image:caption>Renovierte Wohnung mit neuem Boden und frisch gestrichenen Wänden - Übergabefertig durch SE Handwerk</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://sehandwerk.de/kraftstation-montage.html</loc>
+    <image:image>
+      <image:loc>https://sehandwerk.de/assets/montage.jpg</image:loc>
+      <image:title>Montage und Aufbau</image:title>
+      <image:caption>Professionelle Montage von Möbeln und Sportgeräten durch SE Handwerk</image:caption>
+    </image:image>
+  </url>
+</urlset>

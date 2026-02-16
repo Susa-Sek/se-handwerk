@@ -1,0 +1,12 @@
+# robots.txt für SE Handwerk
+# Letzte Aktualisierung: 2026-02-16
+
+User-agent: *
+Allow: /
+
+# Verhindere das Indexieren von rechtlichen Seiten
+Disallow: /impressum.html
+Disallow: /datenschutz.html
+
+# Sitemap für alle Crawler
+Sitemap: https://sehandwerk.de/sitemap.xml
