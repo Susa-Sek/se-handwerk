@@ -57,25 +57,25 @@
   <line x1="60" y1="132" x2="261.26" y2="132" stroke="#C8962E" stroke-width="0.5" opacity="0.4"/>
 
   <!-- Kontaktdaten mit Icons -->
+  <!-- Telefon -->
+  <g transform="translate(42, 142)">
+    <circle cx="8" cy="8" r="7" fill="#C8962E" opacity="0.1"/>
+    <text x="8" y="11" font-family="Inter, sans-serif" font-size="9" font-weight="400" fill="#C8962E" text-anchor="middle">📞</text>
+    <text x="22" y="11" font-family="Inter, sans-serif" font-size="8" font-weight="400" fill="#1E3A5F">+49 173 4536225</text>
+  </g>
+
   <!-- E-Mail -->
-  <g transform="translate(42, 145)">
+  <g transform="translate(42, 159)">
     <circle cx="8" cy="8" r="7" fill="#C8962E" opacity="0.1"/>
     <text x="8" y="11" font-family="Inter, sans-serif" font-size="10" font-weight="400" fill="#C8962E" text-anchor="middle">@</text>
-    <text x="22" y="11" font-family="Inter, sans-serif" font-size="9" font-weight="400" fill="#1E3A5F">kontakt@sehandwerk.de</text>
+    <text x="22" y="11" font-family="Inter, sans-serif" font-size="8" font-weight="400" fill="#1E3A5F">kontakt@sehandwerk.de</text>
   </g>
 
   <!-- Website -->
-  <g transform="translate(42, 163)">
+  <g transform="translate(42, 176)">
     <circle cx="8" cy="8" r="7" fill="#C8962E" opacity="0.1"/>
     <text x="8" y="11" font-family="Inter, sans-serif" font-size="9" font-weight="400" fill="#C8962E" text-anchor="middle">🌐</text>
-    <text x="22" y="11" font-family="Inter, sans-serif" font-size="9" font-weight="400" fill="#1E3A5F">sehandwerk.de</text>
-  </g>
-
-  <!-- Adresse -->
-  <g transform="translate(42, 181)">
-    <circle cx="8" cy="8" r="7" fill="#C8962E" opacity="0.1"/>
-    <text x="8" y="11" font-family="Inter, sans-serif" font-size="9" font-weight="400" fill="#C8962E" text-anchor="middle">📍</text>
-    <text x="22" y="8" font-family="Inter, sans-serif" font-size="8" font-weight="400" fill="#555555">Steinsfeldstr. 21, 74626 Bretzfeld</text>
+    <text x="22" y="11" font-family="Inter, sans-serif" font-size="8" font-weight="400" fill="#1E3A5F">sehandwerk.de</text>
   </g>
 
   <!-- Regionen unten rechts -->
