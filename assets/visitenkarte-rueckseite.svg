@@ -78,6 +78,18 @@
     <text x="22" y="11" font-family="Inter, sans-serif" font-size="8" font-weight="400" fill="#1E3A5F">sehandwerk.de</text>
   </g>
 
+  <!-- WhatsApp Hinweis -->
+  <g transform="translate(42, 193)">
+    <text x="22" y="8" font-family="Inter, sans-serif" font-size="7" font-weight="400" fill="#1E3A5F" opacity="0.7">WhatsApp: +49 173 4536225</text>
+  </g>
+
+  <!-- WhatsApp -->
+  <g transform="translate(165, 193)">
+    <circle cx="8" cy="8" r="6" fill="#25D366" opacity="0.15"/>
+    <text x="8" y="11" font-family="Inter, sans-serif" font-size="8" font-weight="400" fill="#25D366" text-anchor="middle">WA</text>
+    <text x="22" y="11" font-family="Inter, sans-serif" font-size="7" font-weight="400" fill="#1E3A5F">+49 173 4536225</text>
+  </g>
+
   <!-- Regionen unten rechts -->
   <text x="280" y="198" font-family="Inter, sans-serif" font-size="7" font-weight="400" fill="#1E3A5F" opacity="0.7" text-anchor="end">
     Heilbronn • Stuttgart • Mannheim
