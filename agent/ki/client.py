@@ -1,13 +1,14 @@
-"""Zentraler Anthropic-Client für alle KI-Agenten."""
+"""Zentraler Ollama-Client für alle KI-Agenten (Cloud/Lokal)."""
 
 import json
 import os
 import re
+import sys
 import time
 from datetime import date
 from typing import Optional
 
-import anthropic
+import ollama
 
 from utils.logger import setup_logger
 
@@ -15,20 +16,47 @@ logger = setup_logger("se_handwerk.ki.client")
 
 
 class KIClient:
-    """Zentraler Anthropic-Client mit Retry, Rate-Limit und Token-Tracking."""
+    """Zentraler Ollama-Client mit Retry und Token-Tracking."""
 
     def __init__(self, config: dict):
         self.config = config
         self.ki_config = config.get("ki", {})
-        api_key = os.getenv("ANTHROPIC_API_KEY")
-        if not api_key:
-            logger.warning("ANTHROPIC_API_KEY nicht gesetzt – KI-Funktionen deaktiviert")
-            self._client = None
-        else:
-            self._client = anthropic.Anthropic(api_key=api_key)
 
+        # Ollama Host (Cloud oder Lokal)
+        self.ollama_host = os.getenv(
+            "OLLAMA_HOST",
+            self.ki_config.get("ollama_host", "http://localhost:11434")
+        )
+
+        # API Key (für Ollama Cloud)
+        self.api_key = os.getenv("OLLAMA_API_KEY", "")
+
+        # Modellkonfiguration
+        self._modell_standard = self.ki_config.get("modell", "glm-5")
+        self._modell_strategie = self.ki_config.get("strategie_modell", "glm-5")
+
+        # Auto-Pull Modelle (nur für lokale Hosts)
+        self._auto_pull = self.ki_config.get("ollama_auto_pull", False)
+
+        # Client initialisieren mit Authentifizierung
+        try:
+            # Headers für Authentifizierung (Cloud benötigt Bearer Token)
+            headers = {}
+            if self.api_key:
+                headers["Authorization"] = f"Bearer {self.api_key}"
+
+            self._client = ollama.Client(host=self.ollama_host, headers=headers)
+            self._verfuegbar = True
+            logger.info(f"Ollama-Client verbunden: {self.ollama_host}")
+            if self.api_key:
+                logger.info("Ollama Cloud Authentifizierung aktiv")
+        except Exception as e:
+            logger.warning(f"Ollama nicht erreichbar: {e} – KI-Funktionen deaktiviert")
+            self._client = None
+            self._verfuegbar = False
+
+        # Rate-Limit (optional für Cloud)
         self._max_anfragen_pro_minute = self.ki_config.get("max_anfragen_pro_minute", 20)
-        self._kosten_limit_tag = self.ki_config.get("kosten_limit_tag_euro", 1.0)
         self._anfrage_timestamps: list[float] = []
 
         # Token-Tracking pro Agent pro Tag
@@ -37,8 +65,8 @@ class KIClient:
 
     @property
     def ist_verfuegbar(self) -> bool:
-        """Prüft ob der KI-Client nutzbar ist."""
-        return self._client is not None
+        """Prüft ob der Ollama-Client nutzbar ist."""
+        return self._verfuegbar
 
     def anfrage(
         self,
@@ -48,14 +76,15 @@ class KIClient:
         json_mode: bool = False,
         max_tokens: int = 500,
         agent_name: str = "unbekannt",
+        temperature: float = 0.7,
     ) -> Optional[str]:
-        """Einzelne API-Anfrage mit Fehlerbehandlung und Rate-Limiting."""
+        """Einzelne Ollama-Anfrage mit Fehlerbehandlung."""
         if not self.ist_verfuegbar:
-            logger.warning("KI-Client nicht verfügbar (kein API-Key)")
+            logger.warning("Ollama-Client nicht verfügbar")
             return None
 
         if not modell:
-            modell = self.ki_config.get("modell", "claude-3-haiku-20240307")
+            modell = self._modell_standard
 
         # Rate-Limit prüfen
         self._rate_limit_warten()
@@ -66,96 +95,95 @@ class KIClient:
             self._token_verbrauch = {}
             self._tracking_datum = heute
 
-        # Kosten-Limit prüfen
-        if self._tages_kosten_ueberschritten():
-            logger.warning(
-                f"Tägliches Kostenlimit ({self._kosten_limit_tag}€) erreicht – "
-                f"Anfrage übersprungen"
-            )
-            return None
-
         # Bei json_mode den System-Prompt ergänzen
         effektiver_system_prompt = system_prompt
         if json_mode:
             effektiver_system_prompt += "\n\nAntworte AUSSCHLIESSLICH mit validem JSON. Kein Text davor oder danach."
 
         try:
-            response = self._client.messages.create(
+            # Ollama Chat-Completion
+            response = self._client.chat(
                 model=modell,
-                max_tokens=max_tokens,
-                system=effektiver_system_prompt,
                 messages=[
+                    {"role": "system", "content": effektiver_system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
+                options={
+                    "temperature": temperature,
+                    "num_predict": max_tokens,
+                    # Ollama-Format erzwingen wenn json_mode
+                    "format": "json" if json_mode else "",
+                },
             )
 
             # Token-Verbrauch tracken
-            usage = response.usage
-            if usage:
-                self._token_tracking(agent_name, usage.input_tokens, usage.output_tokens)
+            if hasattr(response, "prompt_eval_count") and hasattr(response, "eval_count"):
+                self._token_tracking(
+                    agent_name,
+                    response.prompt_eval_count,
+                    response.eval_count
+                )
+                total = response.prompt_eval_count + response.eval_count
+            elif hasattr(response, "usage") and response.usage:
+                self._token_tracking(
+                    agent_name,
+                    response.usage.prompt_tokens or 0,
+                    response.usage.completion_tokens or 0
+                )
+                total = (response.usage.prompt_tokens or 0) + (response.usage.completion_tokens or 0)
+            else:
+                total = "?"
 
-            antwort = response.content[0].text
-            total = (usage.input_tokens + usage.output_tokens) if usage else "?"
-            logger.debug(f"KI-Anfrage OK ({agent_name}): {total} Tokens")
+            antwort = response.message.content
+            logger.debug(f"Ollama-Anfrage OK ({agent_name}): {total} Tokens")
 
-            # Bei json_mode: JSON aus der Antwort extrahieren
-            if json_mode:
+            # Fallback JSON-Extraktion falls format="json" nicht funktioniert
+            if json_mode and not self._ist_json(antwort):
                 antwort = self._json_extrahieren(antwort)
 
             return antwort
 
-        except anthropic.RateLimitError as e:
-            logger.warning(f"Anthropic Rate-Limit: {e} – warte 30s")
-            time.sleep(30)
-            return self.anfrage(system_prompt, user_prompt, modell, json_mode, max_tokens, agent_name)
-
-        except anthropic.APIConnectionError as e:
-            logger.error(f"Anthropic Verbindungsfehler: {e}")
+        except ollama.ResponseError as e:
+            logger.error(f"Ollama Response-Fehler: {e}")
             return None
 
-        except anthropic.APIError as e:
-            logger.error(f"Anthropic API-Fehler: {e}")
+        except ollama.ConnectionError as e:
+            logger.error(f"Ollama Verbindungsfehler: {e}")
             return None
 
         except Exception as e:
-            logger.error(f"Unerwarteter KI-Fehler: {e}")
+            logger.error(f"Unerwarteter Ollama-Fehler: {e}")
             return None
 
-    def _json_extrahieren(self, text: str) -> str:
-        """Extrahiert JSON aus Antworttext, falls Claude es in Text einbettet."""
-        text = text.strip()
-
-        # Schon valides JSON?
+    def _ist_json(self, text: str) -> bool:
+        """Prüft ob Text valides JSON ist."""
         try:
             json.loads(text)
-            return text
+            return True
         except (json.JSONDecodeError, ValueError):
-            pass
+            return False
+
+    def _json_extrahieren(self, text: str) -> str:
+        """Extrahiert JSON aus Antworttext."""
+        text = text.strip()
 
         # JSON aus Markdown-Codeblock extrahieren
         match = re.search(r"```(?:json)?\s*\n?(.*?)\n?```", text, re.DOTALL)
         if match:
             kandidat = match.group(1).strip()
-            try:
-                json.loads(kandidat)
+            if self._ist_json(kandidat):
                 return kandidat
-            except (json.JSONDecodeError, ValueError):
-                pass
 
         # Erstes { ... } oder [ ... ] Paar finden
         for start_char, end_char in [('{', '}'), ('[', ']')]:
             start = text.find(start_char)
             if start == -1:
                 continue
-            # Von hinten das letzte passende Zeichen suchen
             end = text.rfind(end_char)
             if end > start:
                 kandidat = text[start:end + 1]
-                try:
-                    json.loads(kandidat)
+                if self._ist_json(kandidat):
                     return kandidat
-                except (json.JSONDecodeError, ValueError):
-                    pass
 
         logger.warning("Konnte kein JSON aus der Antwort extrahieren")
         return text
@@ -163,7 +191,7 @@ class KIClient:
     def _rate_limit_warten(self):
         """Wartet falls nötig, um Rate-Limit einzuhalten."""
         jetzt = time.time()
-        # Alte Timestamps entfernen (älter als 60 Sekunden)
+        # Alte Timestamps entfernen
         self._anfrage_timestamps = [
             ts for ts in self._anfrage_timestamps if jetzt - ts < 60
         ]
@@ -186,20 +214,22 @@ class KIClient:
         self._token_verbrauch[agent_name]["output_tokens"] += output_tokens
         self._token_verbrauch[agent_name]["anfragen"] += 1
 
-    def _tages_kosten_ueberschritten(self) -> bool:
-        """Schätzt ob das Tageslimit überschritten wurde."""
-        # Kostenschätzung Claude Haiku: $0.80/1M input, $4.00/1M output
-        # Claude Sonnet: $3.00/1M input, $15.00/1M output
-        gesamt_input = sum(
-            d["input_tokens"] for d in self._token_verbrauch.values()
-        )
-        gesamt_output = sum(
-            d["output_tokens"] for d in self._token_verbrauch.values()
-        )
-        kosten_usd = (gesamt_input * 0.0000008) + (gesamt_output * 0.000004)
-        kosten_eur = kosten_usd * 0.93  # Grobe USD→EUR Umrechnung
-        return kosten_eur >= self._kosten_limit_tag
-
     def token_verbrauch_heute(self) -> dict:
         """Gibt Token-Verbrauch pro Agent zurück."""
         return dict(self._token_verbrauch)
+
+    def modell_laden(self, modell_name: str) -> bool:
+        """Lädt ein Modell falls noch nicht vorhanden."""
+        try:
+            modelle = [m["name"] for m in self._client.list().get("models", [])]
+            if modell_name in modelle:
+                logger.info(f"Modell {modell_name} bereits geladen")
+                return True
+
+            logger.info(f"Lade Modell {modell_name}...")
+            self._client.pull(modell_name)
+            logger.info(f"Modell {modell_name} erfolgreich geladen")
+            return True
+        except Exception as e:
+            logger.error(f"Fehler beim Laden von {modell_name}: {e}")
+            return False

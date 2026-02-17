@@ -7,13 +7,23 @@ firma:
   region_schwerpunkt: "Heilbronn"
 
 # ----------------------------------------------------------
-# SUCHGEBIET: Nur 100 km um Heilbronn
+# SUCHGEBIET: Nur 70 km um Heilbronn (zuverlässiges Filtering)
 # ----------------------------------------------------------
 suchgebiet:
   aktiv: true
   zentrum: "Heilbronn"
-  radius_km: 100
+  radius_km: 70
   max_alter_stunden: 5
+  zentrum_koordinaten: [49.1427, 9.2109]
+
+# ----------------------------------------------------------
+# GEODISTANZ-FILTERING: Nominatim API (OpenStreetMap)
+# ----------------------------------------------------------
+nominatim:
+  enabled: true
+  base_url: "https://nominatim.openstreetmap.org"
+  user_agent: "se_handwerk_agent"
+  cache_tage: 30
 
 # ----------------------------------------------------------
 # REGIONEN mit Scoring-Gewichtung
@@ -163,15 +173,24 @@ markt:
   max_ergebnisse: 20
 
 # ----------------------------------------------------------
-# KI-AGENTEN (Anthropic Claude)
+# KI-AGENTEN (Ollama - Lokale GLM-4)
 # ----------------------------------------------------------
 ki:
   enabled: true
-  modell: "claude-3-haiku-20240307"               # Standard für Suche & Outreach
-  strategie_modell: "claude-sonnet-4-20250514"   # Besseres Modell für Strategie
-  fallback_auf_regeln: true              # Bei API-Fehler regelbasiert weiter
-  kosten_limit_tag_euro: 1.00            # Tägliches Kostenlimit
-  max_anfragen_pro_minute: 20
+  # Ollama Konfiguration
+  ollama_host: "http://localhost:11434"
+  ollama_auto_pull: true
+
+  # Modelle (GLM-5 via Ollama Cloud)
+  modell: "glm-5"                         # Standard für Suche & Outreach
+  strategie_modell: "glm-5"               # GLM-5 für Strategie (selbes Modell)
+
+  # Alternativen (auskommentiert)
+  # modell: "glm-4:9b"                   # Kleinere Version für mehr Speed
+  # strategie_modell: "glm-4:9b"         # oder andere Größen
+
+  fallback_auf_regeln: true              # Bei Fehler regelbasiert weiter
+  kosten_limit_tag_euro: 0.0             # Nicht relevant bei lokalen Modellen
 
   strategie:
     intervall: "taeglich"                # Wie oft Strategie analysiert wird

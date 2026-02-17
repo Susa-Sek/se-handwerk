@@ -11,6 +11,7 @@ Nutzung:
 """
 
 import argparse
+import os
 import signal
 import sys
 import time
@@ -52,6 +53,43 @@ PROJEKT_ROOT = ROOT.parent
 load_dotenv(PROJEKT_ROOT / ".env")
 
 logger = setup_logger("se_handwerk.main")
+
+
+def _validate_env_vars() -> bool:
+    """
+    Prüft ob alle notwendigen Environment-Variables gesetzt sind.
+    Gibt True zurück wenn alle gesetzt sind, sonst False und loggt Fehler.
+    """
+    required_vars = {
+        "TELEGRAM_BOT_TOKEN": "Telegram Bot Token",
+        "TELEGRAM_CHAT_ID": "Telegram Chat ID",
+    }
+
+    optional_vars = {
+        "OLLAMA_HOST": "Ollama Host URL (Cloud oder Lokal)",
+    }
+
+    missing = []
+    for var, desc in required_vars.items():
+        if not os.environ.get(var):
+            missing.append(f"  - {var} ({desc})")
+
+    if missing:
+        logger.error("=" * 50)
+        logger.error("FEHLER: Fehlende Environment-Variable(n)!")
+        logger.error("Bitte in der .env Datei im Projekt-Root setzen:")
+        for m in missing:
+            logger.error(m)
+        logger.error("=" * 50)
+        return False
+
+    # Warnung für optionale Variablen
+    for var, desc in optional_vars.items():
+        if not os.environ.get(var):
+            logger.warning(f"Warnung: {var} nicht gesetzt ({desc}) - KI-Agenten deaktiviert")
+
+    logger.info("Environment-Validation: Erfolgreich")
+    return True
 
 
 class AkquiseAgent:
@@ -616,6 +654,11 @@ def main():
     )
 
     args = parser.parse_args()
+
+    # Environment-Validierung (außer bei --test)
+    if not args.test:
+        if not _validate_env_vars():
+            sys.exit(1)
 
     if args.test:
         test_telegram(args.config)

@@ -5,6 +5,7 @@ from typing import Optional
 
 from models import Listing, Kategorie
 from utils.logger import setup_logger
+from utils.geo_distance import GeoDistanceFilter
 
 logger = setup_logger("se_handwerk.criteria")
 
@@ -17,6 +18,9 @@ class Criteria:
         self._ausschluss_billig = [s.lower() for s in ausschluesse.get("begriffe_billig", [])]
         self._suchbegriffe = config.get("suchbegriffe", {})
 
+        # Geo-Distanz-Filter initialisieren
+        self.geo_filter = GeoDistanceFilter(config)
+
     def ist_ausgeschlossen(self, listing: Listing) -> tuple[bool, Optional[str]]:
         text = f"{listing.titel} {listing.beschreibung}".lower()
         for ausschluss in self._ausschluss_leistungen:
@@ -25,69 +29,14 @@ class Criteria:
         for billig in self._ausschluss_billig:
             if billig in text:
                 return True, f"Billig-Anfrage: {billig}"
-        ort_lower = listing.ort.lower()
-        if not ort_lower:
+
+        if not listing.ort:
             return False, None
 
-        # Städte/Regionen im 100km-Umkreis um Heilbronn
-        im_umkreis_100km = [
-            # Kernregion (0-30km)
-            "heilbronn", "neckarsulm", "weinsberg", "bad friedrichshall",
-            "lauffen", "brackenheim", "öhringen", "neuenstadt",
-            "bad rappenau", "eppingen", "schwaigern", "obersulm",
-            "erlenbach", "gundelsheim", "möckmühl", "bad wimpfen",
-            "jagsthausen", "widdern", "langenbrettach", "untergruppenbach",
-            "abstatt", "beilstein", "ilsfeld", "talheim", "flein",
-            "leingarten", "nordheim", "cleebronn",
-            # 30-70km
-            "stuttgart", "ludwigsburg", "schwäbisch hall", "crailsheim",
-            "esslingen", "waiblingen", "fellbach", "leonberg",
-            "kornwestheim", "bietigheim", "sachsenheim", "vaihingen",
-            "mühlacker", "bretten", "künzelsau", "gaildorf",
-            "backnang", "winnenden", "schorndorf", "marbach",
-            "böblingen", "sindelfingen", "mosbach", "sinsheim",
-            # 70-100km
-            "heidelberg", "mannheim", "karlsruhe", "pforzheim",
-            "schwäbisch gmünd", "aalen", "ellwangen",
-            "würzburg", "tauberbischofsheim", "wertheim",
-            "göppingen", "kirchheim", "nürtingen",
-        ]
-
-        # Harter Ausschluss: Städte die definitiv zu weit weg sind
-        zu_weit_weg = [
-            # Andere Bundesländer
-            "berlin", "hamburg", "münchen", "köln", "frankfurt",
-            "düsseldorf", "dortmund", "essen", "bremen", "dresden",
-            "leipzig", "hannover", "nürnberg", "rostock", "kiel",
-            "lübeck", "potsdam", "erfurt", "magdeburg", "saarbrücken",
-            "mainz", "wiesbaden", "kassel", "braunschweig", "bielefeld",
-            "münster", "augsburg", "regensburg", "chemnitz", "halle",
-            "bochum", "duisburg", "bonn", "aachen", "krefeld",
-            "mönchengladbach", "gelsenkirchen", "oberhausen",
-            # BW aber >100km von Heilbronn
-            "freiburg", "konstanz", "ulm", "friedrichshafen",
-            "ravensburg", "tuttlingen", "villingen", "donaueschingen",
-            "rottweil", "offenburg", "lahr", "lörrach", "waldshut",
-            "sigmaringen", "biberach",
-        ]
-
-        for stadt in zu_weit_weg:
-            if stadt in ort_lower:
-                return True, f"Zu weit entfernt (>100km): {listing.ort}"
-
-        # Wenn Ort bekannt und im Umkreis → OK
-        if any(ind in ort_lower for ind in im_umkreis_100km):
-            return False, None
-
-        # PLZ-Check: 74xxx (Heilbronn), 70-71xxx (Stuttgart/LB), 69xxx (HD/MA)
-        import re
-        plz_match = re.search(r'\b(\d{5})\b', ort_lower)
-        if plz_match:
-            plz = plz_match.group(1)
-            erlaubte_prefixe = ["74", "70", "71", "69", "68", "75", "72", "73"]
-            if plz[:2] in erlaubte_prefixe:
-                return False, None
-            return True, f"PLZ außerhalb Einzugsgebiet: {plz} ({listing.ort})"
+        # Geo-Distanz-Filtering mit Nominatim API
+        im_radius, distanz, grund = self.geo_filter.ist_im_radius(listing.ort)
+        if not im_radius and grund:
+            return True, grund
 
         return False, None
 
