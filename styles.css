@@ -21,6 +21,16 @@
   --radius-sm: 8px;
 }
 
+/* ========== UTILITY CLASSES ========== */
+.text-center { text-align: center; }
+.justify-center { justify-content: center; }
+.margin-top-40 { margin-top: 40px; }
+.bg-primary-dark { background: #344242; }
+.bg-grey-1 { background: #3D4441; }
+.bg-grey-2 { background: #3A3A2D; }
+.bg-grey-3 { background: #2D3A33; }
+.footer-link { color: rgba(255,255,255,0.5); }
+
 html { scroll-behavior: smooth; }
 
 body {
