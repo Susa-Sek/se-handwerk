@@ -163,15 +163,18 @@ markt:
   max_ergebnisse: 20
 
 # ----------------------------------------------------------
-# KI-AGENTEN (OpenAI)
+# KI-AGENTEN (Ollama Cloud / GLM-5)
 # ----------------------------------------------------------
 ki:
   enabled: true
-  openai_modell: "gpt-4o-mini"           # Standard für Suche & Outreach
-  strategie_modell: "gpt-4o"             # Besseres Modell für Strategie
+  openai_modell: "glm-5:cloud"           # Standard für Suche & Outreach
+  strategie_modell: "glm-5:cloud"        # Strategie nutzt gleiches Modell
   fallback_auf_regeln: true              # Bei API-Fehler regelbasiert weiter
   kosten_limit_tag_euro: 1.00            # Tägliches Kostenlimit
   max_anfragen_pro_minute: 20
+  # GLM-5 Pricing (USD pro 1M Token)
+  preis_input_pro_million: 0.10
+  preis_output_pro_million: 0.10
 
   strategie:
     intervall: "taeglich"                # Wie oft Strategie analysiert wird

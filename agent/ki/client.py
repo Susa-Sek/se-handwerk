@@ -1,30 +1,38 @@
-"""Zentraler OpenAI-Client für alle KI-Agenten."""
+"""Zentraler KI-Client für alle KI-Agenten (Ollama Cloud / Native API)."""
 
 import os
 import time
 from datetime import datetime, date
 from typing import Optional
 
-from openai import OpenAI, APIError, RateLimitError, APIConnectionError
+import requests
 
 from utils.logger import setup_logger
 
 logger = setup_logger("se_handwerk.ki.client")
 
+# Ollama Cloud API Endpoint (Native API)
+OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "https://ollama.com/api")
+
 
 class KIClient:
-    """Zentraler OpenAI-Client mit Retry, Rate-Limit und Token-Tracking."""
+    """Zentraler KI-Client mit Retry, Rate-Limit und Token-Tracking.
+
+    Unterstützt Ollama Cloud (Native API).
+    """
 
     def __init__(self, config: dict):
         self.config = config
         self.ki_config = config.get("ki", {})
-        api_key = os.getenv("OPENAI_API_KEY")
-        if not api_key:
-            logger.warning("OPENAI_API_KEY nicht gesetzt – KI-Funktionen deaktiviert")
-            self._client = None
-        else:
-            self._client = OpenAI(api_key=api_key)
 
+        # Ollama API-Key
+        self._api_key = os.getenv("OLLAMA_API_KEY") or os.getenv("OPENAI_API_KEY")
+        if not self._api_key:
+            logger.warning("OLLAMA_API_KEY nicht gesetzt – KI-Funktionen deaktiviert")
+        else:
+            logger.info("KI-Client initialisiert (Native Ollama API)")
+
+        self._base_url = OLLAMA_BASE_URL
         self._max_anfragen_pro_minute = self.ki_config.get("max_anfragen_pro_minute", 20)
         self._kosten_limit_tag = self.ki_config.get("kosten_limit_tag_euro", 1.0)
         self._anfrage_timestamps: list[float] = []
@@ -36,7 +44,7 @@ class KIClient:
     @property
     def ist_verfuegbar(self) -> bool:
         """Prüft ob der KI-Client nutzbar ist."""
-        return self._client is not None
+        return self._api_key is not None
 
     def anfrage(
         self,
@@ -53,7 +61,7 @@ class KIClient:
             return None
 
         if not modell:
-            modell = self.ki_config.get("openai_modell", "gpt-4o-mini")
+            modell = self.ki_config.get("openai_modell", "glm-5:cloud")
 
         # Rate-Limit prüfen
         self._rate_limit_warten()
@@ -73,43 +81,60 @@ class KIClient:
             return None
 
         try:
-            kwargs = {
+            # Native Ollama API Request
+            url = f"{self._base_url}/chat"
+            headers = {
+                "Authorization": f"Bearer {self._api_key}",
+                "Content-Type": "application/json",
+            }
+            payload = {
                 "model": modell,
                 "messages": [
                     {"role": "system", "content": system_prompt},
                     {"role": "user", "content": user_prompt},
                 ],
-                "max_tokens": max_tokens,
-                "temperature": 0.7,
+                "stream": False,
+                "options": {
+                    "num_predict": max_tokens,
+                    "temperature": 0.7,
+                },
             }
 
-            if json_mode:
-                kwargs["response_format"] = {"type": "json_object"}
+            response = requests.post(url, json=payload, headers=headers, timeout=60)
+            response.raise_for_status()
 
-            response = self._client.chat.completions.create(**kwargs)
+            data = response.json()
 
-            # Token-Verbrauch tracken
-            usage = response.usage
-            if usage:
-                self._token_tracking(agent_name, usage.prompt_tokens, usage.completion_tokens)
+            # Antwort extrahieren (GLM-5 nutzt 'thinking' für Extended Thinking)
+            message = data.get("message", {})
+            antwort = message.get("content", "") or message.get("thinking", "")
+            if not antwort:
+                logger.error(f"Leere Antwort von Ollama API: {data}")
+                return None
 
-            antwort = response.choices[0].message.content
+            # Token-Verbrauch tracken (falls verfügbar)
+            eval_count = data.get("eval_count", 0)
+            prompt_eval_count = data.get("prompt_eval_count", 0)
+            if eval_count or prompt_eval_count:
+                self._token_tracking(agent_name, prompt_eval_count, eval_count)
+
             logger.debug(
-                f"KI-Anfrage OK ({agent_name}): {usage.total_tokens if usage else '?'} Tokens"
+                f"KI-Anfrage OK ({agent_name}): {prompt_eval_count + eval_count} Tokens"
             )
             return antwort
 
-        except RateLimitError as e:
-            logger.warning(f"OpenAI Rate-Limit: {e} – warte 30s")
-            time.sleep(30)
-            return self.anfrage(system_prompt, user_prompt, modell, json_mode, max_tokens, agent_name)
-
-        except APIConnectionError as e:
-            logger.error(f"OpenAI Verbindungsfehler: {e}")
+        except requests.exceptions.Timeout:
+            logger.error("Ollama API Timeout")
             return None
 
-        except APIError as e:
-            logger.error(f"OpenAI API-Fehler: {e}")
+        except requests.exceptions.ConnectionError as e:
+            logger.error(f"Ollama Verbindungsfehler: {e}")
+            return None
+
+        except requests.exceptions.HTTPError as e:
+            logger.error(f"Ollama API-Fehler: {e}")
+            if e.response is not None:
+                logger.error(f"Response: {e.response.text}")
             return None
 
         except Exception as e:
@@ -144,14 +169,18 @@ class KIClient:
 
     def _tages_kosten_ueberschritten(self) -> bool:
         """Schätzt ob das Tageslimit überschritten wurde."""
-        # Grobe Kostenschätzung: gpt-4o-mini ~$0.15/1M input, ~$0.60/1M output
+        # GLM-5 Kostenschätzung (Ollama Cloud Pricing)
+        # Ca. $0.10/1M input, $0.10/1M output (angenommen)
         gesamt_prompt = sum(
             d["prompt_tokens"] for d in self._token_verbrauch.values()
         )
         gesamt_completion = sum(
             d["completion_tokens"] for d in self._token_verbrauch.values()
         )
-        kosten_usd = (gesamt_prompt * 0.00000015) + (gesamt_completion * 0.0000006)
+        # Preis pro 1M Token (in USD)
+        preis_input = self.ki_config.get("preis_input_pro_million", 0.10)
+        preis_output = self.ki_config.get("preis_output_pro_million", 0.10)
+        kosten_usd = (gesamt_prompt * preis_input / 1_000_000) + (gesamt_completion * preis_output / 1_000_000)
         kosten_eur = kosten_usd * 0.93  # Grobe USD→EUR Umrechnung
         return kosten_eur >= self._kosten_limit_tag
 
