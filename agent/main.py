@@ -42,6 +42,7 @@ from scrapers.nebenan import NebenanScraper
 from scrapers.markt import MarktScraper
 from utils.date_parser import ist_nicht_aelter_als_stunden
 from utils.logger import setup_logger
+from utils.standort_filter import ist_im_einzugsgebiet
 
 # .env laden (liegt im Projekt-Root, eine Ebene über agent/)
 PROJEKT_ROOT = ROOT.parent
@@ -172,6 +173,15 @@ class AkquiseAgent:
                 relevante_regionen = regionen[:3]
 
                 listings = scraper.alle_suchen(relevante_begriffe, relevante_regionen)
+
+                # Standort-Filter: Nur Listings im Einzugsgebiet
+                vorher = len(listings)
+                listings = [l for l in listings if ist_im_einzugsgebiet(l, self.config)[0]]
+                if vorher > len(listings):
+                    logger.info(
+                        f"Standort-Filter: {vorher - len(listings)} Anzeigen "
+                        f"außerhalb Einzugsgebiet entfernt, {len(listings)} übrig"
+                    )
 
                 # Nur Anzeigen nicht älter als X Stunden (z. B. 5)
                 max_alter = (

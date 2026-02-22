@@ -3,7 +3,7 @@
 import json
 from typing import Optional
 
-from ki.client import KIClient
+from ki.client import KIClient, json_extrahieren
 from models import Listing, Bewertungsergebnis, Kategorie, Prioritaet
 from filter.scorer import Scorer
 from utils.logger import setup_logger
@@ -135,82 +135,81 @@ class SuchAgent:
         self, antwort: str, listings: list[Listing]
     ) -> Optional[list[Bewertungsergebnis]]:
         """Parst die JSON-Antwort in Bewertungsergebnisse."""
-        try:
-            # Manchmal kommt die Antwort als {"bewertungen": [...]} statt direkt als Array
-            daten = json.loads(antwort)
-            if isinstance(daten, dict):
-                # Versuche verschiedene Schlüssel
-                for key in ["bewertungen", "ergebnisse", "listings", "results"]:
-                    if key in daten:
-                        daten = daten[key]
-                        break
-                else:
-                    # Falls kein passender Key, versuche den ersten Array-Wert
-                    for v in daten.values():
-                        if isinstance(v, list):
-                            daten = v
-                            break
-
-            if not isinstance(daten, list):
-                logger.warning("KI-Antwort ist kein Array")
-                return None
-
-            ergebnisse = []
-            for i, listing in enumerate(listings):
-                # Finde passende Bewertung (nach Index oder Position)
-                bewertung = None
-                for d in daten:
-                    if d.get("index") == i:
-                        bewertung = d
-                        break
-                if bewertung is None and i < len(daten):
-                    bewertung = daten[i]
-
-                if bewertung is None:
-                    ergebnisse.append(self._fallback_bewerten(listing))
-                    continue
-
-                try:
-                    kategorie_str = bewertung.get("kategorie", "sonstiges").lower()
-                    kategorie = {
-                        "boden": Kategorie.BODEN,
-                        "montage": Kategorie.MONTAGE,
-                        "uebergabe": Kategorie.UEBERGABE,
-                    }.get(kategorie_str, Kategorie.SONSTIGES)
-
-                    score_gesamt = int(bewertung.get("score_gesamt", 0))
-                    score_gesamt = max(0, min(100, score_gesamt))
-
-                    if score_gesamt >= 70:
-                        prioritaet = Prioritaet.GRUEN
-                    elif score_gesamt >= 40:
-                        prioritaet = Prioritaet.GELB
-                    else:
-                        prioritaet = Prioritaet.ROT
-
-                    ergebnis = Bewertungsergebnis(
-                        listing=listing,
-                        score_gesamt=score_gesamt,
-                        score_region=int(bewertung.get("score_region", 0)),
-                        score_leistung=int(bewertung.get("score_leistung", 0)),
-                        score_qualitaet=int(bewertung.get("score_qualitaet", 0)),
-                        kategorie=kategorie,
-                        prioritaet=prioritaet,
-                        ki_begruendung=bewertung.get("begruendung", ""),
-                    )
-                    ergebnisse.append(ergebnis)
-
-                    logger.info(
-                        f"KI-Score: {score_gesamt}/100 [{prioritaet.value}] "
-                        f"→ {listing.titel[:50]}"
-                    )
-
-                except (ValueError, TypeError) as e:
-                    logger.warning(f"Fehler beim Parsen der Bewertung für Listing {i}: {e}")
-                    ergebnisse.append(self._fallback_bewerten(listing))
-
-            return ergebnisse
-
-        except (json.JSONDecodeError, TypeError) as e:
-            logger.error(f"Fehler beim Parsen der KI-Batch-Antwort: {e}")
+        daten = json_extrahieren(antwort)
+        if not daten:
+            logger.error("Konnte kein JSON aus KI-Batch-Antwort extrahieren")
             return None
+
+        # Manchmal kommt die Antwort als {"bewertungen": [...]} statt direkt als Array
+        if isinstance(daten, dict):
+            # Versuche verschiedene Schlüssel
+            for key in ["bewertungen", "ergebnisse", "listings", "results"]:
+                if key in daten:
+                    daten = daten[key]
+                    break
+            else:
+                # Falls kein passender Key, versuche den ersten Array-Wert
+                for v in daten.values():
+                    if isinstance(v, list):
+                        daten = v
+                        break
+
+        if not isinstance(daten, list):
+            logger.warning("KI-Antwort ist kein Array")
+            return None
+
+        ergebnisse = []
+        for i, listing in enumerate(listings):
+            # Finde passende Bewertung (nach Index oder Position)
+            bewertung = None
+            for d in daten:
+                if d.get("index") == i:
+                    bewertung = d
+                    break
+            if bewertung is None and i < len(daten):
+                bewertung = daten[i]
+
+            if bewertung is None:
+                ergebnisse.append(self._fallback_bewerten(listing))
+                continue
+
+            try:
+                kategorie_str = bewertung.get("kategorie", "sonstiges").lower()
+                kategorie = {
+                    "boden": Kategorie.BODEN,
+                    "montage": Kategorie.MONTAGE,
+                    "uebergabe": Kategorie.UEBERGABE,
+                }.get(kategorie_str, Kategorie.SONSTIGES)
+
+                score_gesamt = int(bewertung.get("score_gesamt", 0))
+                score_gesamt = max(0, min(100, score_gesamt))
+
+                if score_gesamt >= 70:
+                    prioritaet = Prioritaet.GRUEN
+                elif score_gesamt >= 40:
+                    prioritaet = Prioritaet.GELB
+                else:
+                    prioritaet = Prioritaet.ROT
+
+                ergebnis = Bewertungsergebnis(
+                    listing=listing,
+                    score_gesamt=score_gesamt,
+                    score_region=int(bewertung.get("score_region", 0)),
+                    score_leistung=int(bewertung.get("score_leistung", 0)),
+                    score_qualitaet=int(bewertung.get("score_qualitaet", 0)),
+                    kategorie=kategorie,
+                    prioritaet=prioritaet,
+                    ki_begruendung=bewertung.get("begruendung", ""),
+                )
+                ergebnisse.append(ergebnis)
+
+                logger.info(
+                    f"KI-Score: {score_gesamt}/100 [{prioritaet.value}] "
+                    f"→ {listing.titel[:50]}"
+                )
+
+            except (ValueError, TypeError) as e:
+                logger.warning(f"Fehler beim Parsen der Bewertung für Listing {i}: {e}")
+                ergebnisse.append(self._fallback_bewerten(listing))
+
+        return ergebnisse

@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from typing import Optional
 
-from ki.client import KIClient
+from ki.client import KIClient, json_extrahieren
 from models import StrategiePlan
 from utils.logger import setup_logger
 
@@ -202,8 +202,36 @@ class StrategieAgent:
 
     def _parse_antwort(self, antwort: str) -> Optional[StrategiePlan]:
         """Parst die JSON-Antwort in einen StrategiePlan."""
+        daten = json_extrahieren(antwort)
+        if not daten:
+            logger.error("Konnte kein JSON aus Strategie-Antwort extrahieren")
+            return None
         try:
-            daten = json.loads(antwort)
+            # Falls GLM-5 eine Liste zurückgibt, versuche sie zu interpretieren
+            if isinstance(daten, list):
+                # Suche nach bekannten Keys in der Liste
+                neue_begriffe = []
+                deaktivierte = []
+                plattformen = []
+                begruendung = ""
+                for item in daten:
+                    if isinstance(item, dict):
+                        if "neue_suchbegriffe" in item:
+                            neue_begriffe = item.get("neue_suchbegriffe", [])
+                        if "deaktivierte_begriffe" in item:
+                            deaktivierte = item.get("deaktivierte_begriffe", [])
+                        if "plattform_empfehlungen" in item:
+                            plattformen = item.get("plattform_empfehlungen", [])
+                        if "begruendung" in item:
+                            begruendung = item.get("begruendung", "")
+                return StrategiePlan(
+                    neue_suchbegriffe=neue_begriffe,
+                    deaktivierte_begriffe=deaktivierte,
+                    plattform_empfehlungen=plattformen,
+                    begruendung=begruendung,
+                    datum=datetime.now(),
+                )
+
             return StrategiePlan(
                 neue_suchbegriffe=daten.get("neue_suchbegriffe", []),
                 deaktivierte_begriffe=daten.get("deaktivierte_begriffe", []),
@@ -211,6 +239,6 @@ class StrategieAgent:
                 begruendung=daten.get("begruendung", ""),
                 datum=datetime.now(),
             )
-        except (json.JSONDecodeError, KeyError, TypeError) as e:
+        except (KeyError, TypeError) as e:
             logger.error(f"Fehler beim Parsen der Strategie-Antwort: {e}")
             return None

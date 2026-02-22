@@ -1,6 +1,8 @@
 """Zentraler KI-Client für alle KI-Agenten (Ollama Cloud / Native API)."""
 
+import json
 import os
+import re
 import time
 from datetime import datetime, date
 from typing import Optional
@@ -13,6 +15,68 @@ logger = setup_logger("se_handwerk.ki.client")
 
 # Ollama Cloud API Endpoint (Native API)
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "https://ollama.com/api")
+
+
+def json_extrahieren(text: str) -> Optional[dict | list]:
+    """Extrahiert JSON aus Text mit Markdown-Code-Blöcken oder anderem Kontext.
+
+    GLM-5 liefert manchmal JSON in Markdown-Blöcken oder mit zusätzlichem Text.
+    Diese Funktion extrahiert das eigentliche JSON.
+    """
+    if not text:
+        return None
+
+    text = text.strip()
+
+    # 1. Versuch: Direktes JSON
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    # 2. Versuch: Markdown-Code-Block extrahieren
+    # Pattern: ```json ... ``` oder ``` ... ```
+    code_block_pattern = r'```(?:json)?\s*([\s\S]*?)\s*```'
+    match = re.search(code_block_pattern, text)
+    if match:
+        try:
+            return json.loads(match.group(1))
+        except json.JSONDecodeError:
+            pass
+
+    # 3. Versuch: JSON-Objekt oder Array im Text finden
+    # Suche nach erstem { oder [
+    for start_char, end_char in [('{', '}'), ('[', ']')]:
+        start_idx = text.find(start_char)
+        if start_idx != -1:
+            # Finde passendes Ende
+            depth = 0
+            in_string = False
+            escape_next = False
+            for i, char in enumerate(text[start_idx:], start_idx):
+                if escape_next:
+                    escape_next = False
+                    continue
+                if char == '\\':
+                    escape_next = True
+                    continue
+                if char == '"' and not escape_next:
+                    in_string = not in_string
+                    continue
+                if in_string:
+                    continue
+                if char == start_char:
+                    depth += 1
+                elif char == end_char:
+                    depth -= 1
+                    if depth == 0:
+                        try:
+                            return json.loads(text[start_idx:i+1])
+                        except json.JSONDecodeError:
+                            break
+
+    logger.warning(f"Konnte kein JSON extrahieren aus: {text[:200]}...")
+    return None
 
 
 class KIClient:
