@@ -154,7 +154,11 @@ class AkquiseAgent:
                 bisherige = self.db.top_listings_heute(50)
                 plan = self.strategie_agent.analysieren(statistik, bisherige)
                 if plan:
-                    # Vorschläge via Telegram senden (nicht automatisch anwenden)
+                    auto_anwenden = self.config.get("ki", {}).get("strategie", {}).get("auto_anwenden", False)
+                    if auto_anwenden:
+                        # Self-Improvement: Neue Suchbegriffe direkt anwenden
+                        self._strategie_anwenden(plan)
+                    # Immer via Telegram senden
                     self._strategie_vorschlag_senden(plan)
             except Exception as e:
                 logger.error(f"Fehler bei Strategie-Agent: {e}")
@@ -267,6 +271,31 @@ class AkquiseAgent:
                 )
             except Exception:
                 pass
+
+    def _strategie_anwenden(self, plan):
+        """Wendet Strategie-Vorschläge automatisch an (Self-Improvement)."""
+        import yaml
+
+        # Neue Suchbegriffe hinzufügen
+        if plan.neue_suchbegriffe:
+            aktuelle = self.config.get("suchbegriffe", {})
+            # Neue Begriffe zur Kategorie "sonstiges" hinzufügen oder neue Kategorie
+            if "ki_vorschlaege" not in aktuelle:
+                aktuelle["ki_vorschlaege"] = []
+            for begriff in plan.neue_suchbegriffe[:5]:  # Max 5 neue
+                if begriff not in aktuelle["ki_vorschlaege"]:
+                    aktuelle["ki_vorschlaege"].append(begriff)
+                    logger.info(f"Neuer Suchbegriff hinzugefügt: {begriff}")
+            self.config["suchbegriffe"] = aktuelle
+
+            # Config speichern
+            config_path = ROOT / "config.yaml"
+            try:
+                with open(config_path, "w", encoding="utf-8") as f:
+                    yaml.safe_dump(self.config, f, allow_unicode=True, default_flow_style=False)
+                logger.info("Strategie-Änderungen in config.yaml gespeichert")
+            except Exception as e:
+                logger.error(f"Konnte config.yaml nicht speichern: {e}")
 
     def _strategie_vorschlag_senden(self, plan):
         """Sendet Strategie-Vorschläge via Telegram."""
