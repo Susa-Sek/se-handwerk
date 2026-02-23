@@ -1,12 +1,8 @@
 """Telegram-Benachrichtigungen für den Akquise-Agent."""
 
-import asyncio
 import os
-import threading
+import requests
 from typing import Optional
-
-from telegram import Bot
-from telegram.constants import ParseMode
 
 from models import Bewertungsergebnis
 from utils.logger import setup_logger
@@ -14,38 +10,36 @@ from utils.logger import setup_logger
 logger = setup_logger("se_handwerk.telegram")
 
 
-def _run_async(coro):
-    """Führt async Funktion in separatem Thread aus."""
-    result = [None]
-    exception = [None]
-
-    def _run():
-        try:
-            loop = asyncio.new_event_loop()
-            asyncio.set_event_loop(loop)
-            try:
-                result[0] = loop.run_until_complete(coro)
-            finally:
-                loop.close()
-        except Exception as e:
-            exception[0] = e
-
-    thread = threading.Thread(target=_run)
-    thread.start()
-    thread.join(timeout=15)
-
-    if exception[0]:
-        raise exception[0]
-    return result[0]
-
-
 class TelegramNotifier:
     def __init__(self, config: dict):
         self.config = config
         token = os.getenv("TELEGRAM_BOT_TOKEN") or config.get("telegram", {}).get("bot_token")
         chat_id = os.getenv("TELEGRAM_CHAT_ID") or config.get("telegram", {}).get("chat_id")
-        self.bot = Bot(token=token) if token else None
+        self.token = token
         self.chat_id = str(chat_id) if chat_id else None
+        self.api_url = f"https://api.telegram.org/bot{token}" if token else None
+
+    def _send_message(self, text: str) -> bool:
+        """Sendet eine Nachricht über die Telegram API."""
+        if not self.token or not self.chat_id:
+            logger.warning("Telegram: Bot-Token oder Chat-ID nicht konfiguriert")
+            return False
+        try:
+            response = requests.post(
+                f"{self.api_url}/sendMessage",
+                data={
+                    "chat_id": self.chat_id,
+                    "text": text,
+                    "parse_mode": "HTML",
+                    "disable_web_page_preview": True,
+                },
+                timeout=10,
+            )
+            response.raise_for_status()
+            return True
+        except Exception as e:
+            logger.error(f"Telegram Fehler: {e}")
+            return False
 
     def _format_nachricht(self, ergebnis: Bewertungsergebnis) -> str:
         e = ergebnis
@@ -67,51 +61,15 @@ class TelegramNotifier:
         return text
 
     def senden_sync(self, ergebnis: Bewertungsergebnis) -> bool:
-        """Sendet Telegram-Nachricht."""
-        if not self.bot or not self.chat_id:
-            logger.warning("Telegram: Bot oder Chat-ID nicht konfiguriert")
+        """Sendet Telegram-Nachricht synchron via HTTP API."""
+        if not self._send_message(self._format_nachricht(ergebnis)):
             return False
-        try:
-            _run_async(self._senden_async(ergebnis))
-            return True
-        except Exception as e:
-            logger.error(f"Telegram Fehler: {e}")
-            return False
-
-    async def _senden_async(self, ergebnis: Bewertungsergebnis) -> bool:
-        try:
-            await self.bot.send_message(
-                chat_id=self.chat_id,
-                text=self._format_nachricht(ergebnis),
-                parse_mode=ParseMode.HTML,
-                disable_web_page_preview=True,
-            )
-            logger.info(f"Telegram: Nachricht gesendet für '{ergebnis.listing.titel[:50]}'")
-            return True
-        except Exception as e:
-            logger.error(f"Telegram Fehler: {e}")
-            return False
-
-    async def _fehler_melden_async(self, nachricht: str) -> bool:
-        if not self.bot or not self.chat_id:
-            return False
-        try:
-            await self.bot.send_message(
-                chat_id=self.chat_id,
-                text=f"⚠️ <b>Agent-Fehler</b>\n\n{nachricht}",
-                parse_mode=ParseMode.HTML,
-            )
-            return True
-        except Exception as e:
-            logger.error(f"Telegram Fehler: {e}")
-            return False
+        logger.info(f"Telegram: Nachricht gesendet für '{ergebnis.listing.titel[:50]}'")
+        return True
 
     def fehler_melden(self, nachricht: str) -> bool:
-        try:
-            return _run_async(self._fehler_melden_async(nachricht)) or False
-        except Exception as e:
-            logger.error(f"Telegram Fehler: {e}")
-            return False
+        """Sendet eine Fehlermeldung."""
+        return self._send_message(f"⚠️ <b>Agent-Fehler</b>\n\n{nachricht}")
 
     def _format_zusammenfassung(self, statistik: dict, top: list) -> str:
         lines = [
@@ -123,23 +81,10 @@ class TelegramNotifier:
             lines.append(f"{i}. [{row.get('prioritaet', '?')}] {row.get('titel', '')[:50]} | {row.get('ort', '')}")
         return "\n".join(lines)
 
-    async def _zusammenfassung_async(self, statistik: dict, top: list) -> bool:
-        if not self.bot or not self.chat_id:
-            return False
-        try:
-            await self.bot.send_message(
-                chat_id=self.chat_id,
-                text=self._format_zusammenfassung(statistik, top),
-                parse_mode=ParseMode.HTML,
-            )
-            return True
-        except Exception as e:
-            logger.error(f"Telegram Fehler: {e}")
-            return False
-
     def zusammenfassung_sync(self, statistik: dict, top: list) -> bool:
-        try:
-            return _run_async(self._zusammenfassung_async(statistik, top)) or False
-        except Exception as e:
-            logger.error(f"Telegram Fehler: {e}")
-            return False
+        """Sendet eine Tageszusammenfassung."""
+        return self._send_message(self._format_zusammenfassung(statistik, top))
+
+    def send_strategie(self, text: str) -> bool:
+        """Sendet eine Strategie-Nachricht."""
+        return self._send_message(text)

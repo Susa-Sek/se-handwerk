@@ -299,8 +299,6 @@ class AkquiseAgent:
 
     def _strategie_vorschlag_senden(self, plan):
         """Sendet Strategie-Vorschläge via Telegram."""
-        import asyncio
-
         text = (
             "🧠 <b>KI-Strategie-Vorschlag</b>\n\n"
             f"<b>Neue Suchbegriffe:</b>\n"
@@ -322,14 +320,7 @@ class AkquiseAgent:
             text += f"\n<i>{plan.begruendung[:300]}</i>"
 
         try:
-            if self.telegram.bot and self.telegram.chat_id:
-                asyncio.run(
-                    self.telegram.bot.send_message(
-                        chat_id=self.telegram.chat_id,
-                        text=text,
-                        parse_mode="HTML",
-                    )
-                )
+            if self.telegram.send_strategie(text):
                 logger.info("Strategie-Vorschlag via Telegram gesendet")
         except Exception as e:
             logger.error(f"Fehler beim Senden des Strategie-Vorschlags: {e}")
