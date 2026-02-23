@@ -147,6 +147,11 @@ suchbegriffe:
   - Handwerker Heilbronn
   - Trockenbau
   - Fussboden verlegen
+  - Bodenleger Heilbronn
+  - Möbelmonteur Heilbronn
+  - Wohnung fertig renovieren
+  - Handwerker Boden legen
+  - Schrank montieren
   montage:
   - Möbel montieren
   - Möbelaufbau
@@ -174,7 +179,7 @@ suchbegriffe:
   - Mietwohnung renovieren
 suchgebiet:
   aktiv: true
-  max_alter_stunden: 5
+  max_alter_stunden: 0
   radius_km: 100
   zentrum: Heilbronn
 telegram:

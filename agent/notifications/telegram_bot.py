@@ -13,6 +13,16 @@ from utils.logger import setup_logger
 logger = setup_logger("se_handwerk.telegram")
 
 
+def _get_event_loop():
+    """Holt oder erstellt einen Event Loop."""
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    return loop
+
+
 class TelegramNotifier:
     def __init__(self, config: dict):
         self.config = config
@@ -52,7 +62,14 @@ class TelegramNotifier:
             return False
 
     def senden_sync(self, ergebnis: Bewertungsergebnis) -> bool:
-        return asyncio.run(self._senden_async(ergebnis))
+        loop = _get_event_loop()
+        if loop.is_running():
+            # Wenn Loop schon läuft, erstelle neuen Task
+            import concurrent.futures
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future = executor.submit(asyncio.run, self._senden_async(ergebnis))
+                return future.result()
+        return loop.run_until_complete(self._senden_async(ergebnis))
 
     async def fehler_melden(self, nachricht: str) -> bool:
         if not self.bot or not self.chat_id:
