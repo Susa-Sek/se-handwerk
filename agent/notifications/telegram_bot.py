@@ -2,6 +2,7 @@
 
 import asyncio
 import os
+import threading
 from typing import Optional
 
 from telegram import Bot
@@ -13,14 +14,29 @@ from utils.logger import setup_logger
 logger = setup_logger("se_handwerk.telegram")
 
 
-def _get_event_loop():
-    """Holt oder erstellt einen Event Loop."""
-    try:
-        loop = asyncio.get_running_loop()
-    except RuntimeError:
-        loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(loop)
-    return loop
+def _run_async(coro):
+    """Führt async Funktion in separatem Thread aus."""
+    result = [None]
+    exception = [None]
+
+    def _run():
+        try:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            try:
+                result[0] = loop.run_until_complete(coro)
+            finally:
+                loop.close()
+        except Exception as e:
+            exception[0] = e
+
+    thread = threading.Thread(target=_run)
+    thread.start()
+    thread.join(timeout=15)
+
+    if exception[0]:
+        raise exception[0]
+    return result[0]
 
 
 class TelegramNotifier:
@@ -36,18 +52,33 @@ class TelegramNotifier:
         prioritaet_emoji = {"gruen": "🟢", "gelb": "🟡", "rot": "🔴"}.get(e.prioritaet.value, "⚪")
         text = (
             f"{prioritaet_emoji} <b>{e.listing.titel[:80]}</b>\n"
-            f"Score: {e.score_gesamt}/100 | {e.kategorie.value} | {e.listing.quelle.value}\n"
-            f"Ort: {e.listing.ort or '-'}\n"
-            f"<a href=\"{e.listing.url}\">Anzeige öffnen</a>\n"
+            f"📊 Score: {e.score_gesamt}/100 "
+            f"(Region: {e.score_region} | Leistung: {e.score_leistung} | Qualität: {e.score_qualitaet})\n"
+            f"📍 Ort: {e.listing.ort or '-'}\n"
+            f"📁 Kategorie: {e.kategorie.value} | Quelle: {e.listing.quelle.value}\n"
+            f"<a href=\"{e.listing.url}\">🔗 Anzeige öffnen</a>\n"
         )
+        # KI-Begründung anzeigen
+        if e.ki_begruendung:
+            text += f"\n💡 <b>KI-Bewertung:</b> {e.ki_begruendung[:300]}"
+        # Antwort-Vorschlag anzeigen
         if e.antwort_vorschlag:
-            text += f"\n--- Vorschlag ---\n{e.antwort_vorschlag[:500]}"
+            text += f"\n\n📝 <b>Antwort-Vorschlag:</b>\n{e.antwort_vorschlag[:400]}"
         return text
 
-    async def _senden_async(self, ergebnis: Bewertungsergebnis) -> bool:
+    def senden_sync(self, ergebnis: Bewertungsergebnis) -> bool:
+        """Sendet Telegram-Nachricht."""
         if not self.bot or not self.chat_id:
             logger.warning("Telegram: Bot oder Chat-ID nicht konfiguriert")
             return False
+        try:
+            _run_async(self._senden_async(ergebnis))
+            return True
+        except Exception as e:
+            logger.error(f"Telegram Fehler: {e}")
+            return False
+
+    async def _senden_async(self, ergebnis: Bewertungsergebnis) -> bool:
         try:
             await self.bot.send_message(
                 chat_id=self.chat_id,
@@ -61,17 +92,7 @@ class TelegramNotifier:
             logger.error(f"Telegram Fehler: {e}")
             return False
 
-    def senden_sync(self, ergebnis: Bewertungsergebnis) -> bool:
-        loop = _get_event_loop()
-        if loop.is_running():
-            # Wenn Loop schon läuft, erstelle neuen Task
-            import concurrent.futures
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                future = executor.submit(asyncio.run, self._senden_async(ergebnis))
-                return future.result()
-        return loop.run_until_complete(self._senden_async(ergebnis))
-
-    async def fehler_melden(self, nachricht: str) -> bool:
+    async def _fehler_melden_async(self, nachricht: str) -> bool:
         if not self.bot or not self.chat_id:
             return False
         try:
@@ -81,6 +102,13 @@ class TelegramNotifier:
                 parse_mode=ParseMode.HTML,
             )
             return True
+        except Exception as e:
+            logger.error(f"Telegram Fehler: {e}")
+            return False
+
+    def fehler_melden(self, nachricht: str) -> bool:
+        try:
+            return _run_async(self._fehler_melden_async(nachricht)) or False
         except Exception as e:
             logger.error(f"Telegram Fehler: {e}")
             return False
@@ -110,4 +138,8 @@ class TelegramNotifier:
             return False
 
     def zusammenfassung_sync(self, statistik: dict, top: list) -> bool:
-        return asyncio.run(self._zusammenfassung_async(statistik, top))
+        try:
+            return _run_async(self._zusammenfassung_async(statistik, top)) or False
+        except Exception as e:
+            logger.error(f"Telegram Fehler: {e}")
+            return False
