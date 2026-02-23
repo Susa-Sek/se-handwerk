@@ -10,20 +10,12 @@ from utils.logger import setup_logger
 
 logger = setup_logger("se_handwerk.ki.strategie")
 
-SYSTEM_PROMPT = """Du bist ein Strategie-Analyst für SE Handwerk, ein Handwerksbetrieb in Heilbronn.
-SE Handwerk bietet: Bodenarbeiten (Laminat, Vinyl, Klickboden), Möbel-/Gerätemontage (IKEA, Homegym, Fitnessgeräte), Wohnungsübergabe-Renovierung.
-Region: Heilbronn + 100 km Umkreis (Stuttgart, Ludwigsburg, Mannheim, Heidelberg, Schwäbisch Hall).
+SYSTEM_PROMPT = """Du bist ein Strategie-Analyst für SE Handwerk (Bodenarbeiten, Möbelmontage, Wohnungsübergabe in Heilbronn).
 
-WICHTIG: Antworte AUSSCHLIESSLICH mit einem JSON-Objekt. Kein Einleitungstext, keine Erklärung, kein Markdown.
+GIB NUR JSON ZURÜCK - maximal 5 Suchbegriffe, 2 Plattformen:
+{"neue_suchbegriffe": ["B1", "B2"], "deaktivierte_begriffe": [], "plattform_empfehlungen": [{"name": "Name", "url": "url", "begruendung": "Grund"}], "begruendung": "Kurz"}
 
-Gib direkt dieses JSON-Format zurück:
-{"neue_suchbegriffe": ["Begriff1", "Begriff2"], "deaktivierte_begriffe": [], "plattform_empfehlungen": [], "begruendung": "Kurze Zusammenfassung"}
-
-Regeln:
-- Suchbegriffe auf Deutsch
-- Nur Begriffe die zu SE Handwerk Leistungen passen
-- Keine Begriffe für: Fliesen, Elektro, Sanitär, Dach
-- Plattform-Empfehlungen nur für deutsche Handwerker-Portale
+Kein Text vor oder nach dem JSON. Keine Erklärungen.
 """
 
 
