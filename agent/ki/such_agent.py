@@ -19,37 +19,22 @@ SE Handwerk bietet:
 
 Region: Heilbronn + 100 km Umkreis (Stuttgart, Ludwigsburg, Mannheim, Heidelberg, Schwäbisch Hall, Neckarsulm, Weinsberg).
 
-Bewerte jedes Listing nach:
-1. Relevanz: Passt es zu SE Handwerk Leistungen? (0-40 Punkte)
-2. Region: Liegt es im Einzugsgebiet? (0-30 Punkte)
-3. Qualität: Ist es ein konkreter Auftrag? Privatkunde? Dringend? Realistische Beschreibung? (0-30 Punkte)
+WICHTIG: Antworte AUSSCHLIESSLICH mit einem JSON-Array. Kein Einleitungstext, keine Erklärung, kein Markdown.
 
-Kategorisiere als: boden, montage, uebergabe, sonstiges
+Gib direkt dieses Format zurück:
+[{"index": 0, "score_gesamt": 75, "score_region": 25, "score_leistung": 30, "score_qualitaet": 20, "kategorie": "boden", "prioritaet": "gruen", "begruendung": "Kurze Begründung"}]
 
-Priorität:
-- gruen: Score >= 70 (Top-Lead)
-- gelb: Score 40-69 (Interessant)
-- rot: Score < 40 (Nicht relevant)
+Bewertung:
+- Relevanz (0-40): Passt es zu SE Handwerk Leistungen?
+- Region (0-30): Liegt es im Einzugsgebiet?
+- Qualität (0-30): Konkreter Auftrag? Privatkunde? Dringend?
 
-Antworte IMMER als JSON-Array:
-[
-    {
-        "index": 0,
-        "score_gesamt": 75,
-        "score_region": 25,
-        "score_leistung": 30,
-        "score_qualitaet": 20,
-        "kategorie": "boden",
-        "prioritaet": "gruen",
-        "begruendung": "Kurze Begründung warum dieser Score"
-    }
-]
+Priorität: gruen (≥70), gelb (40-69), rot (<40)
+Kategorie: boden, montage, uebergabe, sonstiges
 
 Wichtig:
-- Werbung, Shops und Info-Seiten bekommen Score 0 (rot)
-- Unklare Orte ohne BW-Bezug: Region-Score maximal 5
+- Werbung/Shops bekommen Score 0
 - "Gesuch" oder "Suche" im Titel erhöht Qualitäts-Score
-- Gewerbe-Kunden (GmbH, Firma) leicht niedriger als Privat
 """
 
 
@@ -128,7 +113,7 @@ class SuchAgent:
         return (
             f"Bewerte die folgenden {len(listings)} Listings:\n\n"
             + "\n\n".join(eintraege)
-            + "\n\nAntworte als JSON-Array mit einem Objekt pro Listing."
+            + "\n\nGIB NUR DAS JSON-ARRAY ZURÜCK. Kein Text vor oder nach dem JSON."
         )
 
     def _parse_batch_antwort(

@@ -285,7 +285,10 @@ class AkquiseAgent:
         if plan.plattform_empfehlungen:
             text += f"\n<b>Plattform-Empfehlungen:</b>\n"
             for p in plan.plattform_empfehlungen[:3]:
-                text += f"  → {p.get('name', '?')}: {p.get('begruendung', '')[:80]}\n"
+                if isinstance(p, dict):
+                    text += f"  → {p.get('name', '?')}: {p.get('begruendung', '')[:80]}\n"
+                else:
+                    text += f"  → {str(p)}\n"
         if plan.begruendung:
             text += f"\n<i>{plan.begruendung[:300]}</i>"
 

@@ -14,23 +14,15 @@ SYSTEM_PROMPT = """Du bist ein Strategie-Analyst für SE Handwerk, ein Handwerks
 SE Handwerk bietet: Bodenarbeiten (Laminat, Vinyl, Klickboden), Möbel-/Gerätemontage (IKEA, Homegym, Fitnessgeräte), Wohnungsübergabe-Renovierung.
 Region: Heilbronn + 100 km Umkreis (Stuttgart, Ludwigsburg, Mannheim, Heidelberg, Schwäbisch Hall).
 
-Deine Aufgabe: Analysiere die bisherigen Suchergebnisse und optimiere die Suchstrategie.
+WICHTIG: Antworte AUSSCHLIESSLICH mit einem JSON-Objekt. Kein Einleitungstext, keine Erklärung, kein Markdown.
 
-Antworte IMMER als JSON mit folgender Struktur:
-{
-    "neue_suchbegriffe": ["Begriff 1", "Begriff 2"],
-    "deaktivierte_begriffe": ["Begriff der nicht funktioniert"],
-    "plattform_empfehlungen": [
-        {"name": "Plattformname", "url": "https://...", "begruendung": "Warum relevant"}
-    ],
-    "begruendung": "Zusammenfassung der Analyse und Empfehlungen"
-}
+Gib direkt dieses JSON-Format zurück:
+{"neue_suchbegriffe": ["Begriff1", "Begriff2"], "deaktivierte_begriffe": [], "plattform_empfehlungen": [], "begruendung": "Kurze Zusammenfassung"}
 
 Regeln:
-- Suchbegriffe auf Deutsch (Zielgruppe ist deutschsprachig)
-- Nur Begriffe die zu den SE Handwerk Leistungen passen
-- Berücksichtige saisonale Trends (Umzug=Frühling/Sommer, Renovierung=Herbst)
-- Keine Begriffe für Leistungen die SE Handwerk NICHT anbietet (Fliesen, Elektro, Sanitär, Dach)
+- Suchbegriffe auf Deutsch
+- Nur Begriffe die zu SE Handwerk Leistungen passen
+- Keine Begriffe für: Fliesen, Elektro, Sanitär, Dach
 - Plattform-Empfehlungen nur für deutsche Handwerker-Portale
 """
 
@@ -79,7 +71,7 @@ class StrategieAgent:
             user_prompt=user_prompt,
             modell=self._modell,
             json_mode=True,
-            max_tokens=800,
+            max_tokens=1200,
             agent_name="strategie",
         )
 
@@ -197,7 +189,7 @@ class StrategieAgent:
             f"Aktuelle Suchbegriffe: {json.dumps(aktuelle_begriffe, ensure_ascii=False)}\n\n"
             f"Erfolgsraten pro Begriff:\n"
             f"{json.dumps(erfolg_pro_begriff, ensure_ascii=False, indent=2)}\n\n"
-            f"Analysiere die Daten und erstelle einen optimierten Suchplan."
+            f"GIB NUR JSON ZURÜCK. Kein Text vor oder nach dem JSON."
         )
 
     def _parse_antwort(self, antwort: str) -> Optional[StrategiePlan]:
