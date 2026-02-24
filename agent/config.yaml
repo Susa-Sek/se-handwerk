@@ -33,7 +33,7 @@ firma:
   name: SE Handwerk
   region_schwerpunkt: Heilbronn
 google:
-  enabled: true
+  enabled: false
   max_results: 10
   site_filter:
   - nebenan.de
@@ -45,7 +45,7 @@ ki:
     max_tokens: 500
   enabled: true
   fallback_auf_regeln: true
-  kosten_limit_tag_euro: 1.0
+  kosten_limit_tag_euro: 2.0
   max_anfragen_pro_minute: 20
   openai_modell: glm-5:cloud
   outreach:
@@ -64,7 +64,7 @@ kleinanzeigen:
   radius_km: 100
 markt:
   basis_url: https://www.markt.de
-  enabled: false
+  enabled: true
   max_ergebnisse: 20
   radius_km: 100
 myhammer:
@@ -72,7 +72,7 @@ myhammer:
   enabled: false
 nebenan:
   basis_url: https://www.nebenan.de
-  enabled: false
+  enabled: true
   max_ergebnisse: 20
 regionen:
   heilbronn:
@@ -152,6 +152,34 @@ suchbegriffe:
   - Wohnung fertig renovieren
   - Handwerker Boden legen
   - Schrank montieren
+  - Bodenleger
+  - Bodenarbeiten Heilbronn
+  - Boden legen
+  - Estricharbeiten
+  - Bodenleger Heilbronn günstig
+  - Fussboden verlegen Heilbronn
+  - Boden renovieren Wohnung
+  - Vinylboden verlegen Heilbronn
+  - Möbelmontage Heilbronn
+  - Bodenlegen Heilbronn
+  - Möbel aufbauen
+  - Neubau Boden
+  - Wohnung fertig machen
+  - Handwerker Boden
+  - Boden sanieren
+  - Möbel aufbauen Heilbronn
+  - Wohnung renovieren Heilbronn
+  - Estrich verlegen
+  - Laminat verlegen Heilbronn
+  - Bodenleger in Heilbronn
+  - Estricharbeiten Heilbronn
+  - Boden sanieren Kosten
+  - Innenrenovierung Heilbronn
+  - Bodenverlegung Heilbronn
+  - Renovierungsservice Heilbronn
+  - Wohnungsaufbereitung
+  - Malerarbeiten Heilbronn
+  - Fussbodenleger
   montage:
   - Möbel montieren
   - Möbelaufbau
