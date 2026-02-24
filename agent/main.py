@@ -158,8 +158,7 @@ class AkquiseAgent:
                     if auto_anwenden:
                         # Self-Improvement: Neue Suchbegriffe direkt anwenden
                         self._strategie_anwenden(plan)
-                    # Immer via Telegram senden
-                    self._strategie_vorschlag_senden(plan)
+                        logger.info(f"Strategie angewendet: {len(plan.neue_suchbegriffe)} neue Begriffe")
             except Exception as e:
                 logger.error(f"Fehler bei Strategie-Agent: {e}")
 
