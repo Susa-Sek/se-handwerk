@@ -5,8 +5,8 @@ User-agent: *
 Allow: /
 
 # Verhindere das Indexieren von rechtlichen Seiten
-Disallow: /impressum.html
-Disallow: /datenschutz.html
+Disallow: /impressum
+Disallow: /datenschutz
 
 # Sitemap für alle Crawler
 Sitemap: https://sehandwerk.de/sitemap.xml
