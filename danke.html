@@ -4,18 +4,36 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Anfrage erhalten | SE Handwerk</title>
+  <title>Anfrage erhalten – Wir melden uns bald | SE Handwerk</title>
+  <meta name="description" content="Vielen Dank für Ihre Anfrage bei SE Handwerk. Wir haben Ihre Nachricht erhalten und melden uns innerhalb von 24 Stunden mit einem Festpreisangebot bei Ihnen.">
   <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://sehandwerk.de/danke">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:title" content="Anfrage erhalten – Wir melden uns bald | SE Handwerk">
+  <meta property="og:description" content="Vielen Dank für Ihre Anfrage. SE Handwerk meldet sich innerhalb von 24 Stunden.">
+  <meta property="og:url" content="https://sehandwerk.de/danke">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Anfrage erhalten – Wir melden uns bald | SE Handwerk",
+    "url": "https://sehandwerk.de/danke",
+    "publisher": {"@type": "Organization", "name": "SE Handwerk", "url": "https://sehandwerk.de"}
+  }
+  </script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="assets/logo-icon-dark.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- ===== NAVIGATION ===== -->
-  <nav class="nav" id="nav">
+  <nav class="nav solid" id="nav">
     <div class="container nav-inner">
       <a href="/" class="nav-logo" aria-label="SE Handwerk">
         <img src="assets/logo-white.png" alt="SE Handwerk">
@@ -107,7 +125,7 @@
 
   <script>
     const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+    window.addEventListener('scroll', () => nav.classList.toggle('glass', window.scrollY > 20), { passive: true });
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
     mobileToggle.addEventListener('click', () => mobileMenu.classList.toggle('active'));
