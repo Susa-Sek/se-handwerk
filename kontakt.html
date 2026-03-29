@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Kontakt | SE Handwerk – Anfrage & Angebot Heilbronn</title>
-  <meta name="description" content="Kontaktieren Sie SE Handwerk für Bodenarbeiten, Wohnungsübergabe oder Montage in Heilbronn & Stuttgart. Anfrage per Formular oder E-Mail – schnelle Antwort.">
+  <title>Kontakt | Anfrage senden | SE Handwerk</title>
+  <meta name="description" content="Kontaktieren Sie SE Handwerk für Bodenarbeiten, Wohnungsübergabe oder Montage. Anfrage per Formular oder E-Mail. Raum Heilbronn & Stuttgart.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://sehandwerk.de/kontakt">
 
@@ -15,28 +15,16 @@
   <meta property="og:description" content="Kontaktieren Sie SE Handwerk für Bodenarbeiten, Wohnungsübergabe oder Montage. Anfrage per Formular oder E-Mail. Raum Heilbronn & Stuttgart.">
   <meta property="og:url" content="https://sehandwerk.de/kontakt">
   <meta property="og:site_name" content="SE Handwerk">
-  <meta property="og:image" content="https://sehandwerk.de/assets/logo-icon-dark.png">
-  <meta property="og:image" content="https://sehandwerk.de/assets/logo-icon-dark.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/logo-icon-dark.png">
   <link rel="stylesheet" href="styles.css">
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Kontakt | SE Handwerk – Anfrage & Angebot Heilbronn",
-    "url": "https://sehandwerk.de/kontakt",
-    "publisher": {"@type": "Organization", "name": "SE Handwerk", "url": "https://sehandwerk.de"}
-  }
-  </script>
 </head>
 <body>
 
   <!-- ===== NAVIGATION ===== -->
-  <nav class="nav solid" id="nav">
+  <nav class="nav" id="nav">
     <div class="container nav-inner">
       <a href="/" class="nav-logo" aria-label="SE Handwerk">
         <img src="assets/logo-white.png" alt="SE Handwerk">
@@ -67,7 +55,7 @@
   <!-- ===== PAGE HEADER ===== -->
     <!-- ===== MAIN CONTENT ===== -->
   <main>
-  <section class="page-header page-header-2026">
+  <section class="page-header">
     <div class="container">
       <div class="breadcrumb"><a href="/">Startseite</a> / Kontakt</div>
       <h1 class="section-title">Kontakt & Anfrage</h1>
@@ -226,7 +214,7 @@
       const s = window.scrollY;
       const h = document.documentElement.scrollHeight - window.innerHeight;
       if (h > 0) scrollProgress.style.width = ((s / h) * 100) + '%';
-      nav.classList.toggle('glass', s > 20);
+      nav.classList.toggle('scrolled', s > 20);
     }
     window.addEventListener('scroll', updateScroll, { passive: true });
 
