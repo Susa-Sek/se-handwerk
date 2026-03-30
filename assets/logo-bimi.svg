@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.2" baseProfile="tiny-ps"
+     viewBox="0 0 100 100" width="100" height="100">
+  <title>SE Handwerk</title>
+
+  <!-- Hintergrund -->
+  <rect width="100" height="100" fill="#1A2535"/>
+
+  <!-- Haus-Körper (weiß, kein Füllung) -->
+  <rect x="27" y="50" width="46" height="28" fill="none" stroke="#FFFFFF" stroke-width="2.2"/>
+
+  <!-- Dach-Kontur (weiß) -->
+  <polyline points="22,50 50,22 78,50" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linejoin="miter"/>
+
+  <!-- Gelber Dach-Akzent (linkes Dachdreieck) -->
+  <polygon points="22,50 50,22 50,50" fill="#F5A623"/>
+
+  <!-- Gelbes Fenster/Gaube -->
+  <rect x="40" y="31" width="17" height="16" fill="#F5A623"/>
+
+  <!-- Tür -->
+  <rect x="43" y="62" width="14" height="16" fill="none" stroke="#FFFFFF" stroke-width="1.5"/>
+
+  <!-- SE HANDWERK Text -->
+  <text x="50" y="92"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="9.5"
+        font-weight="700"
+        fill="#FFFFFF"
+        text-anchor="middle"
+        letter-spacing="1.5">SE HANDWERK</text>
+</svg>
