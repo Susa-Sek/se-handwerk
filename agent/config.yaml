@@ -26,6 +26,22 @@ ausschluesse:
 datenbank:
   cleanup_tage: 30
   pfad: se_handwerk.db
+email:
+  enabled: false
+  imap_host: "imap.sehandwerk.de"
+  imap_port: 993
+  smtp_host: "smtp.sehandwerk.de"
+  smtp_port: 587
+  absender: "kontakt@sehandwerk.de"
+  absender_name: "SE Handwerk"
+  gesendet_ordner_namen:
+    - "Sent"
+    - "Gesendet"
+    - "[Gmail]/Sent Mail"
+  follow_up_tage:
+    - 3
+    - 7
+  imap_cache_minuten: 30
 facebook:
   enabled: false
   gruppen_urls: []

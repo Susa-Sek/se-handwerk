@@ -88,3 +88,107 @@ class TelegramNotifier:
     def send_strategie(self, text: str) -> bool:
         """Sendet eine Strategie-Nachricht."""
         return self._send_message(text)
+
+    def outreach_freigabe_anfragen(
+        self,
+        kontakt_id: int,
+        empfaenger: str,
+        betreff: str,
+        vorschau: str,
+    ) -> bool:
+        """Sendet Freigabe-Anfrage mit Inline-Keyboard (✅/❌) via Telegram."""
+        if not self.token or not self.chat_id:
+            logger.warning("Telegram: nicht konfiguriert – Freigabe-Anfrage übersprungen")
+            return False
+
+        keyboard = {
+            "inline_keyboard": [[
+                {"text": "✅ Freigeben", "callback_data": f"oja:{kontakt_id}"},
+                {"text": "❌ Ablehnen",  "callback_data": f"onein:{kontakt_id}"},
+            ]]
+        }
+        text = (
+            f"📧 <b>E-Mail-Freigabe</b>\n"
+            f"An: <code>{empfaenger}</code>\n"
+            f"Betreff: {betreff[:60]}\n\n"
+            f"<i>{vorschau[:200]}…</i>"
+        )
+        try:
+            r = requests.post(
+                f"{self.api_url}/sendMessage",
+                json={
+                    "chat_id": self.chat_id,
+                    "text": text,
+                    "parse_mode": "HTML",
+                    "reply_markup": keyboard,
+                },
+                timeout=10,
+            )
+            if r.ok:
+                logger.info(f"Freigabe-Anfrage gesendet für Kontakt {kontakt_id}")
+            return r.ok
+        except Exception as e:
+            logger.error(f"Freigabe-Anfrage Fehler: {e}")
+            return False
+
+    def callbacks_verarbeiten(self, db) -> list[dict]:
+        """Pollt getUpdates, verarbeitet oja:/onein: Callback-Queries.
+
+        Speichert den Update-Offset persistent in der DB (einstellungen-Tabelle).
+        Gibt Liste von {id: int, genehmigt: bool} zurück.
+        """
+        if not self.token or not self.chat_id:
+            return []
+
+        offset = int(db.setting_lesen("telegram_update_offset") or 0)
+        try:
+            r = requests.get(
+                f"{self.api_url}/getUpdates",
+                params={
+                    "offset": offset,
+                    "timeout": 0,
+                    "allowed_updates": ["callback_query"],
+                },
+                timeout=15,
+            )
+            if not r.ok:
+                logger.warning(f"getUpdates fehlgeschlagen: {r.status_code}")
+                return []
+        except Exception as e:
+            logger.error(f"getUpdates Fehler: {e}")
+            return []
+
+        ergebnisse = []
+        for update in r.json().get("result", []):
+            update_id = update["update_id"]
+            db.setting_setzen("telegram_update_offset", str(update_id + 1))
+
+            cq = update.get("callback_query")
+            if not cq:
+                continue
+
+            # Callback bestätigen (verhindert Ladeanzeige im Client)
+            try:
+                requests.post(
+                    f"{self.api_url}/answerCallbackQuery",
+                    json={"callback_query_id": cq["id"]},
+                    timeout=5,
+                )
+            except Exception:
+                pass
+
+            data = cq.get("data", "")
+            if data.startswith("oja:"):
+                try:
+                    ergebnisse.append({"id": int(data.split(":")[1]), "genehmigt": True})
+                except (ValueError, IndexError):
+                    pass
+            elif data.startswith("onein:"):
+                try:
+                    ergebnisse.append({"id": int(data.split(":")[1]), "genehmigt": False})
+                except (ValueError, IndexError):
+                    pass
+
+        if ergebnisse:
+            logger.info(f"Telegram-Callbacks verarbeitet: {len(ergebnisse)} Entscheidungen")
+        return ergebnisse

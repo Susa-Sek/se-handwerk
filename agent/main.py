@@ -77,6 +77,25 @@ class AkquiseAgent:
             self.such_agent = None
             self.outreach_agent = None
 
+        # E-Mail-Outreach initialisieren
+        self.outreach_manager = None
+        email_config = self.config.get("email", {})
+        if email_config.get("enabled", False):
+            from outreach.imap_client import IMAPClient
+            from outreach.smtp_client import SMTPClient
+            from outreach.kontakt_extraktor import KontaktExtraktor
+            from outreach.outreach_manager import OutreachManager
+            self.outreach_manager = OutreachManager(
+                config=self.config,
+                db=self.db,
+                imap_client=IMAPClient(self.config),
+                smtp_client=SMTPClient(self.config),
+                kontakt_extraktor=KontaktExtraktor(),
+                outreach_agent=self.outreach_agent,
+                telegram=self.telegram,
+            )
+            logger.info("E-Mail-Outreach aktiviert")
+
         logger.info("=" * 50)
         logger.info("SE Handwerk Akquise-Agent gestartet")
         logger.info(f"Aktive Scraper: {[s.name for s in self.scrapers]}")
@@ -145,6 +164,13 @@ class AkquiseAgent:
         """Führt einen kompletten Scan-Durchlauf durch."""
         logger.info("-" * 40)
         logger.info(f"Starte Durchlauf: {datetime.now().strftime('%H:%M:%S')}")
+
+        # Genehmigte E-Mails senden + Telegram-Callbacks verarbeiten
+        if self.outreach_manager:
+            try:
+                self.outreach_manager.genehmigte_senden()
+            except Exception as e:
+                logger.error(f"Fehler bei genehmigte_senden: {e}")
 
         # 1. StrategieAgent (1x täglich)
         if self.ki_enabled and self.strategie_agent and self.strategie_agent.soll_ausfuehren():
@@ -224,6 +250,13 @@ class AkquiseAgent:
                                 ergebnis
                             )
 
+                    # E-Mail-Outreach: Extraktion + Freigabe-Anfrage per Telegram
+                    if self.outreach_manager and ergebnis.ist_relevant:
+                        try:
+                            self.outreach_manager.outreach_starten(ergebnis)
+                        except Exception as e:
+                            logger.error(f"Fehler bei outreach_starten: {e}")
+
                     # 7. Database speichern (inkl. KI-Begründung)
                     self.db.speichern(
                         url_hash=ergebnis.listing.url_hash,
@@ -247,6 +280,13 @@ class AkquiseAgent:
             except Exception as e:
                 logger.error(f"Fehler bei Scraper {scraper.name}: {e}")
                 fehler += 1
+
+        # Follow-up-E-Mails prüfen und versenden
+        if self.outreach_manager:
+            try:
+                self.outreach_manager.follow_ups_pruefen()
+            except Exception as e:
+                logger.error(f"Fehler bei follow_ups_pruefen: {e}")
 
         # Token-Verbrauch loggen
         if self.ki_enabled and self.ki_client and self.ki_client.ist_verfuegbar:

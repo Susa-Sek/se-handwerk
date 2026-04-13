@@ -90,6 +90,52 @@ class OutreachAgent:
         logger.info(f"KI-Nachricht erstellt für '{ergebnis.listing.titel[:50]}' ({len(nachricht)} Zeichen)")
         return nachricht
 
+    def email_erstellen(self, ergebnis: Bewertungsergebnis) -> tuple[str, str]:
+        """Erstellt (betreff, text) für E-Mail-Outreach.
+
+        Betreff: "Ihre Anfrage: {titel[:60]}"
+        Text: formell mit Anrede und Signatur. Fallback: Template + Signatur.
+        """
+        betreff = f"Ihre Anfrage: {ergebnis.listing.titel[:60]}"
+        signatur = "\n\nMit freundlichen Grüßen\nSE Handwerk\nkontakt@sehandwerk.de"
+
+        if not self.ki.ist_verfuegbar:
+            basis = self._fallback_generator.generieren(ergebnis)
+            return betreff, f"Guten Tag,\n\n{basis}{signatur}"
+
+        user_prompt = (
+            f"Erstelle eine formelle E-Mail (kein Chat) für folgendes Inserat:\n\n"
+            f"Titel: {ergebnis.listing.titel}\n"
+            f"Beschreibung: {ergebnis.listing.beschreibung[:500]}\n"
+            f"Ort: {ergebnis.listing.ort}\n"
+            f"Kategorie: {ergebnis.kategorie.value}\n\n"
+            f"Vorgaben:\n"
+            f"- Beginne mit 'Guten Tag,'\n"
+            f"- 3-4 Sätze (personalisiert, kein Preis, Kontaktangebot)\n"
+            f"- Schließe mit: 'Mit freundlichen Grüßen\\nSE Handwerk\\nkontakt@sehandwerk.de'\n"
+            f"Schreibe NUR den E-Mail-Text, ohne Betreff."
+        )
+
+        antwort = self.ki.anfrage(
+            system_prompt=SYSTEM_PROMPT,
+            user_prompt=user_prompt,
+            modell=self._modell,
+            max_tokens=self._max_tokens,
+            agent_name="outreach_email",
+        )
+
+        if not antwort:
+            basis = self._fallback_generator.generieren(ergebnis)
+            return betreff, f"Guten Tag,\n\n{basis}{signatur}"
+
+        text = antwort.strip().strip('"').strip("'")
+        # Signatur anhängen falls KI sie vergessen hat
+        if "sehandwerk.de" not in text:
+            text += signatur
+
+        logger.info(f"E-Mail erstellt für '{ergebnis.listing.titel[:50]}' ({len(text)} Zeichen)")
+        return betreff, text
+
     def nachricht_anpassen(self, ergebnis: Bewertungsergebnis, stil: str) -> str:
         """Passt Nachricht an Plattform-Stil an."""
         if not self.ki.ist_verfuegbar:
