@@ -466,30 +466,20 @@ class AkquiseAgent:
 
 def test_telegram(config_pfad: str = "config.yaml"):
     """Sendet eine Test-Nachricht an Telegram."""
-    import asyncio
-
     config_path = ROOT / config_pfad
     with open(config_path, "r", encoding="utf-8") as f:
         config = yaml.safe_load(f)
 
     notifier = TelegramNotifier(config)
-
-    async def _test():
-        if notifier.bot:
-            await notifier.bot.send_message(
-                chat_id=notifier.chat_id,
-                text=(
-                    "✅ <b>SE Handwerk Agent - Testmeldung</b>\n\n"
-                    "Die Telegram-Verbindung funktioniert!\n"
-                    f"Zeitpunkt: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}"
-                ),
-                parse_mode="HTML",
-            )
-            print("Test-Nachricht erfolgreich gesendet!")
-        else:
-            print("FEHLER: Bot nicht initialisiert. Token prüfen!")
-
-    asyncio.run(_test())
+    ok = notifier._send_message(
+        "✅ <b>SE Handwerk Agent - Testmeldung</b>\n\n"
+        "Die Telegram-Verbindung funktioniert!\n"
+        f"Zeitpunkt: {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}"
+    )
+    if ok:
+        print("Test-Nachricht erfolgreich gesendet!")
+    else:
+        print("FEHLER: Nachricht nicht gesendet. Token/Chat-ID prüfen!")
 
 
 def main():
