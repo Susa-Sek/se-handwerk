@@ -77,6 +77,27 @@ class AkquiseAgent:
             self.such_agent = None
             self.outreach_agent = None
 
+        # B2B-Outreach initialisieren
+        self.b2b_manager = None
+        if self.config.get("b2b", {}).get("enabled", False):
+            from outreach.imap_client import IMAPClient as _IMAP
+            from outreach.smtp_client import SMTPClient as _SMTP
+            from scrapers.b2b_recherche import B2BRecherche
+            from ki.b2b_agent import B2BAgent
+            from outreach.b2b_manager import B2BManager
+            _imap = _IMAP(self.config)
+            _smtp = _SMTP(self.config)
+            self.b2b_manager = B2BManager(
+                config=self.config,
+                db=self.db,
+                recherche=B2BRecherche(self.config),
+                b2b_agent=B2BAgent(self.ki_client or type("_", (), {"ist_verfuegbar": False})(), self.config),
+                smtp=_smtp,
+                imap=_imap,
+                telegram=self.telegram,
+            )
+            logger.info("B2B-Outreach aktiviert")
+
         # E-Mail-Outreach initialisieren
         self.outreach_manager = None
         email_config = self.config.get("email", {})
@@ -164,6 +185,14 @@ class AkquiseAgent:
         """Führt einen kompletten Scan-Durchlauf durch."""
         logger.info("-" * 40)
         logger.info(f"Starte Durchlauf: {datetime.now().strftime('%H:%M:%S')}")
+
+        # B2B: genehmigte E-Mails senden + Follow-ups prüfen
+        if self.b2b_manager:
+            try:
+                self.b2b_manager.genehmigte_senden()
+                self.b2b_manager.follow_ups_pruefen()
+            except Exception as e:
+                logger.error(f"Fehler bei B2B-Manager: {e}")
 
         # Genehmigte E-Mails senden + Telegram-Callbacks verarbeiten
         if self.outreach_manager:
@@ -364,6 +393,22 @@ class AkquiseAgent:
         except Exception as e:
             logger.error(f"Fehler beim Senden des Strategie-Vorschlags: {e}")
 
+    def _b2b_recherche_job(self):
+        """Tägliche B2B-Recherche — wird per Scheduler aufgerufen."""
+        if not self.b2b_manager:
+            return
+        logger.info("→ B2B-Recherche gestartet")
+        try:
+            neue = self.b2b_manager.recherche_ausfuehren()
+            if neue:
+                self.telegram._send_message(
+                    f"🏢 <b>B2B-Recherche abgeschlossen</b>\n"
+                    f"{neue} neue Kontakte zur Freigabe\n\n"
+                    f"{self.b2b_manager.tages_zusammenfassung()}"
+                )
+        except Exception as e:
+            logger.error(f"B2B-Recherche fehlgeschlagen: {e}")
+
     def tages_zusammenfassung_senden(self):
         """Sendet die tägliche Zusammenfassung."""
         statistik = self.db.statistik_heute()
@@ -391,6 +436,11 @@ class AkquiseAgent:
         schedule.every().day.at(zusammenfassung_zeit).do(
             self.tages_zusammenfassung_senden
         )
+
+        if self.b2b_manager:
+            recherche_zeit = self.config.get("b2b", {}).get("recherche_uhrzeit", "09:00")
+            schedule.every().day.at(recherche_zeit).do(self._b2b_recherche_job)
+            logger.info(f"B2B-Recherche täglich um {recherche_zeit}")
 
         cleanup_tage = self.config.get("datenbank", {}).get("cleanup_tage", 30)
         schedule.every().day.at("03:00").do(self.db.cleanup, tage=cleanup_tage)

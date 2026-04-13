@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Optional
 
-from models import EmailKontakt
+from models import B2BKontakt, EmailKontakt
 from utils.logger import setup_logger
 
 logger = setup_logger("se_handwerk.db")
@@ -74,6 +74,32 @@ class Database:
                 schluessel TEXT PRIMARY KEY,
                 wert TEXT NOT NULL
             )
+        """)
+        self.conn.execute("""
+            CREATE TABLE IF NOT EXISTS b2b_kontakte (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                firma TEXT NOT NULL,
+                website TEXT NOT NULL,
+                email TEXT NOT NULL,
+                typ TEXT NOT NULL,
+                ort TEXT NOT NULL,
+                telefon TEXT,
+                quelle TEXT DEFAULT 'gelbeseiten',
+                status TEXT DEFAULT 'ausstehend',
+                gesendet_am TIMESTAMP,
+                follow_up_1_am TIMESTAMP,
+                follow_up_2_am TIMESTAMP,
+                antwort_erhalten_am TIMESTAMP,
+                abgemeldet_am TIMESTAMP,
+                erstellt_am TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                UNIQUE(email)
+            )
+        """)
+        self.conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_b2b_status ON b2b_kontakte(status)
+        """)
+        self.conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_b2b_typ ON b2b_kontakte(typ)
         """)
         self.conn.commit()
         logger.info(f"Datenbank initialisiert: {self.db_pfad}")
@@ -283,6 +309,94 @@ class Database:
             (schluessel, wert),
         )
         self.conn.commit()
+
+    # ── B2B-Kontakte ─────────────────────────────────────────────────────────
+
+    def b2b_kontakt_speichern(self, kontakt: B2BKontakt) -> Optional[int]:
+        """INSERT OR IGNORE auf email. Gibt id zurück oder None wenn Duplikat."""
+        cursor = self.conn.execute(
+            """INSERT OR IGNORE INTO b2b_kontakte
+               (firma, website, email, typ, ort, telefon, quelle, status)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+            (
+                kontakt.firma,
+                kontakt.website,
+                kontakt.email.lower(),
+                kontakt.typ.value,
+                kontakt.ort,
+                kontakt.telefon,
+                kontakt.quelle,
+                kontakt.status.value,
+            ),
+        )
+        self.conn.commit()
+        if cursor.rowcount == 0:
+            logger.debug(f"B2B-Kontakt bereits vorhanden: {kontakt.email}")
+            return None
+        logger.info(f"B2B-Kontakt gespeichert: {kontakt.firma} <{kontakt.email}>")
+        return cursor.lastrowid
+
+    def b2b_kontakt_status_setzen(self, id: int, status: str, **zeitstempel) -> None:
+        """Aktualisiert Status und optionale Zeitstempel."""
+        erlaubt = {"gesendet_am", "follow_up_1_am", "follow_up_2_am",
+                   "antwort_erhalten_am", "abgemeldet_am"}
+        felder = {k: v for k, v in zeitstempel.items() if k in erlaubt}
+        set_teile = ["status = ?"]
+        werte: list = [status]
+        for feld, wert in felder.items():
+            set_teile.append(f"{feld} = ?")
+            werte.append(wert.isoformat() if isinstance(wert, datetime) else wert)
+        werte.append(id)
+        self.conn.execute(
+            f"UPDATE b2b_kontakte SET {', '.join(set_teile)} WHERE id = ?", werte
+        )
+        self.conn.commit()
+
+    def b2b_bereits_gespeichert(self, email: str) -> bool:
+        """Prüft ob diese E-Mail bereits in b2b_kontakte existiert."""
+        cur = self.conn.execute(
+            "SELECT 1 FROM b2b_kontakte WHERE email = ?", (email.lower(),)
+        )
+        return cur.fetchone() is not None
+
+    def b2b_kontakte_laden(self, status: str) -> list[dict]:
+        """Lädt alle B2B-Kontakte mit gegebenem Status."""
+        cur = self.conn.execute(
+            """SELECT * FROM b2b_kontakte WHERE status = ?
+               ORDER BY typ, erstellt_am ASC""",
+            (status,),
+        )
+        rows = cur.fetchall()
+        result = []
+        for row in rows:
+            d = dict(row)
+            for feld in ("gesendet_am", "follow_up_1_am", "follow_up_2_am",
+                         "antwort_erhalten_am", "abgemeldet_am"):
+                if d.get(feld):
+                    try:
+                        d[feld] = datetime.fromisoformat(d[feld])
+                    except (ValueError, TypeError):
+                        d[feld] = None
+            result.append(d)
+        return result
+
+    def b2b_statistik(self) -> dict:
+        """Gibt Gesamtstatistik der B2B-Kontakte zurück."""
+        cur = self.conn.execute(
+            """SELECT
+                 COUNT(*) as gesamt,
+                 SUM(CASE WHEN status='gesendet'    THEN 1 ELSE 0 END) as gesendet,
+                 SUM(CASE WHEN status='beantwortet' THEN 1 ELSE 0 END) as beantwortet,
+                 SUM(CASE WHEN status='abgelehnt'   THEN 1 ELSE 0 END) as abgelehnt,
+                 SUM(CASE WHEN status='ausstehend'  THEN 1 ELSE 0 END) as ausstehend
+               FROM b2b_kontakte"""
+        )
+        row = cur.fetchone()
+        return {k: (row[k] or 0) for k in row.keys()} if row else {}
+
+    def b2b_callbacks_verarbeiten(self, db_self, telegram_callbacks: list[dict]) -> None:
+        """Veraltet – direkt b2b_kontakt_status_setzen verwenden."""
+        pass
 
     def close(self):
         """Schließt die Datenbankverbindung."""

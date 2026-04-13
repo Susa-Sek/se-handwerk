@@ -87,6 +87,34 @@ class Bewertungsergebnis:
         return not self.ausgeschlossen and self.prioritaet != Prioritaet.ROT
 
 
+class B2BKontaktTyp(Enum):
+    HAUSVERWALTUNG  = "hausverwaltung"   # Hauptziel: viel Wiederholungsgeschäft
+    WOHNUNGSBAU     = "wohnungsbau"      # Großvolumen, Bestandsobjekte
+    MAKLER          = "makler"           # Vor Verkauf/Vermietung
+    FACILITY        = "facility"         # Outsourcing-Partner
+    UMZUG           = "umzug"            # Weiterempfehlung an Kunden
+    SONSTIGES       = "sonstiges"
+
+
+@dataclass
+class B2BKontakt:
+    """Ein B2B-Lead aus der Immobilienbranche."""
+    firma: str
+    website: str
+    email: str
+    typ: B2BKontaktTyp
+    ort: str
+    telefon: Optional[str] = None
+    quelle: str = "gelbeseiten"          # gelbeseiten | google | manuell
+    status: KontaktStatus = KontaktStatus.AUSSTEHEND
+    id: Optional[int] = None
+    gesendet_am: Optional[datetime] = None
+    follow_up_1_am: Optional[datetime] = None
+    follow_up_2_am: Optional[datetime] = None
+    antwort_erhalten_am: Optional[datetime] = None
+    abgemeldet_am: Optional[datetime] = None  # DSGVO Opt-out
+
+
 @dataclass
 class EmailKontakt:
     """E-Mail-Kontakt für Outreach-Workflow."""
