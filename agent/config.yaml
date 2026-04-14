@@ -23,9 +23,52 @@ ausschluesse:
   - Landschaftsbau
   - Fenster einbauen
   - Rohbau
+b2b:
+  enabled: true
+  # Zieltypen (alle aktiv; deaktivieren durch Entfernen aus der Liste)
+  typen:
+    - hausverwaltung
+    - wohnungsbau
+    - makler
+    - facility
+    - umzug
+  # Suchregionen (Gelbe Seiten + Google)
+  regionen:
+    - Heilbronn
+    - Neckarsulm
+    - Ludwigsburg
+    - Stuttgart
+  # Limits
+  max_pro_typ: 15              # Gelbe Seiten: max Einträge pro Typ/Region
+  max_kontakte_pro_lauf: 30    # Impressum-Crawls gesamt pro Lauf
+  max_freigaben_pro_tag: 10    # Telegram-Freigaben pro Tag (schützt E-Mail-Reputation)
+  google_max_results: 8        # Ergebnisse pro Google-Suchanfrage
+  # Follow-up-Abstände in Tagen
+  follow_up_tage:
+    - 5    # Follow-up 1: 5 Tage nach Erstkontakt
+    - 12   # Follow-up 2: 12 Tage nach Erstkontakt
+  # Tageszeit für die automatische Recherche
+  recherche_uhrzeit: "09:00"
+
 datenbank:
   cleanup_tage: 30
   pfad: se_handwerk.db
+email:
+  enabled: true
+  imap_host: "mail.privateemail.com"
+  imap_port: 993
+  smtp_host: "mail.privateemail.com"
+  smtp_port: 587
+  absender: "kontakt@sehandwerk.de"
+  absender_name: "SE Handwerk"
+  gesendet_ordner_namen:
+    - "Sent"
+    - "Sent Items"
+    - "Gesendet"
+  follow_up_tage:
+    - 3
+    - 7
+  imap_cache_minuten: 30
 facebook:
   enabled: false
   gruppen_urls: []

@@ -35,6 +35,17 @@ class Status(Enum):
     UEBERSPRUNGEN = "uebersprungen"
 
 
+class KontaktStatus(Enum):
+    AUSSTEHEND    = "ausstehend"     # extrahiert, wartet auf Telegram-Freigabe
+    GENEHMIGT     = "genehmigt"      # freigegeben, noch nicht gesendet
+    GESENDET      = "gesendet"       # erste E-Mail raus
+    FOLLOW_UP_1   = "follow_up_1"    # Follow-up 1 gesendet (Tag 3)
+    FOLLOW_UP_2   = "follow_up_2"    # Follow-up 2 gesendet (Tag 7)
+    BEANTWORTET   = "beantwortet"    # Antwort im Posteingang erkannt
+    ABGELEHNT     = "abgelehnt"      # per Telegram abgelehnt
+    ABGESCHLOSSEN = "abgeschlossen"  # kein weiterer Kontakt nötig
+
+
 @dataclass
 class Listing:
     """Ein gefundenes Inserat/Gesuch von einer Plattform."""
@@ -74,6 +85,49 @@ class Bewertungsergebnis:
     @property
     def ist_relevant(self) -> bool:
         return not self.ausgeschlossen and self.prioritaet != Prioritaet.ROT
+
+
+class B2BKontaktTyp(Enum):
+    HAUSVERWALTUNG  = "hausverwaltung"   # Hauptziel: viel Wiederholungsgeschäft
+    WOHNUNGSBAU     = "wohnungsbau"      # Großvolumen, Bestandsobjekte
+    MAKLER          = "makler"           # Vor Verkauf/Vermietung
+    FACILITY        = "facility"         # Outsourcing-Partner
+    UMZUG           = "umzug"            # Weiterempfehlung an Kunden
+    SONSTIGES       = "sonstiges"
+
+
+@dataclass
+class B2BKontakt:
+    """Ein B2B-Lead aus der Immobilienbranche."""
+    firma: str
+    website: str
+    email: str
+    typ: B2BKontaktTyp
+    ort: str
+    telefon: Optional[str] = None
+    quelle: str = "gelbeseiten"          # gelbeseiten | google | manuell
+    status: KontaktStatus = KontaktStatus.AUSSTEHEND
+    id: Optional[int] = None
+    gesendet_am: Optional[datetime] = None
+    follow_up_1_am: Optional[datetime] = None
+    follow_up_2_am: Optional[datetime] = None
+    antwort_erhalten_am: Optional[datetime] = None
+    abgemeldet_am: Optional[datetime] = None  # DSGVO Opt-out
+
+
+@dataclass
+class EmailKontakt:
+    """E-Mail-Kontakt für Outreach-Workflow."""
+    listing_url_hash: str
+    empfaenger_email: str
+    betreff: str
+    nachricht_text: str
+    status: KontaktStatus = KontaktStatus.AUSSTEHEND
+    id: Optional[int] = None
+    gesendet_am: Optional[datetime] = None
+    follow_up_1_am: Optional[datetime] = None
+    follow_up_2_am: Optional[datetime] = None
+    antwort_erhalten_am: Optional[datetime] = None
 
 
 @dataclass
