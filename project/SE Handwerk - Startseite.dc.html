@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;overflow-x:clip;}
+  body{margin:0;background:#F4F2EC;color:#181B1F;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  a{color:#2F5BEA;text-decoration:none;}
+  a:hover{color:#1E3FB0;}
+  *:focus-visible{outline:2px solid #2F5BEA;outline-offset:3px;}
+  ::selection{background:#2F5BEA;color:#fff;}
+  h1,h2,h3{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.025em;line-height:1.0;}
+  p{margin:0;}
+  @keyframes maskUp{from{transform:translateY(120%)}to{transform:translateY(0)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes drawX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes floatIn{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important;}}
+</style>
+</helmet>
+
+<div style="background:#F4F2EC;">
+
+  <!-- ===== ROTER FADEN — SPINE ===== -->
+  <div style="position:fixed;left:26px;top:0;bottom:0;width:2px;background:rgba(47,91,234,0.16);z-index:90;pointer-events:none;"></div>
+  <div style="{{ spineFillStyle }}">
+    <div style="position:absolute;bottom:-4px;left:-3px;width:8px;height:8px;border-radius:50%;background:#2F5BEA;box-shadow:0 0 12px 2px rgba(47,91,234,0.55);"></div>
+  </div>
+
+  <!-- ===== NAV ===== -->
+  <nav style="position:fixed;top:0;left:0;right:0;z-index:100;height:66px;background:rgba(244,242,236,0.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(24,27,31,0.1);">
+    <div style="max-width:1240px;margin:0 auto;height:100%;padding:0 40px;display:flex;align-items:center;justify-content:space-between;">
+      <a href="#top" style="display:flex;align-items:baseline;gap:12px;color:#181B1F;">
+        <span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:19px;letter-spacing:-0.02em;">SE Handwerk</span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A8F95;letter-spacing:0.06em;">GbR · BRETZFELD</span>
+      </a>
+      <div style="display:flex;align-items:center;gap:30px;">
+        <div style="display:flex;gap:26px;">
+          <a href="#leistungen" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6067;" style-hover="color:#181B1F;">Leistungen</a>
+          <a href="#ablauf" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6067;" style-hover="color:#181B1F;">Ablauf</a>
+          <a href="#eigentuemer" style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.04em;text-transform:uppercase;color:#5B6067;" style-hover="color:#181B1F;">Für Eigentümer</a>
+        </div>
+        <a href="#kontakt" style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:#2F5BEA;padding:11px 18px;border-radius:100px;white-space:nowrap;" style-hover="background:#1E3FB0;">Projekt besprechen</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section id="top" data-screen-label="Hero" style="position:relative;padding:132px 0 96px;overflow:hidden;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;position:relative;">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:30px;animation:fadeUp .7s ease .1s both;">
+        <span style="width:8px;height:8px;background:#2F5BEA;border-radius:50%;"></span>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;">Sanierung aus einer Hand · Raum Heilbronn</span>
+      </div>
+
+      <h1 style="font-size:clamp(44px,7vw,108px);letter-spacing:-0.03em;max-width:14ch;">
+        <span style="display:block;overflow:hidden;padding-bottom:2px;"><span style="display:inline-block;transform:translateY(120%);animation:maskUp 1s cubic-bezier(.16,1,.3,1) .12s both;">Alles fertig.</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:2px;"><span style="display:inline-block;transform:translateY(120%);animation:maskUp 1s cubic-bezier(.16,1,.3,1) .24s both;">Ohne dass Sie</span></span>
+        <span style="display:block;overflow:hidden;padding-bottom:2px;"><span style="display:inline-block;transform:translateY(120%);animation:maskUp 1s cubic-bezier(.16,1,.3,1) .36s both;color:#2F5BEA;">einen Anruf machen.</span></span>
+      </h1>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:56px;margin-top:56px;align-items:start;">
+        <div style="animation:fadeUp .8s ease .6s both;">
+          <p style="font-size:18px;line-height:1.65;color:#494E54;max-width:440px;">
+            Wir übernehmen Ihre Sanierung vollständig — von der ersten Aufnahme bis zur Übergabe. Ein Ansprechpartner, ein Angebot, ein Termin, an dem fertig ist. Den Rest machen wir.
+          </p>
+          <div style="display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;">
+            <a href="#kontakt" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:#2F5BEA;padding:16px 28px;border-radius:100px;white-space:nowrap;" style-hover="background:#1E3FB0;">Projekt besprechen</a>
+            <a href="#leistungen" style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:#181B1F;background:transparent;border:1px solid rgba(24,27,31,0.24);padding:16px 28px;border-radius:100px;white-space:nowrap;" style-hover="border-color:#181B1F;">Unsere Leistungen</a>
+          </div>
+          <div style="display:flex;gap:34px;margin-top:44px;">
+            <div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;color:#181B1F;">1</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.04em;margin-top:4px;line-height:1.5;">ANSPRECH&shy;PARTNER</div>
+            </div>
+            <div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;color:#181B1F;">&lt; 24h</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.04em;margin-top:4px;line-height:1.5;">RÜCK&shy;MELDUNG</div>
+            </div>
+            <div>
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;color:#181B1F;">100%</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.04em;margin-top:4px;line-height:1.5;">AUS EINER HAND</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- image + floating card, offset down (asymmetry) + parallax -->
+        <div style="position:relative;margin-top:20px;">
+          <div style="{{ heroImgStyle }}">
+            <div style="position:relative;aspect-ratio:5/6;border-radius:6px;overflow:hidden;background:repeating-linear-gradient(125deg,#E6E2D8,#E6E2D8 13px,#EDEAE1 13px,#EDEAE1 26px);border:1px solid rgba(24,27,31,0.12);animation:floatIn 1s cubic-bezier(.16,1,.3,1) .4s both;">
+              <div style="position:absolute;top:16px;left:16px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A8F95;letter-spacing:0.05em;">ABB. 01 · 5:6</div>
+              <div style="position:absolute;bottom:18px;left:18px;right:18px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B7076;line-height:1.55;">[ BILDPLATZ ]<br>fertiger Innenraum nach Sanierung — ruhiges Licht, architektonische Perspektive</div>
+            </div>
+          </div>
+          <!-- floating dark mini-taktplan -->
+          <div style="position:absolute;bottom:-30px;left:14px;width:clamp(240px,84%,310px);background:#141A1F;border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:16px 16px 18px;box-shadow:0 22px 50px -20px rgba(20,26,31,0.45);animation:floatIn 1s cubic-bezier(.16,1,.3,1) .8s both;">
+            <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,0.09);padding-bottom:11px;margin-bottom:14px;">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:0.06em;color:#7E858B;">TAKTPLAN #4471</span>
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5C82FF;">IM TAKT</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:9px;">
+              <div style="display:flex;align-items:center;gap:9px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#7E858B;width:60px;flex-shrink:0;">RÜCKBAU</span><span style="height:12px;flex:1;position:relative;"><span style="position:absolute;left:0;width:40%;height:100%;background:#39424B;border-radius:2px;transform:scaleX(0);transform-origin:left;animation:drawX .55s cubic-bezier(.16,1,.3,1) 1.2s both;"></span></span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#7E858B;width:60px;flex-shrink:0;">TROCKENB.</span><span style="height:12px;flex:1;position:relative;"><span style="position:absolute;left:32%;width:34%;height:100%;background:#39424B;border-radius:2px;transform:scaleX(0);transform-origin:left;animation:drawX .55s cubic-bezier(.16,1,.3,1) 1.32s both;"></span></span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#7E858B;width:60px;flex-shrink:0;">BODEN</span><span style="height:12px;flex:1;position:relative;"><span style="position:absolute;left:60%;width:22%;height:100%;background:#2F5BEA;border-radius:2px;transform:scaleX(0);transform-origin:left;animation:drawX .55s cubic-bezier(.16,1,.3,1) 1.44s both;"></span></span></div>
+              <div style="display:flex;align-items:center;gap:9px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#7E858B;width:60px;flex-shrink:0;">MALER</span><span style="height:12px;flex:1;position:relative;"><span style="position:absolute;left:80%;width:20%;height:100%;background:#2F5BEA;border-radius:2px;transform:scaleX(0);transform-origin:left;animation:drawX .55s cubic-bezier(.16,1,.3,1) 1.56s both;"></span></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIGNATURE: DER TAKTPLAN (dunkles Kapitel) ===== -->
+  <section id="takt-sec" data-screen-label="Taktplan" style="position:relative;height:{{ sectionHeight }};background:#141A1F;color:#ECEBE5;">
+    <div style="position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;">
+      <div style="max-width:1240px;margin:0 auto;padding:0 40px;width:100%;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:34px;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7E858B;margin-bottom:14px;">Das eine Kapitel — ein Ablauf in der Zeit</div>
+            <div style="position:relative;height:52px;">
+              <h2 style="{{ chaosLabelStyle }}">Ohne Koordination.</h2>
+              <h2 style="{{ orderLabelStyle }}">Mit SE&nbsp;Handwerk.</h2>
+            </div>
+          </div>
+          <div style="text-align:right;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7E858B;letter-spacing:0.05em;line-height:1.9;">
+            5 GEWERKE<br>1 ANSPRECHPARTNER<br>1 TERMIN
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-between;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5B636A;letter-spacing:0.05em;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,0.1);">
+          <span>TAG 0</span><span>15</span><span>30</span><span>45</span><span>60</span>
+        </div>
+
+        <div style="position:relative;margin-top:14px;height:{{ plotHeight }};">
+          <div style="{{ deadlineStyle }}"></div>
+          <div style="{{ playheadStyle }}"></div>
+          <sc-for list="{{ bars }}" as="bar" hint-placeholder-count="5">
+            <div style="{{ bar.style }}">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:rgba(255,255,255,0.9);letter-spacing:0.03em;white-space:nowrap;overflow:hidden;">{{ bar.code }} · {{ bar.name }}</span>
+              <sc-if value="{{ bar.hasTag }}" hint-placeholder-val="{{ false }}">
+                <span style="{{ bar.tagStyle }}">◄ {{ bar.tag }}</span>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="margin-top:38px;border-top:1px solid rgba(255,255,255,0.1);padding-top:20px;max-width:580px;">
+          <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:600;font-size:20px;line-height:1.4;color:#ECEBE5;letter-spacing:-0.01em;">Ein Ablauf. Ein Ansprechpartner. Ein Datum, an dem fertig ist.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WARUM SANIERUNGEN SCHEITERN ===== -->
+  <section data-screen-label="Warum-scheitern" style="background:#F4F2EC;padding:112px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="max-width:900px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;margin-bottom:22px;" data-reveal="0">§ 02 — Das Problem</div>
+        <h2 style="font-size:clamp(30px,4vw,54px);max-width:840px;color:#181B1F;" data-reveal="60">Sanierungen scheitern nicht am Handwerk. Sie scheitern an fehlender Koordination.</h2>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;margin-top:48px;">
+          <p style="font-size:16.5px;line-height:1.7;color:#494E54;" data-reveal="120">Der Bodenleger kommt, aber der Estrich ist noch feucht. Der Maler steht vor der Tür, während der Trockenbau noch läuft. Der Fliesenleger sagt kurzfristig ab, und niemand hat einen Ersatz. Am Ende zieht sich ein Projekt, das acht Wochen dauern sollte, über ein halbes Jahr — und der Bauherr ist der, der alles zusammenhalten muss.</p>
+          <div data-reveal="200">
+            <p style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:23px;line-height:1.35;color:#181B1F;margin-bottom:18px;letter-spacing:-0.01em;">Genau da setzen wir an.</p>
+            <p style="font-size:16.5px;line-height:1.7;color:#494E54;">Wir planen den Ablauf, stimmen die Gewerke aufeinander ab, überwachen die Ausführung und stehen für das Ergebnis gerade. Sie haben eine Nummer, die Sie anrufen. Und ein Datum, an dem fertig ist.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WAS WIR ÜBERNEHMEN ===== -->
+  <section id="leistungen" data-screen-label="Leistungen" style="background:#ECE8DF;padding:112px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;flex-wrap:wrap;gap:16px;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;margin-bottom:20px;" data-reveal="0">§ 03 — Leistungsumfang</div>
+          <h2 style="font-size:clamp(30px,4vw,54px);color:#181B1F;" data-reveal="60">Was wir übernehmen.</h2>
+        </div>
+        <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.05em;">5 POSITIONEN</span>
+      </div>
+      <div style="border-top:1px solid rgba(24,27,31,0.16);">
+        <sc-for list="{{ leistungen }}" as="l" hint-placeholder-count="5">
+          <div data-reveal="{{ l.delay }}" style="display:grid;grid-template-columns:64px minmax(200px,300px) 1fr;gap:28px;align-items:baseline;padding:28px 8px;border-bottom:1px solid rgba(24,27,31,0.14);transition:padding-left .3s,background .3s;" style-hover="padding-left:20px;background:rgba(255,255,255,0.4);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#2F5BEA;letter-spacing:0.05em;">{{ l.code }}</span>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:23px;color:#181B1F;letter-spacing:-0.015em;">{{ l.title }}</h3>
+            <p style="font-size:15.5px;line-height:1.6;color:#4E545A;max-width:560px;">{{ l.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SO LÄUFT ES AB ===== -->
+  <section id="ablauf" data-screen-label="Ablauf" style="background:#F4F2EC;padding:112px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="margin-bottom:52px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;margin-bottom:20px;" data-reveal="0">§ 04 — Ablauf in vier Takten</div>
+        <h2 style="font-size:clamp(30px,4vw,54px);color:#181B1F;" data-reveal="60">So läuft es ab.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0;border-top:1px solid rgba(24,27,31,0.2);">
+        <sc-for list="{{ ablauf }}" as="a" hint-placeholder-count="4">
+          <div data-reveal="{{ a.delay }}" style="padding:30px 26px 40px;border-right:1px solid rgba(24,27,31,0.12);">
+            <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:46px;color:#2F5BEA;line-height:1;margin-bottom:22px;letter-spacing:-0.03em;">{{ a.num }}</div>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:21px;color:#181B1F;margin-bottom:14px;letter-spacing:-0.015em;">{{ a.title }}</h3>
+            <p style="font-size:15px;line-height:1.6;color:#4E545A;">{{ a.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FÜR EIGENTÜMER ===== -->
+  <section id="eigentuemer" data-screen-label="Eigentuemer" style="background:#ECE8DF;padding:112px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="max-width:780px;margin-bottom:52px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;margin-bottom:20px;" data-reveal="0">§ 05 — Für wen wir arbeiten</div>
+        <h2 style="font-size:clamp(30px,4vw,54px);color:#181B1F;" data-reveal="60">Für Eigentümer, die keine Zeit für Baustellen haben.</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+        <sc-for list="{{ zielgruppen }}" as="z" hint-placeholder-count="3">
+          <div data-reveal="{{ z.delay }}" style="border:1px solid rgba(24,27,31,0.12);border-radius:6px;padding:30px 26px;background:#F9F8F4;height:100%;transition:transform .4s,box-shadow .4s;" style-hover="transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(20,26,31,0.35);">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#fff;background:#2F5BEA;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border-radius:50%;margin-bottom:22px;">{{ z.code }}</div>
+            <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:20px;color:#181B1F;line-height:1.2;margin-bottom:16px;letter-spacing:-0.015em;">{{ z.title }}</h3>
+            <p style="font-size:15px;line-height:1.65;color:#4E545A;">{{ z.desc }}</p>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WARUM SE + BILD ===== -->
+  <section data-screen-label="Warum-SE" style="background:#F4F2EC;padding:112px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:60px;align-items:center;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;margin-bottom:20px;" data-reveal="0">§ 06 — Warum SE Handwerk</div>
+        <h2 style="font-size:clamp(28px,3.4vw,46px);margin-bottom:36px;color:#181B1F;" data-reveal="60">Verantwortung bis zur Abnahme.</h2>
+        <div>
+          <sc-for list="{{ vorteile }}" as="v" hint-placeholder-count="4">
+            <div data-reveal="{{ v.delay }}" style="display:grid;grid-template-columns:30px 1fr;gap:16px;padding:22px 0;border-top:1px solid rgba(24,27,31,0.14);">
+              <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#2F5BEA;">{{ v.n }}</span>
+              <div>
+                <h3 style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:19px;color:#181B1F;margin-bottom:6px;letter-spacing:-0.015em;">{{ v.title }}</h3>
+                <p style="font-size:15px;line-height:1.6;color:#4E545A;">{{ v.desc }}</p>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div data-reveal="120" style="position:relative;aspect-ratio:4/5;background:repeating-linear-gradient(135deg,#E6E2D8,#E6E2D8 13px,#EDEAE1 13px,#EDEAE1 26px);border:1px solid rgba(24,27,31,0.14);border-radius:6px;overflow:hidden;">
+        <div style="position:absolute;top:14px;left:14px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A8F95;letter-spacing:0.05em;">ABB. 02 / 4:5</div>
+        <div style="position:absolute;bottom:16px;left:16px;right:16px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6B7076;line-height:1.55;">[ BILDPLATZ ]<br>Übergabesituation / Handschlag — ruhiges Licht, gleiche Farbtemperatur</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REGION ===== -->
+  <section data-screen-label="Region" style="background:#ECE8DF;padding:100px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:56px;align-items:center;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;margin-bottom:20px;" data-reveal="0">§ 07 — Einsatzgebiet</div>
+        <h2 style="font-size:clamp(28px,3.4vw,46px);margin-bottom:24px;color:#181B1F;" data-reveal="60">Im Raum Heilbronn und Umgebung.</h2>
+        <p style="font-size:16.5px;line-height:1.7;color:#494E54;max-width:460px;" data-reveal="120">Wir sind in Bretzfeld ansässig und arbeiten im gesamten Raum Heilbronn, Hohenlohe, Neckarsulm, Sinsheim und Stuttgart.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:32px;" data-reveal="180">
+          <sc-for list="{{ regionen }}" as="r" hint-placeholder-count="5">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#4E545A;border:1px solid rgba(24,27,31,0.18);padding:8px 14px;border-radius:100px;">{{ r }}</span>
+          </sc-for>
+        </div>
+      </div>
+      <div data-reveal="140" style="aspect-ratio:1/1;position:relative;border:1px solid rgba(24,27,31,0.14);border-radius:6px;background:#F4F2EC;overflow:hidden;">
+        <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(24,27,31,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(24,27,31,0.055) 1px,transparent 1px);background-size:34px 34px;"></div>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:58%;height:58%;border:1px solid rgba(47,91,234,0.35);border-radius:50%;"></div>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:30%;height:30%;border:1px solid rgba(47,91,234,0.55);border-radius:50%;"></div>
+        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:10px;height:10px;background:#2F5BEA;border-radius:50%;box-shadow:0 0 0 6px rgba(47,91,234,0.14);"></div>
+        <div style="position:absolute;left:calc(50% + 14px);top:calc(50% - 28px);font-family:'IBM Plex Mono',monospace;font-size:11px;color:#2F5BEA;letter-spacing:0.05em;">BRETZFELD</div>
+        <div style="position:absolute;bottom:16px;left:16px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A8F95;letter-spacing:0.05em;">49.18°N / 9.44°E — RADIUS ~60 KM</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KONTAKT ===== -->
+  <section id="kontakt" data-screen-label="Kontakt" style="background:#F4F2EC;padding:112px 0;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:60px;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#7C8188;margin-bottom:20px;" data-reveal="0">§ 08 — Kontakt</div>
+        <h2 style="font-size:clamp(30px,3.8vw,52px);margin-bottom:24px;color:#181B1F;" data-reveal="60">Sprechen wir über Ihr Projekt.</h2>
+        <p style="font-size:16.5px;line-height:1.7;color:#494E54;max-width:400px;margin-bottom:40px;" data-reveal="120">Erzählen Sie uns kurz, was ansteht. Wir melden uns innerhalb von 24 Stunden und vereinbaren einen Termin vor Ort.</p>
+        <div style="display:flex;flex-direction:column;" data-reveal="180">
+          <a href="tel:+491734536225" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid rgba(24,27,31,0.14);color:#181B1F;" style-hover="color:#2F5BEA;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.06em;">TELEFON</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;">+49 173 4536225</span>
+          </a>
+          <a href="mailto:kontakt@sehandwerk.de" style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid rgba(24,27,31,0.14);color:#181B1F;" style-hover="color:#2F5BEA;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.06em;">E-MAIL</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:15px;">kontakt@sehandwerk.de</span>
+          </a>
+          <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-top:1px solid rgba(24,27,31,0.14);border-bottom:1px solid rgba(24,27,31,0.14);">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.06em;">ADRESSE</span>
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:14px;color:#4E545A;">Steinsfeldstraße 21, 74626 Bretzfeld</span>
+          </div>
+        </div>
+      </div>
+      <div data-reveal="120" style="border:1px solid rgba(24,27,31,0.14);border-radius:6px;background:#F9F8F4;">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:18px 26px;border-bottom:1px solid rgba(24,27,31,0.12);">
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;letter-spacing:0.06em;">ANFRAGE — FORMBLATT A</span>
+          <span style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#7C8188;">RÜCKMELDUNG &lt; 24 H</span>
+        </div>
+        <form onsubmit="{{ onSubmit }}" style="padding:26px;">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <label style="display:block;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#7C8188;letter-spacing:0.05em;text-transform:uppercase;display:block;margin-bottom:8px;">Name</span><input type="text" style="width:100%;background:#fff;border:1px solid rgba(24,27,31,0.16);border-radius:4px;padding:12px;color:#181B1F;font-family:'IBM Plex Sans',sans-serif;font-size:14px;"></label>
+            <label style="display:block;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#7C8188;letter-spacing:0.05em;text-transform:uppercase;display:block;margin-bottom:8px;">Telefon</span><input type="tel" style="width:100%;background:#fff;border:1px solid rgba(24,27,31,0.16);border-radius:4px;padding:12px;color:#181B1F;font-family:'IBM Plex Sans',sans-serif;font-size:14px;"></label>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+            <label style="display:block;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#7C8188;letter-spacing:0.05em;text-transform:uppercase;display:block;margin-bottom:8px;">E-Mail</span><input type="email" style="width:100%;background:#fff;border:1px solid rgba(24,27,31,0.16);border-radius:4px;padding:12px;color:#181B1F;font-family:'IBM Plex Sans',sans-serif;font-size:14px;"></label>
+            <label style="display:block;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#7C8188;letter-spacing:0.05em;text-transform:uppercase;display:block;margin-bottom:8px;">Objekt / Ort</span><input type="text" style="width:100%;background:#fff;border:1px solid rgba(24,27,31,0.16);border-radius:4px;padding:12px;color:#181B1F;font-family:'IBM Plex Sans',sans-serif;font-size:14px;"></label>
+          </div>
+          <label style="display:block;margin-bottom:22px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#7C8188;letter-spacing:0.05em;text-transform:uppercase;display:block;margin-bottom:8px;">Worum geht es?</span><textarea rows="4" style="width:100%;background:#fff;border:1px solid rgba(24,27,31,0.16);border-radius:4px;padding:12px;color:#181B1F;font-family:'IBM Plex Sans',sans-serif;font-size:14px;resize:vertical;"></textarea></label>
+          <button type="submit" style="width:100%;font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;color:#fff;background:#2F5BEA;border:none;padding:16px;border-radius:100px;cursor:pointer;" style-hover="background:#1E3FB0;">Anfrage senden</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background:#141A1F;color:#ECEBE5;padding:56px 0 40px;">
+    <div style="max-width:1240px;margin:0 auto;padding:0 40px;">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:32px;padding-bottom:36px;border-bottom:1px solid rgba(255,255,255,0.1);">
+        <div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px;letter-spacing:-0.02em;margin-bottom:10px;">SE Handwerk</div>
+          <p style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#7E858B;line-height:1.9;">Said &amp; Tuzcuoglu GbR<br>Steinsfeldstraße 21 · 74626 Bretzfeld</p>
+        </div>
+        <div style="display:flex;gap:56px;flex-wrap:wrap;">
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5B636A;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">Seite</span>
+            <a href="#leistungen" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#A8AEB3;" style-hover="color:#ECEBE5;">Leistungen</a>
+            <a href="#ablauf" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#A8AEB3;" style-hover="color:#ECEBE5;">Ablauf</a>
+            <a href="#kontakt" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#A8AEB3;" style-hover="color:#ECEBE5;">Kontakt</a>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:10px;">
+            <span style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5B636A;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:2px;">Rechtliches</span>
+            <a href="#" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#A8AEB3;" style-hover="color:#ECEBE5;">Impressum</a>
+            <a href="#" style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#A8AEB3;" style-hover="color:#ECEBE5;">Datenschutz</a>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding-top:24px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5B636A;letter-spacing:0.04em;flex-wrap:wrap;gap:10px;">
+        <span>© 2026 SE HANDWERK — SANIERUNG AUS EINER HAND</span>
+        <span>RAUM HEILBRONN / HOHENLOHE</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:880}}">
+class Component extends DCLogic {
+  state = { taktProgress: 0, docProgress: 0, scrollY: 0, reduced: false };
+
+  componentDidMount() {
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced) { this.setState({ reduced: true, taktProgress: 1 }); return; }
+    this._raf = null;
+    this.onScroll = () => {
+      const de = document.scrollingElement || document.documentElement;
+      const sy = de.scrollTop;
+      const max = de.scrollHeight - window.innerHeight;
+      const dp = max > 0 ? Math.max(0, Math.min(1, sy / max)) : 0;
+      const sec = document.getElementById('takt-sec');
+      let p = this.state.taktProgress || 0;
+      if (sec) {
+        const r = sec.getBoundingClientRect();
+        const span = sec.offsetHeight - window.innerHeight;
+        p = span > 0 ? Math.max(0, Math.min(1, (-r.top) / span)) : 0;
+      }
+      const upd = {};
+      if (Math.abs(p - (this.state.taktProgress || 0)) > 0.0015) upd.taktProgress = p;
+      if (Math.abs(dp - (this.state.docProgress || 0)) > 0.0015) upd.docProgress = dp;
+      if (Math.abs(sy - (this.state.scrollY || 0)) > 2) upd.scrollY = sy;
+      if (Object.keys(upd).length) this.setState(upd);
+    };
+    this._sh = () => { if (this._raf) return; this._raf = requestAnimationFrame(() => { this._raf = null; this.onScroll(); }); };
+    window.addEventListener('scroll', this._sh, { passive: true });
+    window.addEventListener('resize', this._sh);
+    this.onScroll();
+    this.setupReveals();
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._sh);
+    window.removeEventListener('resize', this._sh);
+  }
+
+  setupReveals() {
+    const els = [].slice.call(document.querySelectorAll('[data-reveal]'));
+    els.forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(30px)';
+      el.style.clipPath = 'inset(0 0 100% 0)';
+      el.style.willChange = 'transform, opacity, clip-path';
+      el.style.transition = 'opacity .9s ease, transform 1.05s cubic-bezier(.16,1,.3,1), clip-path 1.05s cubic-bezier(.16,1,.3,1)';
+      el.style.transitionDelay = (el.getAttribute('data-reveal') || '0') + 'ms';
+    });
+    const io = new IntersectionObserver((ents) => {
+      ents.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'none';
+          e.target.style.clipPath = 'inset(0 0 0% 0)';
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(el => io.observe(el));
+  }
+
+  renderVals() {
+    const p = this.state.taktProgress || 0;
+    const sm = t => t * t * (3 - 2 * t);
+    const e = sm(p);
+    const lerp = (a, b, t) => a + (b - a) * t;
+    const clamp = (x, a, b) => Math.max(a, Math.min(b, x));
+    const hex = h => { h = h.replace('#', ''); return [parseInt(h.slice(0,2),16), parseInt(h.slice(2,4),16), parseInt(h.slice(4,6),16)]; };
+    const mix = (a, b, t) => { const A = hex(a), B = hex(b); return 'rgb(' + A.map((v,i)=>Math.round(lerp(v,B[i],t))).join(',') + ')'; };
+
+    const total = 66, rowH = 54, barH = 30, topPad = 6;
+    const defs = [
+      { code: '01', name: 'Rückbau', c: [4, 15], o: [0, 9] },
+      { code: '02', name: 'Bodenarbeiten', c: [8, 22], o: [18, 10], tag: 'KONFLIKT · ESTRICH FEUCHT' },
+      { code: '03', name: 'Trockenbau', c: [3, 24], o: [8, 11] },
+      { code: '04', name: 'Bad & Sanitär', c: [22, 28], o: [26, 12] },
+      { code: '05', name: 'Malerarbeiten', c: [32, 30], o: [36, 8], tag: '+18 TAGE' }
+    ];
+    const colorT = sm(clamp((p - 0.42) / 0.5, 0, 1));
+    const bars = defs.map((d, i) => {
+      const start = lerp(d.c[0], d.o[0], e);
+      const len = lerp(d.c[1], d.o[1], e);
+      const jitter = (1 - e) * ((i % 2 === 0) ? -5 : 6);
+      const left = start / total * 100;
+      const width = len / total * 100;
+      const top = topPad + i * rowH + jitter;
+      const bg = mix('#39424B', '#2F5BEA', colorT);
+      const style = 'position:absolute;left:' + left.toFixed(2) + '%;width:' + width.toFixed(2) + '%;top:' + top.toFixed(1) + 'px;height:' + barH + 'px;background:' + bg + ';border-radius:2px;display:flex;align-items:center;padding:0 12px;box-shadow:0 1px 0 rgba(0,0,0,.35);';
+      const hasTag = !!d.tag && (1 - e) > 0.04;
+      const tagStyle = 'position:absolute;right:-8px;top:50%;transform:translate(100%,-50%);font-family:\'IBM Plex Mono\',monospace;font-size:10px;color:#E0895A;letter-spacing:0.04em;white-space:nowrap;opacity:' + (1 - e).toFixed(3) + ';';
+      return { code: d.code, name: d.name, style, tag: d.tag || '', hasTag, tagStyle };
+    });
+
+    const deadlineLeft = 45 / total * 100;
+    const playheadLeft = lerp(1, 45, e) / total * 100;
+    const dp = this.state.docProgress || 0;
+    const sy = this.state.scrollY || 0;
+
+    return {
+      bars,
+      sectionHeight: this.state.reduced ? '100vh' : '280vh',
+      plotHeight: (topPad * 2 + defs.length * rowH) + 'px',
+      heroImgStyle: 'will-change:transform;transform:translateY(' + (sy * -0.06).toFixed(1) + 'px);',
+      spineFillStyle: 'position:fixed;left:26px;top:0;width:2px;z-index:91;pointer-events:none;background:#2F5BEA;box-shadow:0 0 10px rgba(47,91,234,0.45);height:' + (dp * 100).toFixed(2) + 'vh;',
+      deadlineStyle: 'position:absolute;top:-8px;bottom:0;width:1px;background:repeating-linear-gradient(#2F5BEA,#2F5BEA 4px,transparent 4px,transparent 8px);left:' + deadlineLeft.toFixed(2) + '%;',
+      playheadStyle: 'position:absolute;top:-8px;bottom:0;width:2px;background:#ECEBE5;box-shadow:0 0 8px rgba(236,235,229,0.4);left:' + playheadLeft.toFixed(2) + '%;opacity:' + clamp((p - 0.12) / 0.18, 0, 1).toFixed(3) + ';',
+      chaosLabelStyle: 'position:absolute;inset:0;font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;letter-spacing:-0.025em;font-size:clamp(26px,3.2vw,44px);color:#7E858B;opacity:' + (1 - clamp(e * 1.7, 0, 1)).toFixed(3) + ';',
+      orderLabelStyle: 'position:absolute;inset:0;font-family:\'Bricolage Grotesque\',sans-serif;font-weight:800;letter-spacing:-0.025em;font-size:clamp(26px,3.2vw,44px);color:#ECEBE5;opacity:' + clamp((e - 0.45) / 0.4, 0, 1).toFixed(3) + ';',
+      onSubmit: (ev) => { ev.preventDefault(); alert('Danke — Ihre Anfrage ist eingegangen. Wir melden uns innerhalb von 24 Stunden.'); },
+      leistungen: [
+        { code: '01', title: 'Komplettsanierung', desc: 'Wohnungen, Häuser, Gewerbeeinheiten. Vom Rückbau bis zur bezugsfertigen Übergabe.', delay: '0' },
+        { code: '02', title: 'Bodenarbeiten', desc: 'Rückbau, Untergrundvorbereitung, Estricharbeiten, Vinyl, Laminat, Parkett, Fliesen.', delay: '80' },
+        { code: '03', title: 'Wand & Decke', desc: 'Trockenbau, Ständerwände, abgehängte Decken, Innenputz, Malerarbeiten.', delay: '160' },
+        { code: '04', title: 'Bad & Sanitär', desc: 'Komplette Badsanierung inklusive aller notwendigen Gewerke.', delay: '240' },
+        { code: '05', title: 'Einzelgewerke', desc: 'Auch für abgegrenzte Aufgaben sind wir der richtige Ansprechpartner.', delay: '320' }
+      ],
+      ablauf: [
+        { num: '1', title: 'Aufnahme vor Ort', desc: 'Wir sehen uns das Objekt an, hören zu und verstehen, was Sie erreichen wollen. Kostenfrei und unverbindlich.', delay: '0' },
+        { num: '2', title: 'Angebot', desc: 'Sie bekommen ein nachvollziehbares Angebot — transparent aufgeschlüsselt, keine Überraschungen im Nachhinein.', delay: '90' },
+        { num: '3', title: 'Ausführung', desc: 'Wir stimmen die Gewerke ab, halten den Ablauf zusammen und sind während der gesamten Bauzeit Ihr Ansprechpartner.', delay: '180' },
+        { num: '4', title: 'Übergabe', desc: 'Gemeinsame Abnahme. Erst wenn Sie zufrieden sind, ist das Projekt für uns abgeschlossen.', delay: '270' }
+      ],
+      zielgruppen: [
+        { code: 'A', title: 'Kapitalanleger und Investoren', desc: 'Sie haben ein Objekt gekauft und wollen es schnell vermietbar oder verkaufsfertig haben. Wir übernehmen die Sanierung vollständig — auch wenn Sie nicht in der Region wohnen. Sie bekommen regelmäßige Updates, wir kümmern uns um den Rest.', delay: '0' },
+        { code: 'B', title: 'Erbengemeinschaften und auswärtige Eigentümer', desc: 'Eine geerbte Immobilie zu sanieren, wenn man 300 Kilometer entfernt lebt, ist ein Vollzeitjob. Übernehmen wir gerne.', delay: '100' },
+        { code: 'C', title: 'Private Bauherren', desc: 'Sie sanieren Ihr Zuhause und wollen sich nicht nebenbei zum Bauleiter fortbilden. Verständlich. Genau dafür sind wir da.', delay: '200' }
+      ],
+      vorteile: [
+        { n: '01', title: 'Alles aus einer Hand', desc: 'Boden, Wand, Bad, Innenausbau — wir machen Ihre Sanierung komplett. Sie brauchen niemanden sonst.', delay: '0' },
+        { n: '02', title: 'Ein Ansprechpartner statt fünf', desc: 'Sie telefonieren mit uns — nicht mit dem Bodenleger, dem Maler und dem Trockenbauer.', delay: '80' },
+        { n: '03', title: 'Verbindliche Termine', desc: 'Wir planen realistisch und halten, was wir zusagen. Wenn sich etwas ändert, erfahren Sie es von uns — vorher.', delay: '160' },
+        { n: '04', title: 'Transparente Angebote', desc: 'Klar aufgeschlüsselte Positionen. Sie sehen, wofür Sie zahlen.', delay: '240' }
+      ],
+      regionen: ['Heilbronn', 'Hohenlohe', 'Neckarsulm', 'Sinsheim', 'Stuttgart', 'Bretzfeld']
+    };
+  }
+}
+</script>
+</body>
+</html>
