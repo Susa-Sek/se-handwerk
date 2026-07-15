@@ -50,11 +50,28 @@ img{max-width:100%;}
 
 /* Directional variants — drop the clip-path wipe and slide/scale instead, so
    sections resolve with varied motion rather than one uniform upward fade. */
-.reveal--left,.reveal--right,.reveal--scale{clip-path:none;}
+.reveal--left,.reveal--right,.reveal--scale,.reveal--grow{clip-path:none;}
 .reveal--left{transform:translateX(-48px);}
 .reveal--right{transform:translateX(48px);}
 .reveal--scale{transform:scale(.93);transform-origin:center;}
-.reveal--left.is-visible,.reveal--right.is-visible,.reveal--scale.is-visible{clip-path:none;transform:none;}
+.reveal--grow{transform:scaleY(0);transform-origin:top;}
+.reveal--left.is-visible,.reveal--right.is-visible,.reveal--scale.is-visible,.reveal--grow.is-visible{clip-path:none;transform:none;}
+
+/* Problem section — vertical gold divider between the two columns; hidden once
+   the columns stack on narrow screens. */
+.problem-divider{position:absolute;left:50%;top:4%;bottom:4%;width:1px;
+  background:linear-gradient(rgba(201,154,69,0.55),rgba(201,154,69,0.05));}
+@media(max-width:648px){.problem-divider{display:none;}}
+
+/* Warum-SE — the intro pins while the reasons scroll past it. Falls back to
+   normal flow on mobile where the columns stack. */
+.warum-sticky{position:sticky;top:108px;align-self:start;}
+@media(max-width:760px){.warum-sticky{position:static;}}
+
+/* Region — living radar: a rotating survey beam and expanding sonar rings. */
+@keyframes radarSweep{to{transform:rotate(360deg);}}
+@keyframes sonar{0%{transform:translate(-50%,-50%) scale(.28);opacity:.55;}
+  100%{transform:translate(-50%,-50%) scale(1);opacity:0;}}
 
 /* Real :hover states ported from the source's style-hover attributes */
 .nav-link{color:#97A2AD;transition:color .2s;}

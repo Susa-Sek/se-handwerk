@@ -31,19 +31,21 @@ export function ProblemSection() {
           </Reveal>
           <div
             style={{
+              position: 'relative',
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
               gap: 48,
               marginTop: 48,
             }}
           >
-            <Reveal as="p" delay={120} style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD' }}>
+            <Reveal from="grow" delay={140} className="problem-divider" />
+            <Reveal as="p" from="left" delay={120} style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD' }}>
               Der Bodenleger kommt, aber der Estrich ist noch feucht. Der Maler steht vor der Tür,
               während der Trockenbau noch läuft. Der Fliesenleger sagt kurzfristig ab, und niemand hat
               einen Ersatz. Am Ende zieht sich ein Projekt, das acht Wochen dauern sollte, über ein
               halbes Jahr — und der Bauherr ist der, der alles zusammenhalten muss.
             </Reveal>
-            <Reveal delay={200}>
+            <Reveal from="right" delay={200}>
               <p
                 style={{
                   fontFamily: bricolage,
@@ -325,62 +327,73 @@ export function WarumSESection() {
           display: 'grid',
           gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))',
           gap: 60,
-          alignItems: 'center',
+          alignItems: 'start',
         }}
       >
-        <div>
+        {/* pinned intro — stays fixed while the reasons scroll past */}
+        <div className="warum-sticky">
           <Reveal delay={0} style={{ ...kicker, marginBottom: 20 }}>
             Warum SE Handwerk
           </Reveal>
           <Reveal
             as="h2"
             delay={60}
-            style={{ fontSize: 'clamp(28px,3.4vw,46px)', marginBottom: 36, color: '#EDF1F5' }}
+            style={{ fontSize: 'clamp(28px,3.4vw,46px)', marginBottom: 26, color: '#EDF1F5' }}
           >
             Verantwortung bis zur Abnahme.
           </Reveal>
-          <div>
-            {vorteile.map((v) => (
-              <Reveal
-                key={v.n}
-                delay={v.delay}
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '30px 1fr',
-                  gap: 16,
-                  padding: '22px 0',
-                  borderTop: '1px solid rgba(255,255,255,0.11)',
-                }}
-              >
-                <span style={{ fontFamily: mono, fontSize: 12, color: '#C99A45' }}>{v.n}</span>
-                <div>
-                  <h3
-                    style={{
-                      fontFamily: bricolage,
-                      fontWeight: 700,
-                      fontSize: 19,
-                      color: '#EDF1F5',
-                      marginBottom: 6,
-                      letterSpacing: '-0.015em',
-                    }}
-                  >
-                    {v.title}
-                  </h3>
-                  <p style={{ fontSize: 15, lineHeight: 1.6, color: '#AEB9C3' }}>{v.desc}</p>
-                </div>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal delay={120} style={{ display: 'flex', alignItems: 'center', gap: 12, maxWidth: 360 }}>
+            <span style={{ width: 8, height: 12, borderLeft: '1px solid rgba(201,154,69,0.6)', flexShrink: 0 }} />
+            <span style={{ flex: 1, height: 1, background: 'rgba(201,154,69,0.4)' }} />
+            <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.06em', color: '#C99A45', whiteSpace: 'nowrap' }}>
+              4 GRÜNDE
+            </span>
+          </Reveal>
         </div>
-        <Reveal delay={120}>
-          <Figure
-            src="detail-uebergabe.jpg"
-            ratio="4/5"
-            abb="ABB. 02 / 4:5"
-            parallax={46}
-            caption="Fertig saniertes Detail bei der Übergabe — ruhiges Tageslicht, gleiche Farbtemperatur"
-          />
-        </Reveal>
+
+        {/* the four reasons + result photo scroll past the pinned intro */}
+        <div>
+          {vorteile.map((v) => (
+            <Reveal
+              key={v.n}
+              from="right"
+              delay={v.delay}
+              style={{
+                display: 'grid',
+                gridTemplateColumns: '30px 1fr',
+                gap: 16,
+                padding: '26px 0',
+                borderTop: '1px solid rgba(255,255,255,0.11)',
+              }}
+            >
+              <span style={{ fontFamily: mono, fontSize: 12, color: '#C99A45' }}>{v.n}</span>
+              <div>
+                <h3
+                  style={{
+                    fontFamily: bricolage,
+                    fontWeight: 700,
+                    fontSize: 19,
+                    color: '#EDF1F5',
+                    marginBottom: 6,
+                    letterSpacing: '-0.015em',
+                  }}
+                >
+                  {v.title}
+                </h3>
+                <p style={{ fontSize: 15, lineHeight: 1.6, color: '#AEB9C3' }}>{v.desc}</p>
+              </div>
+            </Reveal>
+          ))}
+          <Reveal delay={80} style={{ marginTop: 40 }}>
+            <Figure
+              src="detail-uebergabe.jpg"
+              ratio="4/5"
+              abb="ABB. 02 / 4:5"
+              parallax={40}
+              caption="Fertig saniertes Detail bei der Übergabe — ruhiges Tageslicht, gleiche Farbtemperatur"
+            />
+          </Reveal>
+        </div>
       </div>
     </section>
   );
@@ -451,6 +464,39 @@ export function RegionSection() {
               backgroundSize: '34px 34px',
             }}
           />
+          {/* rotating survey beam */}
+          <div
+            aria-hidden
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              width: '58%',
+              height: '58%',
+              transform: 'translate(-50%,-50%)',
+              borderRadius: '50%',
+              background:
+                'conic-gradient(from 0deg, rgba(201,154,69,0.30), rgba(201,154,69,0.04) 42%, transparent 60%)',
+              animation: 'radarSweep 6.5s linear infinite',
+            }}
+          />
+          {/* expanding sonar rings */}
+          {[0, 1, 2].map((i) => (
+            <span
+              key={i}
+              aria-hidden
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                width: '58%',
+                height: '58%',
+                border: '1px solid rgba(201,154,69,0.45)',
+                borderRadius: '50%',
+                animation: `sonar 3.9s ease-out ${(i * 1.3).toFixed(2)}s infinite`,
+              }}
+            />
+          ))}
           <div
             style={{
               position: 'absolute',

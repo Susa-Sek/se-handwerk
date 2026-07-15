@@ -12,7 +12,7 @@ type Tag = 'div' | 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'section';
 
 // Entrance direction. 'up' (default) is the original clip-path wipe; the others
 // vary the rhythm so sections no longer all resolve the same way.
-type From = 'up' | 'left' | 'right' | 'scale';
+type From = 'up' | 'left' | 'right' | 'scale' | 'grow';
 
 interface RevealProps {
   as?: Tag;
