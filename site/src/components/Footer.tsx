@@ -43,7 +43,7 @@ export default function Footer() {
               SE Handwerk
             </div>
             <p style={{ fontFamily: mono, fontSize: 12, color: '#8A97A3', lineHeight: 1.9 }}>
-              Said &amp; Tuzcuoglu GbR
+              SE Handwerk GbR
               <br />
               Steinsfeldstraße 21 · 74626 Bretzfeld
             </p>
@@ -66,9 +66,9 @@ export default function Footer() {
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <span style={colLabel}>Rechtliches</span>
-              <a href="#" className="footer-link" style={colLink}>
+              <Link to="/impressum" className="footer-link" style={colLink}>
                 Impressum
-              </a>
+              </Link>
               <a href="#" className="footer-link" style={colLink}>
                 Datenschutz
               </a>

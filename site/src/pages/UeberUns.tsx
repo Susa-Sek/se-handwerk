@@ -14,14 +14,14 @@ const kicker: React.CSSProperties = {
 
 const founders = [
   {
-    name: 'Sulieman Said',
-    role: 'Kalkulation · Planung · Kundenbetreuung',
+    title: 'Kalkulation & Kundenbetreuung',
+    role: 'Erster Ansprechpartner',
     desc: 'Erster Ansprechpartner für unsere Auftraggeber. Nimmt Projekte auf, kalkuliert den Umfang und hält den Kontakt über die gesamte Laufzeit.',
     delay: 0,
   },
   {
-    name: 'Emre Tuzcuoglu',
-    role: 'Bauleitung · Abstimmung vor Ort',
+    title: 'Bauleitung',
+    role: 'Koordination vor Ort',
     desc: 'Verantwortet die Bauleitung und die Koordination auf der Baustelle. Sorgt dafür, dass die Gewerke ineinandergreifen und der Ablauf hält.',
     delay: 100,
   },
@@ -57,9 +57,8 @@ export default function UeberUns() {
             }}
           >
             <Reveal as="p" delay={120} style={{ fontSize: 18, lineHeight: 1.7, color: '#B9C3CD' }}>
-              SE Handwerk wurde von Sulieman Said und Emre Tuzcuoglu gegründet — mit einer einfachen
-              Beobachtung: Auf dem Bau gibt es genug gute Handwerker. Was fehlt, ist jemand, der sie
-              zusammenhält.
+              SE Handwerk entstand aus einer einfachen Beobachtung: Auf dem Bau gibt es genug gute
+              Handwerker. Was fehlt, ist jemand, der sie zusammenhält.
             </Reveal>
             <Reveal delay={200}>
               <p style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD', marginBottom: 22 }}>
@@ -95,7 +94,7 @@ export default function UeberUns() {
           >
             {founders.map((f) => (
               <Reveal
-                key={f.name}
+                key={f.title}
                 delay={f.delay}
                 style={{
                   border: '1px solid rgba(255,255,255,0.10)',
@@ -126,7 +125,7 @@ export default function UeberUns() {
                     marginBottom: 16,
                   }}
                 >
-                  {f.name}
+                  {f.title}
                 </h3>
                 <p style={{ fontSize: 15.5, lineHeight: 1.65, color: '#AEB9C3' }}>{f.desc}</p>
               </Reveal>

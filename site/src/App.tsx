@@ -7,6 +7,7 @@ import RoterFaden from './components/RoterFaden';
 import Home from './pages/Home';
 import UeberUns from './pages/UeberUns';
 import Kontakt from './pages/Kontakt';
+import Impressum from './pages/Impressum';
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
@@ -36,6 +37,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/ueber-uns" element={<UeberUns />} />
           <Route path="/kontakt" element={<Kontakt />} />
+          <Route path="/impressum" element={<Impressum />} />
           <Route path="*" element={<Home />} />
         </Routes>
         <Footer />

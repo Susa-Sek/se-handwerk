@@ -86,7 +86,7 @@ export default function Kontakt() {
                   ADRESSE
                 </span>
                 <span style={{ fontFamily: mono, fontSize: 14, color: '#AEB9C3', textAlign: 'right' }}>
-                  Said &amp; Tuzcuoglu GbR
+                  SE Handwerk GbR
                   <br />
                   Steinsfeldstraße 21, 74626 Bretzfeld
                 </span>

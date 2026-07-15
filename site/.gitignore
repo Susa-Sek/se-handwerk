@@ -26,3 +26,6 @@ dist-ssr
 # local secrets
 .env
 .env.local
+
+# generierte self-contained Vorschau (Build-Artefakt)
+se-handwerk-preview.html
