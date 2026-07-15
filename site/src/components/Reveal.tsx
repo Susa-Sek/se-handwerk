@@ -10,9 +10,14 @@ import { prefersReducedMotion } from '../lib/motion';
 
 type Tag = 'div' | 'h1' | 'h2' | 'h3' | 'p' | 'span' | 'section';
 
+// Entrance direction. 'up' (default) is the original clip-path wipe; the others
+// vary the rhythm so sections no longer all resolve the same way.
+type From = 'up' | 'left' | 'right' | 'scale';
+
 interface RevealProps {
   as?: Tag;
   delay?: number;
+  from?: From;
   className?: string;
   style?: CSSProperties;
   id?: string;
@@ -27,6 +32,7 @@ interface RevealProps {
 export default function Reveal({
   as = 'div',
   delay = 0,
+  from = 'up',
   className,
   style,
   id,
@@ -74,7 +80,7 @@ export default function Reveal({
     {
       ref,
       id,
-      className: `reveal${visible ? ' is-visible' : ''}${className ? ' ' + className : ''}`,
+      className: `reveal${from !== 'up' ? ' reveal--' + from : ''}${visible ? ' is-visible' : ''}${className ? ' ' + className : ''}`,
       style: { transitionDelay: `${delay}ms`, ...style },
     },
     children,

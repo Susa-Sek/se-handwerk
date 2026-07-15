@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useViewportProgress } from '../hooks/useViewportProgress';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -11,19 +12,26 @@ interface FigureProps {
   abb: string;
   /** caption describing the subject (also the alt text) */
   caption: string;
+  /** vertical parallax drift range in px (0 = static). The photo over-scans its
+   *  frame and shifts as the figure travels the viewport, adding depth. */
+  parallax?: number;
   style?: React.CSSProperties;
   className?: string;
 }
 
 // Renders a real photo from /images when present; until the file exists it
 // falls back to an intentional on-brand blueprint plate (not a debug marker).
-export default function Figure({ src, ratio, abb, caption, style, className }: FigureProps) {
+export default function Figure({ src, ratio, abb, caption, parallax = 0, style, className }: FigureProps) {
   const [loaded, setLoaded] = useState(false);
   const [failed, setFailed] = useState(false);
+  const [ref, progress] = useViewportProgress<HTMLDivElement>();
   const showPlate = !loaded || failed;
+  const drift = parallax ? (progress - 0.5) * parallax : 0;
+  const showImg = loaded && !failed;
 
   return (
     <div
+      ref={ref}
       className={className}
       style={{
         position: 'relative',
@@ -62,22 +70,48 @@ export default function Figure({ src, ratio, abb, caption, style, className }: F
         </>
       )}
 
-      <img
-        src={`${import.meta.env.BASE_URL}images/${src}`}
-        alt={caption}
-        loading="lazy"
-        onLoad={() => setLoaded(true)}
-        onError={() => setFailed(true)}
+      {/* photo — over-scans the frame when parallax is on so the drift never
+          exposes an edge */}
+      <div
         style={{
           position: 'absolute',
-          inset: 0,
-          width: '100%',
-          height: '100%',
-          objectFit: 'cover',
-          opacity: loaded && !failed ? 1 : 0,
-          transition: 'opacity .6s ease',
+          inset: parallax ? '-8% 0' : 0,
+          transform: parallax ? `translate3d(0, ${drift.toFixed(1)}px, 0)` : undefined,
+          willChange: parallax ? 'transform' : undefined,
         }}
-      />
+      >
+        <img
+          src={`${import.meta.env.BASE_URL}images/${src}`}
+          alt={caption}
+          loading="lazy"
+          onLoad={() => setLoaded(true)}
+          onError={() => setFailed(true)}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            opacity: showImg ? 1 : 0,
+            transition: 'opacity .6s ease',
+          }}
+        />
+      </div>
+
+      {/* subtle vignette + gold edge-light on the loaded photo, ties it to the
+          blueprint palette */}
+      {showImg && (
+        <div
+          aria-hidden
+          style={{
+            position: 'absolute',
+            inset: 0,
+            pointerEvents: 'none',
+            background:
+              'radial-gradient(120% 100% at 50% 0%, transparent 55%, rgba(14,24,34,0.34) 100%)',
+          }}
+        />
+      )}
 
       {/* plate number — top-left, drawing-sheet style */}
       <div

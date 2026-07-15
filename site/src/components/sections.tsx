@@ -1,6 +1,8 @@
 import Reveal from './Reveal';
 import ContactForm from './ContactForm';
 import Figure from './Figure';
+import { useViewportProgress } from '../hooks/useViewportProgress';
+import { clamp } from '../lib/motion';
 import { ablauf, leistungen, regionen, vorteile, zielgruppen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
@@ -99,6 +101,7 @@ export function LeistungenSection() {
             <Reveal
               key={l.code}
               delay={l.delay}
+              from="left"
               className="leistung-row"
               style={{
                 display: 'grid',
@@ -132,6 +135,54 @@ export function LeistungenSection() {
   );
 }
 
+// A gold timeline that draws across the four Takte as the section scrolls into
+// view, lighting each beat in turn — a scroll-scrubbed replacement for the
+// static top border, reinforcing the "Ablauf in vier Takten" idea.
+function AblaufConnector({ count }: { count: number }) {
+  const [ref, progress] = useViewportProgress<HTMLDivElement>();
+  const fill = clamp((progress - 0.16) / 0.46, 0, 1);
+  return (
+    <div
+      ref={ref}
+      style={{ position: 'relative', height: 2, background: 'rgba(255,255,255,0.16)', marginBottom: 2 }}
+    >
+      <div
+        style={{
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          height: '100%',
+          width: `${(fill * 100).toFixed(1)}%`,
+          background: '#C99A45',
+          boxShadow: '0 0 10px rgba(201,154,69,0.5)',
+        }}
+      />
+      {Array.from({ length: count }, (_, i) => {
+        const at = (i + 0.5) / count;
+        const lit = fill >= at - 0.005;
+        return (
+          <span
+            key={i}
+            style={{
+              position: 'absolute',
+              left: `${(at * 100).toFixed(2)}%`,
+              top: '50%',
+              width: 9,
+              height: 9,
+              marginLeft: -4.5,
+              marginTop: -4.5,
+              borderRadius: '50%',
+              background: lit ? '#C99A45' : '#3A4652',
+              boxShadow: lit ? '0 0 9px 1px rgba(201,154,69,0.6)' : 'none',
+              transition: 'background .3s ease, box-shadow .3s ease',
+            }}
+          />
+        );
+      })}
+    </div>
+  );
+}
+
 export function AblaufSection() {
   return (
     <section id="ablauf" style={{ background: '#16222F', padding: '112px 0' }}>
@@ -144,18 +195,19 @@ export function AblaufSection() {
             So läuft es ab.
           </Reveal>
         </div>
+        <AblaufConnector count={ablauf.length} />
         <div
           style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))',
             gap: 0,
-            borderTop: '1px solid rgba(255,255,255,0.16)',
           }}
         >
           {ablauf.map((a) => (
             <Reveal
               key={a.num}
               delay={a.delay}
+              from="up"
               style={{ padding: '30px 26px 40px', borderRight: '1px solid rgba(255,255,255,0.10)' }}
             >
               <div
@@ -215,6 +267,7 @@ export function EigentuemerSection() {
             <Reveal
               key={z.code}
               delay={z.delay}
+              from="scale"
               className="ziel-card"
               style={{
                 border: '1px solid rgba(255,255,255,0.10)',
@@ -324,6 +377,7 @@ export function WarumSESection() {
             src="detail-uebergabe.jpg"
             ratio="4/5"
             abb="ABB. 02 / 4:5"
+            parallax={46}
             caption="Fertig saniertes Detail bei der Übergabe — ruhiges Tageslicht, gleiche Farbtemperatur"
           />
         </Reveal>
@@ -492,6 +546,7 @@ export function ErgebnisBand() {
             src="interior-01.jpg"
             ratio="16/7"
             abb="ABB. 03 / ERGEBNIS"
+            parallax={64}
             caption="Fertig saniertes Objekt, bezugsfertig übergeben — ruhiges Tageslicht, architektonische Perspektive"
           />
         </Reveal>
