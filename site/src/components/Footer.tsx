@@ -31,17 +31,11 @@ export default function Footer() {
           }}
         >
           <div>
-            <div
-              style={{
-                fontFamily: "'Bricolage Grotesque',sans-serif",
-                fontWeight: 800,
-                fontSize: 20,
-                letterSpacing: '-0.02em',
-                marginBottom: 10,
-              }}
-            >
-              SE Handwerk
-            </div>
+            <img
+              src="/images/logo-white.png"
+              alt="SE Handwerk"
+              style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
+            />
             <p style={{ fontFamily: mono, fontSize: 12, color: '#8A97A3', lineHeight: 1.9 }}>
               SE Handwerk GbR
               <br />
@@ -69,9 +63,9 @@ export default function Footer() {
               <Link to="/impressum" className="footer-link" style={colLink}>
                 Impressum
               </Link>
-              <a href="#" className="footer-link" style={colLink}>
+              <Link to="/datenschutz" className="footer-link" style={colLink}>
                 Datenschutz
-              </a>
+              </Link>
             </div>
           </div>
         </div>

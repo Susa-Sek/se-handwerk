@@ -48,19 +48,14 @@ export default function Nav() {
         <Link
           to="/"
           onClick={go('#top')}
-          style={{ display: 'flex', alignItems: 'baseline', gap: 12, color: '#EDF1F5' }}
+          aria-label="SE Handwerk — Startseite"
+          style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#EDF1F5' }}
         >
-          <span
-            style={{
-              fontFamily: "'Bricolage Grotesque',sans-serif",
-              fontWeight: 800,
-              fontSize: 19,
-              letterSpacing: '-0.02em',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            SE Handwerk
-          </span>
+          <img
+            src="/images/logo-white.png"
+            alt="SE Handwerk"
+            style={{ height: 30, width: 'auto', display: 'block' }}
+          />
           <span
             className="nav-tag"
             style={{ fontFamily: mono, fontSize: 10.5, color: '#7E8B98', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}

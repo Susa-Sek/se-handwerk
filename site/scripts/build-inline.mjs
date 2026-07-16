@@ -29,11 +29,17 @@ for (const f of readdirSync(join(dist, 'images'))) {
   imgMap[f] = `data:${mime};base64,${b.toString('base64')}`;
 }
 
-// 3) rewrite the runtime image path (`/images/${e}`) to use the embedded map
+// 3a) rewrite the Figure runtime image path (`/images/${e}`) to use the map
 if (!js.includes('`/images/${e}`')) {
   console.error('WARN: expected image path token not found — check the bundle');
 }
 js = js.replaceAll('`/images/${e}`', '(globalThis.__IMG[e]||`/images/${e}`)');
+
+// 3b) inline any static /images/<file> references (e.g. the logo in Nav/Footer)
+for (const [name, uri] of Object.entries(imgMap)) {
+  js = js.replaceAll(`/images/${name}`, uri);
+  css = css.replaceAll(`/images/${name}`, uri);
+}
 
 // 4) assemble the body fragment
 const body = [
