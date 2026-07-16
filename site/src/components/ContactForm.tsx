@@ -2,6 +2,13 @@ import { useState } from 'react';
 
 const mono = "'IBM Plex Mono',monospace";
 
+// FormSubmit endpoint. Uses the plain e-mail address (already public in the
+// Impressum/Footer). After the first real submission FormSubmit sends a one-time
+// activation link to this address — it must be clicked once before mails arrive.
+// Optional later: swap for the hashed endpoint FormSubmit generates
+// (https://formsubmit.co/ajax/<hash>) to keep the address out of the page source.
+const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/kontakt@sehandwerk.de';
+
 const labelText: React.CSSProperties = {
   fontFamily: mono,
   fontSize: 10.5,
@@ -24,8 +31,48 @@ const inputStyle: React.CSSProperties = {
   outlineColor: '#C99A45',
 };
 
+type Status = 'idle' | 'sending' | 'sent' | 'error';
+
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<Status>('idle');
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const data = Object.fromEntries(new FormData(form).entries());
+
+    // honeypot — bots fill hidden fields; treat as success without sending
+    if (data._honey) {
+      setStatus('sent');
+      return;
+    }
+
+    setStatus('sending');
+    try {
+      const res = await fetch(FORMSUBMIT_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          Name: data.name,
+          Telefon: data.phone,
+          'E-Mail': data.email,
+          'Objekt / Ort': data.objekt,
+          Nachricht: data.nachricht,
+          _subject: 'Neue Anfrage über sehandwerk.de',
+          _template: 'table',
+          _captcha: 'false',
+        }),
+      });
+      const json = await res.json().catch(() => ({}));
+      if (res.ok && (json.success === 'true' || json.success === true)) {
+        setStatus('sent');
+      } else {
+        setStatus('error');
+      }
+    } catch {
+      setStatus('error');
+    }
+  }
 
   return (
     <div
@@ -50,7 +97,7 @@ export default function ContactForm() {
         <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3' }}>RÜCKMELDUNG &lt; 24 H</span>
       </div>
 
-      {sent ? (
+      {status === 'sent' ? (
         <div style={{ padding: '48px 26px', textAlign: 'center' }}>
           <div
             style={{
@@ -84,17 +131,11 @@ export default function ContactForm() {
           </p>
         </div>
       ) : (
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-          }}
-          style={{ padding: 26 }}
-        >
+        <form onSubmit={handleSubmit} style={{ padding: 26 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
             <label style={{ display: 'block' }}>
               <span style={labelText}>Name</span>
-              <input type="text" name="name" autoComplete="name" style={inputStyle} />
+              <input type="text" name="name" autoComplete="name" required style={inputStyle} />
             </label>
             <label style={{ display: 'block' }}>
               <span style={labelText}>Telefon</span>
@@ -104,7 +145,7 @@ export default function ContactForm() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
             <label style={{ display: 'block' }}>
               <span style={labelText}>E-Mail</span>
-              <input type="email" name="email" autoComplete="email" style={inputStyle} />
+              <input type="email" name="email" autoComplete="email" required style={inputStyle} />
             </label>
             <label style={{ display: 'block' }}>
               <span style={labelText}>Objekt / Ort</span>
@@ -113,10 +154,43 @@ export default function ContactForm() {
           </div>
           <label style={{ display: 'block', marginBottom: 22 }}>
             <span style={labelText}>Worum geht es?</span>
-            <textarea rows={4} name="nachricht" style={{ ...inputStyle, resize: 'vertical' }} />
+            <textarea rows={4} name="nachricht" required style={{ ...inputStyle, resize: 'vertical' }} />
           </label>
+
+          {/* honeypot — hidden from users, catches bots */}
+          <input
+            type="text"
+            name="_honey"
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+            style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+          />
+
+          {status === 'error' && (
+            <p
+              style={{
+                fontSize: 13.5,
+                lineHeight: 1.6,
+                color: '#E0895A',
+                marginBottom: 16,
+              }}
+            >
+              Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder erreichen Sie uns
+              direkt:{' '}
+              <a href="tel:+491734536225" style={{ color: '#DCB566' }}>
+                +49&nbsp;173&nbsp;4536225
+              </a>{' '}
+              ·{' '}
+              <a href="mailto:kontakt@sehandwerk.de" style={{ color: '#DCB566' }}>
+                kontakt@sehandwerk.de
+              </a>
+            </p>
+          )}
+
           <button
             type="submit"
+            disabled={status === 'sending'}
             className="btn-primary"
             style={{
               width: '100%',
@@ -128,10 +202,11 @@ export default function ContactForm() {
               border: 'none',
               padding: 16,
               borderRadius: 100,
-              cursor: 'pointer',
+              cursor: status === 'sending' ? 'default' : 'pointer',
+              opacity: status === 'sending' ? 0.7 : 1,
             }}
           >
-            Anfrage senden
+            {status === 'sending' ? 'Wird gesendet …' : 'Anfrage senden'}
           </button>
         </form>
       )}
