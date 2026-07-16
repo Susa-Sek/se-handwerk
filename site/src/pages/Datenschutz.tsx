@@ -26,8 +26,8 @@ export default function Datenschutz() {
               <br />
               <br />
               E-Mail:{' '}
-              <a href="mailto:kontakt@se-handwerk.de" style={s.a}>
-                kontakt@se-handwerk.de
+              <a href="mailto:kontakt@sehandwerk.de" style={s.a}>
+                kontakt@sehandwerk.de
               </a>
             </p>
           </LegalSection>
@@ -186,8 +186,8 @@ export default function Datenschutz() {
               das Recht, diese Einwilligung jederzeit zu widerrufen. Die Rechtmäßigkeit der aufgrund der
               Einwilligung bis zum Widerruf erfolgten Verarbeitung wird dadurch nicht berührt. Ihren Widerruf
               können Sie per E-Mail an{' '}
-              <a href="mailto:kontakt@se-handwerk.de" style={s.a}>
-                kontakt@se-handwerk.de
+              <a href="mailto:kontakt@sehandwerk.de" style={s.a}>
+                kontakt@sehandwerk.de
               </a>{' '}
               richten.
             </p>

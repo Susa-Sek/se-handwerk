@@ -26,8 +26,8 @@ export default function Impressum() {
           <LegalSection title="Kontakt">
             <p style={s.p}>
               E-Mail:{' '}
-              <a href="mailto:kontakt@se-handwerk.de" style={s.a}>
-                kontakt@se-handwerk.de
+              <a href="mailto:kontakt@sehandwerk.de" style={s.a}>
+                kontakt@sehandwerk.de
               </a>
             </p>
           </LegalSection>
