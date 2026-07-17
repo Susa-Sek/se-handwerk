@@ -287,7 +287,7 @@ export default function Hero() {
             transform: 'translate3d(calc(var(--px) * 22px), calc(var(--py) * 22px), 0)',
           }}
         >
-          <Crosshair pos={{ top: 0, left: -10 }} label="49.18°N / 9.44°E" delay={1.5} />
+          <Crosshair pos={{ top: 0, left: -10 }} label="49.14°N / 9.22°E" delay={1.5} />
           <Crosshair pos={{ top: 0, right: -10 }} label="BLATT 01 / 01" delay={1.62} />
         </div>
 

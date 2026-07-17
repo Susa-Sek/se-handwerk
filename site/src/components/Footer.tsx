@@ -39,7 +39,7 @@ export default function Footer() {
             <p style={{ fontFamily: mono, fontSize: 12, color: '#8A97A3', lineHeight: 1.9 }}>
               SE Handwerk GbR
               <br />
-              Steinsfeldstraße 21 · 74626 Bretzfeld
+              Raum Heilbronn und Umgebung
             </p>
           </div>
           <div style={{ display: 'flex', gap: 56, flexWrap: 'wrap' }}>
@@ -83,7 +83,7 @@ export default function Footer() {
           }}
         >
           <span>© 2026 SE HANDWERK — SANIERUNG AUS EINER HAND</span>
-          <span>RAUM HEILBRONN / HOHENLOHE</span>
+          <span>RAUM HEILBRONN</span>
         </div>
       </div>
     </footer>

@@ -108,9 +108,7 @@ export const vorteile = [
 
 export const regionen = [
   'Heilbronn',
-  'Hohenlohe',
   'Neckarsulm',
   'Sinsheim',
   'Stuttgart',
-  'Bretzfeld',
 ];

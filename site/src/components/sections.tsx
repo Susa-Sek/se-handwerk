@@ -423,8 +423,8 @@ export function RegionSection() {
             Im Raum Heilbronn und Umgebung.
           </Reveal>
           <Reveal as="p" delay={120} style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD', maxWidth: 460 }}>
-            Wir sind in Bretzfeld ansässig und arbeiten im gesamten Raum Heilbronn, Hohenlohe,
-            Neckarsulm, Sinsheim und Stuttgart.
+            Wir arbeiten im gesamten Raum Heilbronn und Umgebung — von Neckarsulm über Sinsheim
+            bis Stuttgart.
           </Reveal>
           <Reveal delay={180} style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 32 }}>
             {regionen.map((r) => (
@@ -545,7 +545,7 @@ export function RegionSection() {
               letterSpacing: '0.05em',
             }}
           >
-            BRETZFELD
+            HEILBRONN
           </div>
           <div
             style={{
@@ -558,7 +558,7 @@ export function RegionSection() {
               letterSpacing: '0.05em',
             }}
           >
-            49.18°N / 9.44°E — RADIUS ~60 KM
+            49.14°N / 9.22°E — RADIUS ~60 KM
           </div>
         </Reveal>
       </div>
@@ -645,10 +645,10 @@ export function KontaktSection() {
               }}
             >
               <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3', letterSpacing: '0.06em' }}>
-                ADRESSE
+                EINSATZGEBIET
               </span>
               <span style={{ fontFamily: mono, fontSize: 14, color: '#AEB9C3' }}>
-                Steinsfeldstraße 21, 74626 Bretzfeld
+                Raum Heilbronn und Umgebung
               </span>
             </div>
           </Reveal>

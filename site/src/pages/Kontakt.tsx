@@ -83,12 +83,12 @@ export default function Kontakt() {
                 }}
               >
                 <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3', letterSpacing: '0.06em' }}>
-                  ADRESSE
+                  EINSATZGEBIET
                 </span>
                 <span style={{ fontFamily: mono, fontSize: 14, color: '#AEB9C3', textAlign: 'right' }}>
                   SE Handwerk GbR
                   <br />
-                  Steinsfeldstraße 21, 74626 Bretzfeld
+                  Raum Heilbronn und Umgebung
                 </span>
               </div>
             </Reveal>

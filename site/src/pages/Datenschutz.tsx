@@ -20,9 +20,7 @@ export default function Datenschutz() {
               <br />
               Sulieman Said &amp; Emre Tuzcuoglu
               <br />
-              Steinsfeldstr. 21
-              <br />
-              74626 Bretzfeld
+              Anschrift: siehe Impressum
               <br />
               <br />
               E-Mail:{' '}
