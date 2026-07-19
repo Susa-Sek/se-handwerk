@@ -464,24 +464,45 @@ export function RegionSection() {
               backgroundSize: '34px 34px',
             }}
           />
-          {/* rotating survey beam */}
+          {/* range rings */}
+          {[
+            { s: '82%', o: 0.1 },
+            { s: '54%', o: 0.16 },
+            { s: '28%', o: 0.24 },
+          ].map((r) => (
+            <div
+              key={r.s}
+              aria-hidden
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                width: r.s,
+                height: r.s,
+                transform: 'translate(-50%,-50%)',
+                border: `1px solid rgba(201,154,69,${r.o})`,
+                borderRadius: '50%',
+              }}
+            />
+          ))}
+          {/* fine rotating survey beam */}
           <div
             aria-hidden
             style={{
               position: 'absolute',
               left: '50%',
               top: '50%',
-              width: '58%',
-              height: '58%',
+              width: '82%',
+              height: '82%',
               transform: 'translate(-50%,-50%)',
               borderRadius: '50%',
               background:
-                'conic-gradient(from 0deg, rgba(201,154,69,0.30), rgba(201,154,69,0.04) 42%, transparent 60%)',
-              animation: 'radarSweep 6.5s linear infinite',
+                'conic-gradient(from 0deg, rgba(201,154,69,0.16), rgba(201,154,69,0.02) 14%, transparent 30%)',
+              animation: 'radarSweep 7.5s linear infinite',
             }}
           />
-          {/* expanding sonar rings */}
-          {[0, 1, 2].map((i) => (
+          {/* one soft sonar pulse */}
+          {[0, 1].map((i) => (
             <span
               key={i}
               aria-hidden
@@ -489,58 +510,60 @@ export function RegionSection() {
                 position: 'absolute',
                 left: '50%',
                 top: '50%',
-                width: '58%',
-                height: '58%',
-                border: '1px solid rgba(201,154,69,0.45)',
+                width: '82%',
+                height: '82%',
+                border: '1px solid rgba(201,154,69,0.28)',
                 borderRadius: '50%',
-                animation: `sonar 3.9s ease-out ${(i * 1.3).toFixed(2)}s infinite`,
+                animation: `sonar 4.6s ease-out ${(i * 2.3).toFixed(2)}s infinite`,
               }}
             />
           ))}
+          {/* surrounding towns — placed by rough direction from Heilbronn */}
+          {[
+            { name: 'Neckarsulm', x: '57%', y: '31%' },
+            { name: 'Sinsheim', x: '24%', y: '44%' },
+            { name: 'Stuttgart', x: '52%', y: '77%' },
+          ].map((c) => (
+            <div
+              key={c.name}
+              style={{
+                position: 'absolute',
+                left: c.x,
+                top: c.y,
+                transform: 'translate(-50%,-50%)',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 7,
+              }}
+            >
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#7E8B98', flexShrink: 0 }} />
+              <span style={{ fontFamily: mono, fontSize: 10, color: '#8A97A3', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
+                {c.name}
+              </span>
+            </div>
+          ))}
+          {/* centre — Heilbronn */}
           <div
             style={{
               position: 'absolute',
               left: '50%',
               top: '50%',
               transform: 'translate(-50%,-50%)',
-              width: '58%',
-              height: '58%',
-              border: '1px solid rgba(201,154,69,0.40)',
-              borderRadius: '50%',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%,-50%)',
-              width: '30%',
-              height: '30%',
-              border: '1px solid rgba(201,154,69,0.55)',
-              borderRadius: '50%',
-            }}
-          />
-          <div
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: '50%',
-              transform: 'translate(-50%,-50%)',
-              width: 10,
-              height: 10,
+              width: 12,
+              height: 12,
               background: '#C99A45',
               borderRadius: '50%',
-              boxShadow: '0 0 0 6px rgba(201,154,69,0.16)',
+              boxShadow: '0 0 0 6px rgba(201,154,69,0.16), 0 0 16px 2px rgba(201,154,69,0.55)',
             }}
           />
           <div
             style={{
               position: 'absolute',
-              left: 'calc(50% + 14px)',
-              top: 'calc(50% - 28px)',
+              left: 'calc(50% + 15px)',
+              top: 'calc(50% - 27px)',
               fontFamily: mono,
-              fontSize: 11,
+              fontSize: 11.5,
+              fontWeight: 500,
               color: '#C99A45',
               letterSpacing: '0.05em',
             }}
@@ -560,41 +583,6 @@ export function RegionSection() {
           >
             49.14°N / 9.22°E — RADIUS ~60 KM
           </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-export function ErgebnisBand() {
-  return (
-    <section style={{ background: '#101A26', padding: '0 0 4px' }}>
-      <div style={container}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'baseline',
-            padding: '90px 0 24px',
-            flexWrap: 'wrap',
-            gap: 12,
-          }}
-        >
-          <Reveal delay={0} style={{ ...kicker }}>
-            Das Ergebnis
-          </Reveal>
-          <span style={{ fontFamily: mono, fontSize: 11, color: '#7E8B98', letterSpacing: '0.05em' }}>
-            BEZUGSFERTIG ÜBERGEBEN
-          </span>
-        </div>
-        <Reveal delay={80}>
-          <Figure
-            src="interior-01.jpg"
-            ratio="16/7"
-            abb="ABB. 03 / ERGEBNIS"
-            parallax={64}
-            caption="Fertig saniertes Objekt, bezugsfertig übergeben — ruhiges Tageslicht, architektonische Perspektive"
-          />
         </Reveal>
       </div>
     </section>

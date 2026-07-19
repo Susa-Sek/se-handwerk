@@ -86,7 +86,7 @@ export default function Kontakt() {
                   EINSATZGEBIET
                 </span>
                 <span style={{ fontFamily: mono, fontSize: 14, color: '#AEB9C3', textAlign: 'right' }}>
-                  SE Handwerk GbR
+                  SE Handwerk
                   <br />
                   Raum Heilbronn und Umgebung
                 </span>

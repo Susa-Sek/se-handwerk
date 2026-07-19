@@ -60,7 +60,7 @@ export default function Nav() {
             className="nav-tag"
             style={{ fontFamily: mono, fontSize: 10.5, color: '#7E8B98', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
           >
-            GbR · RAUM HEILBRONN
+RAUM HEILBRONN
           </span>
         </Link>
 

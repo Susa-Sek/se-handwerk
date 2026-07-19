@@ -2,7 +2,6 @@ import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 
 const mono = "'IBM Plex Mono',monospace";
-const bricolage = "'Bricolage Grotesque',sans-serif";
 const container: React.CSSProperties = { maxWidth: 1240, margin: '0 auto', padding: '0 40px' };
 const kicker: React.CSSProperties = {
   fontFamily: mono,
@@ -12,25 +11,10 @@ const kicker: React.CSSProperties = {
   color: '#8A97A3',
 };
 
-const founders = [
-  {
-    title: 'Kalkulation & Kundenbetreuung',
-    role: 'Erster Ansprechpartner',
-    desc: 'Erster Ansprechpartner für unsere Auftraggeber. Nimmt Projekte auf, kalkuliert den Umfang und hält den Kontakt über die gesamte Laufzeit.',
-    delay: 0,
-  },
-  {
-    title: 'Bauleitung',
-    role: 'Koordination vor Ort',
-    desc: 'Verantwortet die Bauleitung und die Koordination auf der Baustelle. Sorgt dafür, dass die Gewerke ineinandergreifen und der Ablauf hält.',
-    delay: 100,
-  },
-];
-
 export default function UeberUns() {
   return (
     <main>
-      <section style={{ background: '#16222F', padding: '150px 0 96px' }}>
+      <section style={{ background: '#16222F', padding: '150px 0 120px' }}>
         <div style={container}>
           <Reveal delay={0} style={{ ...kicker, marginBottom: 22 }}>
             Über uns
@@ -74,65 +58,8 @@ export default function UeberUns() {
               </p>
             </Reveal>
           </div>
-        </div>
-      </section>
 
-      <section style={{ background: '#1B2937', padding: '96px 0' }}>
-        <div style={container}>
-          <Reveal delay={0} style={{ ...kicker, marginBottom: 20 }}>
-            Die Gründer
-          </Reveal>
-          <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(28px,3.4vw,46px)', color: '#EDF1F5', marginBottom: 48 }}>
-            Zwei Verantwortliche. Klare Zuständigkeiten.
-          </Reveal>
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit,minmax(300px,1fr))',
-              gap: 24,
-            }}
-          >
-            {founders.map((f) => (
-              <Reveal
-                key={f.title}
-                delay={f.delay}
-                style={{
-                  border: '1px solid rgba(255,255,255,0.10)',
-                  borderRadius: 6,
-                  padding: '32px 30px',
-                  background: '#223141',
-                  height: '100%',
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: mono,
-                    fontSize: 11,
-                    color: '#C99A45',
-                    letterSpacing: '0.05em',
-                    marginBottom: 20,
-                  }}
-                >
-                  {f.role}
-                </div>
-                <h3
-                  style={{
-                    fontFamily: bricolage,
-                    fontWeight: 700,
-                    fontSize: 26,
-                    color: '#EDF1F5',
-                    letterSpacing: '-0.02em',
-                    marginBottom: 16,
-                  }}
-                >
-                  {f.title}
-                </h3>
-                <p style={{ fontSize: 15.5, lineHeight: 1.65, color: '#AEB9C3' }}>{f.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={160} style={{ marginTop: 56 }}>
+          <Reveal delay={260} style={{ marginTop: 56 }}>
             <Link
               to="/kontakt"
               className="btn-primary"

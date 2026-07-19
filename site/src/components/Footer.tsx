@@ -37,7 +37,7 @@ export default function Footer() {
               style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
             />
             <p style={{ fontFamily: mono, fontSize: 12, color: '#8A97A3', lineHeight: 1.9 }}>
-              SE Handwerk GbR
+              SE Handwerk
               <br />
               Raum Heilbronn und Umgebung
             </p>

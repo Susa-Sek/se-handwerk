@@ -3,7 +3,6 @@ import Taktplan from '../components/Taktplan';
 import {
   AblaufSection,
   EigentuemerSection,
-  ErgebnisBand,
   KontaktSection,
   LeistungenSection,
   ProblemSection,
@@ -21,7 +20,6 @@ export default function Home() {
       <AblaufSection />
       <EigentuemerSection />
       <WarumSESection />
-      <ErgebnisBand />
       <RegionSection />
       <KontaktSection />
     </main>
