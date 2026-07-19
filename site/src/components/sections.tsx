@@ -1,9 +1,8 @@
 import Reveal from './Reveal';
 import ContactForm from './ContactForm';
-import Figure from './Figure';
 import { useViewportProgress } from '../hooks/useViewportProgress';
 import { clamp } from '../lib/motion';
-import { ablauf, leistungen, regionen, vorteile, zielgruppen } from '../content';
+import { ablauf, regionen, vorteile, zielgruppen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
@@ -66,71 +65,6 @@ export function ProblemSection() {
               </p>
             </Reveal>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-export function LeistungenSection() {
-  return (
-    <section id="leistungen" style={{ background: '#EFE9DE', padding: '112px 0' }}>
-      <div style={container}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            marginBottom: 52,
-            flexWrap: 'wrap',
-            gap: 16,
-          }}
-        >
-          <div>
-            <Reveal delay={0} style={{ ...kicker, marginBottom: 20 }}>
-              Leistungsumfang
-            </Reveal>
-            <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#1E2A35' }}>
-              Was wir übernehmen.
-            </Reveal>
-          </div>
-          <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.05em' }}>
-            5 POSITIONEN
-          </span>
-        </div>
-        <div style={{ borderTop: '1px solid rgba(20,26,32,0.13)' }}>
-          {leistungen.map((l) => (
-            <Reveal
-              key={l.code}
-              delay={l.delay}
-              from="left"
-              className="leistung-row"
-              style={{
-                display: 'grid',
-                gridTemplateColumns: '64px minmax(200px,300px) 1fr',
-                gap: 28,
-                alignItems: 'baseline',
-                padding: '28px 8px',
-                borderBottom: '1px solid rgba(20,26,32,0.11)',
-              }}
-            >
-              <span style={{ fontFamily: mono, fontSize: 12, color: '#C99A45', letterSpacing: '0.05em' }}>
-                {l.code}
-              </span>
-              <h3
-                style={{
-                  fontFamily: bricolage,
-                  fontWeight: 700,
-                  fontSize: 23,
-                  color: '#1E2A35',
-                  letterSpacing: '-0.015em',
-                }}
-              >
-                {l.title}
-              </h3>
-              <p style={{ fontSize: 15.5, lineHeight: 1.6, color: '#525E69', maxWidth: 560 }}>{l.desc}</p>
-            </Reveal>
-          ))}
         </div>
       </div>
     </section>
@@ -362,7 +296,7 @@ export function WarumSESection() {
                 display: 'grid',
                 gridTemplateColumns: '30px 1fr',
                 gap: 16,
-                padding: '26px 0',
+                padding: '34px 0',
                 borderTop: '1px solid rgba(20,26,32,0.11)',
               }}
             >
@@ -384,15 +318,6 @@ export function WarumSESection() {
               </div>
             </Reveal>
           ))}
-          <Reveal delay={80} style={{ marginTop: 40 }}>
-            <Figure
-              src="detail-uebergabe.jpg"
-              ratio="4/5"
-              abb="ABB. 02 / 4:5"
-              parallax={40}
-              caption="Fertig saniertes Detail bei der Übergabe — ruhiges Tageslicht, gleiche Farbtemperatur"
-            />
-          </Reveal>
         </div>
       </div>
     </section>

@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
+import { useSmoothScroll } from './hooks/useSmoothScroll';
+import { getLenis, scrollToId } from './lib/smoothScroll';
 import { ScrollProvider } from './context/ScrollContext';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -16,18 +18,20 @@ function ScrollManager() {
   useEffect(() => {
     if (hash) {
       const id = hash.replace('#', '');
-      const t = window.setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView();
-      }, 60);
+      const t = window.setTimeout(() => scrollToId(id), 80);
       return () => window.clearTimeout(t);
     }
-    window.scrollTo(0, 0);
+    // route change → jump to top immediately (no smooth animation between pages)
+    const lenis = getLenis();
+    if (lenis) lenis.scrollTo(0, { immediate: true });
+    else window.scrollTo(0, 0);
   }, [pathname, hash]);
 
   return null;
 }
 
 export default function App() {
+  useSmoothScroll();
   return (
     <BrowserRouter>
       <ScrollProvider>

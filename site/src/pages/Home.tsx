@@ -1,10 +1,10 @@
 import Hero from '../components/Hero';
 import Taktplan from '../components/Taktplan';
+import LeistungenHorizontal from '../components/LeistungenHorizontal';
 import {
   AblaufSection,
   EigentuemerSection,
   KontaktSection,
-  LeistungenSection,
   ProblemSection,
   RegionSection,
   WarumSESection,
@@ -16,7 +16,7 @@ export default function Home() {
       <Hero />
       <Taktplan />
       <ProblemSection />
-      <LeistungenSection />
+      <LeistungenHorizontal />
       <AblaufSection />
       <EigentuemerSection />
       <WarumSESection />

@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { scrollToId } from '../lib/smoothScroll';
 
 // Anchor links to homepage sections must work from any route: scroll in place
-// when already on "/", otherwise navigate home and let the hash carry the target.
+// (through Lenis when active) when already on "/", otherwise navigate home and
+// let the hash carry the target.
 export function useSectionLink() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -12,9 +14,7 @@ export function useSectionLink() {
       e.preventDefault();
       const id = hash.replace('#', '');
       if (location.pathname === '/') {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-        else window.scrollTo({ top: 0, behavior: 'smooth' });
+        scrollToId(id);
       } else {
         navigate('/#' + id);
       }
