@@ -20,13 +20,13 @@ const statNum: React.CSSProperties = {
   fontFamily: bricolage,
   fontWeight: 800,
   fontSize: 34,
-  color: '#EDF1F5',
+  color: '#1E2A35',
   lineHeight: 1,
 };
 const statLabel: React.CSSProperties = {
   fontFamily: mono,
   fontSize: 11,
-  color: '#8A97A3',
+  color: '#6C7883',
   letterSpacing: '0.04em',
   marginTop: 6,
   lineHeight: 1.5,
@@ -135,7 +135,7 @@ function Crosshair({
           fontFamily: mono,
           fontSize: 9.5,
           letterSpacing: '0.05em',
-          color: '#6E7B88',
+          color: '#8A929B',
           animation: `dot .5s ease ${delay + 0.15}s both`,
         }}
       >
@@ -222,7 +222,7 @@ export default function Hero() {
         overflow: 'hidden',
         padding: '150px 0 90px',
         background:
-          'radial-gradient(120% 90% at 78% 8%, #1B2A3A 0%, #16222F 46%, #101A26 100%)',
+          'radial-gradient(120% 90% at 78% 8%, #FFFFFF 0%, #F6F2EA 46%, #E7E0D3 100%)',
       }}
     >
       {/* ---- blueprint grid (parallax back layer) ---- */}
@@ -244,7 +244,7 @@ export default function Hero() {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.035) 1px,transparent 1px)',
+              'linear-gradient(rgba(20,26,32,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(20,26,32,0.035) 1px,transparent 1px)',
             backgroundSize: '44px 44px',
           }}
         />
@@ -352,7 +352,7 @@ export default function Hero() {
             style={{
               fontSize: 18,
               lineHeight: 1.65,
-              color: '#B9C3CD',
+              color: '#47535E',
               maxWidth: 480,
               marginTop: 30,
               animation: 'fadeUp .8s ease 1.1s both',
@@ -418,12 +418,12 @@ export default function Hero() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)',
+                  borderBottom: '1px solid rgba(20,26,32,0.08)',
                   paddingBottom: 11,
                   marginBottom: 14,
                 }}
               >
-                <span style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: '#8A97A3' }}>
+                <span style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: '#6C7883' }}>
                   TAKTPLAN #4471
                 </span>
                 <span style={{ fontFamily: mono, fontSize: 10, color: '#C99A45', display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -442,7 +442,7 @@ export default function Hero() {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
                 {miniRows.map((r) => (
                   <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-                    <span style={{ fontFamily: mono, fontSize: 9, color: '#8A97A3', width: 62, flexShrink: 0 }}>
+                    <span style={{ fontFamily: mono, fontSize: 9, color: '#6C7883', width: 62, flexShrink: 0 }}>
                       {r.label}
                     </span>
                     <span style={{ height: 12, flex: 1, position: 'relative' }}>
@@ -484,7 +484,7 @@ export default function Hero() {
           animation: 'fadeUp 1s ease 1.7s both',
         }}
       >
-        <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.14em', color: '#6E7B88' }}>SCROLLEN</span>
+        <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.14em', color: '#8A929B' }}>SCROLLEN</span>
         <span
           style={{
             width: 1,

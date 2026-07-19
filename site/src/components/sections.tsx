@@ -15,18 +15,18 @@ const kicker: React.CSSProperties = {
   fontSize: 12,
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
-  color: '#8A97A3',
+  color: '#6C7883',
 };
 
 export function ProblemSection() {
   return (
-    <section style={{ background: '#16222F', padding: '112px 0' }}>
+    <section style={{ background: '#F6F2EA', padding: '112px 0' }}>
       <div style={container}>
         <div style={{ maxWidth: 900 }}>
           <Reveal delay={0} style={{ ...kicker, marginBottom: 22 }}>
             Das Problem
           </Reveal>
-          <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', maxWidth: 840, color: '#EDF1F5' }}>
+          <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', maxWidth: 840, color: '#1E2A35' }}>
             Sanierungen scheitern nicht am Handwerk. Sie scheitern an fehlender Koordination.
           </Reveal>
           <div
@@ -39,7 +39,7 @@ export function ProblemSection() {
             }}
           >
             <Reveal from="grow" delay={140} className="problem-divider" />
-            <Reveal as="p" from="left" delay={120} style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD' }}>
+            <Reveal as="p" from="left" delay={120} style={{ fontSize: 16.5, lineHeight: 1.7, color: '#47535E' }}>
               Der Bodenleger kommt, aber der Estrich ist noch feucht. Der Maler steht vor der Tür,
               während der Trockenbau noch läuft. Der Fliesenleger sagt kurzfristig ab, und niemand hat
               einen Ersatz. Am Ende zieht sich ein Projekt, das acht Wochen dauern sollte, über ein
@@ -52,14 +52,14 @@ export function ProblemSection() {
                   fontWeight: 700,
                   fontSize: 23,
                   lineHeight: 1.35,
-                  color: '#EDF1F5',
+                  color: '#1E2A35',
                   marginBottom: 18,
                   letterSpacing: '-0.01em',
                 }}
               >
                 Genau da setzen wir an.
               </p>
-              <p style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD' }}>
+              <p style={{ fontSize: 16.5, lineHeight: 1.7, color: '#47535E' }}>
                 Wir planen den Ablauf, stimmen die Gewerke aufeinander ab, überwachen die Ausführung und
                 stehen für das Ergebnis gerade. Sie haben eine Nummer, die Sie anrufen. Und ein Datum,
                 an dem fertig ist.
@@ -74,7 +74,7 @@ export function ProblemSection() {
 
 export function LeistungenSection() {
   return (
-    <section id="leistungen" style={{ background: '#1B2937', padding: '112px 0' }}>
+    <section id="leistungen" style={{ background: '#EFE9DE', padding: '112px 0' }}>
       <div style={container}>
         <div
           style={{
@@ -90,15 +90,15 @@ export function LeistungenSection() {
             <Reveal delay={0} style={{ ...kicker, marginBottom: 20 }}>
               Leistungsumfang
             </Reveal>
-            <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#EDF1F5' }}>
+            <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#1E2A35' }}>
               Was wir übernehmen.
             </Reveal>
           </div>
-          <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3', letterSpacing: '0.05em' }}>
+          <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.05em' }}>
             5 POSITIONEN
           </span>
         </div>
-        <div style={{ borderTop: '1px solid rgba(255,255,255,0.13)' }}>
+        <div style={{ borderTop: '1px solid rgba(20,26,32,0.13)' }}>
           {leistungen.map((l) => (
             <Reveal
               key={l.code}
@@ -111,7 +111,7 @@ export function LeistungenSection() {
                 gap: 28,
                 alignItems: 'baseline',
                 padding: '28px 8px',
-                borderBottom: '1px solid rgba(255,255,255,0.11)',
+                borderBottom: '1px solid rgba(20,26,32,0.11)',
               }}
             >
               <span style={{ fontFamily: mono, fontSize: 12, color: '#C99A45', letterSpacing: '0.05em' }}>
@@ -122,13 +122,13 @@ export function LeistungenSection() {
                   fontFamily: bricolage,
                   fontWeight: 700,
                   fontSize: 23,
-                  color: '#EDF1F5',
+                  color: '#1E2A35',
                   letterSpacing: '-0.015em',
                 }}
               >
                 {l.title}
               </h3>
-              <p style={{ fontSize: 15.5, lineHeight: 1.6, color: '#AEB9C3', maxWidth: 560 }}>{l.desc}</p>
+              <p style={{ fontSize: 15.5, lineHeight: 1.6, color: '#525E69', maxWidth: 560 }}>{l.desc}</p>
             </Reveal>
           ))}
         </div>
@@ -146,7 +146,7 @@ function AblaufConnector({ count }: { count: number }) {
   return (
     <div
       ref={ref}
-      style={{ position: 'relative', height: 2, background: 'rgba(255,255,255,0.16)', marginBottom: 2 }}
+      style={{ position: 'relative', height: 2, background: 'rgba(20,26,32,0.16)', marginBottom: 2 }}
     >
       <div
         style={{
@@ -187,13 +187,13 @@ function AblaufConnector({ count }: { count: number }) {
 
 export function AblaufSection() {
   return (
-    <section id="ablauf" style={{ background: '#16222F', padding: '112px 0' }}>
+    <section id="ablauf" style={{ background: '#F6F2EA', padding: '112px 0' }}>
       <div style={container}>
         <div style={{ marginBottom: 52 }}>
           <Reveal delay={0} style={{ ...kicker, marginBottom: 20 }}>
             Ablauf in vier Takten
           </Reveal>
-          <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#EDF1F5' }}>
+          <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#1E2A35' }}>
             So läuft es ab.
           </Reveal>
         </div>
@@ -210,7 +210,7 @@ export function AblaufSection() {
               key={a.num}
               delay={a.delay}
               from="up"
-              style={{ padding: '30px 26px 40px', borderRight: '1px solid rgba(255,255,255,0.10)' }}
+              style={{ padding: '30px 26px 40px', borderRight: '1px solid rgba(20,26,32,0.10)' }}
             >
               <div
                 style={{
@@ -230,14 +230,14 @@ export function AblaufSection() {
                   fontFamily: bricolage,
                   fontWeight: 700,
                   fontSize: 21,
-                  color: '#EDF1F5',
+                  color: '#1E2A35',
                   marginBottom: 14,
                   letterSpacing: '-0.015em',
                 }}
               >
                 {a.title}
               </h3>
-              <p style={{ fontSize: 15, lineHeight: 1.6, color: '#AEB9C3' }}>{a.desc}</p>
+              <p style={{ fontSize: 15, lineHeight: 1.6, color: '#525E69' }}>{a.desc}</p>
             </Reveal>
           ))}
         </div>
@@ -248,13 +248,13 @@ export function AblaufSection() {
 
 export function EigentuemerSection() {
   return (
-    <section id="eigentuemer" style={{ background: '#1B2937', padding: '112px 0' }}>
+    <section id="eigentuemer" style={{ background: '#EFE9DE', padding: '112px 0' }}>
       <div style={container}>
         <div style={{ maxWidth: 780, marginBottom: 52 }}>
           <Reveal delay={0} style={{ ...kicker, marginBottom: 20 }}>
             Für wen wir arbeiten
           </Reveal>
-          <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#EDF1F5' }}>
+          <Reveal as="h2" delay={60} style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#1E2A35' }}>
             Für Eigentümer, die keine Zeit für Baustellen haben.
           </Reveal>
         </div>
@@ -272,10 +272,10 @@ export function EigentuemerSection() {
               from="scale"
               className="ziel-card"
               style={{
-                border: '1px solid rgba(255,255,255,0.10)',
+                border: '1px solid rgba(20,26,32,0.10)',
                 borderRadius: 6,
                 padding: '30px 26px',
-                background: '#223141',
+                background: '#FFFFFF',
                 height: '100%',
               }}
             >
@@ -301,7 +301,7 @@ export function EigentuemerSection() {
                   fontFamily: bricolage,
                   fontWeight: 700,
                   fontSize: 20,
-                  color: '#EDF1F5',
+                  color: '#1E2A35',
                   lineHeight: 1.2,
                   marginBottom: 16,
                   letterSpacing: '-0.015em',
@@ -309,7 +309,7 @@ export function EigentuemerSection() {
               >
                 {z.title}
               </h3>
-              <p style={{ fontSize: 15, lineHeight: 1.65, color: '#AEB9C3' }}>{z.desc}</p>
+              <p style={{ fontSize: 15, lineHeight: 1.65, color: '#525E69' }}>{z.desc}</p>
             </Reveal>
           ))}
         </div>
@@ -320,7 +320,7 @@ export function EigentuemerSection() {
 
 export function WarumSESection() {
   return (
-    <section style={{ background: '#16222F', padding: '112px 0' }}>
+    <section style={{ background: '#F6F2EA', padding: '112px 0' }}>
       <div
         style={{
           ...container,
@@ -338,7 +338,7 @@ export function WarumSESection() {
           <Reveal
             as="h2"
             delay={60}
-            style={{ fontSize: 'clamp(28px,3.4vw,46px)', marginBottom: 26, color: '#EDF1F5' }}
+            style={{ fontSize: 'clamp(28px,3.4vw,46px)', marginBottom: 26, color: '#1E2A35' }}
           >
             Verantwortung bis zur Abnahme.
           </Reveal>
@@ -363,7 +363,7 @@ export function WarumSESection() {
                 gridTemplateColumns: '30px 1fr',
                 gap: 16,
                 padding: '26px 0',
-                borderTop: '1px solid rgba(255,255,255,0.11)',
+                borderTop: '1px solid rgba(20,26,32,0.11)',
               }}
             >
               <span style={{ fontFamily: mono, fontSize: 12, color: '#C99A45' }}>{v.n}</span>
@@ -373,14 +373,14 @@ export function WarumSESection() {
                     fontFamily: bricolage,
                     fontWeight: 700,
                     fontSize: 19,
-                    color: '#EDF1F5',
+                    color: '#1E2A35',
                     marginBottom: 6,
                     letterSpacing: '-0.015em',
                   }}
                 >
                   {v.title}
                 </h3>
-                <p style={{ fontSize: 15, lineHeight: 1.6, color: '#AEB9C3' }}>{v.desc}</p>
+                <p style={{ fontSize: 15, lineHeight: 1.6, color: '#525E69' }}>{v.desc}</p>
               </div>
             </Reveal>
           ))}
@@ -401,7 +401,7 @@ export function WarumSESection() {
 
 export function RegionSection() {
   return (
-    <section style={{ background: '#1B2937', padding: '100px 0' }}>
+    <section style={{ background: '#EFE9DE', padding: '100px 0' }}>
       <div
         style={{
           ...container,
@@ -418,11 +418,11 @@ export function RegionSection() {
           <Reveal
             as="h2"
             delay={60}
-            style={{ fontSize: 'clamp(28px,3.4vw,46px)', marginBottom: 24, color: '#EDF1F5' }}
+            style={{ fontSize: 'clamp(28px,3.4vw,46px)', marginBottom: 24, color: '#1E2A35' }}
           >
             Im Raum Heilbronn und Umgebung.
           </Reveal>
-          <Reveal as="p" delay={120} style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD', maxWidth: 460 }}>
+          <Reveal as="p" delay={120} style={{ fontSize: 16.5, lineHeight: 1.7, color: '#47535E', maxWidth: 460 }}>
             Wir arbeiten im gesamten Raum Heilbronn und Umgebung — von Neckarsulm über Sinsheim
             bis Stuttgart.
           </Reveal>
@@ -433,8 +433,8 @@ export function RegionSection() {
                 style={{
                   fontFamily: mono,
                   fontSize: 12,
-                  color: '#AEB9C3',
-                  border: '1px solid rgba(255,255,255,0.15)',
+                  color: '#525E69',
+                  border: '1px solid rgba(20,26,32,0.15)',
                   padding: '8px 14px',
                   borderRadius: 100,
                 }}
@@ -449,9 +449,9 @@ export function RegionSection() {
           style={{
             aspectRatio: '1/1',
             position: 'relative',
-            border: '1px solid rgba(255,255,255,0.11)',
+            border: '1px solid rgba(20,26,32,0.11)',
             borderRadius: 6,
-            background: '#16222F',
+            background: '#F6F2EA',
             overflow: 'hidden',
           }}
         >
@@ -460,7 +460,7 @@ export function RegionSection() {
               position: 'absolute',
               inset: 0,
               backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.055) 1px,transparent 1px)',
+                'linear-gradient(rgba(20,26,32,0.055) 1px,transparent 1px),linear-gradient(90deg,rgba(20,26,32,0.055) 1px,transparent 1px)',
               backgroundSize: '34px 34px',
             }}
           />
@@ -536,8 +536,8 @@ export function RegionSection() {
                 gap: 7,
               }}
             >
-              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#7E8B98', flexShrink: 0 }} />
-              <span style={{ fontFamily: mono, fontSize: 10, color: '#8A97A3', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
+              <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#74808B', flexShrink: 0 }} />
+              <span style={{ fontFamily: mono, fontSize: 10, color: '#6C7883', letterSpacing: '0.04em', whiteSpace: 'nowrap' }}>
                 {c.name}
               </span>
             </div>
@@ -577,7 +577,7 @@ export function RegionSection() {
               left: 16,
               fontFamily: mono,
               fontSize: 10.5,
-              color: '#7E8B98',
+              color: '#74808B',
               letterSpacing: '0.05em',
             }}
           >
@@ -591,7 +591,7 @@ export function RegionSection() {
 
 export function KontaktSection() {
   return (
-    <section id="kontakt" style={{ background: '#16222F', padding: '112px 0' }}>
+    <section id="kontakt" style={{ background: '#F6F2EA', padding: '112px 0' }}>
       <div
         style={{
           ...container,
@@ -607,14 +607,14 @@ export function KontaktSection() {
           <Reveal
             as="h2"
             delay={60}
-            style={{ fontSize: 'clamp(30px,3.8vw,52px)', marginBottom: 24, color: '#EDF1F5' }}
+            style={{ fontSize: 'clamp(30px,3.8vw,52px)', marginBottom: 24, color: '#1E2A35' }}
           >
             Sprechen wir über Ihr Projekt.
           </Reveal>
           <Reveal
             as="p"
             delay={120}
-            style={{ fontSize: 16.5, lineHeight: 1.7, color: '#B9C3CD', maxWidth: 400, marginBottom: 40 }}
+            style={{ fontSize: 16.5, lineHeight: 1.7, color: '#47535E', maxWidth: 400, marginBottom: 40 }}
           >
             Erzählen Sie uns kurz, was ansteht. Wir melden uns innerhalb von 24 Stunden und vereinbaren
             einen Termin vor Ort.
@@ -628,14 +628,14 @@ export function KontaktSection() {
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 padding: '20px 0',
-                borderTop: '1px solid rgba(255,255,255,0.11)',
-                borderBottom: '1px solid rgba(255,255,255,0.11)',
+                borderTop: '1px solid rgba(20,26,32,0.11)',
+                borderBottom: '1px solid rgba(20,26,32,0.11)',
               }}
             >
-              <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3', letterSpacing: '0.06em' }}>
+              <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.06em' }}>
                 EINSATZGEBIET
               </span>
-              <span style={{ fontFamily: mono, fontSize: 14, color: '#AEB9C3' }}>
+              <span style={{ fontFamily: mono, fontSize: 14, color: '#525E69' }}>
                 Raum Heilbronn und Umgebung
               </span>
             </div>
@@ -669,10 +669,10 @@ function ContactRow({
         justifyContent: 'space-between',
         alignItems: 'center',
         padding: '20px 0',
-        borderTop: top ? '1px solid rgba(255,255,255,0.11)' : undefined,
+        borderTop: top ? '1px solid rgba(20,26,32,0.11)' : undefined,
       }}
     >
-      <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3', letterSpacing: '0.06em' }}>
+      <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.06em' }}>
         {label}
       </span>
       <span style={{ fontFamily: mono, fontSize: 15 }}>{value}</span>

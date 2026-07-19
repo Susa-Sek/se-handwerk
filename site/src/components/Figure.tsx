@@ -38,8 +38,8 @@ export default function Figure({ src, ratio, abb, caption, parallax = 0, style, 
         aspectRatio: ratio,
         borderRadius: 6,
         overflow: 'hidden',
-        border: '1px solid rgba(255,255,255,0.11)',
-        background: '#131F2B',
+        border: '1px solid rgba(20,26,32,0.11)',
+        background: '#E4DDCF',
         ...style,
       }}
     >
@@ -51,7 +51,7 @@ export default function Figure({ src, ratio, abb, caption, parallax = 0, style, 
               position: 'absolute',
               inset: 0,
               backgroundImage:
-                'linear-gradient(rgba(255,255,255,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.035) 1px,transparent 1px)',
+                'linear-gradient(rgba(20,26,32,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(20,26,32,0.035) 1px,transparent 1px)',
               backgroundSize: '30px 30px',
             }}
           />
@@ -121,7 +121,7 @@ export default function Figure({ src, ratio, abb, caption, parallax = 0, style, 
           left: 14,
           fontFamily: mono,
           fontSize: 10.5,
-          color: showPlate ? '#7E8B98' : 'rgba(237,241,245,0.85)',
+          color: showPlate ? '#74808B' : 'rgba(237,241,245,0.85)',
           letterSpacing: '0.05em',
           textShadow: showPlate ? 'none' : '0 1px 6px rgba(0,0,0,0.5)',
         }}
@@ -142,7 +142,7 @@ export default function Figure({ src, ratio, abb, caption, parallax = 0, style, 
             gap: 8,
             fontFamily: mono,
             fontSize: 11.5,
-            color: '#8A97A3',
+            color: '#6C7883',
             lineHeight: 1.55,
           }}
         >

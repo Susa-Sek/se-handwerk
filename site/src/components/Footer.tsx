@@ -6,7 +6,7 @@ const mono = "'IBM Plex Mono',monospace";
 const colLabel: React.CSSProperties = {
   fontFamily: mono,
   fontSize: 10.5,
-  color: '#6E7B88',
+  color: '#8A929B',
   letterSpacing: '0.06em',
   textTransform: 'uppercase',
   marginBottom: 2,
@@ -17,7 +17,7 @@ export default function Footer() {
   const onSection = useSectionLink();
 
   return (
-    <footer style={{ background: '#0E1822', color: '#EDF1F5', padding: '56px 0 40px' }}>
+    <footer style={{ background: '#ECE5DA', color: '#1E2A35', padding: '56px 0 40px' }}>
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 40px' }}>
         <div
           style={{
@@ -27,16 +27,16 @@ export default function Footer() {
             flexWrap: 'wrap',
             gap: 32,
             paddingBottom: 36,
-            borderBottom: '1px solid rgba(255,255,255,0.1)',
+            borderBottom: '1px solid rgba(20,26,32,0.1)',
           }}
         >
           <div>
             <img
-              src="/images/logo-white.png"
+              src="/images/logo-dark.png"
               alt="SE Handwerk"
               style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
             />
-            <p style={{ fontFamily: mono, fontSize: 12, color: '#8A97A3', lineHeight: 1.9 }}>
+            <p style={{ fontFamily: mono, fontSize: 12, color: '#6C7883', lineHeight: 1.9 }}>
               SE Handwerk
               <br />
               Raum Heilbronn und Umgebung
@@ -76,7 +76,7 @@ export default function Footer() {
             paddingTop: 24,
             fontFamily: mono,
             fontSize: 11,
-            color: '#6E7B88',
+            color: '#8A929B',
             letterSpacing: '0.04em',
             flexWrap: 'wrap',
             gap: 10,

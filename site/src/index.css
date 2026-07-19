@@ -5,9 +5,9 @@ html{scroll-behavior:smooth;}
    IntersectionObserver report ratio:0 for everything below the fold, which
    would keep every scroll-reveal permanently hidden. body spans the full
    content height, so reveals fire correctly while wide elements stay clipped. */
-body{margin:0;overflow-x:clip;background:#16222F;color:#EDF1F5;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
-a{color:#DCB566;text-decoration:none;}
-a:hover{color:#EBC97E;}
+body{margin:0;overflow-x:clip;background:#F6F2EA;color:#1E2A35;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+a{color:#B0791E;text-decoration:none;}
+a:hover{color:#8C5E12;}
 *:focus-visible{outline:2px solid #C99A45;outline-offset:3px;}
 ::selection{background:#C99A45;color:#14202E;}
 h1,h2,h3{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.025em;line-height:1.0;}
@@ -74,20 +74,20 @@ img{max-width:100%;}
   100%{transform:translate(-50%,-50%) scale(1);opacity:0;}}
 
 /* Real :hover states ported from the source's style-hover attributes */
-.nav-link{color:#97A2AD;transition:color .2s;}
-.nav-link:hover{color:#EDF1F5;}
+.nav-link{color:#6C7883;transition:color .2s;}
+.nav-link:hover{color:#1E2A35;}
 .btn-primary{color:#14202E;background:#C99A45;box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 10px 24px -14px rgba(201,154,69,0.7);transition:background .25s,transform .25s,box-shadow .25s;}
 .btn-primary:hover{background:#DCB566;color:#14202E;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.18) inset,0 14px 30px -12px rgba(201,154,69,0.85);}
-.btn-ghost{color:#EDF1F5;background:transparent;border:1px solid rgba(255,255,255,0.22);transition:border-color .25s,background .25s;}
-.btn-ghost:hover{border-color:rgba(201,154,69,0.65);background:rgba(201,154,69,0.06);color:#EDF1F5;}
+.btn-ghost{color:#1E2A35;background:transparent;border:1px solid rgba(20,26,32,0.22);transition:border-color .25s,background .25s;}
+.btn-ghost:hover{border-color:rgba(201,154,69,0.75);background:rgba(201,154,69,0.09);color:#1E2A35;}
 .leistung-row{transition:padding-left .3s,background .3s,box-shadow .3s;}
 .leistung-row:hover{padding-left:20px;background:rgba(201,154,69,0.05);box-shadow:inset 3px 0 0 #C99A45;}
 .ziel-card{transition:transform .4s,box-shadow .4s;}
 .ziel-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(20,26,31,0.35);}
-.contact-line{color:#EDF1F5;transition:color .2s;}
-.contact-line:hover{color:#C99A45;}
-.footer-link{color:#AEB9C3;transition:color .2s;}
-.footer-link:hover{color:#EDF1F5;}
+.contact-line{color:#1E2A35;transition:color .2s;}
+.contact-line:hover{color:#B0791E;}
+.footer-link{color:#525E69;transition:color .2s;}
+.footer-link:hover{color:#1E2A35;}
 
 .nav-panel{display:none;}
 @media (max-width:760px){

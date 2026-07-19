@@ -57,8 +57,8 @@ export default function Taktplan() {
       style={{
         position: 'relative',
         height: reduced ? '100vh' : '280vh',
-        background: '#0E1822',
-        color: '#EDF1F5',
+        background: '#ECE5DA',
+        color: '#1E2A35',
       }}
     >
       <div
@@ -88,7 +88,7 @@ export default function Taktplan() {
                   fontSize: 12,
                   letterSpacing: '0.08em',
                   textTransform: 'uppercase',
-                  color: '#8A97A3',
+                  color: '#6C7883',
                   marginBottom: 14,
                 }}
               >
@@ -103,7 +103,7 @@ export default function Taktplan() {
                     fontWeight: 800,
                     letterSpacing: '-0.025em',
                     fontSize: 'clamp(26px,3.2vw,44px)',
-                    color: '#8A97A3',
+                    color: '#6C7883',
                     opacity: chaosOpacity,
                   }}
                 >
@@ -117,7 +117,7 @@ export default function Taktplan() {
                     fontWeight: 800,
                     letterSpacing: '-0.025em',
                     fontSize: 'clamp(26px,3.2vw,44px)',
-                    color: '#EDF1F5',
+                    color: '#1E2A35',
                     opacity: orderOpacity,
                   }}
                 >
@@ -130,7 +130,7 @@ export default function Taktplan() {
                 textAlign: 'right',
                 fontFamily: mono,
                 fontSize: 11,
-                color: '#8A97A3',
+                color: '#6C7883',
                 letterSpacing: '0.05em',
                 lineHeight: 1.9,
               }}
@@ -149,10 +149,10 @@ export default function Taktplan() {
               justifyContent: 'space-between',
               fontFamily: mono,
               fontSize: 10.5,
-              color: '#6E7B88',
+              color: '#8A929B',
               letterSpacing: '0.05em',
               paddingBottom: 8,
-              borderBottom: '1px solid rgba(255,255,255,0.1)',
+              borderBottom: '1px solid rgba(20,26,32,0.1)',
             }}
           >
             <span>TAG 0</span>
@@ -180,7 +180,7 @@ export default function Taktplan() {
                 top: -8,
                 bottom: 0,
                 width: 2,
-                background: '#EDF1F5',
+                background: '#1E2A35',
                 boxShadow: '0 0 8px rgba(237,241,245,0.4)',
                 left: `${playheadLeft.toFixed(2)}%`,
                 opacity: playheadOpacity,
@@ -240,7 +240,7 @@ export default function Taktplan() {
           <div
             style={{
               marginTop: 38,
-              borderTop: '1px solid rgba(255,255,255,0.1)',
+              borderTop: '1px solid rgba(20,26,32,0.1)',
               paddingTop: 20,
               maxWidth: 580,
             }}
@@ -251,7 +251,7 @@ export default function Taktplan() {
                 fontWeight: 600,
                 fontSize: 20,
                 lineHeight: 1.4,
-                color: '#EDF1F5',
+                color: '#1E2A35',
                 letterSpacing: '-0.01em',
               }}
             >
@@ -262,7 +262,7 @@ export default function Taktplan() {
                 fontFamily: mono,
                 fontSize: 12.5,
                 lineHeight: 1.6,
-                color: '#8A97A3',
+                color: '#6C7883',
                 letterSpacing: '0.02em',
                 marginTop: 12,
               }}

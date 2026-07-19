@@ -7,7 +7,7 @@ export default function Impressum() {
     <main>
       <LegalHead kicker="Angaben gemäß § 5 TMG" title="Impressum" />
 
-      <section style={{ background: '#1B2937', padding: '20px 0 110px' }}>
+      <section style={{ background: '#EFE9DE', padding: '20px 0 110px' }}>
         <div style={s.container}>
           <LegalSection title="Angaben gemäß § 5 TMG">
             <p style={s.p}>

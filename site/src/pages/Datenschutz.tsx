@@ -11,7 +11,7 @@ export default function Datenschutz() {
         title="Datenschutz"
       />
 
-      <section style={{ background: '#1B2937', padding: '20px 0 110px' }}>
+      <section style={{ background: '#EFE9DE', padding: '20px 0 110px' }}>
         <div style={s.container}>
           <LegalSection title="1. Verantwortlicher">
             <p style={s.p}>Verantwortlich für die Datenverarbeitung auf dieser Website ist:</p>

@@ -12,7 +12,7 @@ const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/kontakt@sehandwerk.de';
 const labelText: React.CSSProperties = {
   fontFamily: mono,
   fontSize: 10.5,
-  color: '#8A97A3',
+  color: '#6C7883',
   letterSpacing: '0.05em',
   textTransform: 'uppercase',
   display: 'block',
@@ -21,11 +21,11 @@ const labelText: React.CSSProperties = {
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
-  background: '#14202E',
-  border: '1px solid rgba(255,255,255,0.14)',
+  background: '#F4F0E8',
+  border: '1px solid rgba(20,26,32,0.14)',
   borderRadius: 4,
   padding: 12,
-  color: '#EDF1F5',
+  color: '#1E2A35',
   fontFamily: "'IBM Plex Sans',sans-serif",
   fontSize: 14,
   outlineColor: '#C99A45',
@@ -77,9 +77,9 @@ export default function ContactForm() {
   return (
     <div
       style={{
-        border: '1px solid rgba(255,255,255,0.11)',
+        border: '1px solid rgba(20,26,32,0.11)',
         borderRadius: 6,
-        background: '#223141',
+        background: '#FFFFFF',
       }}
     >
       <div
@@ -88,13 +88,13 @@ export default function ContactForm() {
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '18px 26px',
-          borderBottom: '1px solid rgba(255,255,255,0.10)',
+          borderBottom: '1px solid rgba(20,26,32,0.10)',
         }}
       >
-        <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3', letterSpacing: '0.06em' }}>
+        <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.06em' }}>
           ANFRAGE — FORMBLATT A
         </span>
-        <span style={{ fontFamily: mono, fontSize: 11, color: '#8A97A3' }}>RÜCKMELDUNG &lt; 24 H</span>
+        <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883' }}>RÜCKMELDUNG &lt; 24 H</span>
       </div>
 
       {status === 'sent' ? (
@@ -117,7 +117,7 @@ export default function ContactForm() {
               fontWeight: 700,
               fontSize: 22,
               lineHeight: 1.3,
-              color: '#EDF1F5',
+              color: '#1E2A35',
               letterSpacing: '-0.015em',
               marginBottom: 14,
               maxWidth: 380,
@@ -126,7 +126,7 @@ export default function ContactForm() {
           >
             Danke — Ihre Anfrage ist eingegangen.
           </p>
-          <p style={{ fontSize: 15, lineHeight: 1.65, color: '#AEB9C3', maxWidth: 360, margin: '0 auto' }}>
+          <p style={{ fontSize: 15, lineHeight: 1.65, color: '#525E69', maxWidth: 360, margin: '0 auto' }}>
             Wir melden uns innerhalb von 24 Stunden und vereinbaren einen Termin vor Ort.
           </p>
         </div>
