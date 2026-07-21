@@ -175,23 +175,6 @@ export default function VorherNachher() {
             >
               ÜBERGABE
             </span>
-            <span
-              style={{
-                position: 'absolute',
-                bottom: 16,
-                left: 16,
-                fontFamily: mono,
-                fontSize: 10,
-                letterSpacing: '0.1em',
-                color: 'rgba(245,242,236,0.8)',
-                background: 'rgba(13,14,16,0.72)',
-                border: '1px solid rgba(245,242,236,0.2)',
-                padding: '6px 10px',
-                borderRadius: 100,
-              }}
-            >
-              SYMBOLBILD
-            </span>
           </div>
         </Reveal>
 
