@@ -42,20 +42,68 @@ const STYLE =
   'slightly uneven wall texture), calm cool-neutral color grade with warm daylight, shot on 35mm, ' +
   'true-to-life — not a glossy render, not oversaturated. No people, no tools, no text, no watermark, no logos.';
 
+// Dark, low-key art direction for the SCHWARZ-AUF-WEISS card imagery.
+const DARK_STYLE =
+  'Moody low-key editorial photograph, dark charcoal ambience, a single warm tungsten/gold accent light, ' +
+  'realistic craft subject, subtle grain, shot on 35mm, true-to-life — not a glossy render. ' +
+  'No people, no tools in hands, no text, no watermark, no logos.';
+
+// Twin composition for the before/after slider — both images must describe the
+// exact same camera setup so the drag comparison reads as one room.
+const TWIN =
+  'Wide 16:9 shot of an empty rectangular room. One large window centered on the back wall, ' +
+  'a door opening on the left wall, camera at chest height, strict one-point perspective, centered symmetrical framing.';
+
 const SLOTS = [
   {
-    name: 'detail-uebergabe.jpg',
+    name: 'vorher.jpg',
     prompt:
-      `${STYLE} Vertical 4:5 composition. A freshly renovated, empty German apartment interior at handover: ` +
-      'matte white plaster walls, light oak flooring, a clean doorway and window with soft daylight. ' +
-      'Quiet, precise, bezugsfertig — the calm after the work is done.',
+      `${TWIN} The room is mid-renovation at day 0: bare grey screed floor, stripped patched plaster walls, ` +
+      'a few cables hanging from the ceiling, light construction dust in the air, cool grey daylight. ' +
+      'Documentary, honest, no equipment clutter. No people, no text, no watermark.',
   },
   {
-    name: 'interior-01.jpg',
+    name: 'nachher.jpg',
     prompt:
-      `${STYLE} Wide 16:7 landscape composition. A fully renovated, unfurnished living space just handed over: ` +
-      'open room, large window with soft daylight, light wood floor, matte white walls, architectural perspective, ' +
-      'a sense of order and completion. Real-estate documentation feel, restrained.',
+      `${TWIN} The same room fully renovated at handover: light oak plank floor, matte white plaster walls, ` +
+      'clean window with warm soft daylight, crisp shadows, bezugsfertig. ' +
+      'Documentary, honest. No people, no furniture, no text, no watermark.',
+  },
+  {
+    name: 'leistung-komplett.jpg',
+    prompt:
+      `${DARK_STYLE} Vertical 4:5. A gutted apartment mid-renovation at night: raw walls and screed floor, ` +
+      'two warm work lights glowing gold in the dark, scaffolding shadows, sense of transformation in progress.',
+  },
+  {
+    name: 'leistung-boden.jpg',
+    prompt:
+      `${DARK_STYLE} Vertical 4:5. Close-up of light oak parquet planks mid-installation on a dark underfloor, ` +
+      'raking warm light across the wood grain, precise seams, shallow depth of field.',
+  },
+  {
+    name: 'leistung-wand.jpg',
+    prompt:
+      `${DARK_STYLE} Vertical 4:5. Freshly troweled plaster wall in raking warm light, ` +
+      'subtle trowel arcs and texture, dark shadow falloff at the edges.',
+  },
+  {
+    name: 'leistung-bad.jpg',
+    prompt:
+      `${DARK_STYLE} Vertical 4:5. Detail of a modern dark bathroom during finishing: matte black fixtures, ` +
+      'large-format dark tiles, one warm spotlight, water-free, precise joints.',
+  },
+  {
+    name: 'leistung-einzel.jpg',
+    prompt:
+      `${DARK_STYLE} Vertical 4:5. A neat flat-lay of classic hand tools on dark waxed wood — folding rule, ` +
+      'pencil, chisel, level — arranged with precision, warm side light, workshop calm.',
+  },
+  {
+    name: 'bento-invest.jpg',
+    prompt:
+      `${DARK_STYLE} Wide 16:9. A finished, empty premium apartment at dusk seen from the doorway: ` +
+      'oak floor reflecting a warm pendant light, deep shadows, city lights faint through the window.',
   },
 ];
 

@@ -1,6 +1,7 @@
 import Hero from '../components/Hero';
 import Marquee from '../components/Marquee';
 import Taktplan from '../components/Taktplan';
+import VorherNachher from '../components/VorherNachher';
 import LeistungenHorizontal from '../components/LeistungenHorizontal';
 import {
   AblaufSection,
@@ -21,6 +22,7 @@ export default function Home() {
       <ProblemSection />
       <LeistungenHorizontal />
       <AblaufSection />
+      <VorherNachher />
       <EigentuemerSection />
       <WarumSESection />
       <RegionSection />

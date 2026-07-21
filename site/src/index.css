@@ -94,9 +94,16 @@ img{max-width:100%;}
 .lhz-progress{height:2px;background:var(--line-ink);margin:26px 0 0;position:relative;overflow:hidden;}
 .lhz-progress>i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gold);}
 .lhz-track{display:flex;gap:22px;padding:0 40px;will-change:transform;}
-.lhz-card{flex:0 0 auto;width:clamp(280px,40vw,390px);background:var(--ink);color:var(--t-paper);
+.lhz-card{position:relative;overflow:hidden;flex:0 0 auto;width:clamp(280px,40vw,390px);background:var(--ink);color:var(--t-paper);
   border:1px solid rgba(245,242,236,0.08);border-radius:12px;padding:38px 32px 30px;display:flex;flex-direction:column;
   transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;}
+.lhz-card>*{position:relative;z-index:1;}
+.card-img{position:absolute!important;inset:0;z-index:0!important;background-size:cover;background-position:center;
+  opacity:.42;transition:opacity .45s ease,transform .7s cubic-bezier(.22,1,.36,1);}
+.card-img::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,14,16,.3) 0%,rgba(13,14,16,.93) 76%);}
+.lhz-card:hover .card-img,.tile:hover .card-img{opacity:.62;transform:scale(1.045);}
+.tile{position:relative;overflow:hidden;}
+.tile>*{position:relative;z-index:1;}
 .lhz-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px rgba(13,14,16,.55);}
 .lhz-num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:64px;line-height:1;
   color:transparent;-webkit-text-stroke:1.3px rgba(245,242,236,.34);letter-spacing:-.03em;}

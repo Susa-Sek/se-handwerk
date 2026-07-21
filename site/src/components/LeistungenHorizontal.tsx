@@ -9,6 +9,15 @@ gsap.registerPlugin(ScrollTrigger);
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
 
+// kie.ai trade photograph per position (dark low-key series)
+const cardImages: Record<string, string> = {
+  '01': 'leistung-komplett.jpg',
+  '02': 'leistung-boden.jpg',
+  '03': 'leistung-wand.jpg',
+  '04': 'leistung-bad.jpg',
+  '05': 'leistung-einzel.jpg',
+};
+
 // Leistungen as a horizontally-scrubbed, pinned set-piece: ink cards slide
 // across the paper stage while a thin gold bar tracks scrub progress.
 // Mobile / reduced motion: plain vertical stack (gsap.matchMedia guard).
@@ -76,6 +85,11 @@ export default function LeistungenHorizontal() {
         <div ref={trackRef} className="lhz-track">
           {leistungen.map((l) => (
             <article key={l.code} className="lhz-card">
+              <span
+                aria-hidden
+                className="card-img"
+                style={{ backgroundImage: `url(/images/${cardImages[l.code]})` }}
+              />
               <span className="lhz-num">{l.code}</span>
               <h3
                 style={{

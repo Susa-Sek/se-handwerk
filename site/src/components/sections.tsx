@@ -12,7 +12,7 @@ const bricolage = "'Bricolage Grotesque',sans-serif";
 const container: React.CSSProperties = { maxWidth: 1240, margin: '0 auto', padding: '0 40px' };
 
 // small mono kicker with a gold tick — shared section opener
-export function SectionKicker({ children }: { children: React.ReactNode }) {
+export function SectionKicker({ children, dark }: { children: React.ReactNode; dark?: boolean }) {
   return (
     <Reveal
       style={{
@@ -23,7 +23,7 @@ export function SectionKicker({ children }: { children: React.ReactNode }) {
         fontSize: 11,
         letterSpacing: '0.12em',
         textTransform: 'uppercase',
-        color: 'var(--t-dim)',
+        color: dark ? 'rgba(245,242,236,0.5)' : 'var(--t-dim)',
         marginBottom: 20,
       }}
     >
@@ -231,6 +231,7 @@ export function EigentuemerSection() {
         <div className="bento">
           <div className="bento-a" style={{ transform: `translateY(${((p - 0.5) * 12).toFixed(1)}px)` }}>
             <Reveal from="scale" delay={0} className="tile tile-ink grain">
+              <span aria-hidden className="card-img" style={{ backgroundImage: 'url(/images/bento-invest.jpg)' }} />
               {badge(zielgruppen[0].code, true)}
               <h3 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 'clamp(24px,2.4vw,32px)', lineHeight: 1.15, marginBottom: 18, letterSpacing: '-0.02em', color: '#F5F2EC' }}>
                 {zielgruppen[0].title}
