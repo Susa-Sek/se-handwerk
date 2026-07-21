@@ -8,7 +8,7 @@ const kicker: React.CSSProperties = {
   fontSize: 12,
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
-  color: '#6C7883',
+  color: 'var(--t-dim)',
 };
 
 const rows = [
@@ -19,7 +19,7 @@ const rows = [
 export default function Kontakt() {
   return (
     <main>
-      <section style={{ background: '#F6F2EA', padding: '150px 0 112px' }}>
+      <section style={{ background: 'var(--paper)', padding: '150px 0 112px' }}>
         <div
           style={{
             ...container,
@@ -39,7 +39,7 @@ export default function Kontakt() {
                 fontSize: 'clamp(40px,5.5vw,80px)',
                 letterSpacing: '-0.03em',
                 marginBottom: 24,
-                color: '#1E2A35',
+                color: 'var(--t-ink)',
               }}
             >
               Kontakt.
@@ -47,7 +47,7 @@ export default function Kontakt() {
             <Reveal
               as="p"
               delay={120}
-              style={{ fontSize: 16.5, lineHeight: 1.7, color: '#47535E', maxWidth: 420, marginBottom: 40 }}
+              style={{ fontSize: 16.5, lineHeight: 1.7, color: 'var(--t-sub)', maxWidth: 420, marginBottom: 40 }}
             >
               Sie haben ein Projekt, über das Sie sprechen möchten? Melden Sie sich — gerne per Telefon,
               das geht am schnellsten. Wir melden uns innerhalb von 24 Stunden.
@@ -63,10 +63,10 @@ export default function Kontakt() {
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     padding: '20px 0',
-                    borderTop: '1px solid rgba(20,26,32,0.11)',
+                    borderTop: '1px solid var(--line-ink)',
                   }}
                 >
-                  <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.06em' }}>
+                  <span style={{ fontFamily: mono, fontSize: 11, color: 'var(--t-dim)', letterSpacing: '0.06em' }}>
                     {r.label}
                   </span>
                   <span style={{ fontFamily: mono, fontSize: 15 }}>{r.value}</span>
@@ -78,14 +78,14 @@ export default function Kontakt() {
                   justifyContent: 'space-between',
                   alignItems: 'center',
                   padding: '20px 0',
-                  borderTop: '1px solid rgba(20,26,32,0.11)',
-                  borderBottom: '1px solid rgba(20,26,32,0.11)',
+                  borderTop: '1px solid var(--line-ink)',
+                  borderBottom: '1px solid var(--line-ink)',
                 }}
               >
-                <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.06em' }}>
+                <span style={{ fontFamily: mono, fontSize: 11, color: 'var(--t-dim)', letterSpacing: '0.06em' }}>
                   EINSATZGEBIET
                 </span>
-                <span style={{ fontFamily: mono, fontSize: 14, color: '#525E69', textAlign: 'right' }}>
+                <span style={{ fontFamily: mono, fontSize: 14, color: 'var(--t-sub)', textAlign: 'right' }}>
                   SE Handwerk
                   <br />
                   Raum Heilbronn und Umgebung

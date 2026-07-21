@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Register } from './sections';
+import { SectionKicker } from './sections';
 import { leistungen } from '../content';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -9,13 +9,13 @@ gsap.registerPlugin(ScrollTrigger);
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
 
-// Leistungen as a horizontally-scrubbed, pinned set-piece: the section pins and
-// the five service cards slide sideways as you scroll (GSAP ScrollTrigger).
-// Desktop + no-reduced-motion only — on mobile / reduced motion gsap.matchMedia
-// never builds the tween and CSS lays the cards out as a normal vertical stack.
+// Leistungen as a horizontally-scrubbed, pinned set-piece: ink cards slide
+// across the paper stage while a thin gold bar tracks scrub progress.
+// Mobile / reduced motion: plain vertical stack (gsap.matchMedia guard).
 export default function LeistungenHorizontal() {
   const sectionRef = useRef<HTMLElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -36,6 +36,9 @@ export default function LeistungenHorizontal() {
           scrub: 1,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            if (barRef.current) barRef.current.style.width = `${(self.progress * 100).toFixed(1)}%`;
+          },
         },
       });
     });
@@ -57,34 +60,37 @@ export default function LeistungenHorizontal() {
             }}
           >
             <div>
-              <Register n={2} label="Leistungsumfang" />
-              <h2 style={{ fontSize: 'clamp(32px,4.6vw,62px)', color: '#1E2A35' }}>Was wir übernehmen.</h2>
+              <SectionKicker>Leistungsumfang</SectionKicker>
+              <h2 style={{ fontSize: 'clamp(34px,5vw,68px)', color: 'var(--t-ink)' }}>Was wir übernehmen.</h2>
             </div>
-            <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 10 }}>
+            <span style={{ fontFamily: mono, fontSize: 11, color: 'var(--t-dim)', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 10 }}>
               5 POSITIONEN
-              <span className="lhz-hint" style={{ color: '#C99A45' }}>→ scrollen</span>
+              <span className="lhz-hint" style={{ color: 'var(--gold-deep)' }}>→ scrollen</span>
             </span>
+          </div>
+          <div className="lhz-progress">
+            <i ref={barRef} />
           </div>
         </div>
 
         <div ref={trackRef} className="lhz-track">
           {leistungen.map((l) => (
             <article key={l.code} className="lhz-card">
-              <span style={{ fontFamily: mono, fontSize: 13, color: '#C99A45', letterSpacing: '0.06em' }}>{l.code}</span>
+              <span className="lhz-num">{l.code}</span>
               <h3
                 style={{
                   fontFamily: bricolage,
                   fontWeight: 700,
                   fontSize: 27,
-                  color: '#1E2A35',
                   letterSpacing: '-0.02em',
-                  margin: '18px 0 14px',
+                  margin: '20px 0 14px',
+                  color: '#F5F2EC',
                 }}
               >
                 {l.title}
               </h3>
-              <p style={{ fontSize: 16, lineHeight: 1.65, color: '#525E69' }}>{l.desc}</p>
-              <span style={{ marginTop: 'auto', paddingTop: 24, fontFamily: mono, fontSize: 10.5, color: '#8A929B', letterSpacing: '0.05em' }}>
+              <p style={{ fontSize: 15.5, lineHeight: 1.65, color: 'rgba(245,242,236,0.62)' }}>{l.desc}</p>
+              <span style={{ marginTop: 'auto', paddingTop: 26, fontFamily: mono, fontSize: 10.5, color: 'rgba(224,168,60,0.8)', letterSpacing: '0.05em' }}>
                 {l.code} / 05
               </span>
             </article>

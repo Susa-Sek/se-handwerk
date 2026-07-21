@@ -3,9 +3,10 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { getLenis, scrollToId } from './lib/smoothScroll';
 import { ScrollProvider } from './context/ScrollContext';
+import Cursor from './components/Cursor';
+import Preloader from './components/Preloader';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
-import RoterFaden from './components/RoterFaden';
 import Home from './pages/Home';
 import UeberUns from './pages/UeberUns';
 import Kontakt from './pages/Kontakt';
@@ -35,7 +36,8 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollProvider>
-        <RoterFaden />
+        <Preloader />
+        <Cursor />
         <Nav />
         <ScrollManager />
         <Routes>

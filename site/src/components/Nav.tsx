@@ -28,10 +28,10 @@ export default function Nav() {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: 'rgba(246,242,234,0.82)',
+        background: 'rgba(13,14,16,0.82)',
         backdropFilter: 'blur(14px)',
         WebkitBackdropFilter: 'blur(14px)',
-        borderBottom: '1px solid rgba(20,26,32,0.10)',
+        borderBottom: '1px solid rgba(245,242,236,0.1)',
       }}
     >
       <div
@@ -49,16 +49,16 @@ export default function Nav() {
           to="/"
           onClick={go('#top')}
           aria-label="SE Handwerk — Startseite"
-          style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#1E2A35' }}
+          style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#F5F2EC' }}
         >
           <img
-            src="/images/logo-dark.png"
+            src="/images/logo-white.png"
             alt="SE Handwerk"
             style={{ height: 30, width: 'auto', display: 'block' }}
           />
           <span
             className="nav-tag"
-            style={{ fontFamily: mono, fontSize: 10.5, color: '#74808B', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
+            style={{ fontFamily: mono, fontSize: 10.5, color: 'rgba(245,242,236,0.45)', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
           >
 RAUM HEILBRONN
           </span>
@@ -102,7 +102,7 @@ RAUM HEILBRONN
               width: 40,
               height: 40,
               background: 'transparent',
-              border: '1px solid rgba(20,26,32,0.16)',
+              border: '1px solid rgba(245,242,236,0.2)',
               borderRadius: 8,
               cursor: 'pointer',
               padding: 0,
@@ -114,7 +114,7 @@ RAUM HEILBRONN
                 display: 'block',
                 width: 18,
                 height: 1.5,
-                background: '#1E2A35',
+                background: '#F5F2EC',
                 margin: '0 auto',
                 transition: 'transform .25s',
                 transform: open ? 'translateY(3.5px) rotate(45deg)' : 'none',
@@ -125,7 +125,7 @@ RAUM HEILBRONN
                 display: 'block',
                 width: 18,
                 height: 1.5,
-                background: '#1E2A35',
+                background: '#F5F2EC',
                 margin: '0 auto',
                 transition: 'transform .25s',
                 transform: open ? 'translateY(-3px) rotate(-45deg)' : 'none',
@@ -139,7 +139,7 @@ RAUM HEILBRONN
         className="nav-panel"
         style={{
           display: open ? 'block' : 'none',
-          borderTop: '1px solid rgba(20,26,32,0.08)',
+          borderTop: '1px solid rgba(245,242,236,0.08)', background: 'rgba(13,14,16,0.96)',
           padding: '10px 40px 20px',
         }}
       >
@@ -153,7 +153,7 @@ RAUM HEILBRONN
             href={`/${l.hash}`}
             onClick={go(l.hash)}
             className="nav-link"
-            style={{ ...linkStyle, display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(20,26,32,0.06)' }}
+            style={{ ...linkStyle, display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(245,242,236,0.06)' }}
           >
             {l.label}
           </a>

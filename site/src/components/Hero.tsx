@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useSectionLink } from '../hooks/useSectionLink';
+import { useMagnetic } from '../hooks/useMagnetic';
 import { prefersReducedMotion } from '../lib/motion';
 
 const mono = "'IBM Plex Mono',monospace";
@@ -11,22 +12,23 @@ const ctaBase: React.CSSProperties = {
   fontWeight: 500,
   letterSpacing: '0.04em',
   textTransform: 'uppercase',
-  padding: '16px 28px',
+  padding: '17px 30px',
   borderRadius: 100,
   whiteSpace: 'nowrap',
+  display: 'inline-block',
 };
 
 const statNum: React.CSSProperties = {
   fontFamily: bricolage,
   fontWeight: 800,
   fontSize: 34,
-  color: '#1E2A35',
+  color: '#F5F2EC',
   lineHeight: 1,
 };
 const statLabel: React.CSSProperties = {
   fontFamily: mono,
   fontSize: 11,
-  color: '#6C7883',
+  color: 'rgba(245,242,236,0.5)',
   letterSpacing: '0.04em',
   marginTop: 6,
   lineHeight: 1.5,
@@ -34,97 +36,27 @@ const statLabel: React.CSSProperties = {
 
 // mini floating Taktplan card rows (deepest parallax layer)
 const miniRows = [
-  { label: 'RÜCKBAU', left: '0', width: '40%', color: '#3A4652', delay: 1.25 },
-  { label: 'TROCKENB.', left: '32%', width: '34%', color: '#3A4652', delay: 1.37 },
-  { label: 'BODEN', left: '60%', width: '22%', color: '#C99A45', delay: 1.49 },
-  { label: 'MALER', left: '80%', width: '20%', color: '#C99A45', delay: 1.61 },
+  { label: 'RÜCKBAU', left: '0', width: '40%', color: '#3A4046', delay: 1.35 },
+  { label: 'TROCKENB.', left: '32%', width: '34%', color: '#3A4046', delay: 1.47 },
+  { label: 'BODEN', left: '60%', width: '22%', color: '#E0A83C', delay: 1.59 },
+  { label: 'MALER', left: '80%', width: '20%', color: '#E0A83C', delay: 1.71 },
 ];
 
-// kinetic headline: word-by-word "develop" (blur+thin → sharp+black),
-// the gold keyword keeps breathing afterwards
-const HEAD_LINES: { words: string[]; gold?: boolean }[] = [
-  { words: ['Ihre', 'Immobilie,'] },
-  { words: ['komplett', 'saniert.'] },
-  { words: ['Zum', 'Festpreis.'], gold: true },
+// headline lines revealed from a clip mask, one after another; the promise
+// line lands last, in gold
+const HEAD_LINES: { text: string; gold?: boolean; delay: number }[] = [
+  { text: 'Ihre Immobilie.', delay: 0.18 },
+  { text: 'Komplett saniert.', delay: 0.32 },
+  { text: 'Zum Festpreis.', gold: true, delay: 0.46 },
 ];
-
-function KineticHeadline({ reduced }: { reduced: boolean }) {
-  let i = -1;
-  return (
-    <>
-      {HEAD_LINES.map((line, li) => (
-        <span key={li} style={{ display: 'block' }}>
-          {line.words.map((w, wi) => {
-            i += 1;
-            const delay = 0.12 + i * 0.09;
-            const isKeyword = line.gold && wi === line.words.length - 1;
-            const anim = reduced
-              ? undefined
-              : isKeyword
-                ? `develop 1s cubic-bezier(.16,1,.3,1) ${delay}s both, breathe 4.6s ease-in-out ${delay + 1.15}s infinite`
-                : `develop 1s cubic-bezier(.16,1,.3,1) ${delay}s both`;
-            return (
-              <span key={wi}>
-                <span
-                  style={{
-                    display: 'inline-block',
-                    willChange: 'filter, transform, font-variation-settings',
-                    color: line.gold ? '#DCB566' : undefined,
-                    animation: anim,
-                  }}
-                >
-                  {w}
-                </span>
-                {wi < line.words.length - 1 ? ' ' : ''}
-              </span>
-            );
-          })}
-        </span>
-      ))}
-    </>
-  );
-}
 
 // corner survey crosshair with a coordinate readout
-function Crosshair({
-  pos,
-  label,
-  delay,
-}: {
-  pos: React.CSSProperties;
-  label: string;
-  delay: number;
-}) {
+function Crosshair({ pos, label, delay }: { pos: React.CSSProperties; label: string; delay: number }) {
   return (
     <div style={{ position: 'absolute', ...pos, pointerEvents: 'none' }}>
-      <div
-        style={{
-          position: 'relative',
-          width: 26,
-          height: 26,
-          animation: `dot .5s ease ${delay}s both`,
-        }}
-      >
-        <span
-          style={{
-            position: 'absolute',
-            top: '50%',
-            left: 0,
-            width: '100%',
-            height: 1,
-            background: 'rgba(201,154,69,0.55)',
-          }}
-        />
-        <span
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: 0,
-            height: '100%',
-            width: 1,
-            background: 'rgba(201,154,69,0.55)',
-          }}
-        />
+      <div style={{ position: 'relative', width: 26, height: 26, animation: `dot .5s ease ${delay}s both` }}>
+        <span style={{ position: 'absolute', top: '50%', left: 0, width: '100%', height: 1, background: 'rgba(224,168,60,0.5)' }} />
+        <span style={{ position: 'absolute', left: '50%', top: 0, height: '100%', width: 1, background: 'rgba(224,168,60,0.5)' }} />
       </div>
       <span
         style={{
@@ -135,7 +67,7 @@ function Crosshair({
           fontFamily: mono,
           fontSize: 9.5,
           letterSpacing: '0.05em',
-          color: '#8A929B',
+          color: 'rgba(245,242,236,0.35)',
           animation: `dot .5s ease ${delay + 0.15}s both`,
         }}
       >
@@ -148,7 +80,8 @@ function Crosshair({
 export default function Hero() {
   const onSection = useSectionLink();
   const rootRef = useRef<HTMLElement | null>(null);
-  const [reduced] = useState(prefersReducedMotion);
+  const ctaPrimary = useMagnetic<HTMLAnchorElement>();
+  const ctaGhost = useMagnetic<HTMLAnchorElement>(0.22);
 
   useEffect(() => {
     if (prefersReducedMotion()) return;
@@ -157,9 +90,9 @@ export default function Hero() {
 
     let raf = 0;
     let tx = 0.5;
-    let ty = 0.4; // target glow position (fraction)
+    let ty = 0.4;
     let px = 0;
-    let py = 0; // target parallax (-1..1)
+    let py = 0;
 
     const apply = () => {
       raf = 0;
@@ -171,7 +104,6 @@ export default function Hero() {
     const schedule = () => {
       if (!raf) raf = requestAnimationFrame(apply);
     };
-
     const onMove = (e: PointerEvent) => {
       const r = root.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width;
@@ -212,20 +144,19 @@ export default function Hero() {
     <section
       id="top"
       ref={rootRef}
-      className="hero-root"
-      data-screen-label="Hero"
+      className="hero-root grain"
       style={{
         position: 'relative',
-        minHeight: 'min(940px, calc(100svh - 0px))',
+        minHeight: 'min(980px, 100svh)',
         display: 'flex',
         alignItems: 'center',
         overflow: 'hidden',
         padding: '150px 0 90px',
-        background:
-          'radial-gradient(120% 90% at 78% 8%, #FFFFFF 0%, #F6F2EA 46%, #E7E0D3 100%)',
+        background: 'radial-gradient(130% 100% at 78% 0%, #17191D 0%, #0D0E10 52%, #0A0B0C 100%)',
+        color: '#F5F2EC',
       }}
     >
-      {/* ---- blueprint grid (parallax back layer) ---- */}
+      {/* blueprint grid (parallax back layer) */}
       <div
         aria-hidden
         className="hero-depth"
@@ -234,7 +165,6 @@ export default function Hero() {
           inset: '-4%',
           transform:
             'translate3d(calc(var(--px) * -14px), calc(var(--py) * -14px), 0) translateY(calc(var(--sp,0) * -60px))',
-          animation: 'blueprintIn 1.4s cubic-bezier(.16,1,.3,1) both',
           maskImage: 'radial-gradient(120% 90% at 60% 30%, #000 40%, transparent 92%)',
           WebkitMaskImage: 'radial-gradient(120% 90% at 60% 30%, #000 40%, transparent 92%)',
         }}
@@ -244,7 +174,7 @@ export default function Hero() {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(20,26,32,0.035) 1px,transparent 1px),linear-gradient(90deg,rgba(20,26,32,0.035) 1px,transparent 1px)',
+              'linear-gradient(rgba(245,242,236,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(245,242,236,0.03) 1px,transparent 1px)',
             backgroundSize: '44px 44px',
           }}
         />
@@ -253,28 +183,14 @@ export default function Hero() {
             position: 'absolute',
             inset: 0,
             backgroundImage:
-              'linear-gradient(rgba(201,154,69,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(201,154,69,0.07) 1px,transparent 1px)',
+              'linear-gradient(rgba(224,168,60,0.06) 1px,transparent 1px),linear-gradient(90deg,rgba(224,168,60,0.06) 1px,transparent 1px)',
             backgroundSize: '220px 220px',
           }}
         />
       </div>
 
-      {/* ---- cursor-follow survey light ---- */}
+      {/* cursor-follow survey light */}
       <div aria-hidden className="hero-glow" style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }} />
-
-      {/* ---- one-shot survey sweep on load ---- */}
-      <div
-        aria-hidden
-        style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          width: 160,
-          pointerEvents: 'none',
-          background: 'linear-gradient(90deg,transparent,rgba(201,154,69,0.10),transparent)',
-          animation: 'sweep 2.6s cubic-bezier(.4,0,.2,1) .3s both',
-        }}
-      />
 
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 40px', position: 'relative', width: '100%' }}>
         {/* corner crosshairs + coordinates (mid parallax) */}
@@ -287,8 +203,8 @@ export default function Hero() {
             transform: 'translate3d(calc(var(--px) * 22px), calc(var(--py) * 22px), 0)',
           }}
         >
-          <Crosshair pos={{ top: 0, left: -10 }} label="49.14°N / 9.22°E" delay={1.5} />
-          <Crosshair pos={{ top: 0, right: -10 }} label="BLATT 01 / 01" delay={1.62} />
+          <Crosshair pos={{ top: 0, left: -10 }} label="49.14°N / 9.22°E" delay={1.6} />
+          <Crosshair pos={{ top: 0, right: -10 }} label="BLATT 01 / 01" delay={1.72} />
         </div>
 
         {/* content (front layer, gentle counter-parallax + scroll fade) */}
@@ -302,14 +218,19 @@ export default function Hero() {
         >
           <h1
             style={{
-              fontSize: 'clamp(44px,7.4vw,112px)',
-              letterSpacing: '-0.035em',
-              lineHeight: 0.98,
-              maxWidth: '16ch',
+              fontSize: 'clamp(46px,8.6vw,132px)',
+              letterSpacing: '-0.04em',
+              lineHeight: 0.96,
               margin: 0,
             }}
           >
-            <KineticHeadline reduced={reduced} />
+            {HEAD_LINES.map((l) => (
+              <span key={l.text} className="hline">
+                <span style={{ animationDelay: `${l.delay}s`, color: l.gold ? '#E0A83C' : undefined }}>
+                  {l.text}
+                </span>
+              </span>
+            ))}
           </h1>
 
           {/* architectural dimension line annotating the headline */}
@@ -318,44 +239,44 @@ export default function Hero() {
               display: 'flex',
               alignItems: 'center',
               gap: 12,
-              marginTop: 26,
-              maxWidth: 540,
-              animation: 'fadeUp .8s ease .95s both',
+              marginTop: 30,
+              maxWidth: 560,
+              animation: 'fadeUp .8s ease 1s both',
             }}
           >
-            <span style={{ width: 8, height: 12, borderLeft: '1px solid rgba(201,154,69,0.6)', flexShrink: 0 }} />
+            <span style={{ width: 8, height: 12, borderLeft: '1px solid rgba(224,168,60,0.7)', flexShrink: 0 }} />
             <span
               style={{
                 flex: 1,
                 height: 1,
-                background: 'rgba(201,154,69,0.45)',
+                background: 'rgba(224,168,60,0.5)',
                 transformOrigin: 'left',
-                animation: 'growX .9s cubic-bezier(.16,1,.3,1) 1.05s both',
+                animation: 'growX .9s cubic-bezier(.16,1,.3,1) 1.1s both',
               }}
             />
-            <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.08em', color: '#C99A45', whiteSpace: 'nowrap' }}>
-              FESTPREIS · 1 ANSPRECHPARTNER · 1 TERMIN
+            <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.08em', color: '#E0A83C', whiteSpace: 'nowrap' }}>
+              SCHWARZ AUF WEISS — SCHRIFTLICH
             </span>
             <span
               style={{
                 flex: 1,
                 height: 1,
-                background: 'rgba(201,154,69,0.45)',
+                background: 'rgba(224,168,60,0.5)',
                 transformOrigin: 'right',
-                animation: 'growX .9s cubic-bezier(.16,1,.3,1) 1.05s both',
+                animation: 'growX .9s cubic-bezier(.16,1,.3,1) 1.1s both',
               }}
             />
-            <span style={{ width: 8, height: 12, borderRight: '1px solid rgba(201,154,69,0.6)', flexShrink: 0 }} />
+            <span style={{ width: 8, height: 12, borderRight: '1px solid rgba(224,168,60,0.7)', flexShrink: 0 }} />
           </div>
 
           <p
             style={{
               fontSize: 18,
               lineHeight: 1.65,
-              color: '#47535E',
+              color: 'rgba(245,242,236,0.66)',
               maxWidth: 480,
-              marginTop: 30,
-              animation: 'fadeUp .8s ease 1.1s both',
+              marginTop: 28,
+              animation: 'fadeUp .8s ease 1.15s both',
             }}
           >
             Ein Ansprechpartner übernimmt Ihre Sanierung vollständig — von der Aufnahme bis zur
@@ -363,16 +284,28 @@ export default function Hero() {
             vermietbar oder verkaufsfertig. Den Rest machen wir.
           </p>
 
-          <div style={{ display: 'flex', gap: 14, marginTop: 34, flexWrap: 'wrap', animation: 'fadeUp .8s ease 1.25s both' }}>
-            <a href="/#kontakt" onClick={onSection('#kontakt')} className="btn-primary hero-cta" style={ctaBase}>
+          <div style={{ display: 'flex', gap: 14, marginTop: 36, flexWrap: 'wrap', animation: 'fadeUp .8s ease 1.3s both' }}>
+            <a
+              ref={ctaPrimary}
+              href="/#kontakt"
+              onClick={onSection('#kontakt')}
+              className="btn-primary magnetic"
+              style={ctaBase}
+            >
               Projekt besprechen
             </a>
-            <a href="/#leistungen" onClick={onSection('#leistungen')} className="btn-ghost hero-cta" style={ctaBase}>
+            <a
+              ref={ctaGhost}
+              href="/#leistungen"
+              onClick={onSection('#leistungen')}
+              className="btn-ghost magnetic"
+              style={ctaBase}
+            >
               Unsere Leistungen
             </a>
           </div>
 
-          <div style={{ display: 'flex', gap: 40, marginTop: 48, flexWrap: 'wrap', animation: 'fadeUp .8s ease 1.4s both' }}>
+          <div style={{ display: 'flex', gap: 40, marginTop: 52, flexWrap: 'wrap', animation: 'fadeUp .8s ease 1.45s both' }}>
             <div>
               <div style={statNum}>1</div>
               <div style={statLabel}>ANSPRECH&shy;PARTNER</div>
@@ -398,19 +331,19 @@ export default function Hero() {
             bottom: -40,
             width: 'clamp(260px, 30vw, 340px)',
             transform: 'translate3d(calc(var(--px) * 34px), calc(var(--py) * 34px), 0)',
-            animation: 'floatIn 1s cubic-bezier(.16,1,.3,1) .9s both',
+            animation: 'floatIn 1s cubic-bezier(.16,1,.3,1) 1.1s both',
           }}
         >
-          <div style={{ animation: 'floatY 7s ease-in-out 2s infinite' }}>
+          <div style={{ animation: 'floatY 7s ease-in-out 2.2s infinite' }}>
             <div
               style={{
-                background: 'rgba(14,24,34,0.82)',
+                background: 'rgba(21,23,26,0.85)',
                 backdropFilter: 'blur(6px)',
                 WebkitBackdropFilter: 'blur(6px)',
-                border: '1px solid rgba(201,154,69,0.22)',
-                borderRadius: 8,
+                border: '1px solid rgba(224,168,60,0.22)',
+                borderRadius: 10,
                 padding: '16px 16px 18px',
-                boxShadow: '0 30px 60px -24px rgba(0,0,0,0.6)',
+                boxShadow: '0 30px 60px -24px rgba(0,0,0,0.7)',
               }}
             >
               <div
@@ -418,31 +351,23 @@ export default function Hero() {
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  borderBottom: '1px solid rgba(20,26,32,0.08)',
+                  borderBottom: '1px solid rgba(245,242,236,0.08)',
                   paddingBottom: 11,
                   marginBottom: 14,
                 }}
               >
-                <span style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: '#6C7883' }}>
+                <span style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: 'rgba(245,242,236,0.5)' }}>
                   TAKTPLAN #4471
                 </span>
-                <span style={{ fontFamily: mono, fontSize: 10, color: '#C99A45', display: 'flex', alignItems: 'center', gap: 6 }}>
-                  <span
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: '50%',
-                      background: '#C99A45',
-                      boxShadow: '0 0 8px 1px rgba(201,154,69,0.7)',
-                    }}
-                  />
+                <span style={{ fontFamily: mono, fontSize: 10, color: '#E0A83C', display: 'flex', alignItems: 'center', gap: 6 }}>
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#E0A83C', boxShadow: '0 0 8px 1px rgba(224,168,60,0.7)' }} />
                   IM TAKT
                 </span>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 9 }}>
                 {miniRows.map((r) => (
                   <div key={r.label} style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
-                    <span style={{ fontFamily: mono, fontSize: 9, color: '#6C7883', width: 62, flexShrink: 0 }}>
+                    <span style={{ fontFamily: mono, fontSize: 9, color: 'rgba(245,242,236,0.45)', width: 62, flexShrink: 0 }}>
                       {r.label}
                     </span>
                     <span style={{ height: 12, flex: 1, position: 'relative' }}>
@@ -454,9 +379,8 @@ export default function Hero() {
                           height: '100%',
                           background: r.color,
                           borderRadius: 2,
-                          transform: reduced ? 'none' : 'scaleX(0)',
                           transformOrigin: 'left',
-                          animation: reduced ? undefined : `drawX .55s cubic-bezier(.16,1,.3,1) ${r.delay}s both`,
+                          animation: `drawX .55s cubic-bezier(.16,1,.3,1) ${r.delay}s both`,
                         }}
                       />
                     </span>
@@ -481,15 +405,15 @@ export default function Hero() {
           alignItems: 'center',
           gap: 8,
           opacity: 'var(--heroFade,1)',
-          animation: 'fadeUp 1s ease 1.7s both',
+          animation: 'fadeUp 1s ease 1.8s both',
         }}
       >
-        <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.14em', color: '#8A929B' }}>SCROLLEN</span>
+        <span style={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.14em', color: 'rgba(245,242,236,0.4)' }}>SCROLLEN</span>
         <span
           style={{
             width: 1,
             height: 34,
-            background: 'linear-gradient(#C99A45,transparent)',
+            background: 'linear-gradient(#E0A83C,transparent)',
             transformOrigin: 'top',
             animation: 'tick 1.4s ease-in-out infinite',
           }}

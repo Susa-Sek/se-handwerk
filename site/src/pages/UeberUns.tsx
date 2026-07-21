@@ -8,13 +8,13 @@ const kicker: React.CSSProperties = {
   fontSize: 12,
   letterSpacing: '0.08em',
   textTransform: 'uppercase',
-  color: '#6C7883',
+  color: 'var(--t-dim)',
 };
 
 export default function UeberUns() {
   return (
     <main>
-      <section style={{ background: '#F6F2EA', padding: '150px 0 120px' }}>
+      <section style={{ background: 'var(--paper)', padding: '150px 0 120px' }}>
         <div style={container}>
           <Reveal delay={0} style={{ ...kicker, marginBottom: 22 }}>
             Über uns
@@ -25,7 +25,7 @@ export default function UeberUns() {
             style={{
               fontSize: 'clamp(40px,6vw,88px)',
               letterSpacing: '-0.03em',
-              color: '#1E2A35',
+              color: 'var(--t-ink)',
               maxWidth: '16ch',
             }}
           >
@@ -40,17 +40,17 @@ export default function UeberUns() {
               alignItems: 'start',
             }}
           >
-            <Reveal as="p" delay={120} style={{ fontSize: 18, lineHeight: 1.7, color: '#47535E' }}>
+            <Reveal as="p" delay={120} style={{ fontSize: 18, lineHeight: 1.7, color: 'var(--t-sub)' }}>
               SE Handwerk entstand aus einer einfachen Beobachtung: Auf dem Bau gibt es genug gute
               Handwerker. Was fehlt, ist jemand, der sie zusammenhält.
             </Reveal>
             <Reveal delay={200}>
-              <p style={{ fontSize: 16.5, lineHeight: 1.7, color: '#47535E', marginBottom: 22 }}>
+              <p style={{ fontSize: 16.5, lineHeight: 1.7, color: 'var(--t-sub)', marginBottom: 22 }}>
                 Wir arbeiten mit einem festen Kreis an Fachleuten, die wir sorgfältig ausgewählt haben.
                 Jeder Einzelne ist geprüft, jeder hat sich auf unseren Baustellen bewiesen. Wer nicht
                 liefert, ist bei uns raus — und genau deshalb können wir für das Ergebnis geradestehen.
               </p>
-              <p style={{ fontSize: 16.5, lineHeight: 1.7, color: '#47535E' }}>
+              <p style={{ fontSize: 16.5, lineHeight: 1.7, color: 'var(--t-sub)' }}>
                 Unsere Aufgabe: die richtigen Leute zur richtigen Zeit an die richtige Stelle bringen und
                 dafür sorgen, dass am Ende steht, was am Anfang besprochen wurde. Das klingt
                 unspektakulär. Es ist aber der Unterschied zwischen einer Sanierung, die läuft, und

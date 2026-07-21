@@ -1,8 +1,10 @@
 import Hero from '../components/Hero';
+import Marquee from '../components/Marquee';
 import Taktplan from '../components/Taktplan';
 import LeistungenHorizontal from '../components/LeistungenHorizontal';
 import {
   AblaufSection,
+  CtaBand,
   EigentuemerSection,
   KontaktSection,
   ProblemSection,
@@ -14,6 +16,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <Marquee />
       <Taktplan />
       <ProblemSection />
       <LeistungenHorizontal />
@@ -21,6 +24,7 @@ export default function Home() {
       <EigentuemerSection />
       <WarumSESection />
       <RegionSection />
+      <CtaBand />
       <KontaktSection />
     </main>
   );

@@ -12,7 +12,7 @@ const FORMSUBMIT_URL = 'https://formsubmit.co/ajax/kontakt@sehandwerk.de';
 const labelText: React.CSSProperties = {
   fontFamily: mono,
   fontSize: 10.5,
-  color: '#6C7883',
+  color: 'var(--t-dim)',
   letterSpacing: '0.05em',
   textTransform: 'uppercase',
   display: 'block',
@@ -21,14 +21,14 @@ const labelText: React.CSSProperties = {
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
-  background: '#F4F0E8',
-  border: '1px solid rgba(20,26,32,0.14)',
+  background: 'var(--paper2)',
+  border: '1px solid rgba(20,23,26,0.16)',
   borderRadius: 4,
   padding: 12,
-  color: '#1E2A35',
+  color: 'var(--t-ink)',
   fontFamily: "'IBM Plex Sans',sans-serif",
   fontSize: 14,
-  outlineColor: '#C99A45',
+  outlineColor: 'var(--gold)',
 };
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
@@ -77,7 +77,7 @@ export default function ContactForm() {
   return (
     <div
       style={{
-        border: '1px solid rgba(20,26,32,0.11)',
+        border: '1px solid var(--line-ink)',
         borderRadius: 6,
         background: '#FFFFFF',
       }}
@@ -91,10 +91,10 @@ export default function ContactForm() {
           borderBottom: '1px solid rgba(20,26,32,0.10)',
         }}
       >
-        <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.06em' }}>
+        <span style={{ fontFamily: mono, fontSize: 11, color: 'var(--t-dim)', letterSpacing: '0.06em' }}>
           ANFRAGE — FORMBLATT A
         </span>
-        <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883' }}>RÜCKMELDUNG &lt; 24 H</span>
+        <span style={{ fontFamily: mono, fontSize: 11, color: 'var(--t-dim)' }}>RÜCKMELDUNG &lt; 24 H</span>
       </div>
 
       {status === 'sent' ? (
@@ -117,7 +117,7 @@ export default function ContactForm() {
               fontWeight: 700,
               fontSize: 22,
               lineHeight: 1.3,
-              color: '#1E2A35',
+              color: 'var(--t-ink)',
               letterSpacing: '-0.015em',
               marginBottom: 14,
               maxWidth: 380,
@@ -178,11 +178,11 @@ export default function ContactForm() {
             >
               Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder erreichen Sie uns
               direkt:{' '}
-              <a href="tel:+491734536225" style={{ color: '#DCB566' }}>
+              <a href="tel:+491734536225" style={{ color: 'var(--gold-deep)' }}>
                 +49&nbsp;173&nbsp;4536225
               </a>{' '}
               ·{' '}
-              <a href="mailto:kontakt@sehandwerk.de" style={{ color: '#DCB566' }}>
+              <a href="mailto:kontakt@sehandwerk.de" style={{ color: 'var(--gold-deep)' }}>
                 kontakt@sehandwerk.de
               </a>
             </p>

@@ -6,56 +6,71 @@ html.lenis,html.lenis body{height:auto;}
 .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain;}
 .lenis.lenis-stopped{overflow:hidden;}
 .lenis.lenis-smooth iframe{pointer-events:none;}
+
+/* ===== SCHWARZ AUF WEISS — design tokens =====
+   The brand promise (Festpreis, schriftlich, verbindlich) as a visual system:
+   dramatic near-black statement sections alternate with clean warm-white
+   content sections; gold is the single accent. */
+:root{
+  --ink:#0D0E10;
+  --ink2:#15171A;
+  --paper:#FAF7F2;
+  --paper2:#F1ECE3;
+  --white:#FFFFFF;
+  --gold:#E0A83C;
+  --gold-deep:#A97A1F;
+  --t-ink:#14171A;
+  --t-sub:#454C54;
+  --t-dim:#70787F;
+  --t-paper:#F5F2EC;
+  --t-paperdim:rgba(245,242,236,0.66);
+  --line-ink:rgba(20,23,26,0.12);
+  --line-paper:rgba(245,242,236,0.14);
+}
+
 /* Horizontal overflow is clipped on BODY (not <html>): clipping on the root
-   element turns it into a viewport-sized clip container and makes
-   IntersectionObserver report ratio:0 for everything below the fold, which
-   would keep every scroll-reveal permanently hidden. body spans the full
-   content height, so reveals fire correctly while wide elements stay clipped. */
-body{margin:0;overflow-x:clip;background:#F6F2EA;color:#1E2A35;font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
-a{color:#B0791E;text-decoration:none;}
+   element breaks geometry-based reveals below the fold. */
+body{margin:0;overflow-x:clip;background:var(--ink);color:var(--t-ink);font-family:'IBM Plex Sans',system-ui,sans-serif;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+a{color:var(--gold-deep);text-decoration:none;}
 a:hover{color:#8C5E12;}
-*:focus-visible{outline:2px solid #C99A45;outline-offset:3px;}
-::selection{background:#C99A45;color:#14202E;}
+*:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+::selection{background:var(--gold);color:var(--ink);}
 h1,h2,h3{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.025em;line-height:1.0;}
 p{margin:0;}
 img{max-width:100%;}
 
+/* film grain on dark sections — inline SVG noise, no external request */
+.grain{position:relative;isolation:isolate;}
+.grain::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.07;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px 160px;mix-blend-mode:overlay;}
+
 @keyframes maskUp{from{transform:translateY(120%)}to{transform:translateY(0)}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes drawX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes floatIn{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
-
-/* ===== HERO — living blueprint set-piece ===== */
-@keyframes blueprintIn{from{opacity:0;transform:scale(1.08)}to{opacity:1;transform:scale(1)}}
 @keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@keyframes growY{from{transform:scaleY(0)}to{transform:scaleY(1)}}
-@keyframes sweep{0%{transform:translateX(-30%);opacity:0}12%{opacity:.9}88%{opacity:.9}100%{transform:translateX(130%);opacity:0}}
 @keyframes dot{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
 @keyframes tick{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes floatIn{from{opacity:0;transform:translateY(34px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-/* kinetic variable-font headline: letters develop from blur+thin to sharp+black */
-@keyframes develop{
-  0%{opacity:0;filter:blur(16px);transform:translateY(0.22em);font-variation-settings:'wght' 300;letter-spacing:0.09em;}
-  55%{opacity:1;filter:blur(0.6px);}
-  100%{opacity:1;filter:blur(0);transform:translateY(0);font-variation-settings:'wght' 800;letter-spacing:-0.035em;}
-}
-/* the gold keyword keeps breathing after it has developed */
-@keyframes breathe{
-  0%,100%{font-variation-settings:'wght' 770;text-shadow:0 0 0 rgba(201,154,69,0);}
-  50%{font-variation-settings:'wght' 830;text-shadow:0 0 26px rgba(201,154,69,0.42);}
-}
+
+/* hero headline — line-by-line clip mask reveal */
+.hline{display:block;overflow:hidden;padding-bottom:0.08em;margin-bottom:-0.08em;}
+.hline>span{display:block;transform:translateY(112%);animation:maskUp 1s cubic-bezier(.22,1,.36,1) both;}
 
 /* mouse-parallax layers read --px/--py (-1..1) set on the hero root */
 .hero-root{--px:0;--py:0;--gx:50%;--gy:38%;}
 .hero-depth{transition:transform .5s cubic-bezier(.16,1,.3,1);will-change:transform;}
-.hero-glow{background:radial-gradient(420px 420px at var(--gx) var(--gy),rgba(201,154,69,0.16),rgba(201,154,69,0.05) 40%,transparent 70%);transition:opacity .6s ease;will-change:background;}
-.hero-cta{transition:transform .25s cubic-bezier(.16,1,.3,1),background .25s,box-shadow .25s,border-color .25s;}
+.hero-glow{background:radial-gradient(460px 460px at var(--gx) var(--gy),rgba(224,168,60,0.13),rgba(224,168,60,0.04) 40%,transparent 70%);will-change:background;}
 
+/* marquee band */
+.marquee{overflow:hidden;display:flex;background:var(--ink);border-top:1px solid var(--line-paper);border-bottom:1px solid var(--line-paper);}
+.marquee-track{display:flex;flex-shrink:0;align-items:center;animation:marq 26s linear infinite;will-change:transform;}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* reveals (geometry-based, see Reveal.tsx) */
 .reveal{opacity:0;transform:translateY(30px);clip-path:inset(0 0 100% 0);will-change:transform,opacity,clip-path;transition:opacity .9s ease,transform 1.05s cubic-bezier(.16,1,.3,1),clip-path 1.05s cubic-bezier(.16,1,.3,1);}
 .reveal.is-visible{opacity:1;transform:none;clip-path:inset(0 0 0% 0);}
-
-/* Directional variants — drop the clip-path wipe and slide/scale instead, so
-   sections resolve with varied motion rather than one uniform upward fade. */
 .reveal--left,.reveal--right,.reveal--scale,.reveal--grow{clip-path:none;}
 .reveal--left{transform:translateX(-48px);}
 .reveal--right{transform:translateX(48px);}
@@ -63,78 +78,95 @@ img{max-width:100%;}
 .reveal--grow{transform:scaleY(0);transform-origin:top;}
 .reveal--left.is-visible,.reveal--right.is-visible,.reveal--scale.is-visible,.reveal--grow.is-visible{clip-path:none;transform:none;}
 
-/* ===== Editorial layout system („Bauakte") =====
-   Asymmetric 12-col grids, sheet-register labels and huge outlined ghost
-   numerals break the uniform two-column skeleton. Everything collapses to a
-   single clean column below 860px. */
+/* asymmetric 12-col grid (collapses to a column on small screens) */
 .g12{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;align-items:start;}
-.c1-5{grid-column:1/6;}.c1-6{grid-column:1/7;}.c1-7{grid-column:1/8;}
-.c2-8{grid-column:2/9;}.c6-12{grid-column:6/12;}.c7-13{grid-column:7/13;}
-.c8-13{grid-column:8/13;}.c6-10{grid-column:6/10;}.c10-13{grid-column:10/13;}
-.push-s{margin-top:56px;}.push-m{margin-top:104px;}.push-l{margin-top:148px;}
-.register{display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;
-  font-size:10.5px;letter-spacing:.12em;color:#8A929B;text-transform:uppercase;white-space:nowrap;}
-.register::before{content:'';width:38px;height:1px;background:#C99A45;flex-shrink:0;}
-.ghost{position:absolute;z-index:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;
-  line-height:.8;letter-spacing:-.05em;font-size:clamp(130px,22vw,300px);color:transparent;
-  -webkit-text-stroke:1.2px rgba(30,42,53,.09);pointer-events:none;user-select:none;}
-.sec-body{position:relative;z-index:1;}
-/* Ablauf — the four Takte hang from the gold timeline at increasing depth,
-   like bars dropping off a construction schedule. */
-.takt-drop{display:block;width:1px;margin:0 auto;background:repeating-linear-gradient(
-  rgba(201,154,69,.55),rgba(201,154,69,.55) 4px,transparent 4px,transparent 8px);}
-/* Region — white drafting-table map card */
-.region-map{position:relative;aspect-ratio:1/1;border-radius:10px;background:#fff;
-  border:1px solid rgba(20,26,32,.10);box-shadow:0 34px 70px -42px rgba(20,26,32,.5);overflow:hidden;}
-.card-white{background:#fff;border:1px solid rgba(20,26,32,.10);border-radius:10px;
-  box-shadow:0 24px 55px -36px rgba(20,26,32,.42);}
-@media(max-width:860px){
-  .g12{display:flex;flex-direction:column;gap:26px;}
-  .push-s,.push-m,.push-l{margin-top:0;}
-  .takt-drop{display:none;}
-  .ghost{font-size:110px;opacity:.7;}
-}
+.c1-5{grid-column:1/6;}.c1-6{grid-column:1/7;}.c1-7{grid-column:1/8;}.c1-8{grid-column:1/9;}
+.c2-8{grid-column:2/9;}.c6-12{grid-column:6/12;}.c7-13{grid-column:7/13;}.c8-13{grid-column:8/13;}
+.push-s{margin-top:56px;}.push-m{margin-top:104px;}
 
-/* Warum-SE — the intro pins while the reasons scroll past it. Falls back to
-   normal flow on mobile where the columns stack. */
+/* Warum-SE — the intro pins while the reasons scroll past it */
 .warum-sticky{position:sticky;top:108px;align-self:start;}
-@media(max-width:760px){.warum-sticky{position:static;}}
 
-/* Leistungen — horizontal pinned set-piece (desktop); vertical stack on mobile. */
-.lhz{position:relative;background:#EFE9DE;overflow:hidden;}
+/* Leistungen — horizontal pinned set-piece; ink cards on paper */
+.lhz{position:relative;background:var(--paper);overflow:hidden;}
 .lhz-inner{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:80px 0;}
-.lhz-head{padding:0 40px;margin-bottom:40px;max-width:1240px;margin-left:auto;margin-right:auto;width:100%;}
+.lhz-head{padding:0 40px;margin-bottom:34px;max-width:1240px;margin-left:auto;margin-right:auto;width:100%;}
+.lhz-progress{height:2px;background:var(--line-ink);margin:26px 0 0;position:relative;overflow:hidden;}
+.lhz-progress>i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--gold);}
 .lhz-track{display:flex;gap:22px;padding:0 40px;will-change:transform;}
-.lhz-card{flex:0 0 auto;width:clamp(280px,40vw,380px);background:#fff;border:1px solid rgba(20,26,32,0.10);border-radius:10px;padding:36px 32px;box-shadow:0 24px 55px -34px rgba(20,26,32,0.4);display:flex;flex-direction:column;}
-@media(max-width:767px){
-  .lhz{overflow:visible;}
-  .lhz-inner{min-height:0;padding:96px 0;}
-  .lhz-head{margin-bottom:28px;}
-  .lhz-track{flex-direction:column;transform:none!important;}
-  .lhz-card{width:auto;}
-}
-@media(max-width:560px){.lhz-hint{display:none;}}
+.lhz-card{flex:0 0 auto;width:clamp(280px,40vw,390px);background:var(--ink);color:var(--t-paper);
+  border:1px solid rgba(245,242,236,0.08);border-radius:12px;padding:38px 32px 30px;display:flex;flex-direction:column;
+  transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;}
+.lhz-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px -30px rgba(13,14,16,.55);}
+.lhz-num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:64px;line-height:1;
+  color:transparent;-webkit-text-stroke:1.3px rgba(245,242,236,.34);letter-spacing:-.03em;}
+.lhz-card:hover .lhz-num{-webkit-text-stroke-color:var(--gold);}
 
-/* Region — living radar: a rotating survey beam and expanding sonar rings. */
-@keyframes radarSweep{to{transform:rotate(360deg);}}
-@keyframes sonar{0%{transform:translate(-50%,-50%) scale(.28);opacity:.55;}
-  100%{transform:translate(-50%,-50%) scale(1);opacity:0;}}
+/* Ablauf — Takte hang from the gold timeline at increasing depth */
+.takt-drop{display:block;width:1px;margin:0 auto;background:repeating-linear-gradient(
+  rgba(169,122,31,.5),rgba(169,122,31,.5) 4px,transparent 4px,transparent 8px);}
 
-/* Real :hover states ported from the source's style-hover attributes */
-.nav-link{color:#6C7883;transition:color .2s;}
-.nav-link:hover{color:#1E2A35;}
-.btn-primary{color:#14202E;background:#C99A45;box-shadow:0 1px 0 rgba(255,255,255,0.12) inset,0 10px 24px -14px rgba(201,154,69,0.7);transition:background .25s,transform .25s,box-shadow .25s;}
-.btn-primary:hover{background:#DCB566;color:#14202E;transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.18) inset,0 14px 30px -12px rgba(201,154,69,0.85);}
-.btn-ghost{color:#1E2A35;background:transparent;border:1px solid rgba(20,26,32,0.22);transition:border-color .25s,background .25s;}
-.btn-ghost:hover{border-color:rgba(201,154,69,0.75);background:rgba(201,154,69,0.09);color:#1E2A35;}
-.ziel-card{transition:transform .4s,box-shadow .4s;}
-.ziel-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px -22px rgba(20,26,31,0.35);}
-.contact-line{color:#1E2A35;transition:color .2s;}
-.contact-line:hover{color:#B0791E;}
-.footer-link{color:#525E69;transition:color .2s;}
-.footer-link:hover{color:#1E2A35;}
+/* Eigentümer — bento grid, mixed ink/white tiles */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:18px;}
+.bento-a{grid-column:1/8;}
+.bento-b{grid-column:8/13;}
+.bento-c{grid-column:1/7;}
+.bento-stat{grid-column:7/13;}
+.tile{border-radius:14px;padding:36px 34px;height:100%;transition:transform .35s cubic-bezier(.22,1,.36,1),box-shadow .35s;}
+.tile:hover{transform:translateY(-6px);box-shadow:0 26px 55px -30px rgba(13,14,16,.35);}
+.tile-ink{background:var(--ink);color:var(--t-paper);}
+.tile-white{background:var(--white);border:1px solid var(--line-ink);}
+
+/* Region — white drafting-table map card */
+.region-map{position:relative;aspect-ratio:1/1;border-radius:12px;background:var(--white);
+  border:1px solid var(--line-ink);box-shadow:0 34px 70px -42px rgba(13,14,16,.5);overflow:hidden;}
+
+/* custom cursor — gold dot + trailing ring (mouse only) */
+.cursor-dot,.cursor-ring{position:fixed;top:0;left:0;pointer-events:none;z-index:9999;border-radius:50%;}
+.cursor-dot{width:7px;height:7px;background:var(--gold);margin:-3.5px 0 0 -3.5px;}
+.cursor-ring{width:34px;height:34px;border:1.5px solid rgba(224,168,60,.5);margin:-17px 0 0 -17px;
+  transition:width .28s,height .28s,margin .28s,border-color .28s,opacity .28s;}
+.cursor-ring.is-active{width:58px;height:58px;margin:-29px 0 0 -29px;border-color:var(--gold);}
+@media(pointer:coarse){.cursor-dot,.cursor-ring{display:none!important;}}
+
+/* preloader */
+.preloader{position:fixed;inset:0;z-index:10000;background:var(--ink);display:flex;align-items:flex-end;
+  padding:40px;transition:transform .65s cubic-bezier(.76,0,.24,1);}
+.preloader.done{transform:translateY(-101%);}
+.preloader-bar{position:absolute;left:0;bottom:0;height:3px;background:var(--gold);width:0;}
+
+/* buttons */
+.btn-primary{color:var(--ink);background:var(--gold);box-shadow:0 1px 0 rgba(255,255,255,0.15) inset,0 12px 28px -14px rgba(224,168,60,0.55);transition:background .25s,transform .25s,box-shadow .25s;}
+.btn-primary:hover{background:#EBBB58;color:var(--ink);transform:translateY(-1px);box-shadow:0 1px 0 rgba(255,255,255,0.2) inset,0 16px 34px -12px rgba(224,168,60,0.7);}
+.btn-ghost{color:var(--t-paper);background:transparent;border:1px solid rgba(245,242,236,0.28);transition:border-color .25s,background .25s;}
+.btn-ghost:hover{border-color:rgba(224,168,60,0.8);background:rgba(224,168,60,0.08);color:var(--t-paper);}
+.magnetic{display:inline-block;will-change:transform;}
+
+/* nav — fixed ink bar, works over dark and light sections alike */
+.nav-link{color:rgba(245,242,236,.62);transition:color .2s;}
+.nav-link:hover{color:var(--t-paper);}
+.contact-line{color:var(--t-ink);transition:color .2s;}
+.contact-line:hover{color:var(--gold-deep);}
+.footer-link{color:rgba(245,242,236,.6);transition:color .2s;}
+.footer-link:hover{color:var(--t-paper);}
+.grund-row{transition:padding-left .3s,border-color .3s;border-top:1px solid var(--line-ink);}
+.grund-row:hover{padding-left:14px;border-top-color:rgba(224,168,60,.7);}
 
 .nav-panel{display:none;}
+@media (max-width:860px){
+  .g12{display:flex;flex-direction:column;gap:26px;}
+  .push-s,.push-m{margin-top:0;}
+  .takt-drop{display:none;}
+  .warum-sticky{position:static;}
+  .bento{display:flex;flex-direction:column;}
+}
+@media (max-width:767px){
+  .lhz{overflow:visible;}
+  .lhz-inner{min-height:0;padding:96px 0;}
+  .lhz-track{flex-direction:column;transform:none!important;}
+  .lhz-card{width:auto;}
+  .lhz-hint{display:none;}
+}
 @media (max-width:760px){
   .nav-desktop{display:none!important;}
   .hero-corners{display:none!important;}
@@ -150,5 +182,8 @@ img{max-width:100%;}
 @media (prefers-reduced-motion: reduce){
   html{scroll-behavior:auto;}
   *{animation:none!important;}
+  .hline>span{transform:none!important;}
   .reveal{opacity:1!important;transform:none!important;clip-path:none!important;transition:none!important;}
+  .marquee-track{animation:none!important;}
+  .cursor-dot,.cursor-ring,.preloader{display:none!important;}
 }
