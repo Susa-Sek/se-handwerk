@@ -76,24 +76,6 @@ export default function Hero() {
           }}
         />
         <div className="hero-photo-fade" />
-        <span
-          style={{
-            position: 'absolute',
-            bottom: 22,
-            right: 24,
-            fontFamily: mono,
-            fontSize: 10.5,
-            letterSpacing: '0.08em',
-            color: 'rgba(245,242,236,0.7)',
-            background: 'rgba(13,14,16,0.5)',
-            border: '1px solid rgba(245,242,236,0.16)',
-            padding: '7px 12px',
-            borderRadius: 100,
-            backdropFilter: 'blur(4px)',
-          }}
-        >
-          SYMBOLBILD · BEZUGSFERTIGER WOHNRAUM
-        </span>
       </div>
 
       {/* left: content */}
