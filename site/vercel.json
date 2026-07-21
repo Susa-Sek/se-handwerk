@@ -1,0 +1,42 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
+    { "source": "/impressum.html", "destination": "/impressum", "permanent": true },
+    { "source": "/datenschutz.html", "destination": "/datenschutz", "permanent": true },
+    { "source": "/ueber-uns.html", "destination": "/ueber-uns", "permanent": true },
+    { "source": "/kontakt.html", "destination": "/kontakt", "permanent": true },
+    { "source": "/danke", "destination": "/kontakt", "permanent": true },
+    { "source": "/danke.html", "destination": "/kontakt", "permanent": true },
+    { "source": "/blog", "destination": "/", "permanent": true },
+    { "source": "/blog/:path*", "destination": "/", "permanent": true },
+    { "source": "/bodenarbeiten{.html}?", "destination": "/", "permanent": true },
+    { "source": "/bodenschutz-gummiboden{.html}?", "destination": "/", "permanent": true },
+    { "source": "/wohnungsuebergabe{.html}?", "destination": "/", "permanent": true },
+    { "source": "/uebergabeservice{.html}?", "destination": "/", "permanent": true },
+    { "source": "/moebelmontage-allgemein{.html}?", "destination": "/", "permanent": true },
+    { "source": "/kraftstation-montage{.html}?", "destination": "/", "permanent": true },
+    { "source": "/power-rack-montage{.html}?", "destination": "/", "permanent": true },
+    { "source": "/multipress-montage{.html}?", "destination": "/", "permanent": true }
+  ],
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
+        { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/(fonts|images)/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    }
+  ]
+}
