@@ -162,10 +162,18 @@ RAUM HEILBRONN
           to="/ueber-uns"
           onClick={() => setOpen(false)}
           className="nav-link"
-          style={{ ...linkStyle, display: 'block', padding: '14px 0' }}
+          style={{ ...linkStyle, display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(245,242,236,0.06)' }}
         >
           Über uns
         </Link>
+        <a
+          href="/#kontakt"
+          onClick={go('#kontakt')}
+          className="btn-primary"
+          style={{ ...linkStyle, fontWeight: 500, display: 'block', textAlign: 'center', marginTop: 18, padding: '15px 18px', borderRadius: 100 }}
+        >
+          Projekt besprechen
+        </a>
       </div>
     </nav>
   );

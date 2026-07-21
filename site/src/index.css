@@ -190,7 +190,7 @@ img{max-width:100%;}
 }
 @media (max-width:760px){
   .nav-desktop{display:none!important;}
-  .hero-corners{display:none!important;}
+  .nav-cta{display:none!important;}
   .nav-burger{display:flex!important;}
 }
 @media (max-width:560px){
