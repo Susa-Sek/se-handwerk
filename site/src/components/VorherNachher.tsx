@@ -43,7 +43,7 @@ export default function VorherNachher() {
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 40px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 44 }}>
           <div>
-            <SectionKicker dark>Das Ergebnis</SectionKicker>
+            <SectionKicker dark>Vorher / Nachher</SectionKicker>
             <Reveal as="h2" delay={40} style={{ fontSize: 'clamp(34px,5vw,68px)', color: '#F5F2EC' }}>
               Von Tag 0 bis zur Übergabe.
             </Reveal>
@@ -71,7 +71,7 @@ export default function VorherNachher() {
             {/* after — full frame */}
             <img
               src="/images/nachher.jpg"
-              alt="Fertig saniertes Zimmer bei der Übergabe"
+              alt="Symbolbild: saniertes Zimmer nach der Sanierung"
               draggable={false}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
             />
@@ -175,12 +175,30 @@ export default function VorherNachher() {
             >
               ÜBERGABE
             </span>
+            <span
+              style={{
+                position: 'absolute',
+                bottom: 16,
+                left: 16,
+                fontFamily: mono,
+                fontSize: 10,
+                letterSpacing: '0.1em',
+                color: 'rgba(245,242,236,0.8)',
+                background: 'rgba(13,14,16,0.72)',
+                border: '1px solid rgba(245,242,236,0.2)',
+                padding: '6px 10px',
+                borderRadius: 100,
+              }}
+            >
+              SYMBOLBILD
+            </span>
           </div>
         </Reveal>
 
         <Reveal as="p" delay={160} style={{ marginTop: 26, fontFamily: mono, fontSize: 12.5, lineHeight: 1.7, color: 'rgba(245,242,236,0.55)', maxWidth: 560 }}>
-          Ein Objekt, ein Taktplan — und dazwischen liegt unsere Arbeit.
+          Ein Ablauf, ein Taktplan — und dazwischen liegt unsere Arbeit.
           Wann es so weit ist, planen wir gemeinsam — realistisch statt schöngerechnet.
+          Alle Abbildungen auf dieser Seite sind Symbolbilder.
         </Reveal>
       </div>
     </section>
