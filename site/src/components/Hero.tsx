@@ -92,7 +92,7 @@ export default function Hero() {
             backdropFilter: 'blur(4px)',
           }}
         >
-          OBJEKT RAUM HEILBRONN — NACH ÜBERGABE
+          SYMBOLBILD · BEZUGSFERTIGER WOHNRAUM
         </span>
       </div>
 
