@@ -1,19 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Register } from './sections';
 import { leistungen } from '../content';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
-const kicker: React.CSSProperties = {
-  fontFamily: mono,
-  fontSize: 12,
-  letterSpacing: '0.08em',
-  textTransform: 'uppercase',
-  color: '#6C7883',
-};
 
 // Leistungen as a horizontally-scrubbed, pinned set-piece: the section pins and
 // the five service cards slide sideways as you scroll (GSAP ScrollTrigger).
@@ -63,8 +57,8 @@ export default function LeistungenHorizontal() {
             }}
           >
             <div>
-              <div style={{ ...kicker, marginBottom: 18 }}>Leistungsumfang</div>
-              <h2 style={{ fontSize: 'clamp(30px,4vw,54px)', color: '#1E2A35' }}>Was wir übernehmen.</h2>
+              <Register n={2} label="Leistungsumfang" />
+              <h2 style={{ fontSize: 'clamp(32px,4.6vw,62px)', color: '#1E2A35' }}>Was wir übernehmen.</h2>
             </div>
             <span style={{ fontFamily: mono, fontSize: 11, color: '#6C7883', letterSpacing: '0.05em', display: 'flex', alignItems: 'center', gap: 10 }}>
               5 POSITIONEN
