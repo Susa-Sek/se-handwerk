@@ -173,14 +173,14 @@ export default function VorherNachher() {
                 borderRadius: 100,
               }}
             >
-              TAG 45 — ÜBERGABE
+              ÜBERGABE
             </span>
           </div>
         </Reveal>
 
         <Reveal as="p" delay={160} style={{ marginTop: 26, fontFamily: mono, fontSize: 12.5, lineHeight: 1.7, color: 'rgba(245,242,236,0.55)', maxWidth: 560 }}>
-          Ein Objekt, ein Taktplan, ein Termin — und dazwischen liegt unsere Arbeit.
-          Den Übergabetermin bekommen Sie vorher schriftlich.
+          Ein Objekt, ein Taktplan — und dazwischen liegt unsere Arbeit.
+          Wann es so weit ist, planen wir gemeinsam — realistisch statt schöngerechnet.
         </Reveal>
       </div>
     </section>

@@ -256,7 +256,7 @@ export default function Taktplan() {
                 letterSpacing: '-0.01em',
               }}
             >
-              Ein Ablauf. Ein Ansprechpartner. Ein Datum, an dem fertig ist.
+              Ein Ablauf. Ein Ansprechpartner. Ein realistischer Taktplan.
             </p>
             <p
               style={{
@@ -268,7 +268,7 @@ export default function Taktplan() {
                 marginTop: 12,
               }}
             >
-              Diesen Taktplan bekommen Sie schriftlich — mit festen Terminen für jedes Gewerk.
+              Den Taktplan bekommen Sie vor Baubeginn — und wenn sich etwas verschiebt, erfahren Sie es zuerst von uns.
             </p>
           </div>
         </div>

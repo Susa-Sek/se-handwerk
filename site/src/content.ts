@@ -41,7 +41,7 @@ export const ablauf = [
   {
     num: '2',
     title: 'Angebot',
-    desc: 'Sie bekommen ein nachvollziehbares Angebot — transparent aufgeschlüsselt, keine Überraschungen im Nachhinein.',
+    desc: 'Sie bekommen ein nachvollziehbares Angebot — transparent aufgeschlüsselt. Sie wissen vorher, was drinsteht.',
     delay: 90,
   },
   {
@@ -94,7 +94,7 @@ export const vorteile = [
   },
   {
     n: '03',
-    title: 'Verbindliche Termine',
+    title: 'Realistische Termine',
     desc: 'Wir planen realistisch und halten, was wir zusagen. Wenn sich etwas ändert, erfahren Sie es von uns — vorher.',
     delay: 160,
   },

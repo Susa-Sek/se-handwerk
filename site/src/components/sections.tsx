@@ -79,8 +79,8 @@ export function ProblemSection() {
           <Reveal from="right" delay={180} className="c7-13">
             <p style={{ fontSize: 17, lineHeight: 1.75, color: 'var(--t-sub)', maxWidth: 560 }}>
               Wir planen den Ablauf, stimmen die Gewerke aufeinander ab, überwachen die Ausführung und
-              stehen für das Ergebnis gerade. Sie haben eine Nummer, die Sie anrufen. Und ein Datum,
-              an dem fertig ist.
+              stehen für das Ergebnis gerade. Sie haben eine Nummer, die Sie anrufen. Und einen Plan,
+              der hält, was man realistisch halten kann.
             </p>
           </Reveal>
         </div>
@@ -157,7 +157,7 @@ export function AblaufSection() {
             </Reveal>
           </div>
           <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.06em', color: 'var(--t-dim)' }}>
-            DIESEN PLAN BEKOMMEN SIE SCHRIFTLICH
+            REALISTISCH GEPLANT — TRANSPARENT KOMMUNIZIERT
           </span>
         </div>
         <AblaufConnector count={ablauf.length} />
@@ -265,7 +265,7 @@ export function EigentuemerSection() {
               <span style={{ fontFamily: mono, fontSize: 12, letterSpacing: '0.08em', lineHeight: 1.9, color: 'rgba(245,242,236,0.6)' }}>
                 RÜCKMELDUNG AUF JEDE ANFRAGE
                 <br />
-                VERBINDLICH — AUCH SAMSTAGS
+                MEIST NOCH AM SELBEN TAG
               </span>
             </Reveal>
           </div>
@@ -459,9 +459,9 @@ export function CtaBand() {
     <section className="grain" style={{ background: 'var(--ink)', padding: '130px 0', color: '#F5F2EC' }}>
       <div style={{ ...container, textAlign: 'center' }}>
         <Reveal as="h2" style={{ fontSize: 'clamp(38px,6.4vw,96px)', letterSpacing: '-0.035em', lineHeight: 1.02 }}>
-          Ein Datum,
+          Wir übernehmen
           <br />
-          an dem <span style={{ color: 'var(--gold)' }}>fertig</span> ist.
+          <span style={{ color: 'var(--gold)' }}>das</span>.
         </Reveal>
         <Reveal delay={140} style={{ marginTop: 44 }}>
           <a

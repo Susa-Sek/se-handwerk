@@ -29,11 +29,22 @@ for (const f of readdirSync(join(dist, 'images'))) {
   imgMap[f] = `data:${mime};base64,${b.toString('base64')}`;
 }
 
-// 3a) rewrite the Figure runtime image path (`/images/${e}`) to use the map
-if (!js.includes('`/images/${e}`')) {
-  console.error('WARN: expected image path token not found — check the bundle');
+// 3a) rewrite runtime-constructed image paths to use the inlined data-URI map.
+// The minifier renames the interpolated variable per build (e.g. `rp[e.code]`),
+// so match the pattern generically rather than a fixed token. Covers both
+// `url(/images/${EXPR})` (CSS backgrounds) and bare `/images/${EXPR}` (img src).
+const beforeJs = js;
+js = js.replace(
+  /`url\(\/images\/\$\{([^`}]+)\}\)`/g,
+  (_m, e) => '`url(${globalThis.__IMG[' + e + ']||"/images/"+' + e + '})`',
+);
+js = js.replace(
+  /`\/images\/\$\{([^`}]+)\}`/g,
+  (_m, e) => '`${globalThis.__IMG[' + e + ']||"/images/"+' + e + '}`',
+);
+if (js === beforeJs) {
+  console.error('WARN: no runtime image path token found — check the bundle');
 }
-js = js.replaceAll('`/images/${e}`', '(globalThis.__IMG[e]||`/images/${e}`)');
 
 // 3b) inline any static /images/<file> references (e.g. the logo in Nav/Footer)
 for (const [name, uri] of Object.entries(imgMap)) {

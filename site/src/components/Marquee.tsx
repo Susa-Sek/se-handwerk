@@ -1,6 +1,6 @@
 const bricolage = "'Bricolage Grotesque',sans-serif";
 
-const ITEMS = ['Festpreis', 'Schriftlich', 'Ein Ansprechpartner', 'Ein Termin'];
+const ITEMS = ['Festpreis', 'Ein Ansprechpartner', 'Klarer Taktplan', 'Ehrliche Termine'];
 
 function Row() {
   return (
