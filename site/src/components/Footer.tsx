@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSectionLink } from '../hooks/useSectionLink';
+import { leistungen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -43,6 +44,14 @@ export default function Footer() {
             </p>
           </div>
           <div style={{ display: 'flex', gap: 56, flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <span style={colLabel}>Leistungen</span>
+              {leistungen.map((l) => (
+                <Link key={l.slug} to={`/leistungen/${l.slug}`} className="footer-link" style={colLink}>
+                  {l.title}
+                </Link>
+              ))}
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <span style={colLabel}>Seite</span>
               <a href="/#leistungen" onClick={onSection('#leistungen')} className="footer-link" style={colLink}>
