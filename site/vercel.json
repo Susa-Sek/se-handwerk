@@ -10,14 +10,14 @@
     { "source": "/danke.html", "destination": "/kontakt", "permanent": true },
     { "source": "/blog", "destination": "/", "permanent": true },
     { "source": "/blog/:path*", "destination": "/", "permanent": true },
-    { "source": "/bodenarbeiten{.html}?", "destination": "/", "permanent": true },
-    { "source": "/bodenschutz-gummiboden{.html}?", "destination": "/", "permanent": true },
-    { "source": "/wohnungsuebergabe{.html}?", "destination": "/", "permanent": true },
-    { "source": "/uebergabeservice{.html}?", "destination": "/", "permanent": true },
-    { "source": "/moebelmontage-allgemein{.html}?", "destination": "/", "permanent": true },
-    { "source": "/kraftstation-montage{.html}?", "destination": "/", "permanent": true },
-    { "source": "/power-rack-montage{.html}?", "destination": "/", "permanent": true },
-    { "source": "/multipress-montage{.html}?", "destination": "/", "permanent": true }
+    { "source": "/bodenarbeiten{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
+    { "source": "/bodenschutz-gummiboden{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
+    { "source": "/wohnungsuebergabe{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/uebergabeservice{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/moebelmontage-allgemein{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/kraftstation-montage{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/power-rack-montage{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/multipress-montage{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
