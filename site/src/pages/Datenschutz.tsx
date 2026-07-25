@@ -1,9 +1,12 @@
 import Reveal from '../components/Reveal';
 import { LegalHead, LegalSection, legalStyles as s } from '../components/legal';
+import { useSeo } from '../hooks/useSeo';
+import { seitenSeo } from '../content';
 
 // Ported from the live sehandwerk.de Datenschutzerklärung. Two clauses adapted
 // to the new site's stack: §4 (fonts are self-hosted here, not Google Fonts).
 export default function Datenschutz() {
+  useSeo(seitenSeo.datenschutz);
   return (
     <main>
       <LegalHead
