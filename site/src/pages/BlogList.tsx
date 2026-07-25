@@ -45,18 +45,26 @@ export default function BlogList() {
                 <Link
                   to={`/blog/${p.slug}`}
                   className="tile tile-white"
-                  style={{ display: 'flex', flexDirection: 'column', height: '100%', borderRadius: 14, padding: '30px 28px', color: 'var(--t-ink)' }}
+                  style={{ display: 'flex', flexDirection: 'column', height: '100%', borderRadius: 14, padding: 0, overflow: 'hidden', color: 'var(--t-ink)' }}
                 >
-                  <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.04em', color: 'var(--gold-deep)' }}>
-                    {p.kategorie} · {p.lesezeit}
-                  </span>
-                  <h2 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 22, letterSpacing: '-0.015em', margin: '14px 0 12px', color: 'var(--t-ink)' }}>
-                    {p.title}
-                  </h2>
-                  <p style={{ fontSize: 15, lineHeight: 1.6, color: 'var(--t-sub)' }}>{p.excerpt}</p>
-                  <span style={{ marginTop: 'auto', paddingTop: 22, fontFamily: mono, fontSize: 11, color: 'var(--gold-deep)', letterSpacing: '0.04em' }}>
-                    Weiterlesen →
-                  </span>
+                  <img
+                    src={`/images/${p.bild}`}
+                    alt={p.bildAlt}
+                    loading="lazy"
+                    style={{ width: '100%', aspectRatio: '16 / 10', objectFit: 'cover', display: 'block' }}
+                  />
+                  <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '24px 28px 28px' }}>
+                    <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.04em', color: 'var(--gold-deep)' }}>
+                      {p.kategorie} · {p.lesezeit}
+                    </span>
+                    <h2 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 22, letterSpacing: '-0.015em', margin: '12px 0 12px', color: 'var(--t-ink)' }}>
+                      {p.title}
+                    </h2>
+                    <p style={{ fontSize: 15, lineHeight: 1.6, color: 'var(--t-sub)' }}>{p.excerpt}</p>
+                    <span style={{ marginTop: 'auto', paddingTop: 22, fontFamily: mono, fontSize: 11, color: 'var(--gold-deep)', letterSpacing: '0.04em' }}>
+                      Weiterlesen →
+                    </span>
+                  </div>
                 </Link>
               </Reveal>
             ))}
