@@ -67,8 +67,18 @@ export default function BlogArticle() {
           </div>
         </header>
 
-        <div style={{ background: 'var(--paper)', padding: '70px 0 90px' }}>
+        <div style={{ background: 'var(--paper)', padding: '48px 0 90px' }}>
           <div style={container}>
+            <figure style={{ margin: '0 0 44px' }}>
+              <img
+                src={`/images/${post.bild}`}
+                alt={post.bildAlt}
+                style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
+              />
+              <figcaption style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: 'var(--t-dim)', marginTop: 8 }}>
+                SYMBOLBILD
+              </figcaption>
+            </figure>
             {post.sections.map((sec, i) => (
               <Reveal key={sec.h2} delay={30 + i * 30} style={{ marginBottom: 40 }}>
                 <h2 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 'clamp(22px,2.6vw,32px)', letterSpacing: '-0.02em', color: 'var(--t-ink)', marginBottom: 16 }}>

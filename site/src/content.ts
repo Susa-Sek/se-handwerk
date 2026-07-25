@@ -289,6 +289,8 @@ export interface BlogPost {
   datum: string; // ISO
   kategorie: string;
   lesezeit: string;
+  bild: string; // Hero-Bild (Dateiname in /images) — Symbolbild
+  bildAlt: string;
   sections: BlogSection[];
   relatedLeistung?: string;
 }
@@ -298,155 +300,236 @@ export const blogPosts: BlogPost[] = [
     slug: 'vinylboden-verlegen-kosten',
     metaTitle: 'Vinylboden verlegen: Kosten pro m² 2026 | SE Handwerk',
     metaDescription:
-      'Was kostet es, Vinylboden verlegen zu lassen? Richtwerte pro m² für Material und Verlegung, Klick-Vinyl vs. vollverklebt und versteckte Zusatzkosten – im Überblick.',
+      'Was kostet Vinylboden verlegen pro m²? Preise für Material und Verlegung, Klick-Vinyl vs. vollverklebt, Untergrund, Zusatzkosten und ein Rechenbeispiel für 70 m².',
     title: 'Vinylboden verlegen: Kosten pro m² im Überblick',
     excerpt:
-      'Material, Verlegung, Untergrund: Was Vinylboden wirklich pro Quadratmeter kostet – mit realistischen Richtwerten und den Posten, die man gern vergisst.',
+      'Material, Verlegung, Untergrund: Was Vinylboden wirklich pro Quadratmeter kostet – mit realistischen Richtwerten, Rechenbeispiel und den Posten, die man gern vergisst.',
     datum: '2026-07-22',
     kategorie: 'Bodenarbeiten',
-    lesezeit: '5 Min.',
+    lesezeit: '8 Min.',
+    bild: 'leistung-boden.jpg',
+    bildAlt: 'Symbolbild: frisch verlegter Vinyl-Designboden in einem hellen Wohnraum',
     relatedLeistung: 'bodenarbeiten',
     sections: [
       {
         h2: 'Was kostet Vinylboden verlegen pro m²?',
         paras: [
-          'Als grober Richtwert liegen die Gesamtkosten für verlegten Vinylboden – Material plus Arbeit – meist zwischen etwa 30 und 70 € pro Quadratmeter. Die Spanne ist so groß, weil Materialqualität, Untergrund und Verlegeart stark ins Gewicht fallen.',
-          'Wichtig vorab: Das sind Marktrichtwerte zur Orientierung, kein Angebot. Den genauen Preis für Ihr Objekt bekommen Sie erst nach einer kurzen Aufnahme vor Ort – dann aber als klaren Festpreis.',
+          'Vinylboden verlegen zu lassen kostet – Material plus Arbeit zusammengerechnet – als grober Richtwert meist zwischen etwa 30 und 70 € pro Quadratmeter. Die Spanne ist deshalb so breit, weil drei Dinge stark ins Gewicht fallen: die Qualität des Vinylbodens, der Zustand des Untergrunds und die Verlegeart (Klick-Vinyl oder vollflächig verklebt).',
+          'Für eine einfache, gute Ausführung im Wohnbereich landen viele Projekte im mittleren Bereich dieser Spanne. Nach oben offen wird es bei sehr hochwertigen Designböden, aufwändiger Untergrundvorbereitung oder kleinteiligen Grundrissen mit vielen Zuschnitten.',
+          'Wichtig vorab: Das sind Marktrichtwerte zur Orientierung – kein Angebot. Den verbindlichen Preis für Ihr Objekt bekommen Sie erst nach einer kurzen Aufnahme vor Ort, dann aber als klaren Festpreis ohne Nachträge.',
         ],
       },
       {
-        h2: 'Materialkosten vs. Verlegekosten',
+        h2: 'Materialkosten: Was kostet der Vinylboden selbst?',
         paras: [
-          'Das Material selbst kostet je nach Qualität ungefähr 15 bis 40 € pro m². Günstige Klick-Vinylböden beginnen darunter, hochwertige Designböden mit dickerer Nutzschicht liegen darüber.',
-          'Für die reine Verlegung durch einen Fachbetrieb sollten Sie zusätzlich etwa 15 bis 30 € pro m² einplanen. Kommt die Untergrundvorbereitung dazu, steigt dieser Anteil.',
+          'Das reine Material für Vinylboden kostet je nach Qualität ungefähr 15 bis 40 € pro m². Günstige Klick-Vinylböden beginnen darunter, hochwertige Designböden mit dicker Nutzschicht liegen darüber.',
+          'Entscheidend für die Haltbarkeit ist die Nutzschicht (die transparente Deckschicht). Für Wohnräume reichen oft 0,3 bis 0,4 mm; für stark genutzte Flächen oder Vermietung sind 0,5 mm und mehr die sichere Wahl – sie halten Kratzern und Möbelrücken länger stand.',
+          'Auch die Verlegeart beeinflusst den Materialpreis: Vollflächig zu verklebendes Vinyl ist als Material häufig günstiger als Klick-Vinyl, dafür steigt der Arbeitsaufwand.',
+        ],
+      },
+      {
+        h2: 'Verlegekosten: Was kostet die Arbeit?',
+        paras: [
+          'Für die reine Verlegung durch einen Fachbetrieb sollten Sie zusätzlich etwa 15 bis 30 € pro m² einplanen. Klick-Vinyl ist schneller verlegt und damit meist günstiger, vollflächiges Verkleben ist aufwändiger und liegt am oberen Ende.',
+          'Kommt Untergrundvorbereitung dazu – Spachteln, Ausgleichen, Grundieren – erhöht sich der Arbeitsanteil spürbar. Genau hier trennt sich saubere Arbeit von Pfusch: Ein ebener, tragfähiger Untergrund ist die Voraussetzung für ein Ergebnis, das jahrelang hält.',
         ],
       },
       {
         h2: 'Klick-Vinyl oder vollflächig verkleben?',
         paras: [
-          'Klick-Vinyl wird schwimmend verlegt, ist schneller fertig und damit meist günstiger. Ideal für Wohnräume und Vermietung.',
-          'Vollflächig verklebtes Vinyl ist aufwändiger, aber besonders belastbar und formstabil – sinnvoll bei großen Flächen, Fußbodenheizung oder stark genutzten Bereichen.',
+          'Klick-Vinyl wird schwimmend verlegt, ist schneller fertig und meist günstiger. Es ist ideal für Wohnräume, Schlafzimmer und die klassische Mietwohnung – und lässt sich bei Bedarf leichter wieder aufnehmen.',
+          'Vollflächig verklebtes Vinyl ist besonders belastbar und formstabil. Sinnvoll ist es bei großen zusammenhängenden Flächen, bei Fußbodenheizung und in stark frequentierten Bereichen wie Fluren oder Gewerberäumen, weil sich der Boden nicht bewegt.',
+          'Als Faustregel gilt: Wohnung vermieten oder schnell fertig werden – Klick-Vinyl. Maximale Robustheit und Fußbodenheizung – verkleben.',
         ],
       },
       {
-        h2: 'Diese Zusatzkosten werden oft vergessen',
+        h2: 'Untergrundvorbereitung – der unterschätzte Posten',
         paras: [
-          'Untergrundvorbereitung: Ausgleichen und Grundieren ist der Posten, der am häufigsten unterschätzt wird – ein ebener Untergrund entscheidet aber über das Ergebnis.',
-          'Rückbau des alten Bodens, Trittschalldämmung, Sockelleisten und Übergangsprofile summieren sich ebenfalls. Wer alles aus einer Hand vergibt, hat diese Posten von Anfang an im Festpreis.',
+          'Der häufigste Grund für spätere Probleme ist ein schlecht vorbereiteter Untergrund. Unebenheiten drücken sich durch, Restfeuchte im Estrich führt zu Schäden, loser Altbelag verhindert eine saubere Verlegung.',
+          'Je nach Zustand fallen Ausgleichsmasse, Grundierung, das Entfernen von Altbelägen oder eine Feuchtemessung an. Diese Arbeiten kosten extra, sind aber keine Option zum Weglassen – sie entscheiden über die Lebensdauer des Bodens.',
         ],
       },
       {
-        h2: 'Vinylboden verlegen im Raum Heilbronn',
+        h2: 'Diese Zusatzkosten kommen oft dazu',
         paras: [
-          'Wir verlegen Vinyl-, Design- und Klickböden im gesamten Raum Heilbronn – inklusive Untergrundvorbereitung, Trittschall und Sockelleisten. Sauber verlegt, fair kalkuliert, mit verbindlichem Festpreis vor Baubeginn.',
-          'Gerade für Kapitalanleger und Vermieter übernehmen wir auch die komplette Wohnung – auf Wunsch mit Malerarbeiten und Übergabe im selben Zug.',
+          'Neben Material und Verlegung summieren sich Posten, die in Online-Rechnern gern fehlen: Rückbau und Entsorgung des alten Bodens, Trittschalldämmung, Sockelleisten, Übergangs- und Abschlussprofile sowie das Kürzen von Türblättern.',
+          'Wer alles aus einer Hand vergibt, hat diese Posten von Anfang an im Festpreis – statt am Ende von Nachträgen überrascht zu werden. Das ist gerade bei der Vermietung wichtig, wo die Kalkulation stimmen muss.',
+        ],
+      },
+      {
+        h2: 'Rechenbeispiel: Vinylboden für eine 70-m²-Wohnung',
+        paras: [
+          'Ein grobes Beispiel zur Orientierung: Bei rund 45 € pro m² für verlegten Vinylboden inklusive üblicher Nebenarbeiten landet eine 70-m²-Wohnung bei etwa 3.150 €. Bei einfacherem Material und wenig Untergrundaufwand kann es deutlich darunter liegen, bei hochwertigem Designboden und aufwändigem Untergrund darüber.',
+          'Solche Zahlen ersetzen kein Angebot – sie helfen nur, ein Gefühl für die Größenordnung zu bekommen. Den echten Preis bekommen Sie erst nach der Aufnahme vor Ort.',
+        ],
+      },
+      {
+        h2: 'Vinylboden verlegen lassen im Raum Heilbronn',
+        paras: [
+          'Wir verlegen Vinyl-, Design- und Klickböden im gesamten Raum Heilbronn – inklusive Untergrundvorbereitung, Trittschalldämmung und Sockelleisten. Sauber verlegt, fair kalkuliert und mit verbindlichem Festpreis vor Baubeginn.',
+          'Gerade für Kapitalanleger und Vermieter übernehmen wir auf Wunsch die komplette Wohnung – Boden, Malerarbeiten und Übergabe im selben Zug, mit einem einzigen Ansprechpartner.',
         ],
       },
     ],
   },
   {
     slug: 'laminat-oder-vinyl',
-    metaTitle: 'Laminat oder Vinyl? Der ehrliche Vergleich | SE Handwerk',
+    metaTitle: 'Laminat oder Vinyl? Der ehrliche Vergleich 2026 | SE Handwerk',
     metaDescription:
-      'Laminat oder Vinyl – was ist besser für Wohnung, Vermietung und Fußbodenheizung? Wasserfestigkeit, Optik, Kosten und Haltbarkeit im ehrlichen Vergleich.',
+      'Laminat oder Vinyl – was ist besser für Wohnung, Vermietung und Fußbodenheizung? Aufbau, Wasserfestigkeit, Optik, Haltbarkeit und Kosten im ehrlichen Vergleich.',
     title: 'Laminat oder Vinyl? Der ehrliche Vergleich',
     excerpt:
-      'Beide sehen gut aus und sind bezahlbar – doch bei Wasser, Fußbodenheizung und Vermietung gibt es klare Unterschiede. Der nüchterne Vergleich.',
+      'Beide sehen gut aus und sind bezahlbar – doch bei Wasser, Fußbodenheizung, Haltbarkeit und Vermietung gibt es klare Unterschiede. Der nüchterne Vergleich mit Entscheidungshilfe.',
     datum: '2026-07-22',
     kategorie: 'Bodenarbeiten',
-    lesezeit: '6 Min.',
+    lesezeit: '8 Min.',
+    bild: 'nachher.jpg',
+    bildAlt: 'Symbolbild: heller Wohnraum mit modernem Bodenbelag',
     relatedLeistung: 'bodenarbeiten',
     sections: [
       {
-        h2: 'Der schnelle Überblick',
+        h2: 'Laminat oder Vinyl – der schnelle Überblick',
         paras: [
-          'Laminat ist ein Holzwerkstoff mit Dekorschicht – warm in der Optik, angenehm im Preis. Vinyl (Designboden) besteht aus Kunststoff, ist elastischer, leiser und vor allem feuchtigkeitsbeständig.',
-          'Für die meisten Wohnungen ist Vinyl heute die robustere Wahl – Laminat bleibt eine gute Option, wo es trocken ist und das Budget knapp.',
+          'Laminat ist ein Holzwerkstoff mit aufgedruckter Dekorschicht – warm in der Optik und angenehm im Preis. Vinyl (oft als Designboden verkauft) besteht aus Kunststoff, ist elastischer, leiser beim Begehen und vor allem feuchtigkeitsbeständig.',
+          'Für die meisten Wohnungen ist Vinyl heute die robustere und pflegeleichtere Wahl. Laminat bleibt aber eine gute Option, wo es trocken ist und das Budget knapp bleiben soll.',
+        ],
+      },
+      {
+        h2: 'Aufbau und Material: Woraus bestehen die Böden?',
+        paras: [
+          'Laminat besteht aus einer HDF-Trägerplatte, der Dekorschicht und einem transparenten Overlay als Schutz. Das macht es hart und trittfest, aber empfindlich gegenüber stehendem Wasser.',
+          'Vinyl gibt es als reinen Kunststoffboden oder als Rigid-/SPC-Variante mit mineralischem Trägerkern. Diese modernen Vinylböden sind besonders formstabil, wasserfest und dennoch fußwarm.',
         ],
       },
       {
         h2: 'Wasserfestigkeit: der wichtigste Unterschied',
         paras: [
-          'Vinyl verträgt Feuchtigkeit deutlich besser und ist oft sogar für Bad und Küche geeignet. Laminat quillt bei stehendem Wasser an den Kanten auf – in Feuchträumen ist es keine gute Wahl.',
-          'Für Vermietung spricht das klar für Vinyl: Es verzeiht mehr und hält bei Mieterwechseln länger schön.',
+          'Hier trennen sich die beiden klar: Vinyl verträgt Feuchtigkeit deutlich besser und ist – je nach Produkt – sogar für Küche und Bad geeignet. Verschüttetes Wasser ist kein Problem, solange es nicht tagelang steht.',
+          'Laminat quillt bei stehendem Wasser an den Kanten auf und ist dann meist irreparabel. In Feuchträumen und dort, wo häufig gewischt wird, ist Laminat keine gute Wahl.',
+          'Für die Vermietung spricht das klar für Vinyl: Es verzeiht Missgeschicke und sieht auch nach mehreren Mieterwechseln noch ordentlich aus.',
+        ],
+      },
+      {
+        h2: 'Fußbodenheizung: Was ist geeignet?',
+        paras: [
+          'Beide Böden lassen sich grundsätzlich auf Fußbodenheizung verlegen – entscheidend sind die Herstellerfreigabe und ein geringer Wärmedurchlasswiderstand.',
+          'Vinyl, besonders vollflächig verklebt, leitet die Wärme sehr gut und ist hier oft die effizientere Wahl. Bei Laminat sollten Sie auf ein ausdrücklich für Fußbodenheizung freigegebenes Produkt achten.',
         ],
       },
       {
         h2: 'Optik, Haptik und Trittschall',
         paras: [
-          'Laminat wirkt oft etwas härter und lauter, Vinyl fußwarm und leise. Beide gibt es in überzeugenden Holz- und Steindekoren.',
-          'Mit passender Trittschalldämmung lassen sich beide Böden gut in Mehrfamilienhäusern einsetzen.',
+          'Laminat wirkt beim Begehen oft etwas härter und lauter, Vinyl fußwarm und leise. Beide Beläge gibt es in überzeugenden Holz- und Steindekoren, moderne Produkte sind optisch kaum von echtem Parkett zu unterscheiden.',
+          'Für ruhige Räume und Mehrfamilienhäuser ist die passende Trittschalldämmung Pflicht – damit lassen sich beide Böden angenehm leise verlegen.',
+        ],
+      },
+      {
+        h2: 'Strapazierfähigkeit und Lebensdauer',
+        paras: [
+          'Laminat ist kratz- und druckfest, reagiert aber empfindlich auf Nässe und lässt sich nicht ausbessern. Vinyl ist unempfindlicher gegenüber Feuchtigkeit und Dellen, kann bei scharfen Gegenständen aber eher einschneiden.',
+          'Über die Nutzungsdauer gerechnet liegen beide bei guter Qualität nah beieinander. Wichtiger als der Materialtyp ist die Qualität des konkreten Produkts – und ein fachgerecht vorbereiteter Untergrund.',
         ],
       },
       {
         h2: 'Kosten im Vergleich',
         paras: [
-          'Laminat ist beim Material meist etwas günstiger, Vinyl liegt leicht darüber – der Abstand ist über die Nutzungsdauer aber gering. Entscheidend sind Qualität und Untergrund, nicht der Materialtyp allein.',
-          'Konkrete Zahlen zu Vinyl finden Sie in unserem Beitrag zu den Kosten fürs Vinyl verlegen.',
+          'Laminat ist beim Material meist etwas günstiger, Vinyl liegt leicht darüber. Über die Lebensdauer ist der Unterschied gering – Qualität und Untergrund entscheiden mehr über den Preis als der Materialtyp allein.',
+          'Konkrete Zahlen zu Material und Verlegung finden Sie in unserem Beitrag zu den Kosten fürs Vinylboden verlegen.',
         ],
       },
       {
-        h2: 'Fazit: Was lohnt sich wann?',
+        h2: 'Laminat oder Vinyl für die Vermietung?',
+        paras: [
+          'Für Mietwohnungen empfehlen wir in den meisten Fällen Vinyl: Es hält Feuchtigkeit, Reinigung und Mieterwechsel besser aus und reduziert Instandhaltungskosten über die Jahre.',
+          'Laminat kann sinnvoll sein, wenn das Budget sehr eng ist und die Räume trocken bleiben – etwa Schlaf- und Wohnräume ohne Wasseranschluss.',
+        ],
+      },
+      {
+        h2: 'Fazit: Entscheidungshilfe',
         paras: [
           'Vermietung, Feuchträume, Fußbodenheizung, hohe Beanspruchung: Vinyl. Trockener Wohnraum mit knappem Budget: Laminat kann passen.',
-          'Unsicher, was zu Ihrem Objekt im Raum Heilbronn passt? Wir beraten bei der Aufnahme vor Ort ehrlich – und verlegen beides fachgerecht.',
+          'Unsicher, was zu Ihrem Objekt im Raum Heilbronn passt? Wir beraten bei der Aufnahme vor Ort ehrlich, empfehlen nur, was wirklich sinnvoll ist – und verlegen beides fachgerecht, inklusive Untergrund und Sockelleisten.',
         ],
       },
     ],
   },
   {
     slug: 'wohnung-sanieren-vor-vermietung',
-    metaTitle: 'Wohnung sanieren vor Vermietung: Ablauf & Reihenfolge | SE Handwerk',
+    metaTitle: 'Wohnung sanieren vor Vermietung: Ablauf, Reihenfolge & Kosten | SE Handwerk',
     metaDescription:
-      'Wohnung vor der Vermietung sanieren: die richtige Reihenfolge der Gewerke, realistischer Zeitplan, Kostenfaktoren und wie Sie mit einem Ansprechpartner Zeit sparen.',
+      'Wohnung vor der Vermietung sanieren: die richtige Reihenfolge der Gewerke, welche Arbeiten sich lohnen, Kostenfaktoren, realistischer Zeitplan und typische Fehler.',
     title: 'Wohnung sanieren vor der Vermietung: Ablauf & Reihenfolge',
     excerpt:
-      'Wer die Gewerke in der falschen Reihenfolge beauftragt, verliert Wochen. So läuft eine Sanierung vor der Vermietung wirklich sauber ab.',
+      'Wer die Gewerke in der falschen Reihenfolge beauftragt, verliert Wochen. So läuft eine Sanierung vor der Vermietung wirklich sauber ab – mit Reihenfolge, Kosten und Zeitplan.',
     datum: '2026-07-22',
     kategorie: 'Sanierung',
-    lesezeit: '7 Min.',
+    lesezeit: '9 Min.',
+    bild: 'leistung-komplett.jpg',
+    bildAlt: 'Symbolbild: frisch sanierte, bezugsfertige Wohnung',
     relatedLeistung: 'komplettsanierung',
     sections: [
       {
         h2: 'Warum die Reihenfolge über die Bauzeit entscheidet',
         paras: [
-          'Die häufigste Ursache für Verzögerungen ist nicht ein einzelnes Gewerk, sondern die Koordination. Kommt der Bodenleger, bevor der Estrich trocken ist, oder der Maler, während der Trockenbau noch läuft, steht die Baustelle.',
-          'Eine durchdachte Reihenfolge spart mehr Zeit als jedes einzelne Gewerk schneller auszuführen.',
+          'Die häufigste Ursache für Verzögerungen bei einer Wohnungssanierung ist nicht ein einzelnes Gewerk, sondern die Koordination. Kommt der Bodenleger, bevor der Estrich trocken ist, oder der Maler, während der Trockenbau noch staubt, steht die Baustelle still und Termine platzen.',
+          'Eine durchdachte Reihenfolge spart mehr Zeit als der Versuch, jedes einzelne Gewerk schneller auszuführen. Wer vor der Vermietung saniert, arbeitet außerdem gegen die Uhr: Jede Woche Leerstand kostet Miete.',
         ],
       },
       {
         h2: 'Die richtige Reihenfolge – Schritt für Schritt',
         paras: [
-          '1. Rückbau und Entkernung: alter Boden, Tapeten, defekte Einbauten raus. 2. Roharbeiten: Trockenbau, Elektro- und Sanitärleitungen dort, wo Wände offen sind.',
-          '3. Putz, Estrich und Trocknung. 4. Fliesen und Bad. 5. Bodenbeläge. 6. Malerarbeiten und Feinschliff. 7. Montagen, Endreinigung und Übergabe. Erst am Ende kommt, was empfindlich ist.',
+          'Schritt 1 – Rückbau und Entkernung: alter Boden, Tapeten, defekte Einbauten und Altbeläge raus, inklusive Entsorgung. Schritt 2 – Roharbeiten: Trockenbau, Elektro- und Sanitärleitungen dort verlegen, wo Wände noch offen sind.',
+          'Schritt 3 – Putz, Spachtel, Estrich und die nötige Trocknungszeit. Schritt 4 – Fliesen und Bad. Schritt 5 – Bodenbeläge wie Vinyl, Laminat oder Parkett.',
+          'Schritt 6 – Malerarbeiten und Feinschliff. Schritt 7 – Montagen (Türen, Leisten, Küche), Endreinigung und Übergabe. Alles Empfindliche kommt bewusst zum Schluss.',
         ],
       },
       {
         h2: 'Was zuerst, was zuletzt?',
         paras: [
-          'Faustregel: von oben nach unten und von grob nach fein. Decke und Wände vor dem Boden, Staubintensives vor Empfindlichem, Malerarbeiten kurz vor Schluss.',
-          'Der Boden kommt bewusst spät – so wird er nicht durch nachfolgende Gewerke beschädigt.',
+          'Zwei Faustregeln helfen: von oben nach unten und von grob nach fein. Decke und Wände werden vor dem Boden fertig, staubintensive Arbeiten vor den empfindlichen, Malerarbeiten kurz vor Schluss.',
+          'Der Boden kommt bewusst spät, damit er nicht durch nachfolgende Gewerke verkratzt oder verschmutzt wird. Wird diese Reihenfolge missachtet, zahlt man oft doppelt – einmal für die Arbeit, einmal für die Ausbesserung.',
         ],
       },
       {
-        h2: 'Kostenfaktoren im Blick',
+        h2: 'Welche Arbeiten lohnen sich vor der Vermietung wirklich?',
         paras: [
-          'Die Kosten hängen von Zustand, Größe und Ausstattung ab. Größter Hebel ist meist das Bad, gefolgt von Boden und Malerarbeiten.',
-          'Ein verbindlicher Festpreis vor Baubeginn schützt vor Nachträgen – wichtig, wenn Sie mit spitzer Feder kalkulieren, etwa als Kapitalanleger.',
+          'Nicht jede Wohnung braucht eine Komplettsanierung. Den größten Effekt auf Vermietbarkeit und Miete haben meist frische Wände (Malerarbeiten), ein neuer, pflegeleichter Boden und ein zeitgemäßes Bad.',
+          'Diese drei Bereiche entscheiden über den ersten Eindruck bei Besichtigungen. Küche, Elektrik und Fenster sind je nach Zustand zusätzliche Hebel, aber teurer – hier lohnt eine ehrliche Abwägung von Aufwand und Mietwirkung.',
+        ],
+      },
+      {
+        h2: 'Kostenfaktoren im Überblick',
+        paras: [
+          'Die Kosten einer Sanierung hängen von Zustand, Größe und Ausstattung ab. Der größte Hebel ist meist das Bad, gefolgt von Boden und Malerarbeiten. Auch der Umfang des Rückbaus und die Entsorgung schlagen zu Buche.',
+          'Ein verbindlicher Festpreis vor Baubeginn schützt vor Nachträgen aus dem Nichts – besonders wichtig, wenn Sie als Kapitalanleger mit spitzer Feder rechnen und die Rendite stimmen muss.',
+        ],
+      },
+      {
+        h2: 'Budget realistisch planen',
+        paras: [
+          'Kalkulieren Sie neben den reinen Handwerkskosten immer einen Puffer für Überraschungen ein – gerade in Altbauten kommen hinter Boden und Wand manchmal Dinge zum Vorschein, die vorher niemand sehen konnte.',
+          'Ein transparentes, aufgeschlüsseltes Angebot hilft, Prioritäten zu setzen: Was muss jetzt gemacht werden, was kann warten? So bleibt das Budget unter Kontrolle.',
         ],
       },
       {
         h2: 'Realistischer Zeitplan statt Wunschdenken',
         paras: [
-          'Eine typische Wohnungssanierung dauert einige Wochen. Seriös ist ein Taktplan, der Puffer enthält – auf Baustellen kann sich immer etwas verschieben.',
-          'Entscheidend ist Transparenz: Wenn sich etwas verschiebt, sollten Sie es zuerst erfahren, nicht zuletzt.',
+          'Eine typische Wohnungssanierung dauert je nach Umfang einige Wochen. Seriös ist ein Taktplan, der Puffer enthält – auf Baustellen kann sich immer etwas verschieben, etwa durch Trocknungszeiten oder Lieferengpässe.',
+          'Entscheidend ist Transparenz: Wenn sich etwas verschiebt, sollten Sie es zuerst erfahren, nicht zuletzt. Ehrliche Planung schlägt schöngerechnete Termine, die dann doch nicht halten.',
         ],
       },
       {
-        h2: 'Aus einer Hand im Raum Heilbronn',
+        h2: 'Häufige Fehler bei der Sanierung vor Vermietung',
         paras: [
-          'Wir übernehmen die komplette Sanierung im Raum Heilbronn – alle Gewerke koordiniert, ein Ansprechpartner, ein Festpreis. Gerade für auswärtige Eigentümer und Erben, die nicht vor Ort sein können.',
-          'Sie bekommen regelmäßige Updates und am Ende eine bezugsfertige, vermietbare Wohnung.',
+          'Zu den teuersten Fehlern gehören: Gewerke in der falschen Reihenfolge beauftragen, mehrere Firmen selbst koordinieren müssen, an der Untergrundvorbereitung sparen und ohne Festpreis starten.',
+          'Wer alle Gewerke einzeln vergibt, wird schnell zum unbezahlten Bauleiter – mit fünf Ansprechpartnern, die aufeinander warten. Genau das lässt sich vermeiden.',
+        ],
+      },
+      {
+        h2: 'Sanierung aus einer Hand im Raum Heilbronn',
+        paras: [
+          'Wir übernehmen die komplette Sanierung im Raum Heilbronn – alle Gewerke koordiniert, ein Ansprechpartner, ein verbindlicher Festpreis. Gerade für auswärtige Eigentümer, Kapitalanleger und Erben, die nicht ständig vor Ort sein können.',
+          'Sie bekommen regelmäßige Updates und am Ende eine bezugsfertige, vermietbare Wohnung – ohne selbst zum Bauleiter zu werden.',
         ],
       },
     ],
