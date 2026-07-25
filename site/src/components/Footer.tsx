@@ -60,6 +60,9 @@ export default function Footer() {
               <a href="/#ablauf" onClick={onSection('#ablauf')} className="footer-link" style={colLink}>
                 Ablauf
               </a>
+              <Link to="/blog" className="footer-link" style={colLink}>
+                Ratgeber
+              </Link>
               <Link to="/ueber-uns" className="footer-link" style={colLink}>
                 Über uns
               </Link>

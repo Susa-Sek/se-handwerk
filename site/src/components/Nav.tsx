@@ -75,6 +75,9 @@ RAUM HEILBRONN
             <a href="/#eigentuemer" onClick={go('#eigentuemer')} className="nav-link" style={linkStyle}>
               Für Eigentümer
             </a>
+            <Link to="/blog" className="nav-link" style={linkStyle} onClick={() => setOpen(false)}>
+              Ratgeber
+            </Link>
             <Link to="/ueber-uns" className="nav-link" style={linkStyle} onClick={() => setOpen(false)}>
               Über uns
             </Link>
@@ -158,6 +161,14 @@ RAUM HEILBRONN
             {l.label}
           </a>
         ))}
+        <Link
+          to="/blog"
+          onClick={() => setOpen(false)}
+          className="nav-link"
+          style={{ ...linkStyle, display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(245,242,236,0.06)' }}
+        >
+          Ratgeber
+        </Link>
         <Link
           to="/ueber-uns"
           onClick={() => setOpen(false)}

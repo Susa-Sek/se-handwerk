@@ -1,8 +1,11 @@
 import Reveal from '../components/Reveal';
 import { LegalHead, LegalSection, legalStyles as s } from '../components/legal';
+import { useSeo } from '../hooks/useSeo';
+import { seitenSeo } from '../content';
 
 // Content ported 1:1 from the live sehandwerk.de Impressum (Angaben gemäß § 5 TMG).
 export default function Impressum() {
+  useSeo(seitenSeo.impressum);
   return (
     <main>
       <LegalHead kicker="Angaben gemäß § 5 TMG" title="Impressum" />

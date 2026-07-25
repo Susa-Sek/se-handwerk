@@ -1,5 +1,7 @@
 import Reveal from '../components/Reveal';
 import ContactForm from '../components/ContactForm';
+import { useSeo } from '../hooks/useSeo';
+import { seitenSeo } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 const container: React.CSSProperties = { maxWidth: 1240, margin: '0 auto', padding: '0 40px' };
@@ -17,6 +19,7 @@ const rows = [
 ];
 
 export default function Kontakt() {
+  useSeo(seitenSeo.kontakt);
   return (
     <main>
       <section style={{ background: 'var(--paper)', padding: '150px 0 112px' }}>
