@@ -8,8 +8,6 @@
     { "source": "/kontakt.html", "destination": "/kontakt", "permanent": true },
     { "source": "/danke", "destination": "/kontakt", "permanent": true },
     { "source": "/danke.html", "destination": "/kontakt", "permanent": true },
-    { "source": "/blog", "destination": "/", "permanent": true },
-    { "source": "/blog/:path*", "destination": "/", "permanent": true },
     { "source": "/bodenarbeiten{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
     { "source": "/bodenschutz-gummiboden{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
     { "source": "/wohnungsuebergabe{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
