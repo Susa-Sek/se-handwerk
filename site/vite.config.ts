@@ -13,7 +13,7 @@ const esc = (s: string) =>
 // prerendered semantic content. React (createRoot) replaces #root on load.
 function render(
   shell: string,
-  opts: { title: string; description: string; url: string; body: string; jsonLd?: unknown; keepHead?: boolean },
+  opts: { title: string; description: string; url: string; body: string; jsonLd?: unknown; keepHead?: boolean; image?: string },
 ) {
   const headExtra: string[] = []
   if (!opts.keepHead) {
@@ -26,6 +26,7 @@ function render(
       `<meta property="og:title" content="${esc(opts.title)}" />`,
       `<meta property="og:description" content="${esc(opts.description)}" />`,
     )
+    if (opts.image) headExtra.push(`<meta property="og:image" content="${opts.image}" />`, `<meta name="twitter:image" content="${opts.image}" />`)
   }
   if (opts.jsonLd) headExtra.push(`<script type="application/ld+json">${JSON.stringify(opts.jsonLd)}</script>`)
 
@@ -38,6 +39,12 @@ function render(
       .replace(/<meta\s+property="og:url"[^>]*>/, '')
       .replace(/<meta\s+property="og:title"[\s\S]*?\/>/, '')
       .replace(/<meta\s+property="og:description"[\s\S]*?\/>/, '')
+    // give the page its own OG image (strip the default so it does not win)
+    if (opts.image) {
+      html = html
+        .replace(/<meta\s+property="og:image"[^>]*>/, '')
+        .replace(/<meta\s+name="twitter:image"[^>]*>/, '')
+    }
   }
   return html
     .replace('</head>', headExtra.join('\n') + '\n</head>')
@@ -157,7 +164,7 @@ ${s.intro ? `<p>${esc(s.intro)}</p>` : ''}
       const blogBody = `${MAIN_OPEN}
 <h1>Ratgeber rund um Sanierung &amp; Renovierung</h1>
 <p>Ehrliche Praxis-Tipps zu Kosten, Abläufen und Materialien aus dem Raum Heilbronn.</p>
-<ul>${blogPosts.map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a> — ${esc(p.excerpt)}</li>`).join('')}</ul>
+<ul>${blogPosts.map((p) => `<li><a href="/blog/${p.slug}"><img src="/images/${p.bild}" alt="${esc(p.bildAlt)}" width="480" height="300" loading="lazy" /><br />${esc(p.title)}</a> — ${esc(p.excerpt)}</li>`).join('')}</ul>
 </main>`
       write('/blog', render(shell, {
         title: 'Ratgeber & Blog – Sanierung, Boden & Renovierung | SE Handwerk',
@@ -198,12 +205,13 @@ ${s.intro ? `<p>${esc(s.intro)}</p>` : ''}
 <nav aria-label="Brotkrumen"><a href="/">Start</a> / <a href="/blog">Ratgeber</a> / <span>${esc(p.title)}</span></nav>
 <p>${esc(p.kategorie)} · ${esc(p.lesezeit)}</p>
 <h1>${esc(p.title)}</h1>
+<figure><img src="/images/${p.bild}" alt="${esc(p.bildAlt)}" width="1200" height="675" /><figcaption>Symbolbild</figcaption></figure>
 <p>${esc(p.excerpt)}</p>
 ${p.sections.map((sec) => `<section><h2>${esc(sec.h2)}</h2>${sec.paras.map((x) => `<p>${esc(x)}</p>`).join('')}</section>`).join('')}
 ${p.relatedLeistung ? `<p><a href="/leistungen/${p.relatedLeistung}">Passende Leistung ansehen</a></p>` : ''}
 <p><a href="/blog">Alle Beiträge</a> · <a href="/#kontakt">Projekt besprechen</a></p>
 </main>`
-        write(path, render(shell, { title: p.metaTitle, description: p.metaDescription, url, body, jsonLd }))
+        write(path, render(shell, { title: p.metaTitle, description: p.metaDescription, url, body, jsonLd, image: SITE + '/images/' + p.bild }))
       }
 
       // eslint-disable-next-line no-console
