@@ -7,7 +7,7 @@ import { dirname, join } from 'node:path';
 
 if (process.env.NODE_USE_ENV_PROXY == null && (process.env.HTTPS_PROXY || process.env.https_proxy)) {
   const { spawnSync } = await import('node:child_process');
-  const r = spawnSync(process.execPath, ['--env-file=.env.local', fileURLToPath(import.meta.url)], {
+  const r = spawnSync(process.execPath, ['--env-file=.env.local', fileURLToPath(import.meta.url), ...process.argv.slice(2)], {
     stdio: 'inherit',
     env: { ...process.env, NODE_USE_ENV_PROXY: '1' },
   });
@@ -24,7 +24,7 @@ const STYLE =
   'honest materials, true-to-life — not a glossy render, not oversaturated, subtle real texture. ' +
   'No people, no tools in hands, no text, no watermark, no logos.';
 
-const SLOTS = [
+const ALL = [
   {
     name: 'blog-vinyl.jpg',
     prompt: `${STYLE} Wide 16:9. Close-up of modern light oak-look vinyl design plank flooring freshly installed in a bright room, clean tight seams, warm daylight raking across the surface, shallow depth of field.`,
@@ -37,7 +37,22 @@ const SLOTS = [
     name: 'blog-sanierung.jpg',
     prompt: `${STYLE} Wide 16:9. A freshly renovated bright empty apartment interior at handover, matte white walls, new light oak floor, a large window with soft daylight, clean and move-in ready.`,
   },
+  {
+    name: 'blog-bad.jpg',
+    prompt: `${STYLE} Wide 16:9. A freshly renovated modern bathroom, large-format tiles, walk-in shower, matte fixtures, soft natural daylight from a frosted window, clean and dry, no clutter.`,
+  },
+  {
+    name: 'blog-trockenbau.jpg',
+    prompt: `${STYLE} Wide 16:9. Interior mid-renovation: a new metal-stud drywall partition with fresh plasterboard, one wall freshly plastered and smooth, soft daylight, calm and orderly, no people.`,
+  },
+  {
+    name: 'blog-detail.jpg',
+    prompt: `${STYLE} Wide 16:9. Close-up detail of a fresh skirting board meeting a new light oak floor in a bright renovated room, precise clean joint, soft daylight, shallow depth of field.`,
+  },
 ];
+// Only generate images that don't exist yet (pass names as args, or default to missing-only).
+const wanted = process.argv.slice(2);
+const SLOTS = wanted.length ? ALL.filter((s) => wanted.includes(s.name)) : ALL;
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 async function createTask(prompt) {

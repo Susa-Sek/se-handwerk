@@ -208,7 +208,7 @@ ${s.intro ? `<p>${esc(s.intro)}</p>` : ''}
 <figure><img src="/images/${p.bild}" alt="${esc(p.bildAlt)}" width="1200" height="675" /><figcaption>Symbolbild</figcaption></figure>
 <p>${esc(p.excerpt)}</p>
 <section><h2>Das Wichtigste in Kürze</h2><ul>${p.kurz.map((k) => `<li>${esc(k)}</li>`).join('')}</ul></section>
-${p.sections.map((sec) => `<section><h2>${esc(sec.h2)}</h2>${sec.paras.map((x) => `<p>${esc(x)}</p>`).join('')}${sec.list ? `<ul>${sec.list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>` : ''}</section>`).join('')}
+${p.sections.map((sec) => `<section><h2>${esc(sec.h2)}</h2>${sec.paras.map((x) => `<p>${esc(x)}</p>`).join('')}${sec.list ? `<ul>${sec.list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>` : ''}${sec.bild ? `<figure><img src="/images/${sec.bild}" alt="${esc(sec.bildAlt ?? '')}" width="1200" height="675" loading="lazy" /><figcaption>Symbolbild</figcaption></figure>` : ''}</section>`).join('')}
 ${p.relatedLeistung ? `<p><a href="/leistungen/${p.relatedLeistung}">Passende Leistung ansehen</a></p>` : ''}
 <p><a href="/blog">Alle Beiträge</a> · <a href="/#kontakt">Projekt besprechen</a></p>
 </main>`
