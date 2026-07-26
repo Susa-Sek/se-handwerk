@@ -280,6 +280,8 @@ export interface BlogSection {
   h2: string;
   paras: string[];
   list?: string[]; // optionale Aufzählung nach den Absätzen
+  bild?: string; // optionales Inline-Bild nach dem Abschnitt (Symbolbild)
+  bildAlt?: string;
 }
 export interface BlogPost {
   slug: string;
@@ -305,7 +307,7 @@ export const blogPosts: BlogPost[] = [
       'Was kostet Vinylboden verlegen pro m²? Preise für Material und Verlegung, Klick-Vinyl vs. vollverklebt, Untergrund, Zusatzkosten und ein Rechenbeispiel für 70 m².',
     title: 'Vinylboden verlegen: Kosten pro m² im Überblick',
     excerpt:
-      'Material, Verlegung, Untergrund: Was Vinylboden wirklich pro Quadratmeter kostet – mit realistischen Richtwerten, Rechenbeispiel und den Posten, die man gern vergisst.',
+      'Ich stehe oft daneben, wenn der neue Boden reinkommt – und höre immer dieselbe Frage: Was kostet das jetzt pro Quadratmeter? Hier sind ehrliche Zahlen, ein Rechenbeispiel und die Posten, die auf keinem Online-Rechner stehen.',
     datum: '2026-07-22',
     kategorie: 'Bodenarbeiten',
     lesezeit: '8 Min.',
@@ -322,9 +324,9 @@ export const blogPosts: BlogPost[] = [
       {
         h2: 'Was kostet Vinylboden verlegen pro m²?',
         paras: [
-          'Vinylboden verlegen zu lassen kostet – Material plus Arbeit zusammengerechnet – als grober Richtwert meist zwischen etwa 30 und 70 € pro Quadratmeter. Die Spanne ist deshalb so breit, weil drei Dinge stark ins Gewicht fallen: die Qualität des Vinylbodens, der Zustand des Untergrunds und die Verlegeart (Klick-Vinyl oder vollflächig verklebt).',
-          'Für eine einfache, gute Ausführung im Wohnbereich landen viele Projekte im mittleren Bereich dieser Spanne. Nach oben offen wird es bei sehr hochwertigen Designböden, aufwändiger Untergrundvorbereitung oder kleinteiligen Grundrissen mit vielen Zuschnitten.',
-          'Wichtig vorab: Das sind Marktrichtwerte zur Orientierung – kein Angebot. Den verbindlichen Preis für Ihr Objekt bekommen Sie erst nach einer kurzen Aufnahme vor Ort, dann aber als klaren Festpreis ohne Nachträge.',
+          'Kurz gesagt: Material und Arbeit zusammen liegen meist zwischen 30 und 70 Euro pro Quadratmeter. Warum die Spanne so breit ist? Drei Dinge machen den Preis – die Qualität des Vinyls, der Zustand des Untergrunds und die Frage, ob geklickt oder verklebt wird.',
+          'Die meisten Wohnungen landen in der Mitte. Teuer wird es bei dickem Designboden, einem Untergrund, der erst gerichtet werden muss, oder einem verwinkelten Grundriss mit vielen Zuschnitten.',
+          'Damit wir uns richtig verstehen: Das sind Marktpreise zur Orientierung, kein Angebot. Was Ihr Boden kostet, weiß ich erst, wenn ich den Raum gesehen habe – dann aber als Festpreis, ohne böse Nachträge.',
         ],
       },
       {
@@ -360,14 +362,16 @@ export const blogPosts: BlogPost[] = [
       {
         h2: 'Diese Zusatzkosten kommen oft dazu',
         paras: [
-          'Neben Material und Verlegung summieren sich Posten, die in Online-Rechnern gern fehlen:',
+          'Jetzt kommen die Posten, die auf keinem Online-Rechner auftauchen — und am Ende trotzdem auf der Rechnung stehen:',
         ],
         list: [
           'Rückbau und Entsorgung des alten Bodens',
           'Trittschalldämmung',
           'Sockelleisten sowie Übergangs- und Abschlussprofile',
-          'Kürzen von Türblättern nach dem neuen Bodenaufbau',
+          'Kürzen von Türblättern, weil der neue Aufbau höher ist',
         ],
+        bild: 'blog-detail.jpg',
+        bildAlt: 'Symbolbild: saubere Sockelleiste am Übergang zum neuen Boden',
       },
       {
         h2: 'Rechenbeispiel: Vinylboden für eine 70-m²-Wohnung',
@@ -392,7 +396,7 @@ export const blogPosts: BlogPost[] = [
       'Laminat oder Vinyl – was ist besser für Wohnung, Vermietung und Fußbodenheizung? Aufbau, Wasserfestigkeit, Optik, Haltbarkeit und Kosten im ehrlichen Vergleich.',
     title: 'Laminat oder Vinyl? Der ehrliche Vergleich',
     excerpt:
-      'Beide sehen gut aus und sind bezahlbar – doch bei Wasser, Fußbodenheizung, Haltbarkeit und Vermietung gibt es klare Unterschiede. Der nüchterne Vergleich mit Entscheidungshilfe.',
+      'Laminat oder Vinyl – die Frage bekomme ich auf fast jeder Baustelle. Beide sehen gut aus, beide sind bezahlbar. Aber bei Wasser, Fußbodenheizung und Vermietung trennt sich die Spreu vom Weizen. Hier ist mein ehrlicher Vergleich.',
     datum: '2026-07-22',
     kategorie: 'Bodenarbeiten',
     lesezeit: '8 Min.',
@@ -409,8 +413,8 @@ export const blogPosts: BlogPost[] = [
       {
         h2: 'Laminat oder Vinyl – der schnelle Überblick',
         paras: [
-          'Laminat ist ein Holzwerkstoff mit aufgedruckter Dekorschicht – warm in der Optik und angenehm im Preis. Vinyl (oft als Designboden verkauft) besteht aus Kunststoff, ist elastischer, leiser beim Begehen und vor allem feuchtigkeitsbeständig.',
-          'Für die meisten Wohnungen ist Vinyl heute die robustere und pflegeleichtere Wahl. Laminat bleibt aber eine gute Option, wo es trocken ist und das Budget knapp bleiben soll.',
+          'Laminat ist im Kern Holz mit einer aufgedruckten Dekorschicht – warm anzusehen, günstig zu haben. Vinyl, oft als Designboden verkauft, ist Kunststoff: elastischer, leiser und vor allem eines – wasserfest.',
+          'Ehrlich gesagt: Für die meisten Wohnungen ist Vinyl heute die robustere Wahl. Laminat hat trotzdem seine Berechtigung – nämlich da, wo es trocken bleibt und jeder Euro zählt.',
         ],
       },
       {
@@ -441,6 +445,8 @@ export const blogPosts: BlogPost[] = [
           'Laminat wirkt beim Begehen oft etwas härter und lauter, Vinyl fußwarm und leise. Beide Beläge gibt es in überzeugenden Holz- und Steindekoren, moderne Produkte sind optisch kaum von echtem Parkett zu unterscheiden.',
           'Für ruhige Räume und Mehrfamilienhäuser ist die passende Trittschalldämmung Pflicht – damit lassen sich beide Böden angenehm leise verlegen.',
         ],
+        bild: 'nachher.jpg',
+        bildAlt: 'Symbolbild: heller Wohnraum mit modernem Holzoptik-Boden',
       },
       {
         h2: 'Strapazierfähigkeit und Lebensdauer',
@@ -479,7 +485,7 @@ export const blogPosts: BlogPost[] = [
       'Wohnung vor der Vermietung sanieren: die richtige Reihenfolge der Gewerke, welche Arbeiten sich lohnen, Kostenfaktoren, realistischer Zeitplan und typische Fehler.',
     title: 'Wohnung sanieren vor der Vermietung: Ablauf & Reihenfolge',
     excerpt:
-      'Wer die Gewerke in der falschen Reihenfolge beauftragt, verliert Wochen. So läuft eine Sanierung vor der Vermietung wirklich sauber ab – mit Reihenfolge, Kosten und Zeitplan.',
+      'Ich habe genug Baustellen gesehen, die aus dem Ruder liefen – fast immer war es dieselbe Ursache: die falsche Reihenfolge. So läuft eine Sanierung vor der Vermietung wirklich sauber, mit Reihenfolge, Kosten und einem ehrlichen Zeitplan.',
     datum: '2026-07-22',
     kategorie: 'Sanierung',
     lesezeit: '9 Min.',
@@ -496,8 +502,8 @@ export const blogPosts: BlogPost[] = [
       {
         h2: 'Warum die Reihenfolge über die Bauzeit entscheidet',
         paras: [
-          'Die häufigste Ursache für Verzögerungen bei einer Wohnungssanierung ist nicht ein einzelnes Gewerk, sondern die Koordination. Kommt der Bodenleger, bevor der Estrich trocken ist, oder der Maler, während der Trockenbau noch staubt, steht die Baustelle still und Termine platzen.',
-          'Eine durchdachte Reihenfolge spart mehr Zeit als der Versuch, jedes einzelne Gewerk schneller auszuführen. Wer vor der Vermietung saniert, arbeitet außerdem gegen die Uhr: Jede Woche Leerstand kostet Miete.',
+          'Wenn eine Sanierung aus dem Ruder läuft, liegt es selten an einem einzelnen Handwerker. Es liegt an der Koordination. Der Bodenleger kommt, aber der Estrich ist noch feucht. Der Maler steht vor der Tür, während der Trockenbau noch staubt. Und plötzlich steht alles.',
+          'Die richtige Reihenfolge spart mehr Zeit als jeder Handwerker, der schneller arbeitet. Und wer vor der Vermietung saniert, rechnet gegen die Uhr – jede Woche Leerstand ist Miete, die niemand bezahlt.',
         ],
       },
       {
@@ -514,6 +520,8 @@ export const blogPosts: BlogPost[] = [
           'Malerarbeiten und Feinschliff.',
           'Montagen, Endreinigung und Übergabe – alles Empfindliche zum Schluss.',
         ],
+        bild: 'leistung-komplett.jpg',
+        bildAlt: 'Symbolbild: Wohnung mitten in der Sanierung',
       },
       {
         h2: 'Was zuerst, was zuletzt?',
@@ -567,6 +575,192 @@ export const blogPosts: BlogPost[] = [
         paras: [
           'Wir übernehmen die komplette Sanierung im Raum Heilbronn – alle Gewerke koordiniert, ein Ansprechpartner, ein verbindlicher Festpreis. Gerade für auswärtige Eigentümer, Kapitalanleger und Erben, die nicht ständig vor Ort sein können.',
           'Sie bekommen regelmäßige Updates und am Ende eine bezugsfertige, vermietbare Wohnung – ohne selbst zum Bauleiter zu werden.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'badsanierung-kosten',
+    metaTitle: 'Badsanierung Kosten: Was ein neues Bad kostet 2026 | SE Handwerk',
+    metaDescription:
+      'Was kostet eine Badsanierung? Richtwerte für kleines und großes Bad, die größten Kostentreiber, wo Sparen sich lohnt – und warum ein Festpreis vor bösen Überraschungen schützt.',
+    title: 'Badsanierung Kosten: Was ein neues Bad wirklich kostet',
+    excerpt:
+      'Kein Gewerk sprengt das Budget so gern wie das Bad. Ich erkläre, was ein neues Bad realistisch kostet, wo das Geld hingeht – und an welcher Stelle Sparen sich später rächt.',
+    datum: '2026-07-24',
+    kategorie: 'Bad & Sanitär',
+    lesezeit: '7 Min.',
+    bild: 'blog-bad.jpg',
+    bildAlt: 'Symbolbild: frisch saniertes modernes Badezimmer',
+    kurz: [
+      'Eine Badsanierung kostet je nach Größe und Ausstattung grob 8.000 bis 25.000 Euro.',
+      'Die größten Kostentreiber sind Fliesen, Sanitärobjekte und das Verlegen von Leitungen.',
+      'Ein kleines Gäste-WC ist deutlich günstiger als ein Familienbad mit Wanne und Dusche.',
+      'An der Abdichtung zu sparen ist der teuerste Fehler überhaupt.',
+    ],
+    relatedLeistung: 'bad-sanitaer',
+    sections: [
+      {
+        h2: 'Was kostet eine Badsanierung?',
+        paras: [
+          'Fangen wir mit der Zahl an, die alle suchen: Ein komplett saniertes Bad kostet grob zwischen 8.000 und 25.000 Euro. Ein kleines Gäste-WC liegt darunter, ein großes Familienbad mit Wanne, bodengleicher Dusche und schönen Fliesen darüber.',
+          'Warum die Spanne so groß ist? Weil im Bad mehr Gewerke zusammenkommen als in jedem anderen Raum – Rückbau, Sanitär, Fliesen, Trockenbau, Maler. Jedes davon dreht an der Rechnung.',
+          'Wie immer gilt: Richtwerte, kein Angebot. Den echten Preis gibt es nach der Aufnahme vor Ort, dann als Festpreis.',
+        ],
+      },
+      {
+        h2: 'Die größten Kostentreiber im Bad',
+        paras: [
+          'Wenn ein Bad teuer wird, dann meist an diesen Stellen:',
+        ],
+        list: [
+          'Fliesen – Material und Verlegung, besonders bei großformatigen Platten.',
+          'Sanitärobjekte – WC, Waschtisch, Dusche, Armaturen; hier ist nach oben viel Luft.',
+          'Leitungen verlegen – neue Wasser- und Abflussleitungen sind reine Handarbeit.',
+          'Bodengleiche Dusche – schön, aber aufwändiger als eine einfache Duschtasse.',
+        ],
+        bild: 'leistung-bad.jpg',
+        bildAlt: 'Symbolbild: Detail eines modernen Bades',
+      },
+      {
+        h2: 'Kleines Bad, großes Bad – wo liegt der Unterschied?',
+        paras: [
+          'Ein 4-Quadratmeter-Gäste-WC und ein 12-Quadratmeter-Familienbad sind zwei verschiedene Baustellen. Nicht nur wegen der Fläche – im großen Bad kommen Wanne, ein zweites Becken und viel mehr Wandfläche zum Fliesen dazu.',
+          'Faustregel: Je mehr Objekte und je mehr gefliste Wand, desto teurer. Wer am Grundriss nichts ändert und die Leitungen liegen lässt, spart am meisten.',
+        ],
+      },
+      {
+        h2: 'Wo sich Sparen lohnt – und wo nicht',
+        paras: [
+          'Sparen können Sie bei der Ausstattung. Es muss nicht die Designer-Armatur sein; gute Standardserien halten genauso lange. Und wer den Grundriss beibehält, spart sich die teuren Leitungsarbeiten.',
+          'Nicht sparen sollten Sie an der Abdichtung und der Verarbeitung. Ein undichtes Bad ist der teuerste Fehler, den man machen kann – der Schaden zeigt sich erst Jahre später, meistens in der Wohnung darunter.',
+        ],
+      },
+      {
+        h2: 'Badsanierung im Raum Heilbronn – alles aus einer Hand',
+        paras: [
+          'Wir sanieren Bäder im Raum Heilbronn komplett: Rückbau, Fliesen, koordinierte Sanitärarbeiten, Trockenbau und Maler – ein Ansprechpartner, ein Festpreis. Sie müssen nicht fünf Firmen hinterhertelefonieren.',
+          'Bei der Aufnahme sagen wir ehrlich, was sinnvoll ist und was nicht – und was es kostet, bevor der erste Fliesenhammer fällt.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'trockenbau-kosten',
+    metaTitle: 'Trockenbau Kosten pro m²: Preise für Wände & Decken 2026 | SE Handwerk',
+    metaDescription:
+      'Was kostet Trockenbau pro m²? Preise für Trennwände, Vorwände und abgehängte Decken, was den Preis treibt und wann sich Trockenbau lohnt – vom Handwerksbetrieb erklärt.',
+    title: 'Trockenbau Kosten pro m²: Wände und Decken im Überblick',
+    excerpt:
+      'Eine Wand versetzen, ohne die Statik anzufassen? Genau dafür ist Trockenbau da. Ich zeige, was Trennwände, Vorwände und abgehängte Decken pro Quadratmeter kosten.',
+    datum: '2026-07-24',
+    kategorie: 'Wand & Decke',
+    lesezeit: '6 Min.',
+    bild: 'blog-trockenbau.jpg',
+    bildAlt: 'Symbolbild: Trockenbau-Ständerwand in der Renovierung',
+    kurz: [
+      'Eine einfache Trockenbauwand kostet grob 40 bis 80 Euro pro m², fertig verspachtelt.',
+      'Abgehängte Decken liegen meist bei rund 40 bis 70 Euro pro m².',
+      'Dämmung, doppelte Beplankung und Feuchtraumplatten treiben den Preis nach oben.',
+      'Trockenbau teilt Räume neu auf, ohne in die Statik einzugreifen.',
+    ],
+    relatedLeistung: 'wand-decke',
+    sections: [
+      {
+        h2: 'Was kostet Trockenbau pro m²?',
+        paras: [
+          'Für eine einfache, fertig verspachtelte Trockenbauwand rechnen Sie grob 40 bis 80 Euro pro Quadratmeter. Eine abgehängte Decke liegt meist bei 40 bis 70 Euro pro Quadratmeter.',
+          'Das ist Material plus Arbeit. Nach oben geht es, sobald Dämmung, doppelte Beplankung oder Feuchtraumplatten dazukommen. Nach unten, wenn es eine simple, gerade Wand ohne Extras ist.',
+          'Auch hier: Richtwerte, kein Angebot. Den festen Preis gibt es nach dem Blick vor Ort.',
+        ],
+      },
+      {
+        h2: 'Was den Preis beim Trockenbau treibt',
+        paras: [
+          'Trockenbau klingt simpel, ist im Detail aber unterschiedlich aufwändig. Diese Faktoren machen den Unterschied:',
+        ],
+        list: [
+          'Einfache oder doppelte Beplankung – für mehr Schallschutz und Stabilität.',
+          'Dämmung in der Wand, für Schall oder Wärme.',
+          'Feuchtraumplatten, wenn es ins Bad geht.',
+          'Aussparungen für Türen, Nischen und Technik.',
+          'Spachtelqualität: Q2 reicht unter Fliesen, unter Malerfarbe braucht es Q3 oder Q4.',
+        ],
+        bild: 'leistung-wand.jpg',
+        bildAlt: 'Symbolbild: frisch verspachtelte Wand',
+      },
+      {
+        h2: 'Wann sich Trockenbau lohnt',
+        paras: [
+          'Der große Vorteil: Mit Trockenbau teilen Sie Räume neu auf, ohne eine tragende Wand anzufassen. Aus einem großen Zimmer werden zwei, eine Vorwand versteckt Leitungen, eine abgehängte Decke schluckt Kabel und Technik.',
+          'Das geht schnell, staubarm und ohne die wochenlangen Trocknungszeiten des gemauerten Baus. Für Mietwohnungen und Umnutzungen ist das oft die cleverste Lösung.',
+        ],
+      },
+      {
+        h2: 'Trockenbau und Malerarbeiten im Raum Heilbronn',
+        paras: [
+          'Wir übernehmen Trockenbau, Ständerwände und abgehängte Decken im Raum Heilbronn – und die Malerarbeiten gleich mit. So passt die Spachtelqualität zur späteren Farbe, und niemand schiebt die Verantwortung auf den anderen.',
+          'Ob als Teil einer Sanierung oder als einzelner Auftrag: Sie bekommen einen Ansprechpartner und einen Festpreis.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'sanierung-raum-heilbronn',
+    metaTitle: 'Sanierung im Raum Heilbronn: Ablauf, Kosten & Ansprechpartner | SE Handwerk',
+    metaDescription:
+      'Sanierung im Raum Heilbronn – von Neckarsulm bis Stuttgart: Ablauf, Kosten, regionale Besonderheiten und warum ein Ansprechpartner vor Ort Zeit und Nerven spart.',
+    title: 'Sanierung im Raum Heilbronn: Was Eigentümer wissen sollten',
+    excerpt:
+      'Ob Altbau in der Heilbronner Innenstadt oder Anlegerwohnung in Neckarsulm – regional gibt es Besonderheiten, die eine Sanierung leichter oder schwerer machen. Ein Überblick aus der Praxis.',
+    datum: '2026-07-24',
+    kategorie: 'Sanierung',
+    lesezeit: '7 Min.',
+    bild: 'nachher.jpg',
+    bildAlt: 'Symbolbild: sanierter Wohnraum im Raum Heilbronn',
+    kurz: [
+      'Wir sanieren im gesamten Raum Heilbronn – von Neckarsulm über Sinsheim bis Stuttgart.',
+      'Gerade auswärtige Eigentümer und Kapitalanleger profitieren von einem Ansprechpartner vor Ort.',
+      'Der Altbaubestand der Region bringt eigene Themen mit: Feuchte, alte Leitungen, schiefe Wände.',
+      'Ein Festpreis und regelmäßige Updates ersetzen die ständige Anwesenheit auf der Baustelle.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Sanieren im Raum Heilbronn – die Ausgangslage',
+        paras: [
+          'Der Raum Heilbronn ist bunt gemischt: gründerzeitlicher Altbau, Nachkriegsbauten, dazu viele Anlegerwohnungen aus den Siebzigern und Achtzigern. Jede Epoche bringt ihre eigenen Überraschungen mit.',
+          'Im Altbau sind es oft Feuchte im Keller, alte Elektrik und Wände, die nicht im Lot stehen. In den jüngeren Bauten geht es meist um veraltete Bäder und Böden. Wer das kennt, plant von Anfang an realistischer.',
+        ],
+      },
+      {
+        h2: 'Von Neckarsulm bis Stuttgart – wo wir arbeiten',
+        paras: [
+          'Wir sind im gesamten Raum Heilbronn und Umgebung unterwegs: Heilbronn, Neckarsulm, Sinsheim, Bad Wimpfen, Eppingen und bis in den Großraum Stuttgart. Die kurzen Wege sind kein Nebendetail – sie halten die Baustelle in Bewegung.',
+          'Ein Handwerker aus der Region ist schneller da, wenn eine Entscheidung ansteht. Das klingt banal, entscheidet aber oft über eine Woche mehr oder weniger Bauzeit.',
+        ],
+        bild: 'bento-invest.jpg',
+        bildAlt: 'Symbolbild: sanierte Wohnung bei Dämmerung',
+      },
+      {
+        h2: 'Warum ein Ansprechpartner vor Ort Gold wert ist',
+        paras: [
+          'Viele unserer Kunden wohnen nicht in Heilbronn. Kapitalanleger aus München, Erben aus Hamburg, Eigentümer, die beruflich eingespannt sind. Für sie wäre die Sanierung aus der Ferne ein Vollzeitjob – wenn sie ihn selbst machen müssten.',
+          'Wir übernehmen die Steuerung vor Ort, koordinieren alle Gewerke und schicken regelmäßig Updates mit Fotos. Sie müssen nicht anreisen, um zu wissen, wo Ihr Projekt steht.',
+        ],
+      },
+      {
+        h2: 'Ablauf und Kosten – kurz gesagt',
+        paras: [
+          'Der Ablauf ist immer gleich: Aufnahme vor Ort, ein aufgeschlüsseltes Festpreis-Angebot, dann die Ausführung nach einem realistischen Taktplan. Verschiebt sich etwas, erfahren Sie es zuerst von uns.',
+          'Was es kostet, hängt vom Objekt ab – eine Anlegerwohnung, die vermietbar werden soll, ist etwas anderes als die Kernsanierung eines Altbaus. Konkrete Zahlen zu einzelnen Gewerken finden Sie in unseren anderen Ratgebern.',
+        ],
+      },
+      {
+        h2: 'Ihr Sanierungspartner im Raum Heilbronn',
+        paras: [
+          'Ob vermietbar machen, verkaufsfertig herrichten oder das eigene Zuhause modernisieren: Wir übernehmen die Sanierung im Raum Heilbronn komplett – alle Gewerke, ein Ansprechpartner, ein Festpreis.',
+          'Erzählen Sie uns kurz von Ihrem Objekt. Wir sehen es uns an und sagen ehrlich, was möglich ist.',
         ],
       },
     ],
