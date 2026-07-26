@@ -112,6 +112,19 @@ export default function BlogArticle() {
                     ))}
                   </ul>
                 )}
+                {sec.bild && (
+                  <figure style={{ margin: '30px 0 4px' }}>
+                    <img
+                      src={`/images/${sec.bild}`}
+                      alt={sec.bildAlt ?? ''}
+                      loading="lazy"
+                      style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
+                    />
+                    <figcaption style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: 'var(--t-dim)', marginTop: 8 }}>
+                      SYMBOLBILD
+                    </figcaption>
+                  </figure>
+                )}
               </Reveal>
             ))}
 
