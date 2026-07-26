@@ -279,6 +279,7 @@ export function getLeistung(slug: string | undefined): LeistungDetail | undefine
 export interface BlogSection {
   h2: string;
   paras: string[];
+  list?: string[]; // optionale Aufzählung nach den Absätzen
 }
 export interface BlogPost {
   slug: string;
@@ -291,6 +292,7 @@ export interface BlogPost {
   lesezeit: string;
   bild: string; // Hero-Bild (Dateiname in /images) — Symbolbild
   bildAlt: string;
+  kurz: string[]; // "Das Wichtigste in Kürze" — Vorspann-Kernaussagen
   sections: BlogSection[];
   relatedLeistung?: string;
 }
@@ -307,8 +309,14 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-07-22',
     kategorie: 'Bodenarbeiten',
     lesezeit: '8 Min.',
-    bild: 'leistung-boden.jpg',
+    bild: 'blog-vinyl.jpg',
     bildAlt: 'Symbolbild: frisch verlegter Vinyl-Designboden in einem hellen Wohnraum',
+    kurz: [
+      'Vinylboden verlegen kostet als Richtwert etwa 30–70 € pro m² (Material + Arbeit).',
+      'Das Material allein liegt bei rund 15–40 €/m², die Verlegung bei 15–30 €/m².',
+      'Klick-Vinyl ist günstiger und schneller, verklebtes Vinyl robuster – ideal bei Fußbodenheizung.',
+      'Die Untergrundvorbereitung ist der am häufigsten vergessene Kostenpunkt.',
+    ],
     relatedLeistung: 'bodenarbeiten',
     sections: [
       {
@@ -352,8 +360,13 @@ export const blogPosts: BlogPost[] = [
       {
         h2: 'Diese Zusatzkosten kommen oft dazu',
         paras: [
-          'Neben Material und Verlegung summieren sich Posten, die in Online-Rechnern gern fehlen: Rückbau und Entsorgung des alten Bodens, Trittschalldämmung, Sockelleisten, Übergangs- und Abschlussprofile sowie das Kürzen von Türblättern.',
-          'Wer alles aus einer Hand vergibt, hat diese Posten von Anfang an im Festpreis – statt am Ende von Nachträgen überrascht zu werden. Das ist gerade bei der Vermietung wichtig, wo die Kalkulation stimmen muss.',
+          'Neben Material und Verlegung summieren sich Posten, die in Online-Rechnern gern fehlen:',
+        ],
+        list: [
+          'Rückbau und Entsorgung des alten Bodens',
+          'Trittschalldämmung',
+          'Sockelleisten sowie Übergangs- und Abschlussprofile',
+          'Kürzen von Türblättern nach dem neuen Bodenaufbau',
         ],
       },
       {
@@ -383,8 +396,14 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-07-22',
     kategorie: 'Bodenarbeiten',
     lesezeit: '8 Min.',
-    bild: 'nachher.jpg',
-    bildAlt: 'Symbolbild: heller Wohnraum mit modernem Bodenbelag',
+    bild: 'blog-laminat-vinyl.jpg',
+    bildAlt: 'Symbolbild: Laminat- und Vinyl-Boden im Vergleich',
+    kurz: [
+      'Vinyl ist wasserfest und leise – die robustere Wahl für Vermietung und Feuchträume.',
+      'Laminat ist etwas günstiger, quillt aber bei stehendem Wasser auf.',
+      'Beide gehen auf Fußbodenheizung – bei Laminat auf ausdrückliche Freigabe achten.',
+      'Wichtiger als der Materialtyp: die Produktqualität und ein ebener Untergrund.',
+    ],
     relatedLeistung: 'bodenarbeiten',
     sections: [
       {
@@ -464,8 +483,14 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-07-22',
     kategorie: 'Sanierung',
     lesezeit: '9 Min.',
-    bild: 'leistung-komplett.jpg',
+    bild: 'blog-sanierung.jpg',
     bildAlt: 'Symbolbild: frisch sanierte, bezugsfertige Wohnung',
+    kurz: [
+      'Die richtige Reihenfolge der Gewerke spart mehr Zeit als jedes einzelne Gewerk zu beschleunigen.',
+      'Faustregel: von oben nach unten, von grob nach fein – der Boden kommt bewusst spät.',
+      'Den größten Effekt auf die Miete haben Wände, Boden und Bad.',
+      'Ein Festpreis vor Baubeginn und ein realistischer Zeitplan mit Puffer schützen vor Überraschungen.',
+    ],
     relatedLeistung: 'komplettsanierung',
     sections: [
       {
@@ -478,9 +503,16 @@ export const blogPosts: BlogPost[] = [
       {
         h2: 'Die richtige Reihenfolge – Schritt für Schritt',
         paras: [
-          'Schritt 1 – Rückbau und Entkernung: alter Boden, Tapeten, defekte Einbauten und Altbeläge raus, inklusive Entsorgung. Schritt 2 – Roharbeiten: Trockenbau, Elektro- und Sanitärleitungen dort verlegen, wo Wände noch offen sind.',
-          'Schritt 3 – Putz, Spachtel, Estrich und die nötige Trocknungszeit. Schritt 4 – Fliesen und Bad. Schritt 5 – Bodenbeläge wie Vinyl, Laminat oder Parkett.',
-          'Schritt 6 – Malerarbeiten und Feinschliff. Schritt 7 – Montagen (Türen, Leisten, Küche), Endreinigung und Übergabe. Alles Empfindliche kommt bewusst zum Schluss.',
+          'In dieser Reihenfolge greifen die Gewerke sauber ineinander, ohne aufeinander zu warten:',
+        ],
+        list: [
+          'Rückbau und Entkernung – alter Boden, Tapeten und defekte Einbauten raus, inklusive Entsorgung.',
+          'Roharbeiten – Trockenbau sowie Elektro- und Sanitärleitungen, solange die Wände offen sind.',
+          'Putz, Spachtel und Estrich – inklusive der nötigen Trocknungszeit.',
+          'Fliesen- und Badarbeiten.',
+          'Bodenbeläge wie Vinyl, Laminat oder Parkett.',
+          'Malerarbeiten und Feinschliff.',
+          'Montagen, Endreinigung und Übergabe – alles Empfindliche zum Schluss.',
         ],
       },
       {
@@ -521,8 +553,13 @@ export const blogPosts: BlogPost[] = [
       {
         h2: 'Häufige Fehler bei der Sanierung vor Vermietung',
         paras: [
-          'Zu den teuersten Fehlern gehören: Gewerke in der falschen Reihenfolge beauftragen, mehrere Firmen selbst koordinieren müssen, an der Untergrundvorbereitung sparen und ohne Festpreis starten.',
-          'Wer alle Gewerke einzeln vergibt, wird schnell zum unbezahlten Bauleiter – mit fünf Ansprechpartnern, die aufeinander warten. Genau das lässt sich vermeiden.',
+          'Wer alle Gewerke einzeln vergibt, wird schnell zum unbezahlten Bauleiter – mit fünf Ansprechpartnern, die aufeinander warten. Diese Fehler kosten am meisten:',
+        ],
+        list: [
+          'Gewerke in der falschen Reihenfolge beauftragen.',
+          'Mehrere Firmen selbst koordinieren müssen.',
+          'An der Untergrundvorbereitung sparen.',
+          'Ohne verbindlichen Festpreis starten.',
         ],
       },
       {
