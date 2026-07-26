@@ -128,6 +128,12 @@ export default function BlogArticle() {
               </Reveal>
             ))}
 
+            <Reveal style={{ marginTop: 30, paddingTop: 20, borderTop: '1px solid var(--line-ink)' }}>
+              <p style={{ fontFamily: mono, fontSize: 11.5, lineHeight: 1.7, color: 'var(--t-dim)' }}>
+                Hinweis: Dieser Ratgeber bietet allgemeine, unverbindliche Informationen nach bestem Wissen (Stand 2026). Preisangaben sind grobe Richtwerte und kein Angebot; sie können je nach Objekt, Zustand, Region und Ausführung erheblich abweichen. Der Beitrag ersetzt keine individuelle Fach-, Steuer- oder Rechtsberatung.
+              </p>
+            </Reveal>
+
             {related && (
               <Reveal style={{ marginTop: 20, borderTop: '1px solid var(--line-ink)', paddingTop: 26 }}>
                 <div style={{ fontFamily: mono, fontSize: 11, color: 'var(--t-dim)', letterSpacing: '0.06em', marginBottom: 10 }}>
