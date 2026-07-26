@@ -68,7 +68,7 @@ export default function BlogArticle() {
         </header>
 
         <div style={{ background: 'var(--paper)', padding: '48px 0 90px' }}>
-          <div style={container}>
+          <div style={{ ...container, maxWidth: 760 }}>
             <figure style={{ margin: '0 0 44px' }}>
               <img
                 src={`/images/${post.bild}`}
@@ -79,14 +79,39 @@ export default function BlogArticle() {
                 SYMBOLBILD
               </figcaption>
             </figure>
+
+            {/* Vorspann / Lead */}
+            <Reveal as="p" style={{ fontSize: 'clamp(19px,2.2vw,22px)', lineHeight: 1.55, color: 'var(--t-ink)', fontWeight: 500, marginBottom: 34 }}>
+              {post.excerpt}
+            </Reveal>
+
+            {/* Das Wichtigste in Kürze */}
+            <Reveal style={{ background: 'var(--white)', border: '1px solid var(--line-ink)', borderLeft: '3px solid var(--gold)', borderRadius: 12, padding: '24px 26px', marginBottom: 48 }}>
+              <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.08em', color: 'var(--gold-deep)', marginBottom: 14 }}>
+                DAS WICHTIGSTE IN KÜRZE
+              </div>
+              <ul style={{ margin: 0, paddingLeft: 20, display: 'grid', gap: 10 }}>
+                {post.kurz.map((k, i) => (
+                  <li key={i} style={{ fontSize: 15.5, lineHeight: 1.6, color: 'var(--t-sub)' }}>{k}</li>
+                ))}
+              </ul>
+            </Reveal>
+
             {post.sections.map((sec, i) => (
-              <Reveal key={sec.h2} delay={30 + i * 30} style={{ marginBottom: 40 }}>
-                <h2 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 'clamp(22px,2.6vw,32px)', letterSpacing: '-0.02em', color: 'var(--t-ink)', marginBottom: 16 }}>
+              <Reveal key={sec.h2} delay={20 + i * 20} style={{ marginBottom: 42 }}>
+                <h2 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 'clamp(22px,2.6vw,30px)', letterSpacing: '-0.02em', color: 'var(--t-ink)', marginBottom: 16 }}>
                   {sec.h2}
                 </h2>
                 {sec.paras.map((p, j) => (
-                  <p key={j} style={{ fontSize: 17, lineHeight: 1.75, color: 'var(--t-sub)', marginBottom: 14 }}>{p}</p>
+                  <p key={j} style={{ fontSize: 17.5, lineHeight: 1.8, color: 'var(--t-sub)', marginBottom: 16 }}>{p}</p>
                 ))}
+                {sec.list && (
+                  <ul style={{ margin: '4px 0 0', paddingLeft: 22, display: 'grid', gap: 11 }}>
+                    {sec.list.map((li, k) => (
+                      <li key={k} style={{ fontSize: 17, lineHeight: 1.65, color: 'var(--t-sub)' }}>{li}</li>
+                    ))}
+                  </ul>
+                )}
               </Reveal>
             ))}
 
