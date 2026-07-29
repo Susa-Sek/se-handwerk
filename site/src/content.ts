@@ -781,6 +781,210 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'generalunternehmer-sanierung',
+    metaTitle: 'Generalunternehmer für die Sanierung: Vorteile & Kosten | SE Handwerk',
+    metaDescription:
+      'Generalunternehmer für die Sanierung im Raum Heilbronn: alle Gewerke aus einer Hand, ein Ansprechpartner, ein Festpreis. Vorteile, Kosten und wann es sich lohnt.',
+    title: 'Generalunternehmer für die Sanierung: Lohnt sich alles aus einer Hand?',
+    excerpt:
+      'Fünf Firmen, fünf Rechnungen, fünf Ausreden – oder ein Ansprechpartner, der den Kopf hinhält. Ich erkläre, was ein Generalunternehmer bei der Sanierung wirklich bringt und wann er sich lohnt.',
+    datum: '2026-07-28',
+    kategorie: 'Sanierung',
+    lesezeit: '7 Min.',
+    bild: 'blog-gu.jpg',
+    bildAlt: 'Symbolbild: fertig sanierte Wohnung – das Ergebnis einer koordinierten Sanierung',
+    kurz: [
+      'Ein Generalunternehmer koordiniert alle Gewerke und ist Ihr einziger Ansprechpartner.',
+      'Sie bekommen einen Festpreis und einen Zeitplan statt fünf Einzelrechnungen.',
+      'Besonders sinnvoll für Kapitalanleger, Erben und alle, die nicht vor Ort sind.',
+      'Teurer ist das oft nicht – weil Koordination, Leerlauf und Wartezeiten wegfallen.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Was macht ein Generalunternehmer bei der Sanierung?',
+        paras: [
+          'Kurz gesagt: Ein Generalunternehmer nimmt Ihnen die Baustelle komplett ab. Er plant den Ablauf, beauftragt und koordiniert alle Gewerke – Boden, Trockenbau, Bad, Maler – und steht am Ende für das Ergebnis gerade. Sie haben einen Vertrag und einen Ansprechpartner statt fünf.',
+          'Bei uns heißt das: Sie rufen uns an, nicht den Bodenleger, den Maler und den Fliesenleger nacheinander. Wir halten die Fäden zusammen, Sie behalten den Überblick.',
+        ],
+      },
+      {
+        h2: 'Der Unterschied zur Einzelvergabe',
+        paras: [
+          'Bei der Einzelvergabe suchen Sie jeden Handwerker selbst, holen Angebote ein, stimmen Termine ab und passen auf, dass keiner dem anderen im Weg steht. Klingt machbar – bis der Estrich noch feucht ist und der Bodenleger schon vor der Tür steht.',
+          'Beim Generalunternehmer liegt genau diese Koordination bei einem. Das ist der eigentliche Unterschied: nicht die einzelne Handwerksleistung, sondern wer den Kopf hinhält, wenn Gewerke aufeinandertreffen.',
+        ],
+        bild: 'leistung-komplett.jpg',
+        bildAlt: 'Symbolbild: koordinierte Baustelle in der Sanierung',
+      },
+      {
+        h2: 'Die Vorteile – ehrlich betrachtet',
+        paras: [
+          'Ein Generalunternehmer ist kein Selbstzweck. Aber diese Punkte nehmen Ihnen spürbar Arbeit ab:',
+        ],
+        list: [
+          'Ein Ansprechpartner für alles – kein Hin und Her zwischen Firmen.',
+          'Ein verbindlicher Festpreis statt fünf Einzelrechnungen.',
+          'Ein abgestimmter Zeitplan, in dem die Gewerke ineinandergreifen.',
+          'Klare Verantwortung: Bei Fragen oder Mängeln gibt es keine Schnittstellen-Ausreden.',
+        ],
+      },
+      {
+        h2: 'Wann sich ein Generalunternehmer besonders lohnt',
+        paras: [
+          'Für alle, die nicht selbst auf der Baustelle stehen können oder wollen. Kapitalanleger, die mehrere Objekte betreuen. Erben, die eine Wohnung aus der Ferne herrichten. Berufstätige, die keine Zeit haben, drei Firmen zu koordinieren.',
+          'Wer dagegen handwerklich fit ist, Zeit hat und selbst gern koordiniert, kann mit Einzelvergabe glücklich werden. Ehrlich ist ehrlich.',
+        ],
+      },
+      {
+        h2: 'Kostet ein Generalunternehmer mehr?',
+        paras: [
+          'Der verbreitete Gedanke ist: Einer, der alles steuert, schlägt seinen Aufwand auf. Stimmt zum Teil – dafür fallen Leerlauf, Wartezeiten und die Fehler weg, die zwischen schlecht abgestimmten Firmen entstehen.',
+          'Ob es unterm Strich teurer oder günstiger ist, hängt vom Projekt ab und lässt sich seriös erst nach einer Aufnahme sagen. Was Sie in jedem Fall bekommen: einen Festpreis, mit dem Sie planen können.',
+        ],
+      },
+      {
+        h2: 'Sanierung aus einer Hand im Raum Heilbronn',
+        paras: [
+          'Genau das machen wir: Wir übernehmen Ihre Sanierung im Raum Heilbronn als Ihr Ansprechpartner, koordinieren alle Gewerke und liefern ein fertiges Ergebnis – vermietbar oder verkaufsfertig, wie Sie es brauchen.',
+          'Erzählen Sie uns von Ihrem Objekt. Wir sehen es uns an und sagen ehrlich, was aus einer Hand sinnvoll ist und was nicht.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'sanieren-im-sommer',
+    metaTitle: 'Sanieren im Sommer: Warum die warme Jahreszeit ideal ist | SE Handwerk',
+    metaDescription:
+      'Sanieren im Sommer: Estrich und Farbe trocknen schneller, durchgehend lüften, kürzere Bauzeit. Warum Sommer und Spätsommer gute Monate für die Renovierung sind.',
+    title: 'Sanieren im Sommer: Die unterschätzte beste Jahreszeit',
+    excerpt:
+      'Viele warten mit der Sanierung bis zum Frühjahr – dabei ist der Sommer oft die klügere Wahl. Warme, trockene Luft ist der beste Bautrockner, den es gibt.',
+    datum: '2026-07-28',
+    kategorie: 'Sanierung',
+    lesezeit: '6 Min.',
+    bild: 'blog-sommer.jpg',
+    bildAlt: 'Symbolbild: heller Raum in der Renovierung mit offenem Fenster im Sommer',
+    kurz: [
+      'Estrich, Putz und Farbe trocknen im Sommer schneller – das verkürzt die Bauzeit.',
+      'Durchgehend lüften und trocknen ist bei warmem, trockenem Wetter problemlos.',
+      'Wer über den Sommer saniert, hat die Wohnung im Herbst vermietfertig.',
+      'Bei Hitze haben manche Materialien Verarbeitungsgrenzen – das gehört in Fachhände.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Warum der Sommer gut zum Sanieren ist',
+        paras: [
+          'Der beste Bautrockner der Welt kostet nichts: warme, trockene Sommerluft. Was im Winter tagelang klamm bleibt, ist im Juli oft in einem Bruchteil der Zeit durch. Und Trocknung ist bei fast jeder Sanierung der heimliche Zeitfresser.',
+          'Dazu kommt: Man kann durchgehend lüften, ohne die halbe Wohnung auszukühlen. Staub und Gerüche ziehen schneller ab. Für alle Beteiligten ist das angenehmer.',
+        ],
+      },
+      {
+        h2: 'Trocknungszeiten: der unterschätzte Zeitfresser',
+        paras: [
+          'Estrich, Putz, Spachtel und Farbe müssen trocknen, bevor es weitergeht. Diese Wartezeiten stehen in keinem Angebot als eigener Posten, verlängern die Bauzeit aber real.',
+          'Im Sommer laufen sie schneller ab. Das heißt nicht, dass man Trocknungszeiten überspringen darf – wer zu früh weitermacht, riskiert Schäden. Aber der Puffer ist kleiner, und der ganze Ablauf wird enger.',
+        ],
+        bild: 'nachher.jpg',
+        bildAlt: 'Symbolbild: heller, frisch sanierter Raum',
+      },
+      {
+        h2: 'Über den Sommer sanieren, im Herbst vermieten',
+        paras: [
+          'Für Vermieter passt das Timing gut: Wer im Sommer saniert, hat die Wohnung im Herbst fertig – rechtzeitig zur Nachfrage von Studenten, Berufseinsteigern und Umzüglern zum Semester- und Jobstart.',
+          'Auch der Spätsommer ist noch ein gutes Fenster, bevor die feuchte, kalte Jahreszeit beginnt und die Trocknung wieder länger dauert.',
+        ],
+      },
+      {
+        h2: 'Worauf man im Hochsommer achten sollte',
+        paras: [
+          'Ganz ohne Haken ist der Sommer nicht. Bei sehr hohen Temperaturen haben manche Materialien und Klebstoffe Verarbeitungsgrenzen – Fliesenkleber zum Beispiel zieht schneller an, manche Produkte sollten nicht in der prallen Sonne verarbeitet werden.',
+          'Das ist kein Grund zu warten, sondern einer, es Fachleute machen zu lassen, die die Datenblätter kennen. Wir planen die Reihenfolge so, dass die Hitze mitspielt, statt zu stören.',
+        ],
+      },
+      {
+        h2: 'Jetzt sanieren im Raum Heilbronn',
+        paras: [
+          'Wenn Sie ohnehin dieses Jahr sanieren wollen: Der Sommer ist ein guter Zeitpunkt, nicht der schlechteste. Wir übernehmen die komplette Sanierung im Raum Heilbronn – aus einer Hand, mit einem realistischen Taktplan.',
+          'Sagen Sie uns, bis wann es fertig sein soll. Wir sagen ehrlich, ob das über den Sommer machbar ist.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'wohnung-sanieren-mieterwechsel',
+    metaTitle: 'Wohnung beim Mieterwechsel sanieren: Leerstand clever nutzen | SE Handwerk',
+    metaDescription:
+      'Mieterwechsel im Sommer? Die Leerstandszeit zwischen zwei Mietern optimal für die Sanierung nutzen: Ablauf, was sich lohnt und wie Sie schnell wieder vermieten.',
+    title: 'Wohnung beim Mieterwechsel sanieren: Leerstand clever nutzen',
+    excerpt:
+      'Der Sommer ist Umzugszeit – und damit die beste Gelegenheit, eine Wohnung zwischen zwei Mietern herzurichten. Ich zeige, wie Sie das kurze Zeitfenster optimal nutzen.',
+    datum: '2026-07-28',
+    kategorie: 'Sanierung',
+    lesezeit: '6 Min.',
+    bild: 'nachher.jpg',
+    bildAlt: 'Symbolbild: leere, frisch hergerichtete Wohnung vor der Neuvermietung',
+    kurz: [
+      'Die Leerstandszeit beim Mieterwechsel ist das ideale Fenster für Renovierung.',
+      'Frische Wände, ein neuer Boden und ein aufgefrischtes Bad wirken am stärksten.',
+      'Ein Ansprechpartner und ein enger Zeitplan halten den Leerstand kurz.',
+      'Jede Woche weniger Leerstand ist Miete, die Sie nicht verlieren.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Warum der Mieterwechsel die beste Gelegenheit ist',
+        paras: [
+          'Eine bewohnte Wohnung zu sanieren ist Stückwerk – ein Zimmer nach dem anderen, Möbel rücken, Rücksicht nehmen. Steht die Wohnung dagegen leer, kann man durcharbeiten. Das ist schneller, sauberer und am Ende günstiger.',
+          'Genau dieses Fenster entsteht beim Mieterwechsel. Im Sommer, der klassischen Umzugszeit, besonders oft – und wer es nutzt, spart sich später den Ärger im bewohnten Zustand.',
+        ],
+      },
+      {
+        h2: 'Das Zeitfenster clever nutzen',
+        paras: [
+          'Der Fehler, den ich am häufigsten sehe: Man wartet, bis der alte Mieter raus ist, und fängt dann erst an zu planen. Da sind schon Wochen verloren.',
+          'Besser: Sobald die Kündigung da ist, das Objekt anschauen, das Angebot machen, Material und Termine vorbereiten. Dann kann es losgehen, sobald der Schlüssel zurückkommt – und nicht drei Wochen später.',
+        ],
+        bild: 'blog-detail.jpg',
+        bildAlt: 'Symbolbild: Detail einer frisch renovierten Wohnung',
+      },
+      {
+        h2: 'Was sich für die Neuvermietung lohnt',
+        paras: [
+          'Nicht alles muss neu. Den größten Effekt auf den ersten Eindruck – und damit auf die Miete – haben erfahrungsgemäß diese Arbeiten:',
+        ],
+        list: [
+          'Wände streichen: frische, helle Wände wirken sofort.',
+          'Boden erneuern oder aufarbeiten, wo er abgenutzt ist.',
+          'Bad und Fugen auffrischen, wo es günstig geht.',
+          'Kleinreparaturen: klemmende Türen, lose Leisten, defekte Silikonfugen.',
+        ],
+      },
+      {
+        h2: 'Leerstand kurz halten – so geht es',
+        paras: [
+          'Jede Woche Leerstand kostet Miete. Deshalb zählt beim Mieterwechsel Tempo, ohne dass die Qualität leidet. Ein Ansprechpartner, der alle Gewerke koordiniert, und ein enger, realistischer Zeitplan sind hier Gold wert.',
+          'Wir bereiten alles so vor, dass ab Schlüsselübergabe durchgearbeitet werden kann – und Sie die Wohnung so früh wie möglich wieder inserieren können.',
+        ],
+      },
+      {
+        h2: 'Kurz zum Rechtlichen',
+        paras: [
+          'Was Sie von der alten Kaution einbehalten dürfen, welche Schönheitsreparaturen der Mieter schuldet und was Sache des Vermieters ist – das hängt am Mietvertrag und an der aktuellen Rechtslage. Klären Sie das im Zweifel mit Ihrer Hausverwaltung oder einem Fachanwalt für Mietrecht.',
+          'Wir kümmern uns um die Handwerksleistung, nicht um die Rechtsberatung – das gehört klar getrennt.',
+        ],
+      },
+      {
+        h2: 'Mieterwechsel-Sanierung im Raum Heilbronn',
+        paras: [
+          'Wir richten Wohnungen im Raum Heilbronn zwischen zwei Mietern her – vom frischen Anstrich bis zur kompletten Auffrischung, aus einer Hand und mit einem Ansprechpartner.',
+          'Melden Sie sich am besten, sobald die Kündigung da ist. Je früher wir schauen, desto kürzer bleibt der Leerstand.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
