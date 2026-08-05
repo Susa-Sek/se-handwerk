@@ -57,6 +57,14 @@ const ALL = [
     name: 'blog-sommer.jpg',
     prompt: `${STYLE} Wide 16:9. Bright empty room mid-renovation in summer, a large open window with green trees outside and strong warm summer daylight streaming in, new light floor, fresh white walls, airy and dry.`,
   },
+  {
+    name: 'blog-maler.jpg',
+    prompt: `${STYLE} Wide 16:9. A freshly painted smooth matte white interior wall in a bright empty room, faint roller texture, a crisp clean masking edge along the ceiling, soft even daylight.`,
+  },
+  {
+    name: 'blog-estrich.jpg',
+    prompt: `${STYLE} Wide 16:9. A fresh grey cement screed floor drying in an empty renovated room, matte even surface, bare plastered walls, soft daylight from a window.`,
+  },
 ];
 // Only generate images that don't exist yet (pass names as args, or default to missing-only).
 const wanted = process.argv.slice(2);
