@@ -985,6 +985,271 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'malerkosten-pro-qm',
+    metaTitle: 'Malerkosten pro m²: Was Wände streichen lassen kostet 2026 | SE Handwerk',
+    metaDescription:
+      'Malerkosten pro m²: Was kostet es, Wände streichen zu lassen? Richtwerte für Streichen, Spachteln und Tapezieren, was den Preis treibt und wo Sie sparen können.',
+    title: 'Malerkosten pro m²: Was Wände streichen lassen kostet',
+    excerpt:
+      'Streichen kann doch jeder, oder? Kann man selbst machen – oder machen lassen und die Wochenenden behalten. Ich zeige, was der Maler pro Quadratmeter kostet und woran der Preis hängt.',
+    datum: '2026-07-29',
+    kategorie: 'Wand & Decke',
+    lesezeit: '6 Min.',
+    bild: 'blog-maler.jpg',
+    bildAlt: 'Symbolbild: frisch gestrichene weiße Wand mit sauberer Kante',
+    kurz: [
+      'Wände streichen lassen kostet grob 8 bis 20 Euro pro m² Wandfläche.',
+      'Spachteln, Grundieren und Vorarbeiten kommen je nach Zustand obendrauf.',
+      'Gerechnet wird nach Wand- und Deckenfläche, nicht nach Bodenfläche.',
+      'Tapeten entfernen, Risse und dunkle Altfarben treiben den Preis nach oben.',
+    ],
+    relatedLeistung: 'wand-decke',
+    sections: [
+      {
+        h2: 'Was kostet es, Wände streichen zu lassen?',
+        paras: [
+          'Als Richtwert liegen die Malerkosten fürs reine Streichen bei etwa 8 bis 20 Euro pro Quadratmeter Wandfläche. Klingt überschaubar – bis man merkt, wie viel Wand eine Wohnung wirklich hat.',
+          'Eine 70-Quadratmeter-Wohnung bringt schnell 200 Quadratmeter Wand- und Deckenfläche auf die Waage. Das erklärt, warum Streichen in der Summe mehr kostet, als viele erwarten. Und wie immer: Richtwerte, kein Angebot.',
+        ],
+      },
+      {
+        h2: 'Wie wird die Fläche überhaupt berechnet?',
+        paras: [
+          'Maler rechnen nach zu streichender Fläche – Wände plus Decken, große Fenster und Türen abgezogen. Als grobe Faustregel nimmt man oft das Zweieinhalb- bis Dreifache der Wohnfläche.',
+          'Die Quadratmeterzahl aus dem Mietvertrag ist also nur der Anfang. Für einen belastbaren Preis schaut man sich die Räume an – Höhe, Zustand und Schnitt machen den Unterschied.',
+        ],
+        bild: 'blog-maler.jpg',
+        bildAlt: 'Symbolbild: hell gestrichener Raum',
+      },
+      {
+        h2: 'Was den Malerpreis treibt',
+        paras: [
+          'Streichen ist nicht gleich streichen. Diese Punkte entscheiden, ob Sie am unteren oder oberen Ende landen:',
+        ],
+        list: [
+          'Zustand der Wände – glatt und intakt oder rissig und uneben.',
+          'Spachteln und Grundieren als Vorarbeit.',
+          'Tapeten entfernen oder neu tapezieren.',
+          'Farbwechsel von dunkel auf hell, der mehrere Anstriche braucht.',
+          'Raumhöhe und Aufwand fürs Abkleben und Abdecken.',
+        ],
+      },
+      {
+        h2: 'Selbst streichen oder machen lassen?',
+        paras: [
+          'Eine leere Wohnung in Weiß kann man mit Zeit und Sorgfalt selbst streichen. Sobald es um Spachteln, Risse, hohe Decken oder ein sauberes Ergebnis unter Zeitdruck geht, lohnt der Fachbetrieb – schon wegen der Vorarbeit, die über das Endbild entscheidet.',
+          'Ehrlich gesagt: Den Unterschied zwischen selbst gestrichen und fachgerecht gemacht sieht man erst im Streiflicht. Für die Vermietung zählt genau das.',
+        ],
+      },
+      {
+        h2: 'Malerarbeiten im Raum Heilbronn',
+        paras: [
+          'Wir übernehmen Malerarbeiten im Raum Heilbronn – einzeln oder als Teil einer Sanierung, inklusive Spachteln und Vorarbeit. Fester Preis, sauberes Ergebnis, besenreine Übergabe.',
+          'Vor allem vor einer Vermietung machen frische, gleichmäßige Wände oft den größten Unterschied fürs kleinste Geld.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'estrich-trocknungszeit',
+    metaTitle: 'Estrich Trocknungszeit: Wie lange muss Estrich trocknen? | SE Handwerk',
+    metaDescription:
+      'Estrich Trocknungszeit: Wie lange muss Estrich trocknen, bevor der Boden verlegt wird? Faustregeln, Einflussfaktoren und warum nur die gemessene Restfeuchte zählt.',
+    title: 'Estrich Trocknungszeit: Wie lange muss Estrich wirklich trocknen?',
+    excerpt:
+      'Die eine Frage, die ganze Zeitpläne sprengt: Wann ist der Estrich endlich trocken? Ich erkläre die Faustregeln – und warum am Ende nur das Messgerät entscheidet.',
+    datum: '2026-07-29',
+    kategorie: 'Bodenarbeiten',
+    lesezeit: '6 Min.',
+    bild: 'blog-estrich.jpg',
+    bildAlt: 'Symbolbild: frischer Zementestrich in einem leeren Raum beim Trocknen',
+    kurz: [
+      'Faustregel Zementestrich: rund 1 Woche pro Zentimeter – aber nur für die ersten 4 cm.',
+      'Ab etwa 6 cm Dicke dauert es überproportional länger.',
+      'Entscheidend ist nicht die Zeit, sondern die gemessene Restfeuchte (CM-Messung).',
+      'Ein zu früh verlegter Boden kann sich später wölben oder ablösen.',
+    ],
+    relatedLeistung: 'bodenarbeiten',
+    sections: [
+      {
+        h2: 'Wie lange muss Estrich trocknen?',
+        paras: [
+          'Die klassische Faustregel für Zementestrich lautet: etwa eine Woche pro Zentimeter Dicke – aber nur für die ersten vier Zentimeter. Danach wird es überproportional länger. Ein sechs Zentimeter dicker Estrich braucht also spürbar mehr als sechs Wochen.',
+          'In der Praxis landet man bei üblichen Dicken schnell bei mehreren Wochen bis über zwei Monaten. Das ist eine grobe Orientierung, keine feste Zusage – die tatsächliche Zeit hängt von einigen Faktoren ab.',
+        ],
+      },
+      {
+        h2: 'Was die Trocknung beeinflusst',
+        paras: [
+          'Warum zwei gleich dicke Estriche unterschiedlich lange brauchen? Daran liegt es:',
+        ],
+        list: [
+          'Estrichart – Zementestrich trocknet langsamer als Calciumsulfat-/Anhydritestrich.',
+          'Dicke des Estrichs.',
+          'Temperatur und Luftfeuchtigkeit im Raum.',
+          'Lüften und, falls vorhanden, das fachgerechte Funktionsheizen der Fußbodenheizung.',
+          'Jahreszeit – im warmen, trockenen Sommer schneller, im nasskalten Winter langsamer.',
+        ],
+        bild: 'blog-estrich.jpg',
+        bildAlt: 'Symbolbild: trocknender Estrich in einem Rohbau',
+      },
+      {
+        h2: 'Warum die Zeit allein nicht reicht',
+        paras: [
+          'Auf die Faustregel allein sollte sich niemand verlassen. Was zählt, ist die Restfeuchte – gemessen, klassisch mit der CM-Messung. Erst wenn der Wert unter dem Grenzwert für den geplanten Belag liegt, darf verlegt werden.',
+          'Wer zu früh verlegt, riskiert, dass sich der Boden später wölbt, ablöst oder Feuchteschäden entstehen. Das ist der teuerste Weg, ein paar Tage zu sparen.',
+        ],
+      },
+      {
+        h2: 'Lässt sich die Trocknung beschleunigen?',
+        paras: [
+          'Ein bisschen. Gleichmäßiges Lüften hilft, ebenso das fachgerechte Funktionsheizen bei einer Fußbodenheizung. Bautrockner können unterstützen. Überstürzen lässt sich der Prozess aber nicht – Estrich braucht seine Zeit, egal wie eng der Terminplan ist.',
+          'Im Sommer arbeitet die warme, trockene Luft ohnehin für Sie. Mehr dazu in unserem Beitrag zum Sanieren im Sommer.',
+        ],
+      },
+      {
+        h2: 'Bodenarbeiten im Raum Heilbronn',
+        paras: [
+          'Wir planen den Bodenaufbau im Raum Heilbronn so, dass Trocknungszeiten von Anfang an im Taktplan stehen – und verlegen erst, wenn die Restfeuchte passt. Kein Risiko fürs schnelle Fertigwerden.',
+          'Klingt selbstverständlich, ist aber genau die Stelle, an der Baustellen ohne saubere Koordination auflaufen.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'barrierefreies-bad-kosten',
+    metaTitle: 'Barrierefreies Bad: Kosten, Umbau & Zuschüsse | SE Handwerk',
+    metaDescription:
+      'Barrierefreies Bad: Was kostet der Umbau zur bodengleichen Dusche und zum altersgerechten Bad? Richtwerte, Maßnahmen und mögliche Zuschüsse im Überblick.',
+    title: 'Barrierefreies Bad: Kosten, Umbau und mögliche Zuschüsse',
+    excerpt:
+      'Ein Bad, das auch mit 80 noch funktioniert – oder nach einer OP, oder mit Rollator. Ich zeige, was der barrierefreie Umbau kostet, welche Maßnahmen zählen und wo es Zuschüsse geben kann.',
+    datum: '2026-07-29',
+    kategorie: 'Bad & Sanitär',
+    lesezeit: '7 Min.',
+    bild: 'blog-bad.jpg',
+    bildAlt: 'Symbolbild: modernes Bad mit bodengleicher Dusche',
+    kurz: [
+      'Ein barrierearmer Badumbau beginnt grob ab einigen Tausend Euro, ein komplett barrierefreies Bad liegt deutlich höher.',
+      'Kernstück ist fast immer die bodengleiche, schwellenlose Dusche.',
+      'Für altersgerechte Umbauten gibt es je nach Fall Zuschüsse (z. B. Pflegekasse, KfW).',
+      'Förderbedingungen ändern sich – vor dem Umbau die aktuellen Konditionen prüfen.',
+    ],
+    relatedLeistung: 'bad-sanitaer',
+    sections: [
+      {
+        h2: 'Was kostet ein barrierefreies Bad?',
+        paras: [
+          'Das hängt davon ab, wie weit man geht. Eine einzelne Maßnahme wie der Umbau zur bodengleichen Dusche beginnt grob bei einigen Tausend Euro. Ein komplett barrierefreies Bad nach Norm – mit ausreichend Bewegungsfläche und unterfahrbarem Waschtisch – liegt deutlich darüber.',
+          'Wie immer sind das Richtwerte, kein Angebot. Bei der Aufnahme vor Ort sehen wir, was baulich möglich ist und was es kostet.',
+        ],
+      },
+      {
+        h2: 'Die wichtigsten Maßnahmen',
+        paras: [
+          'Nicht jedes Bad muss die volle Norm erfüllen. Diese Maßnahmen bringen im Alltag am meisten:',
+        ],
+        list: [
+          'Bodengleiche, schwellenlose Dusche.',
+          'Rutschhemmende Fliesen.',
+          'Haltegriffe und die dafür nötigen verstärkten Wände.',
+          'Unterfahrbarer Waschtisch, erhöhtes WC.',
+          'Breitere Türen und mehr Bewegungsfläche.',
+        ],
+        bild: 'leistung-bad.jpg',
+        bildAlt: 'Symbolbild: Detail eines modernen, barrierearmen Bades',
+      },
+      {
+        h2: 'Barrierefrei oder barrierearm – wo ist der Unterschied?',
+        paras: [
+          'Barrierefrei ist ein Begriff mit Norm dahinter (DIN 18040), mit festen Maßen für Bewegungsflächen. Vieles, was im Alltag hilft, ist streng genommen barrierearm: bodengleiche Dusche, Haltegriffe, rutschhemmende Fliesen. Für die meisten reicht genau das.',
+          'Was in Ihrem Fall sinnvoll und baulich machbar ist, klärt man am besten vor Ort – bei anerkanntem Pflegegrad gegebenenfalls zusammen mit der Pflegekasse.',
+        ],
+      },
+      {
+        h2: 'Zuschüsse und Förderung',
+        paras: [
+          'Für altersgerechte oder pflegebedingte Umbauten gibt es je nach Situation Zuschüsse – etwa von der Pflegekasse bei anerkanntem Pflegegrad oder über Förderprogramme wie die der KfW. Höhe und Bedingungen ändern sich aber immer wieder.',
+          'Deshalb ganz klar: Prüfen Sie die aktuellen Konditionen vor dem Umbau bei der jeweiligen Stelle oder lassen Sie sich dort beraten. Wir liefern die handwerkliche Leistung – die Förder- und Antragsberatung gehört in andere, kompetente Hände.',
+        ],
+      },
+      {
+        h2: 'Barrierefreies Bad im Raum Heilbronn',
+        paras: [
+          'Wir bauen Bäder im Raum Heilbronn barrierearm und barrierefrei um – von der bodengleichen Dusche bis zum kompletten altersgerechten Bad, aus einer Hand und mit einem Ansprechpartner.',
+          'Sagen Sie uns, worum es geht. Wir schauen vor Ort, was möglich ist, und sind ehrlich, wenn eine Idee baulich nicht aufgeht.',
+        ],
+      },
+    ],
+  },
+  {
+    slug: 'kernsanierung-kosten',
+    metaTitle: 'Kernsanierung Kosten: Was die Vollsanierung pro m² kostet | SE Handwerk',
+    metaDescription:
+      'Kernsanierung Kosten: Was kostet eine Vollsanierung pro m²? Richtwerte, was alles dazugehört, die größten Kostentreiber und wie Sie das Budget im Griff behalten.',
+    title: 'Kernsanierung Kosten: Was eine Vollsanierung wirklich kostet',
+    excerpt:
+      'Kernsanierung klingt nach einem Wort und einer Zahl – ist aber ein Dutzend Gewerke und ein weites Preisfeld. Ich ordne ein, womit Sie pro Quadratmeter rechnen sollten.',
+    datum: '2026-07-29',
+    kategorie: 'Sanierung',
+    lesezeit: '7 Min.',
+    bild: 'nachher.jpg',
+    bildAlt: 'Symbolbild: fertig kernsanierte, bezugsfertige Wohnung',
+    kurz: [
+      'Eine Kernsanierung kostet grob ab 600 bis über 1.500 Euro pro m² – je nach Zustand und Umfang.',
+      'Bei einer Kernsanierung wird bis auf den Rohbau zurückgebaut.',
+      'Größte Kostentreiber: Bäder, Elektrik, Leitungen und Grundriss-Änderungen.',
+      'Ohne Aufnahme vor Ort ist jede Zahl reine Schätzung.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Was kostet eine Kernsanierung pro m²?',
+        paras: [
+          'Grobe Orientierung: Eine Kernsanierung liegt oft irgendwo zwischen 600 und über 1.500 Euro pro Quadratmeter Wohnfläche. Die Spanne ist riesig, weil Kernsanierung fast alles heißen kann – von innen komplett neu bis zurück auf die tragenden Wände.',
+          'Bei einem Altbau, bei dem Leitungen, Elektrik und Bäder mit müssen, landet man schnell im oberen Bereich. Belastbar wird die Zahl erst nach einer Aufnahme. Vorher ist es Schätzen – ehrlich gesagt.',
+        ],
+      },
+      {
+        h2: 'Was gehört alles zu einer Kernsanierung?',
+        paras: [
+          'Kernsanierung heißt: Es geht ans Eingemachte. Typischerweise steckt das drin:',
+        ],
+        list: [
+          'Rückbau bis auf den Rohbau, inklusive Entsorgung.',
+          'Neue Elektrik und Leitungen für Wasser und Abwasser, teils Heizung.',
+          'Trockenbau, Putz und Estrich.',
+          'Neue Bäder und Böden.',
+          'Fenster und Türen, je nach Zustand.',
+          'Maler- und Endarbeiten bis zur Übergabe.',
+        ],
+        bild: 'leistung-komplett.jpg',
+        bildAlt: 'Symbolbild: Wohnung in der Kernsanierung',
+      },
+      {
+        h2: 'Die größten Kostentreiber',
+        paras: [
+          'Am meisten Geld verschlingen erfahrungsgemäß die Bäder, die Elektrik und alles mit Leitungen und Rohren – weil es Handarbeit ist und hinter alten Wänden gern Überraschungen wartet. Auch geänderte Grundrisse und der Umfang des Rückbaus schlagen durch.',
+          'Fenster und Fassade sind eigene große Posten, gehören aber nicht bei jeder Kernsanierung dazu. Was sinnvoll ist, hängt vom Objekt und Ihrem Ziel ab.',
+        ],
+      },
+      {
+        h2: 'Budget im Griff behalten',
+        paras: [
+          'Zwei Dinge helfen wirklich: ein verbindlicher Festpreis vor Baubeginn und ein Puffer für das, was hinter alten Wänden auftaucht. Gerade im Altbau kommt fast immer etwas, das vorher niemand sehen konnte.',
+          'Ein aufgeschlüsseltes Angebot zeigt, wo das Geld hingeht – und wo sich Prioritäten setzen lassen, ohne an der Substanz zu sparen.',
+        ],
+      },
+      {
+        h2: 'Kernsanierung im Raum Heilbronn – aus einer Hand',
+        paras: [
+          'Wir übernehmen Kernsanierungen im Raum Heilbronn komplett: alle Gewerke koordiniert, ein Ansprechpartner, ein Festpreis. Bei einem so großen Projekt ist das der Unterschied zwischen Bauleiter-Stress und einem fertigen Ergebnis.',
+          'Erzählen Sie uns von Ihrem Objekt – wir schauen es uns an und sagen ehrlich, was drinsteckt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
