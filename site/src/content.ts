@@ -1250,6 +1250,108 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'wohnungsuebergabe-checkliste',
+    metaTitle: 'Wohnungsübergabe: Checkliste für Eigentümer 2026 | SE Handwerk',
+    metaDescription:
+      'Wohnungsübergabe-Checkliste für Vermieter und Eigentümer: Übergabeprotokoll, Zählerstände, Mängel dokumentieren, Schlüssel, Kaution. Was rein muss – und wie Sie die Wohnung vor der Übergabe herrichten.',
+    title: 'Wohnungsübergabe: die Checkliste für Eigentümer',
+    excerpt:
+      'Zwei Parteien, ein enger Termin, oft schlechte Laune – und am Ende streiten alle um die Kaution. Dabei entscheidet sich das meiste an einem Blatt Papier: dem Übergabeprotokoll. Hier steht, was wirklich reingehört, und wo die teuren Fehler passieren.',
+    datum: '2026-08-06',
+    kategorie: 'Ratgeber',
+    lesezeit: '10 Min.',
+    bild: 'blog-uebergabe.jpg',
+    bildAlt: 'Symbolbild: leere frisch renovierte Wohnung bei der Übergabe, Schlüssel auf der Fensterbank',
+    kurz: [
+      'Das Übergabeprotokoll ist das wichtigste Dokument – ohne Unterschrift beider Seiten wird es im Streitfall wertlos.',
+      'Zählerstände (Strom, Gas, Wasser) mit Zählernummer notieren und am besten fotografieren.',
+      'Mängel einzeln und konkret festhalten – „Wohnung in Ordnung" hilft später niemandem.',
+      'Kleine Reparaturen und Malerarbeiten vor der Übergabe rechnen sich fast immer: Eine gepflegte Wohnung geht schneller wieder weg.',
+    ],
+    relatedLeistung: 'einzelgewerke',
+    sections: [
+      {
+        h2: 'Warum sich alles an einem Blatt Papier entscheidet',
+        paras: [
+          'Ich habe schon einige Wohnungsübergaben von der Seite miterlebt. Das Muster ist fast immer gleich: Es ist der letzte Tag im Monat, der Möbelwagen steht noch halb voll unten, jemand hat den Schlüssel verlegt, und niemand hat Zeit. Genau in dieser Hektik wird das Dokument ausgefüllt, um das später gestritten wird – das Übergabeprotokoll.',
+          'Ob Sie als Vermieter eine Wohnung zurücknehmen oder als Eigentümer ein gekauftes Objekt übernehmen: Dieser eine Termin legt fest, wer für welchen Schaden geradesteht und ob die Kaution fließt oder einbehalten wird. Wer hier schludert, zahlt oft später drauf.',
+          'Deshalb dieser Beitrag: eine ehrliche Checkliste, was in eine saubere Wohnungsübergabe gehört – aus Sicht von jemandem, der die Wohnungen danach wieder herrichtet. Rechtsberatung ist das ausdrücklich nicht; bei echten Streitfällen führt am Mieterverein oder einem Fachanwalt kein Weg vorbei.',
+        ],
+      },
+      {
+        h2: 'Wohnungsübergabe-Checkliste: Was ins Protokoll gehört',
+        paras: [
+          'Ein gutes Übergabeprotokoll ist kein Roman und kein Formular von der Stange, das man blind abhakt. Es hält nüchtern fest, in welchem Zustand die Wohnung an diesem Tag ist. Diese Punkte sollten drinstehen:',
+        ],
+        list: [
+          'Datum, vollständige Adresse und die Namen beider Parteien',
+          'Zählerstände für Strom, Gas und Wasser – jeweils mit Zählernummer',
+          'Zustand jedes Raumes einzeln: Wände, Böden, Fenster, Türen',
+          'Zustand von Küche, Bad und fest verbauten Geräten',
+          'Anzahl und Art der übergebenen Schlüssel (Haustür, Wohnung, Keller, Briefkasten)',
+          'Vorhandene Mängel – jeder einzeln und konkret beschrieben',
+          'Unterschrift beider Parteien, im besten Fall mit einem Zeugen',
+        ],
+      },
+      {
+        h2: 'Zählerstände: der Klassiker, den alle vergessen',
+        paras: [
+          'Kein Punkt sorgt später für so viel unnötigen Ärger wie ein fehlender Zählerstand. Wird er beim Auszug nicht festgehalten, streiten sich hinterher zwei Parteien um eine Nachzahlung, die niemand mehr zuordnen kann.',
+          'Notieren Sie zu jedem Zähler die Zählernummer und den Stand am Übergabetag. Ein Foto vom Display beziehungsweise vom Zählwerk kostet zwei Sekunden und beendet jede spätere Diskussion. Bei modernen digitalen Zählern lohnt sich der Blick auf das Datum im Display – manchmal steht die relevante Zahl erst nach ein paarmal Durchklicken da.',
+        ],
+      },
+      {
+        h2: 'Mängel dokumentieren – Fotos schlagen Erinnerung',
+        paras: [
+          'Der zweite große Fehler: pauschale Formulierungen. „Wohnung in gutem Zustand" klingt beim Unterschreiben harmlos und ist im Streitfall wertlos. Konkret muss es sein: „Parkett Wohnzimmer, Kratzer ca. 20 cm unter dem Fenster" statt „Boden okay".',
+          'Machen Sie zu jedem Mangel ein Foto und halten Sie im Protokoll fest, dass Fotos existieren. Ein paar Wochen später weiß niemand mehr, ob der Fleck an der Wand schon vorher da war. Das Bild weiß es.',
+          'Und trennen Sie sauber zwischen normalen Gebrauchsspuren und echten Schäden. Ein Mieter darf eine Wohnung bewohnen – abgelaufene Teppiche oder Dübellöcher in üblichem Rahmen gehören meist zum normalen Verschleiß. Wo genau die Grenze liegt, ist ein juristisches Dauerthema; im Zweifel klärt das eine Rechtsberatung, nicht das Protokoll.',
+        ],
+        bild: 'blog-detail.jpg',
+        bildAlt: 'Symbolbild: genauer Blick auf Boden und Sockelleiste bei der Wohnungsübergabe',
+      },
+      {
+        h2: 'Schlüssel: zählen, notieren, quittieren',
+        paras: [
+          'Klingt banal, wird aber regelmäßig zum Problem. Halten Sie fest, wie viele Schlüssel für was übergeben werden – Haustür, Wohnungstür, Keller, Briefkasten, Garage. Fehlt später ein Schlüssel, ist im Protokoll dokumentiert, wie viele es einmal waren.',
+          'Bei einer Schließanlage kann ein einzelner verlorener Schlüssel richtig teuer werden, weil unter Umständen die ganze Anlage getauscht werden muss. Deshalb lieber einmal zu genau zählen als hinterher rätseln.',
+        ],
+      },
+      {
+        h2: 'Kaution und Schönheitsreparaturen – die Grauzone',
+        paras: [
+          'Jetzt wird es heikel, und hier bleibe ich bewusst vorsichtig: Rund um Kaution und Schönheitsreparaturen gibt es mehr Halbwissen als bei fast jedem anderen Thema. Vieles, was für selbstverständlich gehalten wird, ist vor Gericht schon gekippt worden – etwa starre Renovierungsfristen oder pauschale Klauseln im Mietvertrag.',
+          'Als grobe Orientierung gilt: Die Kaution darf für berechtigte Ansprüche einbehalten werden, muss aber nach dem Auszug in angemessener Zeit abgerechnet werden. Was „berechtigt" und „angemessen" konkret heißt, hängt vom Einzelfall und vom Mietvertrag ab.',
+          'Deshalb der klare Rat: Wenn es um Geld und Schönheitsreparaturen geht, verlassen Sie sich nicht auf Faustregeln aus dem Internet – auch nicht auf meine. Ein kurzer Check beim Mieterverein, beim Eigentümerverband oder bei einem Fachanwalt für Mietrecht ist das Geld fast immer wert.',
+        ],
+      },
+      {
+        h2: 'Die Wohnung vor der Übergabe herrichten – was sich lohnt',
+        paras: [
+          'Jetzt der Teil, bei dem wir ins Spiel kommen. Bei einem Mieterwechsel entscheidet sich zwischen Auszug und Neuvermietung, wie schnell die Wohnung wieder Geld bringt. Jede Woche Leerstand ist Miete, die niemand zahlt.',
+          'Was sich aus meiner Erfahrung fast immer rechnet, bevor der nächste Mieter kommt: Wände frisch streichen, kleine Schäden an Türen und Zargen ausbessern, verschlissene Silikonfugen im Bad erneuern und – wenn der Boden durch ist – gleich neuen Vinyl- oder Laminatboden verlegen. Das sind keine großen Summen, aber sie machen aus „bewohnt" wieder „bezugsfertig".',
+          'Der Trick ist das Timing: Wenn Malerarbeiten, kleine Reparaturen und Boden im selben Zug laufen, statt einzeln über Wochen, steht die Wohnung nur einmal kurz leer. Genau dafür ist ein Ansprechpartner für alle Gewerke Gold wert.',
+        ],
+        bild: 'blog-sanierung.jpg',
+        bildAlt: 'Symbolbild: frisch hergerichtete leere Wohnung, bezugsfertig zur Neuvermietung',
+      },
+      {
+        h2: 'Übergabe bei Mieterwechsel: der enge Zeitplan',
+        paras: [
+          'Der Klassiker bei der Neuvermietung: Der alte Mieter zieht Ende des Monats aus, der neue will zum Ersten rein. Dazwischen liegt oft nur ein Wochenende – und in dieser Lücke sollen Übergabe, Herrichten und erneute Übergabe passieren.',
+          'Ehrlich gesagt ist das selten realistisch, wenn mehr zu tun ist als einmal durchwischen. Wer hier Puffer einplant und die Handwerker früh koordiniert, spart sich den Stress. Und wenn sich doch etwas verschiebt, weil hinter dem alten Boden eine Überraschung steckt, erfahren Sie das bei uns zuerst – nicht am Übergabetag.',
+        ],
+      },
+      {
+        h2: 'Wohnungsübergabe im Raum Heilbronn – wir richten her',
+        paras: [
+          'Wir richten Wohnungen im Raum Heilbronn zwischen zwei Mietern her: Malerarbeiten, kleine Reparaturen, Böden, Bad – koordiniert, mit einem Ansprechpartner und einem Festpreis vor Baubeginn. Sie sagen uns, bis wann die Wohnung bezugsfertig sein soll, wir sagen ehrlich, ob das zu schaffen ist.',
+          'Gerade für Vermieter und Kapitalanleger, die nicht vor Ort sind, übernehmen wir den ganzen Ablauf – vom leergeräumten Zustand bis zur schlüsselfertigen Übergabe an den nächsten Mieter. Schauen Sie sich in Ruhe um, dann sprechen wir über Ihr Objekt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
