@@ -80,14 +80,20 @@ function prerenderSeo(): Plugin {
       const homeJsonLd = [
         {
           '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
+          '@type': 'GeneralContractor',
+          '@id': `${SITE}/#business`,
           name: 'SE Handwerk',
           url: SITE,
-          areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
+          image: `${SITE}/images/nachher.jpg`,
+          logo: `${SITE}/images/logo-dark.png`,
+          email: 'kontakt@sehandwerk.de',
           telephone: '+49 173 4536225',
+          priceRange: '€€',
+          areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
+          knowsAbout: ['Komplettsanierung', 'Bodenarbeiten', 'Malerarbeiten', 'Badsanierung', 'Trockenbau', 'Wohnungsübergabe'],
           description: home.description,
         },
-        { '@context': 'https://schema.org', '@type': 'WebSite', name: 'SE Handwerk', url: SITE },
+        { '@context': 'https://schema.org', '@type': 'WebSite', name: 'SE Handwerk', url: SITE, publisher: { '@id': `${SITE}/#business` } },
       ]
       const homeBody = `${MAIN_OPEN}
 <h1>${esc(home.h1!)}</h1>
@@ -124,7 +130,7 @@ ${s.intro ? `<p>${esc(s.intro)}</p>` : ''}
             description: l.metaDescription,
             url,
             areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
-            provider: { '@type': 'LocalBusiness', name: 'SE Handwerk', url: SITE, areaServed: 'Raum Heilbronn', telephone: '+49 173 4536225' },
+            provider: { '@type': 'GeneralContractor', '@id': `${SITE}/#business`, name: 'SE Handwerk', url: SITE, areaServed: 'Raum Heilbronn', telephone: '+49 173 4536225' },
           },
           {
             '@context': 'https://schema.org',
