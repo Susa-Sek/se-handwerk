@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { ablauf, blogPosts, leistungen, leistungenDetail, regionen, seitenSeo } from './src/content.js'
+import { ablauf, blogPosts, leistungen, leistungenDetail, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
 
 const SITE = 'https://www.sehandwerk.de'
 const esc = (s: string) =>
@@ -77,28 +77,68 @@ function prerenderSeo(): Plugin {
 
       // ── Home: keep the strong existing head meta, add body + brand JSON-LD ──
       const home = seitenSeo.home
+      const homeFaq = leistungenDetail[0].faq
+      const featuredPosts = ['sanierung-raum-heilbronn', 'generalunternehmer-sanierung', 'wohnung-sanieren-vor-vermietung', 'wohnungsuebergabe-checkliste']
+        .map((s) => blogPosts.find((p) => p.slug === s))
+        .filter((p): p is NonNullable<typeof p> => Boolean(p))
       const homeJsonLd = [
         {
           '@context': 'https://schema.org',
-          '@type': 'LocalBusiness',
+          '@type': 'GeneralContractor',
+          '@id': `${SITE}/#business`,
           name: 'SE Handwerk',
           url: SITE,
-          areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
+          image: `${SITE}/images/nachher.jpg`,
+          logo: `${SITE}/images/logo-dark.png`,
+          email: 'kontakt@sehandwerk.de',
           telephone: '+49 173 4536225',
+          priceRange: '€€',
+          areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
+          knowsAbout: ['Komplettsanierung', 'Bodenarbeiten', 'Malerarbeiten', 'Badsanierung', 'Trockenbau', 'Wohnungsübergabe'],
           description: home.description,
         },
-        { '@context': 'https://schema.org', '@type': 'WebSite', name: 'SE Handwerk', url: SITE },
+        { '@context': 'https://schema.org', '@type': 'WebSite', name: 'SE Handwerk', url: SITE, publisher: { '@id': `${SITE}/#business` } },
+        {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: homeFaq.map((f) => ({
+            '@type': 'Question',
+            name: f.frage,
+            acceptedAnswer: { '@type': 'Answer', text: f.antwort },
+          })),
+        },
       ]
       const homeBody = `${MAIN_OPEN}
 <h1>${esc(home.h1!)}</h1>
 <p>${esc(home.intro!)}</p>
+<p>Ob Wohnung, Haus oder Gewerbeeinheit: Wir koordinieren Boden, Wand, Bad und Innenausbau in einem durchgängigen Ablauf — mit einem verbindlichen Festpreis vor Baubeginn. Besonders für Kapitalanleger, Erben und auswärtige Eigentümer, die eine Immobilie im Raum Heilbronn schnell und zuverlässig vermietbar oder verkaufsfertig brauchen.</p>
+<section><h2>Ihre Vorteile</h2><ul>${vorteile.map((v) => `<li><strong>${esc(v.title)}</strong> — ${esc(v.desc)}</li>`).join('')}</ul></section>
 <section><h2>Unsere Leistungen</h2><ul>${leistungen.map((l) => `<li><a href="/leistungen/${l.slug}">${esc(l.title)}</a> — ${esc(l.desc)}</li>`).join('')}</ul></section>
-<p>Einsatzgebiet: ${regionen.map(esc).join(', ')}</p>
-<p><a href="/#kontakt">Projekt besprechen</a> · <a href="/ueber-uns">Über uns</a> · <a href="/kontakt">Kontakt</a></p>
+<section><h2>Für wen wir arbeiten</h2><ul>${zielgruppen.map((z) => `<li><strong>${esc(z.title)}</strong> — ${esc(z.desc)}</li>`).join('')}</ul></section>
+<section><h2>So läuft Ihre Sanierung ab</h2><ol>${ablauf.map((a) => `<li><strong>${esc(a.title)}</strong> — ${esc(a.desc)}</li>`).join('')}</ol></section>
+<section><h2>Häufige Fragen zur Sanierung</h2>${homeFaq.map((f) => `<h3>${esc(f.frage)}</h3><p>${esc(f.antwort)}</p>`).join('')}</section>
+<section><h2>Ratgeber rund um Sanierung und Renovierung</h2><ul>${featuredPosts.map((p) => `<li><a href="/blog/${p.slug}">${esc(p.title)}</a> — ${esc(p.excerpt)}</li>`).join('')}<li><a href="/blog">Alle Ratgeber-Artikel ansehen</a></li></ul></section>
+<section><h2>Einsatzgebiet: Raum Heilbronn</h2><p>Wir sind im gesamten Raum Heilbronn für Sie da — unter anderem in ${regionen.map(esc).join(', ')} und Umgebung. Erzählen Sie uns von Ihrem Objekt: <a href="/kontakt">Kontakt aufnehmen</a>, mehr <a href="/ueber-uns">über uns</a> erfahren oder direkt ein <a href="/#kontakt">Projekt besprechen</a>.</p></section>
 </main>`
       write('/', render(shell, { title: home.title, description: home.description, url: SITE + '/', body: homeBody, jsonLd: homeJsonLd, keepHead: true }))
 
       // ── Standard pages ────────────────────────────────────────────────────
+      const leistungenLinks = `<section><h2>Unsere Leistungen</h2><ul>${leistungen.map((l) => `<li><a href="/leistungen/${l.slug}">${esc(l.title)}</a> — ${esc(l.desc)}</li>`).join('')}</ul></section>`
+      const ablaufBlock = `<section><h2>So läuft Ihre Sanierung ab</h2><ol>${ablauf.map((a) => `<li><strong>${esc(a.title)}</strong> — ${esc(a.desc)}</li>`).join('')}</ol></section>`
+      const standardExtra: Record<string, string> = {
+        'ueber-uns':
+          `<p>SE Handwerk steht für Sanierung und Renovierung aus einer Hand im Raum Heilbronn. Statt fünf Einzelgewerke zu koordinieren, haben Sie einen festen Ansprechpartner — von der ersten Begehung bis zur bezugsfertigen Übergabe.</p>`
+          + `<section><h2>Wofür wir stehen</h2><ul>${vorteile.map((v) => `<li><strong>${esc(v.title)}</strong> — ${esc(v.desc)}</li>`).join('')}</ul></section>`
+          + `<section><h2>Für wen wir arbeiten</h2><ul>${zielgruppen.map((z) => `<li><strong>${esc(z.title)}</strong> — ${esc(z.desc)}</li>`).join('')}</ul></section>`
+          + ablaufBlock
+          + leistungenLinks,
+        kontakt:
+          `<p>Sie erreichen uns telefonisch oder per E-Mail an kontakt@sehandwerk.de. Schildern Sie uns kurz Ihr Vorhaben — je konkreter, desto genauer die erste Einschätzung. Wir melden uns meist noch am selben Tag zurück.</p>`
+          + ablaufBlock
+          + `<section><h2>Häufige Fragen</h2>${leistungenDetail[0].faq.map((f) => `<h3>${esc(f.frage)}</h3><p>${esc(f.antwort)}</p>`).join('')}</section>`
+          + `<p>Einsatzgebiet: ${regionen.map(esc).join(', ')} und Umgebung.</p>`
+          + leistungenLinks,
+      }
       for (const key of ['ueber-uns', 'kontakt', 'impressum', 'datenschutz'] as const) {
         const s = seitenSeo[key]
         const url = SITE + s.path
@@ -106,6 +146,7 @@ function prerenderSeo(): Plugin {
 <nav aria-label="Brotkrumen"><a href="/">Start</a> / <span>${esc(s.h1 ?? s.title)}</span></nav>
 <h1>${esc(s.h1 ?? s.title)}</h1>
 ${s.intro ? `<p>${esc(s.intro)}</p>` : ''}
+${standardExtra[key] ?? ''}
 <p><a href="/#leistungen">Leistungen</a> · <a href="/#kontakt">Kontakt aufnehmen</a></p>
 </main>`
         write(s.path, render(shell, { title: s.title, description: s.description, url, body }))
@@ -124,7 +165,7 @@ ${s.intro ? `<p>${esc(s.intro)}</p>` : ''}
             description: l.metaDescription,
             url,
             areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
-            provider: { '@type': 'LocalBusiness', name: 'SE Handwerk', url: SITE, areaServed: 'Raum Heilbronn', telephone: '+49 173 4536225' },
+            provider: { '@type': 'GeneralContractor', '@id': `${SITE}/#business`, name: 'SE Handwerk', url: SITE, areaServed: 'Raum Heilbronn', telephone: '+49 173 4536225' },
           },
           {
             '@context': 'https://schema.org',
