@@ -79,6 +79,18 @@ export default function Footer() {
                 Datenschutz
               </Link>
             </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <span style={colLabel}>Regional</span>
+              <a
+                href="https://www.hwk-heilbronn.de/"
+                target="_blank"
+                rel="noopener"
+                className="footer-link"
+                style={colLink}
+              >
+                Handwerkskammer Heilbronn-Franken
+              </a>
+            </div>
           </div>
         </div>
         <div
