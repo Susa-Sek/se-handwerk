@@ -1371,9 +1371,9 @@ export const seitenSeo: Record<string, SeitenSeo> = {
   home: {
     path: '/',
     // must match index.html so prerendered (keepHead) and client titles agree
-    title: 'Komplettsanierung zum Festpreis · ein Ansprechpartner | SE Handwerk',
+    title: 'Komplettsanierung Heilbronn zum Festpreis | SE Handwerk',
     description:
-      'Ihre Immobilie, komplett saniert — zum Festpreis. Ein Ansprechpartner übernimmt Ihre Sanierung von der Aufnahme bis zur bezugsfertigen Übergabe. Raum Heilbronn.',
+      'Ihre Immobilie komplett saniert — zum Festpreis, aus einer Hand. Ein Ansprechpartner koordiniert alle Gewerke bis zur Übergabe. Raum Heilbronn.',
     h1: 'Sanierung aus einer Hand — Raum Heilbronn',
     intro:
       'SE Handwerk übernimmt Ihre Sanierung im Raum Heilbronn vollständig: von der ersten Begehung bis zur bezugsfertigen Übergabe. Ein Ansprechpartner koordiniert alle Gewerke — mit Festpreis-Angebot und realistischem Taktplan.',
