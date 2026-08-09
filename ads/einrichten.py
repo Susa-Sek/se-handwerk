@@ -19,13 +19,16 @@ ENV_DATEI = Path(__file__).parent / ".env"
 
 
 class Feld:
-    def __init__(self, name, frage, hinweis, geheim, pruefung=None, warnung=None):
+    def __init__(
+        self, name, frage, hinweis, geheim, pruefung=None, warnung=None, optional=False
+    ):
         self.name = name
         self.frage = frage
         self.hinweis = hinweis
         self.geheim = geheim
         self.pruefung = pruefung
         self.warnung = warnung
+        self.optional = optional
 
 
 FELDER = [
@@ -72,25 +75,61 @@ FELDER = [
     Feld(
         "GOOGLE_ADS_LOGIN_CUSTOMER_ID",
         "Kundennummer des Manager-Kontos",
-        "leer lassen, falls du keins hast",
+        "das Konto mit dem Zusatz '(Verwaltung)' — leer lassen, falls keins",
         geheim=False,
         pruefung=lambda w: w == "" or len(re.sub(r"\D", "", w)) == 10,
         warnung="Eine Kundennummer hat 10 Ziffern (Format XXX-XXX-XXXX).",
+        optional=True,
     ),
 ]
 
 
-def abfragen(feld: Feld) -> str:
-    """Fragt einen Wert ab und lässt bei auffälligem Format nachbessern."""
+def env_lesen() -> dict[str, str]:
+    """Liest eine vorhandene .env, damit einzelne Werte änderbar bleiben."""
+    if not ENV_DATEI.exists():
+        return {}
+    werte: dict[str, str] = {}
+    for zeile in ENV_DATEI.read_text(encoding="utf-8").splitlines():
+        zeile = zeile.strip()
+        if zeile and not zeile.startswith("#") and "=" in zeile:
+            name, _, wert = zeile.partition("=")
+            werte[name.strip()] = wert.strip()
+    return werte
+
+
+def vorschau(feld: Feld, wert: str) -> str:
+    """Geheime Werte nur angedeutet zeigen, unkritische vollständig."""
+    if not feld.geheim:
+        return wert
+    return f"{wert[:3]}… ({len(wert)} Zeichen)"
+
+
+def abfragen(feld: Feld, aktuell: str = "") -> str:
+    """Fragt einen Wert ab und lässt bei auffälligem Format nachbessern.
+
+    Gibt es bereits einen Wert, behält eine leere Eingabe ihn bei.
+    """
     while True:
         print(f"\n{feld.frage}")
         print(f"  ({feld.hinweis})")
+        if aktuell:
+            print(f"  aktuell: {vorschau(feld, aktuell)}")
+            print("  Enter = beibehalten" + ("  ·  '-' = leeren" if feld.optional else ""))
+
         wert = (getpass("  > ") if feld.geheim else input("  > ")).strip()
+
+        if not wert and aktuell:
+            print("  → unverändert")
+            return aktuell
+
+        if wert == "-" and feld.optional:
+            print("  → geleert")
+            return ""
 
         if feld.geheim and wert:
             print("  [verdeckt eingegeben]")
 
-        if not wert and feld.name != "GOOGLE_ADS_LOGIN_CUSTOMER_ID":
+        if not wert and not feld.optional:
             print("  Das Feld darf nicht leer bleiben.")
             continue
 
@@ -111,17 +150,33 @@ def main() -> int:
         "verdeckt eingegeben und landen nur in ads/.env auf diesem Rechner."
     )
 
-    if ENV_DATEI.exists():
-        print(f"\n{ENV_DATEI} existiert bereits.")
-        if input("Überschreiben? [j/N] ").strip().lower() != "j":
-            print("Abgebrochen, nichts geändert.")
-            return 0
+    vorhanden = env_lesen()
+    if vorhanden:
+        print(
+            f"\nBestehende Werte in {ENV_DATEI.name} gefunden.\n"
+            "Mit Enter behältst du einen Wert — so lässt sich auch nur eine\n"
+            "einzelne Kundennummer ändern, ohne alles neu zu tippen."
+        )
 
     try:
-        werte = {feld.name: abfragen(feld) for feld in FELDER}
+        werte = {
+            feld.name: abfragen(feld, vorhanden.get(feld.name, "")) for feld in FELDER
+        }
     except (KeyboardInterrupt, EOFError):
         print("\n\nAbgebrochen, nichts gespeichert.")
         return 1
+
+    werbe = re.sub(r"\D", "", werte.get("GOOGLE_ADS_CUSTOMER_ID", ""))
+    manager = re.sub(r"\D", "", werte.get("GOOGLE_ADS_LOGIN_CUSTOMER_ID", ""))
+    if werbe and werbe == manager:
+        print(
+            "\nWarnung: Werbekonto und Manager-Konto sind dieselbe Nummer.\n"
+            "In einem Manager-Konto lassen sich keine Kampagnen anlegen —\n"
+            "ins Werbekonto-Feld gehört das Konto, in dem die Anzeigen laufen."
+        )
+        if input("Trotzdem speichern? [j/N] ").strip().lower() != "j":
+            print("Abgebrochen, nichts gespeichert.")
+            return 1
 
     zeilen = [
         "# Von ads/einrichten.py erzeugt. Enthaelt Zugangsdaten:",
