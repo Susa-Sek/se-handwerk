@@ -411,11 +411,40 @@ def kampagne_existiert(client, kunden_id: str, name: str) -> bool:
     return False
 
 
+# Häufige Ablehnungsgründe, die sich nicht im Code beheben lassen, sondern
+# eine Aktion in der Google-Oberfläche erfordern.
+ERKLAERUNGEN = (
+    (
+        ("test account", "developer token"),
+        "Der Developer-Token ist bisher nur für Testkonten freigegeben.\n"
+        "  Für ein echtes Konto muss 'Basic access' beantragt werden:\n"
+        "  Manager-Konto → Tools & Einstellungen → API-Center → Zugriffsebene.\n"
+        "  Bis dahin lässt sich alles gegen ein Testkonto durchspielen.",
+    ),
+    (
+        ("not yet enabled",),
+        "Das Werbekonto ist noch nicht aktiv. Meist fehlt die Einrichtung\n"
+        "  oder eine hinterlegte Zahlungsmethode.",
+    ),
+    (
+        ("manager account",),
+        "In einem Manager-Konto lassen sich keine Kampagnen anlegen.\n"
+        "  GOOGLE_ADS_CUSTOMER_ID muss das Werbekonto sein, nicht das\n"
+        "  Manager-Konto. Prüfen mit: python ads/konto_pruefen.py",
+    ),
+)
+
+
 def fehler_ausgeben(ex) -> None:
     """Übersetzt eine GoogleAdsException in lesbare Zeilen statt Stacktrace."""
-    print(f"\nGoogle hat die Anfrage abgelehnt (Request-ID {ex.request_id}):\n",
-          file=sys.stderr)
+    print(
+        f"\nGoogle hat die Anfrage abgelehnt (Request-ID {ex.request_id}):\n",
+        file=sys.stderr,
+    )
+
+    texte = []
     for fehler in ex.failure.errors:
+        texte.append(fehler.message)
         print(f"  • {fehler.message}", file=sys.stderr)
         if fehler.location and fehler.location.field_path_elements:
             pfad = ".".join(
@@ -423,6 +452,12 @@ def fehler_ausgeben(ex) -> None:
                 for element in fehler.location.field_path_elements
             )
             print(f"    Feld: {pfad}", file=sys.stderr)
+
+    zusammen = " ".join(texte).lower()
+    for stichworte, erklaerung in ERKLAERUNGEN:
+        if all(wort in zusammen for wort in stichworte):
+            print(f"\n  {erklaerung}", file=sys.stderr)
+            break
 
 
 # ---------------------------------------------------------------------------
@@ -470,32 +505,34 @@ def main() -> int:
         print("Nur --check angefordert — keine Verbindung zu Google aufgebaut.")
         return 0
 
+    from google.ads.googleads.errors import GoogleAdsException
+
     client = client_aufbauen()
     kunden_id = nur_ziffern(os.environ["GOOGLE_ADS_CUSTOMER_ID"])
 
-    if kampagne_existiert(client, kunden_id, cfg["kampagne"]["name"]):
-        print(
-            "Abbruch, damit keine doppelte Kampagne entsteht. "
-            "Entweder die bestehende Kampagne löschen/umbenennen oder in "
-            "kampagne.yaml einen anderen Namen setzen.",
-            file=sys.stderr,
-        )
-        return 1
-
-    operationen = operationen_bauen(client, kunden_id, cfg)
-    print(f"{len(operationen)} Operationen vorbereitet.")
-
-    from google.ads.googleads.errors import GoogleAdsException
-
-    dienst = client.get_service("GoogleAdsService")
-    anfrage = client.get_type("MutateGoogleAdsRequest")
-    anfrage.customer_id = kunden_id
-    anfrage.mutate_operations.extend(operationen)
-    # validate_only: Google prüft die komplette Kette serverseitig, legt aber
-    # nichts an. Das ist der Standard — schreiben nur mit --live.
-    anfrage.validate_only = not args.live
-
+    # Jeder Google-Aufruf ab hier — auch die Duplikatprüfung — läuft durch
+    # dieselbe Fehlerbehandlung, damit nie ein roher Stacktrace erscheint.
     try:
+        if kampagne_existiert(client, kunden_id, cfg["kampagne"]["name"]):
+            print(
+                "Abbruch, damit keine doppelte Kampagne entsteht. "
+                "Entweder die bestehende Kampagne löschen/umbenennen oder in "
+                "kampagne.yaml einen anderen Namen setzen.",
+                file=sys.stderr,
+            )
+            return 1
+
+        operationen = operationen_bauen(client, kunden_id, cfg)
+        print(f"{len(operationen)} Operationen vorbereitet.")
+
+        dienst = client.get_service("GoogleAdsService")
+        anfrage = client.get_type("MutateGoogleAdsRequest")
+        anfrage.customer_id = kunden_id
+        anfrage.mutate_operations.extend(operationen)
+        # validate_only: Google prüft die komplette Kette serverseitig, legt
+        # aber nichts an. Das ist der Standard — schreiben nur mit --live.
+        anfrage.validate_only = not args.live
+
         antwort = dienst.mutate(request=anfrage)
     except GoogleAdsException as ex:
         fehler_ausgeben(ex)

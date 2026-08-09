@@ -32,17 +32,56 @@ KONTO_FELDER = (
 )
 
 
+def meldungen(fehler) -> list[str]:
+    """Holt die lesbaren Fehlertexte aus einer GoogleAdsException."""
+    failure = getattr(fehler, "failure", None)
+    if failure is not None:
+        return [e.message for e in failure.errors] or [str(fehler)]
+    return [str(fehler).split("\n")[0]]
+
+
+def deutung(texte: list[str]) -> str | None:
+    """Übersetzt die häufigsten Ursachen in Klartext."""
+    zusammen = " ".join(texte).lower()
+    if "test account" in zusammen and "developer token" in zusammen:
+        return (
+            "Der Developer-Token darf bisher nur Testkonten ansprechen.\n"
+            "      Für echte Konten muss 'Basic access' beantragt werden."
+        )
+    if "developer token" in zusammen and (
+        "not approved" in zusammen or "pending" in zusammen
+    ):
+        return "Der Developer-Token ist noch nicht freigegeben."
+    if "not yet enabled" in zusammen or "customer_not_enabled" in zusammen:
+        return (
+            "Das Konto ist noch nicht aktiv — meist fehlt die Einrichtung\n"
+            "      oder die Zahlungsmethode."
+        )
+    if "permission" in zusammen or "not allowed" in zusammen:
+        return "Dieser Zugang hat keine Berechtigung für dieses Konto."
+    return None
+
+
 def konto_abfragen(client, kunden_id: str):
-    """Liest die Stammdaten eines Kontos. None, wenn kein Zugriff besteht."""
+    """Liest die Stammdaten eines Kontos.
+
+    Gibt (konto, fehlertexte) zurück. Ist konto None, erklären die Fehlertexte,
+    warum — 'nicht lesbar' ist ausdrücklich nicht dasselbe wie 'existiert nicht'.
+    """
     dienst = client.get_service("GoogleAdsService")
     abfrage = f"SELECT {', '.join(KONTO_FELDER)} FROM customer LIMIT 1"
     try:
         for zeile in dienst.search(customer_id=kunden_id, query=abfrage):
-            return zeile.customer
+            return zeile.customer, []
     except Exception as fehler:  # noqa: BLE001 - Diagnose, jede Ursache ist relevant
-        kurz = str(fehler).split("\n")[0][:140]
-        print(f"    kein Zugriff: {kurz}")
-    return None
+        texte = meldungen(fehler)
+        for text in texte:
+            print(f"    kein Zugriff: {text}")
+        erklaerung = deutung(texte)
+        if erklaerung:
+            print(f"      → {erklaerung}")
+        return None, texte
+    return None, []
 
 
 def kinder_abfragen(client, manager_id: str):
@@ -94,13 +133,17 @@ def main() -> int:
 
     werbekonten: list[tuple[str, str]] = []
     managerkonten: list[tuple[str, str]] = []
+    gesperrt: list[str] = []
+    alle_fehler: list[str] = []
 
     for ressource in erreichbar:
         kid = ressource.split("/")[-1]
         print(f"\n  {formatiert(kid)}")
 
-        konto = konto_abfragen(client, kid)
+        konto, fehlertexte = konto_abfragen(client, kid)
         if konto is None:
+            gesperrt.append(kid)
+            alle_fehler.extend(fehlertexte)
             continue
 
         art = "Manager-Konto" if konto.manager else "Werbekonto"
@@ -134,6 +177,22 @@ def main() -> int:
     print("\n" + "=" * 68)
     print("Was das für deine Einstellungen bedeutet")
     print("=" * 68)
+
+    # Konnte kein einziges Konto gelesen werden, liegt es am Zugang selbst —
+    # dann sind Aussagen über vorhandene Konten wertlos.
+    if gesperrt and not werbekonten and not managerkonten:
+        print(
+            f"\n  Keines der {len(gesperrt)} sichtbaren Konten ist lesbar.\n"
+            "  Das heißt nicht, dass keine Konten da sind — der Zugang greift nicht."
+        )
+        erklaerung = deutung(alle_fehler)
+        if erklaerung:
+            print(f"\n  Ursache:\n      {erklaerung}")
+        print(
+            "\n  Solange das nicht behoben ist, lässt sich nicht feststellen,\n"
+            "  welche Nummer in welches Feld gehört.\n"
+        )
+        return 1
 
     if gesetzt_werbe and gesetzt_werbe == gesetzt_manager:
         print(
