@@ -62,18 +62,30 @@ Konto zugreifen.
 
 ### 4. Refresh-Token erzeugen
 
-Zwei Dinge, die erfahrungsgemäß schiefgehen:
+**Das Dienstkonto funktioniert hier nicht.** Der Dienstkonto-Weg bräuchte
+domainweite Delegation über Google Workspace. Bei einer `@gmail.com`-Adresse geht
+das nicht — es muss der OAuth-Nutzerflow sein.
 
-- **Das Dienstkonto funktioniert hier nicht.** Der Dienstkonto-Weg bräuchte
-  domainweite Delegation über Google Workspace. Bei einer `@gmail.com`-Adresse
-  geht das nicht — es muss der OAuth-Nutzerflow sein.
-- **Nimm einen OAuth-Client vom Typ „Desktop-App"**, nicht „Webanwendung". Der
-  Desktop-Typ funktioniert ohne konfigurierte Redirect-URI und ist deutlich
-  einfacher.
+Dafür gibt es zwei Wege:
 
-In der [Google Cloud Console](https://console.cloud.google.com/apis/credentials)
-unter **Anmeldedaten → Anmeldedaten erstellen → OAuth-Client-ID → Desktop-App**
-anlegen, JSON herunterladen, dann:
+#### Weg A — nur im Browser (auch auf dem iPad)
+
+Braucht einen OAuth-Client vom Typ **Webanwendung** und Googles eigene Testseite.
+
+1. In der [Cloud Console](https://console.cloud.google.com/apis/credentials) den
+   Webclient öffnen und unter **Autorisierte Weiterleitungs-URIs** exakt
+   `https://developers.google.com/oauthplayground` eintragen, speichern.
+2. Auf dem [OAuth Playground](https://developers.google.com/oauthplayground) das
+   Zahnrad öffnen, **Use your own OAuth credentials** ankreuzen, Client-ID und
+   Client-Schlüssel eintragen.
+3. Links unter *Input your own scopes* `https://www.googleapis.com/auth/adwords`
+   eintragen → **Authorize APIs** → anmelden → **Exchange authorization code for
+   tokens**.
+4. Den **Refresh token** kopieren (beginnt mit `1//`).
+
+#### Weg B — lokal mit Python
+
+Braucht einen OAuth-Client vom Typ **Desktop-App** (keine Redirect-URI nötig):
 
 ```bash
 pip install google-auth-oauthlib
@@ -145,12 +157,10 @@ versehentlich zweimal, bricht es ab, statt eine doppelte Kampagne anzulegen.
 
 Die Kampagne ist pausiert. Vor dem Aktivieren:
 
-1. **Telefonnummer im Konto prüfen** — dort stand zwischenzeitlich
-   `905-610-9793` statt der richtigen `+49 173 4536225`.
-2. Conversion-Aktionen aus GA4 importieren (Formular, Telefon, WhatsApp) und ein
-   Anruf-Asset hinterlegen.
-3. Abrechnung und Währung EUR bestätigen.
-4. Anzeigentexte und Keywords in der Oberfläche gegenlesen.
+1. Conversion-Aktionen aus GA4 importieren (Formular, Telefon, WhatsApp) und ein
+   Anruf-Asset mit `+49 173 4536225` hinterlegen.
+2. Abrechnung und Währung EUR bestätigen.
+3. Anzeigentexte und Keywords in der Oberfläche gegenlesen.
 
 Erst dann aktivieren.
 

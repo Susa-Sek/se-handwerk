@@ -495,7 +495,7 @@ def main() -> int:
     print(
         "Sie steht auf PAUSIERT. Vor dem Aktivieren in der Oberfläche prüfen:\n"
         "  1. Abrechnung hinterlegt und Währung EUR\n"
-        "  2. Telefonnummer im Konto korrekt (+49 173 4536225)\n"
+        "  2. Anruf-Asset mit +49 173 4536225 hinterlegt\n"
         "  3. Conversion-Aktionen aus GA4 importiert\n"
         "  4. Anzeigentexte und Keywords gegen das Dossier gegengelesen"
     )
