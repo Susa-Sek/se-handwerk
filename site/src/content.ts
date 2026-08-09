@@ -134,6 +134,7 @@ export interface LeistungDetail {
   slug: string;
   code: string;
   navTitle: string;
+  keyword: string; // primäres Ziel-Keyword für Überschriften/SEO
   metaTitle: string;
   metaDescription: string;
   h1: string;
@@ -148,6 +149,7 @@ export const leistungenDetail: LeistungDetail[] = [
     slug: 'komplettsanierung',
     code: '01',
     navTitle: 'Komplettsanierung',
+    keyword: 'Komplettsanierung',
     metaTitle: 'Komplettsanierung Heilbronn – aus einer Hand | SE Handwerk',
     metaDescription:
       'Komplettsanierung im Raum Heilbronn: Wohnung, Haus oder Gewerbe – alle Gewerke aus einer Hand, ein Ansprechpartner, Festpreis. Jetzt unverbindlich anfragen.',
@@ -173,6 +175,7 @@ export const leistungenDetail: LeistungDetail[] = [
     slug: 'bodenarbeiten',
     code: '02',
     navTitle: 'Bodenarbeiten',
+    keyword: 'Boden verlegen',
     metaTitle: 'Bodenleger Heilbronn – Vinyl, Laminat & Parkett | SE Handwerk',
     metaDescription:
       'Boden verlegen im Raum Heilbronn: Vinyl, Laminat, Parkett & Fliesen inklusive Untergrundvorbereitung, Trittschalldämmung und Sockelleisten. Fair kalkuliert – jetzt anfragen.',
@@ -198,6 +201,7 @@ export const leistungenDetail: LeistungDetail[] = [
     slug: 'wand-decke',
     code: '03',
     navTitle: 'Wand & Decke',
+    keyword: 'Trockenbau & Malerarbeiten',
     metaTitle: 'Trockenbau & Malerarbeiten Heilbronn | SE Handwerk',
     metaDescription:
       'Trockenbau, Ständerwände, abgehängte Decken, Innenputz und Malerarbeiten im Raum Heilbronn – sauber, planbar, aus einer Hand. Jetzt Angebot anfragen.',
@@ -223,6 +227,7 @@ export const leistungenDetail: LeistungDetail[] = [
     slug: 'bad-sanitaer',
     code: '04',
     navTitle: 'Bad & Sanitär',
+    keyword: 'Badsanierung',
     metaTitle: 'Badsanierung Heilbronn – Komplettbad aus einer Hand | SE Handwerk',
     metaDescription:
       'Badsanierung im Raum Heilbronn: Komplettbad von Rückbau über Fliesen bis Sanitär – alle Gewerke koordiniert, ein Ansprechpartner, Festpreis. Jetzt anfragen.',
@@ -248,10 +253,11 @@ export const leistungenDetail: LeistungDetail[] = [
     slug: 'einzelgewerke',
     code: '05',
     navTitle: 'Einzelgewerke',
+    keyword: 'Handwerker für Einzelaufträge',
     metaTitle: 'Handwerker Heilbronn für Einzelaufträge & Montage | SE Handwerk',
     metaDescription:
       'Einzelne Handwerksleistungen im Raum Heilbronn: Malerarbeiten, Bodenverlegung, Trockenbau, Möbelmontage und Wohnungsübergabe – zuverlässig und planbar. Jetzt anfragen.',
-    h1: 'Einzelne Gewerke & Renovierungsarbeiten',
+    h1: 'Handwerker im Raum Heilbronn für Einzelaufträge',
     kicker: 'Leistung 05 · Einzelgewerke',
     intro:
       'Nicht immer ist es die große Sanierung. Auch für abgegrenzte Aufgaben im Raum Heilbronn sind wir der richtige Ansprechpartner – von Malerarbeiten über Bodenverlegung und Trockenbau bis zu Möbelmontage und Wohnungsübergabe. Zuverlässig, sauber, planbar.',

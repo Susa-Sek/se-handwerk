@@ -125,7 +125,7 @@ export default function LeistungDetail() {
         <div style={container}>
           <SectionKicker>Leistungsumfang</SectionKicker>
           <Reveal as="h2" delay={40} style={{ fontSize: 'clamp(30px,4vw,56px)', letterSpacing: '-0.025em', color: 'var(--t-ink)', maxWidth: 760 }}>
-            Was wir bei {data.navTitle} übernehmen.
+            {data.keyword} im Raum Heilbronn — was wir übernehmen.
           </Reveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 26, marginTop: 52 }}>
             {data.umfang.map((u, i) => (
@@ -169,7 +169,7 @@ export default function LeistungDetail() {
         <div style={{ ...container, maxWidth: 860 }}>
           <SectionKicker>Häufige Fragen</SectionKicker>
           <Reveal as="h2" delay={40} style={{ fontSize: 'clamp(28px,3.6vw,48px)', letterSpacing: '-0.025em', color: 'var(--t-ink)', marginBottom: 40 }}>
-            {data.navTitle}: Fragen &amp; Antworten
+            {data.keyword}: Fragen &amp; Antworten
           </Reveal>
           {data.faq.map((f, i) => (
             <Reveal key={f.frage} delay={40 + i * 40}>
