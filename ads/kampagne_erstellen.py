@@ -46,6 +46,24 @@ CONFIG_ENV = (
 )
 
 
+def env_datei_laden() -> None:
+    """Übernimmt Werte aus ads/.env, sofern die Datei existiert.
+
+    Bereits gesetzte Umgebungsvariablen haben Vorrang — so lässt sich die Datei
+    für einen einzelnen Lauf übersteuern, ohne sie zu ändern.
+    """
+    pfad = Path(__file__).parent / ".env"
+    if not pfad.exists():
+        return
+
+    for zeile in pfad.read_text(encoding="utf-8").splitlines():
+        zeile = zeile.strip()
+        if not zeile or zeile.startswith("#") or "=" not in zeile:
+            continue
+        name, _, wert = zeile.partition("=")
+        os.environ.setdefault(name.strip(), wert.strip())
+
+
 def euro_zu_micros(betrag: float) -> int:
     """Google rechnet intern in Millionstel der Währungseinheit."""
     return int(round(betrag * 1_000_000))
@@ -321,13 +339,17 @@ def client_aufbauen():
         )
         sys.exit(1)
 
+    env_datei_laden()
+
     fehlend = [name for name in CONFIG_ENV if not os.environ.get(name)]
     if fehlend:
-        print("Folgende Umgebungsvariablen fehlen:\n", file=sys.stderr)
+        print("Folgende Zugangsdaten fehlen:\n", file=sys.stderr)
         for name in fehlend:
             print(f"  {name}", file=sys.stderr)
         print(
-            "\nWie du sie bekommst, steht in ads/README.md.\n"
+            "\nAm einfachsten abfragen lassen:\n"
+            "  python ads/einrichten.py\n\n"
+            "Woher die Werte kommen, steht in ads/README.md.\n"
             "Nur die Formatprüfung ohne Zugangsdaten: --check",
             file=sys.stderr,
         )

@@ -6,6 +6,7 @@ der Google-Ads-Oberfläche zusammenzuklicken.
 | Datei | Zweck |
 |---|---|
 | `kampagne.yaml` | Alle Inhalte: Keywords, Anzeigentexte, Budget, Gebote, Radius, Zeitplan. **Hier änderst du etwas.** |
+| `einrichten.py` | Fragt die Zugangsdaten verdeckt ab und legt `ads/.env` an. |
 | `kampagne_erstellen.py` | Liest die YAML und legt daraus die Kampagne an. |
 | `requirements.txt` | Benötigte Python-Pakete. |
 
@@ -112,35 +113,76 @@ dabei prüfen, dass die Währung **EUR** ist.
 
 ## Zugangsdaten setzen
 
-Als Umgebungsvariablen. **Niemals in eine Datei im Repo schreiben** — `.env` ist
-bereits in `.gitignore`.
+Am einfachsten abfragen lassen — die geheimen Werte werden verdeckt eingegeben
+und landen nur in `ads/.env` auf deinem Rechner:
 
 ```bash
-export GOOGLE_ADS_DEVELOPER_TOKEN="..."      # aus dem API-Center (Schritt 2)
-export GOOGLE_ADS_CLIENT_ID="....apps.googleusercontent.com"
-export GOOGLE_ADS_CLIENT_SECRET="..."
-export GOOGLE_ADS_REFRESH_TOKEN="..."        # aus Schritt 4
-export GOOGLE_ADS_CUSTOMER_ID="123-456-7890" # Werbekonto SE Handwerk
-export GOOGLE_ADS_LOGIN_CUSTOMER_ID="..."    # Manager-Konto (optional)
+python ads/einrichten.py
 ```
 
-Bindestriche in den Kundennummern sind egal, das Skript entfernt sie.
+`ads/.env` ist über `.gitignore` ausgeschlossen und kann nicht versehentlich ins
+Repository geraten. Bindestriche in den Kundennummern sind egal.
+
+Alternativ als Umgebungsvariablen — die haben Vorrang vor der Datei:
+
+```bash
+export GOOGLE_ADS_DEVELOPER_TOKEN="..."      # API-Center (Schritt 2)
+export GOOGLE_ADS_CLIENT_ID="....apps.googleusercontent.com"
+export GOOGLE_ADS_CLIENT_SECRET="..."
+export GOOGLE_ADS_REFRESH_TOKEN="..."        # Schritt 4
+export GOOGLE_ADS_CUSTOMER_ID="123-456-7890" # Werbekonto SE Handwerk
+export GOOGLE_ADS_LOGIN_CUSTOMER_ID="..."    # Manager-Konto
+```
+
+> **Nicht in eine Claude-Session eingeben.** Cloud-Umgebungen haben laut
+> Anthropic-Dokumentation keinen Speicher für Geheimnisse — Umgebungsvariablen
+> dort sind für alle lesbar, die die Umgebung nutzen, und Chatinhalte bleiben im
+> Verlauf. Diese Zugangsdaten können echtes Werbebudget ausgeben.
 
 ---
 
 ## Ausführen
 
+### Windows (Schritt für Schritt)
+
+Falls noch kein Python installiert ist: in der PowerShell `winget install
+Python.Python.3.12`, danach das Fenster einmal neu öffnen.
+
+```powershell
+git clone https://github.com/Susa-Sek/se-handwerk.git
+cd se-handwerk
+git checkout claude/google-ads-low-budget-test-iydzb6
+
+py -m venv .venv
+.venv\Scripts\activate
+
+pip install -r ads\requirements.txt
+
+python ads\einrichten.py                    # fragt die sechs Werte ab
+python ads\kampagne_erstellen.py            # Google prüft, legt nichts an
+python ads\kampagne_erstellen.py --live     # legt an, pausiert
+```
+
+Ohne Git geht es auch: auf GitHub den Branch auswählen, **Code → Download ZIP**,
+entpacken, in den Ordner wechseln und ab `py -m venv .venv` weitermachen.
+
+### macOS / Linux
+
 ```bash
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r ads/requirements.txt
 
-# 1. Offline-Formatprüfung
-python ads/kampagne_erstellen.py --check
-
-# 2. Google validiert die komplette Kampagne serverseitig, legt nichts an
+python ads/einrichten.py
 python ads/kampagne_erstellen.py
-
-# 3. Kampagne wirklich anlegen (pausiert)
 python ads/kampagne_erstellen.py --live
+```
+
+### Ohne Zugangsdaten
+
+Die reine Formatprüfung braucht nur `PyYAML` und läuft überall:
+
+```bash
+python ads/kampagne_erstellen.py --check
 ```
 
 Schritt 2 ist der eigentliche Sicherheitsgurt: Google prüft die gesamte Kette
@@ -166,13 +208,9 @@ Erst dann aktivieren.
 
 ---
 
-## Wo läuft das Skript?
+## Zugriff widerrufen
 
-**Auf einem Rechner mit Python** — der saubere Weg. Zugangsdaten bleiben lokal.
-
-**In einer Claude-Code-Session** geht auch, aber dann laufen die Zugangsdaten
-durch den Chatverlauf und bleiben dort gespeichert. Wenn du das machst: danach
-den Refresh-Token in den
-[Google-Kontoeinstellungen](https://myaccount.google.com/permissions) widerrufen
-und einen neuen erzeugen. Ein Developer-Token plus Refresh-Token kann echtes
-Werbebudget ausgeben — entsprechend behandeln.
+Der Refresh-Token bleibt gültig, bis er widerrufen wird. Sobald du ihn nicht mehr
+brauchst — oder falls er versehentlich irgendwo aufgetaucht ist — in den
+[Google-Kontoeinstellungen](https://myaccount.google.com/permissions) den Zugriff
+entziehen. Der Token ist dann wertlos; angelegte Kampagnen bleiben unberührt.
