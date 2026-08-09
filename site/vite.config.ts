@@ -234,9 +234,9 @@ ${standardExtra[key] ?? ''}
 <p>${esc(l.intro)}</p>
 <p><a href="/#kontakt">Projekt besprechen</a> · <a href="/#leistungen">Alle Leistungen</a></p>
 <p>Einsatzgebiet: ${regionen.map(esc).join(', ')}</p>
-<section><h2>Was wir bei ${esc(l.navTitle)} übernehmen.</h2><ul>${l.umfang.map((u) => `<li><h3>${esc(u.titel)}</h3><p>${esc(u.text)}</p></li>`).join('')}</ul></section>
+<section><h2>${esc(l.keyword)} im Raum Heilbronn — was wir übernehmen.</h2><ul>${l.umfang.map((u) => `<li><h3>${esc(u.titel)}</h3><p>${esc(u.text)}</p></li>`).join('')}</ul></section>
 <section><h2>So läuft Ihr Projekt.</h2><ol>${ablauf.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p></li>`).join('')}</ol></section>
-<section><h2>${esc(l.navTitle)}: Fragen &amp; Antworten</h2><dl>${l.faq.map((f) => `<dt>${esc(f.frage)}</dt><dd>${esc(f.antwort)}</dd>`).join('')}</dl></section>
+<section><h2>${esc(l.keyword)}: Fragen &amp; Antworten</h2><dl>${l.faq.map((f) => `<dt>${esc(f.frage)}</dt><dd>${esc(f.antwort)}</dd>`).join('')}</dl></section>
 <section><h2>Weitere Leistungen</h2><ul>${related}</ul></section>
 </main>`
         write(path, render(shell, { title: l.metaTitle, description: l.metaDescription, url, body, jsonLd }))
