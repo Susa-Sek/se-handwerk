@@ -4,7 +4,7 @@ import { SectionKicker, CtaBand } from '../components/sections';
 import { useSectionLink } from '../hooks/useSectionLink';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useSeo, SEO_SITE } from '../hooks/useSeo';
-import { ablauf, getLeistung, leistungen, regionen } from '../content';
+import { ablauf, einsatzOrte, getLeistung, leistungen, regionen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
@@ -38,7 +38,7 @@ export default function LeistungDetail() {
           serviceType: data.navTitle,
           description: data.metaDescription,
           url: SEO_SITE + path,
-          areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
+          areaServed: einsatzOrte.map((r) => ({ '@type': 'City', name: r })),
           provider: {
             '@type': 'LocalBusiness',
             name: 'SE Handwerk',
