@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { ablauf, blogPosts, leistungen, leistungenDetail, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
+import { ablauf, blogPosts, einsatzOrte, leistungen, leistungenDetail, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
 
 const SITE = 'https://www.sehandwerk.de'
 const esc = (s: string) =>
@@ -92,7 +92,7 @@ function prerenderSeo(): Plugin {
           email: 'kontakt@sehandwerk.de',
           telephone: '+49 173 4536225',
           priceRange: '€€',
-          areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
+          areaServed: einsatzOrte.map((r) => ({ '@type': 'City', name: r })),
           knowsAbout: ['Komplettsanierung', 'Bodenarbeiten', 'Malerarbeiten', 'Badsanierung', 'Trockenbau', 'Wohnungsübergabe'],
           description: home.description,
         },
@@ -205,7 +205,7 @@ ${standardExtra[key] ?? ''}
             serviceType: l.navTitle,
             description: l.metaDescription,
             url,
-            areaServed: regionen.map((r) => ({ '@type': 'City', name: r })),
+            areaServed: einsatzOrte.map((r) => ({ '@type': 'City', name: r })),
             provider: { '@type': 'GeneralContractor', '@id': `${SITE}/#business`, name: 'SE Handwerk', url: SITE, areaServed: 'Raum Heilbronn', telephone: '+49 173 4536225' },
           },
           {

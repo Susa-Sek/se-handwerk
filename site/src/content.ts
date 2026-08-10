@@ -111,11 +111,33 @@ export const vorteile = [
   },
 ];
 
+// Sichtbare, kuratierte Chip-Reihe (aufgeräumt, nicht die volle Liste).
 export const regionen = [
   'Heilbronn',
   'Neckarsulm',
+  'Weinsberg',
+  'Öhringen',
+  'Bietigheim-Bissingen',
   'Sinsheim',
-  'Stuttgart',
+];
+
+// Vollständiges Einzugsgebiet – primär für areaServed-JSON-LD (unsichtbar).
+// Reihenfolge nach Nähe/Relevanz. Leicht anpassbar.
+export const einsatzOrte = [
+  'Heilbronn',
+  'Neckarsulm',
+  'Weinsberg',
+  'Öhringen',
+  'Bietigheim-Bissingen',
+  'Sinsheim',
+  'Bad Wimpfen',
+  'Eppingen',
+  'Lauffen am Neckar',
+  'Brackenheim',
+  'Bad Rappenau',
+  'Obersulm',
+  'Bad Friedrichshall',
+  'Ilsfeld',
 ];
 
 // ── Leistungs-Unterseiten (SEO) ─────────────────────────────────────────────
