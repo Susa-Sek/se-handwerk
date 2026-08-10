@@ -136,8 +136,17 @@ def main() -> int:
     gesperrt: list[str] = []
     alle_fehler: list[str] = []
 
-    for ressource in erreichbar:
-        kid = ressource.split("/")[-1]
+    # Unterkonten eines Manager-Kontos stehen nicht in list_accessible_customers.
+    # Das eingetragene Werbekonto deshalb immer zusätzlich direkt prüfen.
+    zu_pruefen = [r.split("/")[-1] for r in erreichbar]
+    if gesetzt_werbe and gesetzt_werbe not in zu_pruefen:
+        zu_pruefen.append(gesetzt_werbe)
+        print(
+            f"\n  Hinweis: {formatiert(gesetzt_werbe)} steht nicht in der direkten"
+            "\n  Kontoliste — als Unterkonto normal. Wird trotzdem geprüft."
+        )
+
+    for kid in zu_pruefen:
         print(f"\n  {formatiert(kid)}")
 
         konto, fehlertexte = konto_abfragen(client, kid)
