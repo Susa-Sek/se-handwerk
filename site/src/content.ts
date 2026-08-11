@@ -1380,6 +1380,108 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'fliesen-verlegen-kosten',
+    metaTitle: 'Fliesen verlegen: Kosten pro m² 2026 | SE Handwerk',
+    metaDescription:
+      'Was kostet Fliesen verlegen pro m²? Preise für Material und Arbeit, Aufpreis für Großformat und Verlegemuster, Untergrund, Abdichtung im Bad und ein Rechenbeispiel – Raum Heilbronn.',
+    title: 'Fliesen verlegen: Kosten pro m² im Überblick',
+    excerpt:
+      'Kaum ein Gewerk hat so eine Preisspanne wie Fliesen. Das gleiche Bad kann 2.000 Euro kosten oder das Doppelte – je nach Format, Muster und Untergrund. Hier sind ehrliche Zahlen, ein Rechenbeispiel und die Posten, an die kaum jemand denkt.',
+    datum: '2026-08-11',
+    kategorie: 'Bad & Fliesen',
+    lesezeit: '10 Min.',
+    bild: 'blog-fliesen.jpg',
+    bildAlt: 'Symbolbild: frisch verlegter großformatiger Fliesenboden in einem hellen Raum',
+    kurz: [
+      'Fliesen verlegen kostet als grober Richtwert etwa 40–100 € pro m² (Material + Arbeit).',
+      'Die reine Verlegung liegt bei rund 30–60 €/m², das Material fängt bei ca. 15 €/m² an – nach oben offen.',
+      'Großformat, Diagonalverlegung und aufwändige Muster kosten Aufpreis – die Arbeit, nicht die Fliese.',
+      'Im Bad ist die Abdichtung Pflicht und der Posten, an dem man niemals sparen sollte.',
+    ],
+    relatedLeistung: 'bad-sanitaer',
+    sections: [
+      {
+        h2: 'Was kostet Fliesen verlegen pro m²?',
+        paras: [
+          'Kurz gesagt: Material und Arbeit zusammen liegen meist zwischen 40 und 100 Euro pro Quadratmeter. Das ist eine große Spanne – und sie ist ehrlich. Kaum ein Gewerk streut so stark, weil drei Dinge den Preis machen: die Fliese selbst, das Format und Verlegemuster, und der Zustand des Untergrunds.',
+          'Ein schlichter Boden mit mittelgroßen Fliesen im Verband liegt am unteren Ende. Ein Bad mit großformatigen Platten, diagonal verlegt, auf einem Untergrund, der erst gerichtet und abgedichtet werden muss, landet schnell am oberen Ende – oder darüber.',
+          'Damit wir uns richtig verstehen: Das sind grobe Marktrichtwerte zur Orientierung, kein Angebot. Preise ändern sich, jeder Raum ist anders. Was Ihr Boden oder Bad kostet, weiß ich erst, wenn ich den Raum gesehen habe – dann aber als Festpreis, ohne böse Nachträge.',
+        ],
+      },
+      {
+        h2: 'Materialkosten: Was kostet die Fliese selbst?',
+        paras: [
+          'Bei der Fliese ist nach oben alles offen. Einfache Feinsteinzeug-Fliesen fangen je nach Angebot bei rund 15 bis 25 Euro pro Quadratmeter an. Gute Markenfliesen liegen eher bei 30 bis 60 Euro, und bei großformatigen Platten, Naturstein oder Designserien ist die Grenze nach oben offen.',
+          'Feinsteinzeug ist für die meisten Wohnungen die vernünftige Wahl: hart, dicht, pflegeleicht und für Boden wie Wand geeignet. Naturstein sieht edel aus, will aber mehr Pflege und ist in der Verlegung heikler – das schlägt sich im Arbeitspreis nieder.',
+          'Nicht vergessen: Verschnitt. Je nach Raum und Muster rechnet man erfahrungsgemäß rund 10 Prozent mehr Fliesen ein, bei Diagonalverlegung eher mehr. Diese Fliesen liegen am Ende zwar im Container, stehen aber trotzdem auf der Rechnung.',
+        ],
+      },
+      {
+        h2: 'Verlegekosten: Was kostet die Arbeit?',
+        paras: [
+          'Für die reine Verlegung durch einen Fachbetrieb rechnen Sie grob 30 bis 60 Euro pro Quadratmeter. Das ist bei Fliesen oft der größere Batzen – anders als bei einem Klickboden ist Fliesenlegen echtes Handwerk, Reihe für Reihe, mit Zuschnitt an jeder Kante.',
+          'Der Preis hängt stark am Aufwand: viele Ecken, Nischen, Rohre und Zuschnitte kosten Zeit. Ein rechteckiger, leerer Raum ist günstiger pro Quadratmeter als ein verwinkeltes Bad mit Dusche, WC und Waschtisch, wo jeder zweite Quadratmeter ein Sonderfall ist.',
+        ],
+      },
+      {
+        h2: 'Format und Verlegemuster – hier entsteht der Aufpreis',
+        paras: [
+          'Ein Punkt, den viele unterschätzen: Nicht die teure Fliese treibt den Arbeitspreis, sondern das Format und das Muster. Großformatige Platten müssen absolut eben liegen, sonst kippeln sie – das verlangt einen top vorbereiteten Untergrund und mehr Zeit. Diagonal oder im aufwändigen Muster verlegt bedeutet mehr Zuschnitt, mehr Verschnitt, mehr Stunden.',
+        ],
+        list: [
+          'Standard-Verband, mittleres Format: günstigste Variante',
+          'Großformat (60×60 cm und größer): Aufpreis für Untergrund und Handling',
+          'Diagonalverlegung: mehr Zuschnitt und Verschnitt',
+          'Muster wie Fischgrät oder Verband mit Versatz: deutlicher Zeitaufschlag',
+          'Mosaik und Bordüren: kleinteilig, entsprechend teuer pro m²',
+        ],
+        bild: 'blog-bad.jpg',
+        bildAlt: 'Symbolbild: frisch gefliestes modernes Bad mit großformatigen Fliesen',
+      },
+      {
+        h2: 'Untergrund und Abdichtung – der Posten fürs Bad',
+        paras: [
+          'Wenn Fliesen später Ärger machen, liegt es fast nie an der Fliese, sondern am Untergrund. Er muss eben, tragfähig und trocken sein. Ist er das nicht, kommen Ausgleichsmasse, Grundierung oder das Entfernen alter Beläge dazu – das kostet extra, ist aber die Grundlage dafür, dass die Fläche bei fachgerechter Ausführung dauerhaft hält.',
+          'Im Bad kommt die Abdichtung dazu, und die ist keine Kür, sondern Pflicht. In Duschen und an Wänden, die nass werden, gehört eine fachgerechte Verbundabdichtung unter die Fliese. Das ist der Posten, an dem man auf keinen Fall sparen sollte – ein Wasserschaden hinter der Fliese kostet später ein Vielfaches.',
+        ],
+      },
+      {
+        h2: 'Diese Zusatzkosten kommen oft dazu',
+        paras: [
+          'Jetzt die Posten, die auf keinem Online-Rechner stehen – und am Ende trotzdem auf der Rechnung landen:',
+        ],
+        list: [
+          'Rückbau und Entsorgung der alten Fliesen',
+          'Untergrund ausgleichen, grundieren, abdichten',
+          'Verfugen und dauerelastische Silikonfugen',
+          'Übergangs-, Eck- und Abschlussprofile',
+          'Aussparungen und Bohrungen für Sanitärobjekte',
+        ],
+      },
+      {
+        h2: 'Rechenbeispiel: Bad und Wohnzimmerboden',
+        paras: [
+          'Rechnen wir grob durch – rein zur Orientierung, ausdrücklich kein Angebot. Ein kleines Bad mit rund 8 Quadratmetern Boden plus Wandflächen ist wegen Abdichtung, Zuschnitten und Verwinklung arbeitsintensiv: Nur für die Fliesenarbeiten inklusive Abdichtung landet man hier schnell im vierstelligen Bereich, oft grob zwischen 1.500 und 3.000 Euro – je nach Fliese und Wandhöhe.',
+          'Ein rechteckiger Wohnzimmerboden von 25 Quadratmetern mit mittelgroßen Feinsteinzeug-Fliesen im Verband ist deutlich günstiger pro Quadratmeter: Bei angenommenen 60 Euro pro Quadratmeter für Material und Verlegung liegt man grob bei rund 1.500 Euro. Den belastbaren Preis für Ihren Raum gibt es erst nach dem Blick vor Ort.',
+        ],
+      },
+      {
+        h2: 'Sparen ja – aber an der richtigen Stelle',
+        paras: [
+          'Sparen können Sie bei der Fliese: Es muss nicht die teuerste Designserie sein, gutes Feinsteinzeug im mittleren Preisbereich hält jahrzehntelang und sieht sauber aus. Und wer beim Format bei einer gängigen Größe im schlichten Verband bleibt, spart doppelt – an Material und an Arbeitszeit.',
+          'Nicht sparen sollten Sie an der Untergrundvorbereitung, an der Abdichtung im Bad und an sauberer Verlegung. Das ist die Stelle, an der schlechte Arbeit erst später auffällt – und dann richtig teuer wird.',
+        ],
+      },
+      {
+        h2: 'Fliesen verlegen lassen im Raum Heilbronn',
+        paras: [
+          'Wir verlegen Boden- und Wandfliesen im gesamten Raum Heilbronn – von der einzelnen Wohnung bis zur kompletten Badsanierung, inklusive Untergrundvorbereitung, Abdichtung und Verfugen. Sauber verlegt, fair kalkuliert und mit verbindlichem Festpreis vor Baubeginn.',
+          'Gerade im Bad greifen Fliesen, Abdichtung, Sanitär und Trockenbau ineinander. Auf Wunsch übernehmen wir das komplett aus einer Hand, mit einem Ansprechpartner. Erzählen Sie uns von Ihrem Projekt – wir schauen es uns an und sagen ehrlich, was drinsteckt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
