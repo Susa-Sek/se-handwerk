@@ -69,6 +69,10 @@ const ALL = [
     name: 'blog-uebergabe.jpg',
     prompt: `${STYLE} Wide 16:9. A bright empty freshly renovated apartment room at handover, matte white walls, new light oak floor, a set of keys resting on a clean windowsill catching soft daylight, calm and move-in ready.`,
   },
+  {
+    name: 'blog-fliesen.jpg',
+    prompt: `${STYLE} Wide 16:9. Close-up of a freshly tiled floor with large-format matte porcelain tiles in a bright room, clean even grout lines, warm daylight raking across the surface, subtle real texture, shallow depth of field.`,
+  },
 ];
 // Only generate images that don't exist yet (pass names as args, or default to missing-only).
 const wanted = process.argv.slice(2);
