@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { ablauf, blogPosts, einsatzOrte, leistungen, leistungenDetail, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
+import { ablauf, blogPosts, blogThemen, einsatzOrte, leistungen, leistungenDetail, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
 
 const SITE = 'https://www.sehandwerk.de'
 const esc = (s: string) =>
@@ -243,10 +243,14 @@ ${standardExtra[key] ?? ''}
       }
 
       // ── Blog-Liste ────────────────────────────────────────────────────────
+      const blogGruppen = blogThemen
+        .map((t) => ({ t, posts: blogPosts.filter((p) => p.relatedLeistung === t.key) }))
+        .filter((g) => g.posts.length > 0)
       const blogBody = `${MAIN_OPEN}
 <h1>Ratgeber rund um Sanierung &amp; Renovierung</h1>
 <p>Ehrliche Praxis-Tipps zu Kosten, Abläufen und Materialien aus dem Raum Heilbronn.</p>
-<ul>${blogPosts.map((p) => `<li><a href="/blog/${p.slug}"><img src="/images/${p.bild}" alt="${esc(p.bildAlt)}" width="480" height="300" loading="lazy" /><br />${esc(p.title)}</a> — ${esc(p.excerpt)}</li>`).join('')}</ul>
+<nav aria-label="Themen"><ul>${blogGruppen.map((g) => `<li><a href="#${g.t.key}">${esc(g.t.title)}</a></li>`).join('')}</ul></nav>
+${blogGruppen.map((g) => `<section id="${g.t.key}"><h2><a href="/leistungen/${g.t.key}">${esc(g.t.title)}</a></h2><p>${esc(g.t.blurb)}</p><ul>${g.posts.map((p) => `<li><a href="/blog/${p.slug}"><img src="/images/${p.bild}" alt="${esc(p.bildAlt)}" width="480" height="300" loading="lazy" /><br />${esc(p.title)}</a> — ${esc(p.excerpt)}</li>`).join('')}</ul></section>`).join('')}
 </main>`
       write('/blog', render(shell, {
         title: 'Ratgeber & Blog – Sanierung, Boden & Renovierung | SE Handwerk',
