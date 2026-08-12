@@ -73,6 +73,8 @@ export default function BlogArticle() {
               <img
                 src={`/images/${post.bild}`}
                 alt={post.bildAlt}
+                width={1200}
+                height={675}
                 style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
               />
               <figcaption style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: 'var(--t-dim)', marginTop: 8 }}>
@@ -118,6 +120,8 @@ export default function BlogArticle() {
                       src={`/images/${sec.bild}`}
                       alt={sec.bildAlt ?? ''}
                       loading="lazy"
+                      width={1200}
+                      height={675}
                       style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
                     />
                     <figcaption style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: 'var(--t-dim)', marginTop: 8 }}>

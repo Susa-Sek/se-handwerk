@@ -25,6 +25,8 @@ function render(
       `<meta property="og:url" content="${opts.url}" />`,
       `<meta property="og:title" content="${esc(opts.title)}" />`,
       `<meta property="og:description" content="${esc(opts.description)}" />`,
+      `<meta name="twitter:title" content="${esc(opts.title)}" />`,
+      `<meta name="twitter:description" content="${esc(opts.description)}" />`,
     )
     if (opts.image) headExtra.push(`<meta property="og:image" content="${opts.image}" />`, `<meta name="twitter:image" content="${opts.image}" />`)
   }
@@ -39,6 +41,8 @@ function render(
       .replace(/<meta\s+property="og:url"[^>]*>/, '')
       .replace(/<meta\s+property="og:title"[\s\S]*?\/>/, '')
       .replace(/<meta\s+property="og:description"[\s\S]*?\/>/, '')
+      .replace(/<meta\s+name="twitter:title"[\s\S]*?\/>/, '')
+      .replace(/<meta\s+name="twitter:description"[\s\S]*?\/>/, '')
     // give the page its own OG image (strip the default so it does not win)
     if (opts.image) {
       html = html
@@ -302,8 +306,18 @@ ${p.relatedLeistung ? `<p><a href="/leistungen/${p.relatedLeistung}">Passende Le
         write(path, render(shell, { title: p.metaTitle, description: p.metaDescription, url, body, jsonLd, image: SITE + '/images/' + p.bild }))
       }
 
+      // ── Echte 404-Seite (Vercel nutzt /404.html automatisch) ──────────────
+      const nfBody = `${MAIN_OPEN}
+<header role="banner"><h1>Seite nicht gefunden</h1>
+<p>Diese Seite gibt es nicht (mehr). Vielleicht hilft einer dieser Wege weiter:</p></header>
+<nav role="navigation" aria-label="Weiter"><a href="/">Zur Startseite</a> · <a href="/#leistungen">Leistungen</a> · <a href="/blog">Ratgeber</a> · <a href="/kontakt">Kontakt</a></nav>
+</main>`
+      const nfHtml = render(shell, { title: 'Seite nicht gefunden | SE Handwerk', description: 'Diese Seite wurde nicht gefunden – hier geht es zurück zu SE Handwerk.', url: SITE + '/404', body: nfBody })
+        .replace('content="index,follow"', 'content="noindex,follow"')
+      writeFileSync(resolve(outDir, '404.html'), nfHtml)
+
       // eslint-disable-next-line no-console
-      console.log(`prerender: ${leistungenDetail.length + 5 + 1 + blogPosts.length} Seiten als statisches HTML erzeugt`)
+      console.log(`prerender: ${leistungenDetail.length + 5 + 1 + blogPosts.length} Seiten + 404 als statisches HTML erzeugt`)
     },
   }
 }

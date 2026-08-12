@@ -53,7 +53,9 @@ export default function Nav() {
         >
           <img
             src="/images/logo-white.png"
-            alt="SE Handwerk"
+            alt="SE Handwerk – Startseite"
+            width={480}
+            height={120}
             style={{ height: 30, width: 'auto', display: 'block' }}
           />
           <span

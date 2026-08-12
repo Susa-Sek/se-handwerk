@@ -45,9 +45,10 @@ export interface SeoInput {
   description: string;
   path: string;
   jsonLd?: unknown;
+  noindex?: boolean;
 }
 
-export function useSeo({ title, description, path, jsonLd }: SeoInput) {
+export function useSeo({ title, description, path, jsonLd, noindex }: SeoInput) {
   const ld = jsonLd ? JSON.stringify(jsonLd) : '';
   useEffect(() => {
     const url = SITE + path;
@@ -58,8 +59,11 @@ export function useSeo({ title, description, path, jsonLd }: SeoInput) {
       upsertMeta('description', 'name', description),
       upsertMeta('og:title', 'property', title),
       upsertMeta('og:description', 'property', description),
+      upsertMeta('twitter:title', 'name', title),
+      upsertMeta('twitter:description', 'name', description),
       upsertMeta('og:url', 'property', url),
       upsertLink('canonical', url),
+      upsertMeta('robots', 'name', noindex ? 'noindex,follow' : 'index,follow'),
     ];
 
     let script: HTMLScriptElement | null = null;
@@ -75,7 +79,7 @@ export function useSeo({ title, description, path, jsonLd }: SeoInput) {
       restore.forEach((r) => r());
       script?.remove();
     };
-  }, [title, description, path, ld]);
+  }, [title, description, path, ld, noindex]);
 }
 
 export const SEO_SITE = SITE;
