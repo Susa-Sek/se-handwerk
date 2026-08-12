@@ -1488,6 +1488,21 @@ export function getPost(slug: string | undefined): BlogPost | undefined {
   return blogPosts.find((p) => p.slug === slug);
 }
 
+// Themen-Gruppierung der Ratgeber-Übersicht (Schlüssel = relatedLeistung-Slug).
+// Reihenfolge = Anzeige-Reihenfolge; leere Gruppen werden ausgelassen.
+export interface BlogThema {
+  key: string;
+  title: string;
+  blurb: string;
+}
+export const blogThemen: BlogThema[] = [
+  { key: 'komplettsanierung', title: 'Sanierung & Planung', blurb: 'Ablauf, Kosten und Reihenfolge einer Sanierung – von der Aufnahme bis zur Übergabe.' },
+  { key: 'bodenarbeiten', title: 'Böden', blurb: 'Vinyl, Laminat, Parkett und Estrich: Kosten, Vergleiche und worauf es beim Untergrund ankommt.' },
+  { key: 'bad-sanitaer', title: 'Bad & Fliesen', blurb: 'Badsanierung, Fliesen und barrierefreie Lösungen – Kosten und Praxis.' },
+  { key: 'wand-decke', title: 'Wände & Decken', blurb: 'Trockenbau, Maler- und Spachtelarbeiten: Preise und Abläufe.' },
+  { key: 'einzelgewerke', title: 'Rund um die Wohnung', blurb: 'Übergabe, Kleinreparaturen und einzelne Gewerke – praktisch erklärt.' },
+];
+
 // ── SEO-Meta je Standard-Seite ──────────────────────────────────────────────
 export interface SeitenSeo {
   path: string;
