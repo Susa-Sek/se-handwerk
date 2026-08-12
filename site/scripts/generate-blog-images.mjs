@@ -124,7 +124,16 @@ async function optimize(buf) {
 async function download(url, dest) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`download HTTP ${res.status}`);
-  await writeFile(dest, await optimize(Buffer.from(await res.arrayBuffer())));
+  const raw = Buffer.from(await res.arrayBuffer());
+  await writeFile(dest, await optimize(raw));
+  // zusätzlich WebP-Variante (Fallback bleibt das JPG)
+  try {
+    const { default: sharp } = await import('sharp');
+    await sharp(raw)
+      .resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true })
+      .webp({ quality: 78 })
+      .toFile(dest.replace(/\.(jpe?g|png)$/i, '.webp'));
+  } catch { /* sharp optional */ }
 }
 async function main() {
   await mkdir(OUT, { recursive: true });

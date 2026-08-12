@@ -2,7 +2,7 @@ import { Link, Navigate, useParams } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 import { CtaBand } from '../components/sections';
 import { useSeo, SEO_SITE } from '../hooks/useSeo';
-import { getLeistung, getPost } from '../content';
+import { blogPosts, getLeistung, getPost } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
@@ -48,6 +48,11 @@ export default function BlogArticle() {
 
   const related = post.relatedLeistung ? getLeistung(post.relatedLeistung) : undefined;
 
+  const relatedPosts = [
+    ...blogPosts.filter((p) => p.slug !== post.slug && p.relatedLeistung === post.relatedLeistung),
+    ...blogPosts.filter((p) => p.slug !== post.slug && p.relatedLeistung !== post.relatedLeistung),
+  ].slice(0, 3);
+
   return (
     <main>
       <article>
@@ -70,13 +75,16 @@ export default function BlogArticle() {
         <div style={{ background: 'var(--paper)', padding: '48px 0 90px' }}>
           <div style={{ ...container, maxWidth: 760 }}>
             <figure style={{ margin: '0 0 44px' }}>
-              <img
-                src={`/images/${post.bild}`}
-                alt={post.bildAlt}
-                width={1200}
-                height={675}
-                style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
-              />
+              <picture>
+                <source srcSet={`/images/${post.bild.replace(/\.(jpe?g|png)$/i, '.webp')}`} type="image/webp" />
+                <img
+                  src={`/images/${post.bild}`}
+                  alt={post.bildAlt}
+                  width={1200}
+                  height={675}
+                  style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
+                />
+              </picture>
               <figcaption style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: 'var(--t-dim)', marginTop: 8 }}>
                 SYMBOLBILD
               </figcaption>
@@ -116,14 +124,17 @@ export default function BlogArticle() {
                 )}
                 {sec.bild && (
                   <figure style={{ margin: '30px 0 4px' }}>
-                    <img
-                      src={`/images/${sec.bild}`}
-                      alt={sec.bildAlt ?? ''}
-                      loading="lazy"
-                      width={1200}
-                      height={675}
-                      style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
-                    />
+                    <picture>
+                      <source srcSet={`/images/${sec.bild.replace(/\.(jpe?g|png)$/i, '.webp')}`} type="image/webp" />
+                      <img
+                        src={`/images/${sec.bild}`}
+                        alt={sec.bildAlt ?? ''}
+                        loading="lazy"
+                        width={1200}
+                        height={675}
+                        style={{ width: '100%', aspectRatio: '16 / 9', objectFit: 'cover', borderRadius: 12, display: 'block' }}
+                      />
+                    </picture>
                     <figcaption style={{ fontFamily: mono, fontSize: 10.5, letterSpacing: '0.06em', color: 'var(--t-dim)', marginTop: 8 }}>
                       SYMBOLBILD
                     </figcaption>
@@ -155,6 +166,47 @@ export default function BlogArticle() {
           </div>
         </div>
       </article>
+
+      {relatedPosts.length > 0 && (
+        <section style={{ background: 'var(--paper)', borderTop: '1px solid var(--line-ink)', padding: '72px 0 90px' }}>
+          <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 40px' }}>
+            <h2 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 'clamp(24px,3vw,34px)', letterSpacing: '-0.02em', color: 'var(--t-ink)', marginBottom: 30 }}>
+              Weitere Artikel zum Thema
+            </h2>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: 24 }}>
+              {relatedPosts.map((p, i) => (
+                <Reveal key={p.slug} delay={40 + i * 60}>
+                  <Link
+                    to={`/blog/${p.slug}`}
+                    className="tile tile-white"
+                    style={{ display: 'flex', flexDirection: 'column', height: '100%', borderRadius: 14, padding: 0, overflow: 'hidden', color: 'var(--t-ink)' }}
+                  >
+                    <picture>
+                      <source srcSet={`/images/${p.bild.replace(/\.(jpe?g|png)$/i, '.webp')}`} type="image/webp" />
+                      <img
+                        src={`/images/${p.bild}`}
+                        alt={p.bildAlt}
+                        loading="lazy"
+                        width={480}
+                        height={300}
+                        style={{ width: '100%', aspectRatio: '16 / 10', objectFit: 'cover', display: 'block' }}
+                      />
+                    </picture>
+                    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '20px 24px 24px' }}>
+                      <span style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.04em', color: 'var(--gold-deep)' }}>
+                        {p.kategorie} · {p.lesezeit}
+                      </span>
+                      <h3 style={{ fontFamily: bricolage, fontWeight: 700, fontSize: 19, letterSpacing: '-0.015em', margin: '10px 0 0', color: 'var(--t-ink)' }}>
+                        {p.title}
+                      </h3>
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <CtaBand />
     </main>

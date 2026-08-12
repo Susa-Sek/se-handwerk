@@ -69,15 +69,18 @@ export default function VorherNachher() {
             }}
           >
             {/* after — full frame */}
-            <img
-              src="/images/nachher.jpg"
-              alt="Symbolbild: saniertes Zimmer nach der Sanierung"
-              draggable={false}
-              loading="lazy"
-              width={1600}
-              height={1000}
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+            <picture>
+              <source srcSet="/images/nachher.webp" type="image/webp" />
+              <img
+                src="/images/nachher.jpg"
+                alt="Symbolbild: saniertes Zimmer nach der Sanierung"
+                draggable={false}
+                loading="lazy"
+                width={1600}
+                height={1000}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </picture>
             {/* before — clipped from the left */}
             <div
               aria-hidden
@@ -87,15 +90,18 @@ export default function VorherNachher() {
                 clipPath: `inset(0 ${(100 - pos).toFixed(2)}% 0 0)`,
               }}
             >
-              <img
-                src="/images/vorher.jpg"
-                alt="Symbolbild: unsaniertes Zimmer vor der Renovierung"
-                draggable={false}
-                loading="lazy"
-                width={1600}
-                height={1000}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.75)' }}
-              />
+              <picture>
+                <source srcSet="/images/vorher.webp" type="image/webp" />
+                <img
+                  src="/images/vorher.jpg"
+                  alt="Symbolbild: unsaniertes Zimmer vor der Renovierung"
+                  draggable={false}
+                  loading="lazy"
+                  width={1600}
+                  height={1000}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.75)' }}
+                />
+              </picture>
             </div>
 
             {/* handle */}
