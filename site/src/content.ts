@@ -1482,6 +1482,100 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'geerbte-immobilie-sanieren',
+    metaTitle: 'Geerbte Immobilie sanieren: Schritt für Schritt | SE Handwerk',
+    metaDescription:
+      'Immobilie geerbt und sanieren? Bestandsaufnahme, Reihenfolge, realistische Kosten, Sanierung aus der Ferne und die typischen Stolpersteine bei Erbengemeinschaften – Raum Heilbronn.',
+    title: 'Geerbte Immobilie sanieren – Schritt für Schritt',
+    excerpt:
+      'Ein Schlüssel, eine Wohnung voller Erinnerungen, oft mehrere Erben und niemand wohnt in der Nähe. Wer eine Immobilie erbt und sanieren will, steht vor vielen Fragen auf einmal. Hier ist eine ehrliche Reihenfolge, an der man sich festhalten kann.',
+    datum: '2026-08-12',
+    kategorie: 'Sanierung',
+    lesezeit: '11 Min.',
+    bild: 'blog-sanierung.jpg',
+    bildAlt: 'Symbolbild: geerbte Wohnung, bereit für die Sanierung',
+    kurz: [
+      'Zuerst eine ehrliche Bestandsaufnahme: Substanz, Zustand und grober Kostenrahmen – bevor irgendjemand streicht.',
+      'Sanieren, vermieten oder verkaufen? Diese Entscheidung steht vor jedem Handwerker-Termin.',
+      'Bei einer Erbengemeinschaft braucht es einen, der die Sanierung koordiniert – sonst passiert nichts.',
+      'Steuer und Erbrecht gehören in die Hände von Notar und Steuerberater – dieser Ratgeber ersetzt das nicht.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Eine geerbte Immobilie sanieren – wo fängt man an?',
+        paras: [
+          'Ich habe schon einige geerbte Wohnungen von innen gesehen. Meist ist es dieselbe Situation: Der Schlüssel liegt auf dem Tisch, in der Wohnung steht noch die Einrichtung von vor dreißig Jahren, und niemand traut sich so richtig ran. Dazu kommt oft, dass mehrere Erben mitreden und keiner in der Nähe wohnt.',
+          'Wer eine Immobilie erbt und sanieren will, sollte nicht mit dem Streichen anfangen, sondern mit einer ehrlichen Bestandsaufnahme. Was ist das für ein Objekt, wie ist die Substanz, und was will die Familie damit? Erst danach reden wir über Handwerker.',
+          'Vorweg, damit wir uns richtig verstehen: Ich bin Handwerker, kein Anwalt und kein Steuerberater. Alles rund um Erbschein, Erbengemeinschaft und Steuern gehört zu Notar und Steuerberater. Was ich beisteuern kann, ist die Praxis: Zustand einschätzen, Reihenfolge festlegen, Kosten realistisch machen.',
+        ],
+      },
+      {
+        h2: 'Schritt 1: Bestandsaufnahme statt Bauchgefühl',
+        paras: [
+          'Bevor Zahlen genannt werden, muss jemand das Objekt wirklich anschauen. Nicht „das sieht doch ganz okay aus", sondern konkret: Wie alt sind Leitungen, Elektrik und Heizung? Sind Fenster dicht? Gibt es Feuchtigkeit im Keller oder Flecken an der Decke? Wie steht es um den Boden unter dem alten Teppich?',
+          'Gerade bei älteren, lange bewohnten Objekten steckt der Aufwand oft nicht dort, wo man ihn sieht. Eine frisch gestrichene Wand ist schnell gemacht – eine marode Elektrik oder eine alte Heizung sind der eigentliche Posten. Diese Dinge gehören auf den Tisch, bevor irgendjemand über Küchenfarben redet.',
+        ],
+        bild: 'blog-detail.jpg',
+        bildAlt: 'Symbolbild: genauer Blick auf die Bausubstanz bei der Bestandsaufnahme',
+      },
+      {
+        h2: 'Schritt 2: Sanieren, vermieten oder verkaufen?',
+        paras: [
+          'Das ist die Gretchenfrage, und sie steht vor jedem Handwerker-Termin. Wer die Wohnung selbst nutzen will, saniert anders als jemand, der vermieten oder verkaufen möchte. Für die Vermietung zählt Robustheit und ein guter Preis pro Quadratmeter. Für den Verkauf reicht oft eine solide, saubere Grundsanierung, damit das Objekt sich gut zeigt.',
+          'Ehrlich gesagt: Nicht jede geerbte Immobilie muss komplett kernsaniert werden. Manchmal lohnt sich die große Lösung, manchmal reicht das Nötige, und manchmal ist der Verkauf im Ist-Zustand der ruhigere Weg. Was sich rechnet, hängt am Objekt und an Ihren Zielen – da sage ich lieber ehrlich, wenn sich viel Aufwand nicht lohnt.',
+        ],
+      },
+      {
+        h2: 'Schritt 3: Erbengemeinschaft – einer muss den Hut aufhaben',
+        paras: [
+          'Wenn mehrere Menschen erben, wird aus einer Sanierung schnell ein Abstimmungsmarathon. Jeder hat eine Meinung, keiner hat Zeit, und am Ende passiert monatelang nichts, während die Wohnung leer steht und trotzdem Geld kostet.',
+          'Aus der Praxis: Es hilft enorm, wenn eine Person aus der Familie die Rolle des Ansprechpartners übernimmt und mit den Handwerkern spricht. Nicht alle Entscheidungen mit fünf Leuten gleichzeitig, sondern gebündelt. Wie die Erbengemeinschaft intern entscheidet und wer wofür haftet, klärt der Notar – die Baustelle selbst braucht aber einen klaren Kopf, der koordiniert.',
+        ],
+      },
+      {
+        h2: 'Schritt 4: In welcher Reihenfolge saniert man?',
+        paras: [
+          'Wenn die Richtung steht, kommt die Reihenfolge. Als grobe Faustregel gilt: erst die Substanz, dann die Kosmetik. In dieser Reihenfolge macht es meist Sinn:',
+        ],
+        list: [
+          'Zuerst das Unsichtbare: Elektrik, Leitungen, Heizung, Feuchtigkeit',
+          'Dann die harten Gewerke: Wände versetzen, Trockenbau, Bad',
+          'Danach Böden und Malerarbeiten',
+          'Zum Schluss Feinschliff, Ausstattung und Übergabe',
+        ],
+      },
+      {
+        h2: 'Was kostet die Sanierung einer geerbten Immobilie?',
+        paras: [
+          'Eine pauschale Zahl wäre unseriös – die Spanne ist bei Altbestand riesig. Von einer soliden Auffrischung bis zur Kernsanierung liegen Welten. Als grobe Orientierung: Wer nur herrichtet und streicht, bleibt im überschaubaren Bereich; wer Elektrik, Heizung und Bad erneuert, landet schnell im großen Rahmen. Konkrete Zahlen gibt es erst nach der Aufnahme vor Ort, und dann als Richtwert, nicht als Versprechen.',
+          'Zwei Dinge sind bei geerbten Objekten wichtig: ein Puffer für das, was hinter alten Wänden auftaucht – im Bestand kommt fast immer etwas –, und ein aufgeschlüsseltes Angebot, das zeigt, wo das Geld hingeht. So lässt sich in der Familie entscheiden, was jetzt sein muss und was warten kann.',
+        ],
+      },
+      {
+        h2: 'Steuer und Recht: kurz angerissen, dann zum Fachmann',
+        paras: [
+          'Rund um eine geerbte Immobilie gibt es steuerliche und rechtliche Fragen – von Fristen über mögliche Freibeträge bis zur Frage, wie sich Sanierungskosten auswirken. Das klingt nach Details, kann aber über größere Beträge entscheiden.',
+          'Deshalb der klare Rat: Bevor Sie größere Summen in die Hand nehmen, sprechen Sie mit einem Steuerberater und – für alles rund ums Erbe – mit einem Notar oder Fachanwalt. Ich sage das nicht aus Vorsicht, sondern weil es sich fast immer auszahlt. Meine Baustelle plane ich gerne parallel dazu.',
+        ],
+      },
+      {
+        h2: 'Aus der Ferne sanieren – ohne jede Woche anzureisen',
+        paras: [
+          'Der häufigste Fall bei geerbten Objekten: Die Erben wohnen weit weg. Jede Woche 300 Kilometer zur Baustelle zu fahren, ist keine Lösung. Genau dafür sind wir da – wir übernehmen die Koordination vor Ort und halten Sie mit Fotos und kurzen Updates auf dem Laufenden.',
+          'Ein Ansprechpartner, ein Festpreis vor Baubeginn, ein realistischer Taktplan. Und wenn im Altbau doch eine Überraschung auftaucht, erfahren Sie das von uns – nicht erst bei der Übergabe.',
+        ],
+      },
+      {
+        h2: 'Geerbte Immobilie sanieren im Raum Heilbronn',
+        paras: [
+          'Wir sanieren geerbte Wohnungen und Häuser im gesamten Raum Heilbronn – von der ehrlichen Bestandsaufnahme über die Koordination aller Gewerke bis zur bezugsfertigen oder verkaufsfertigen Übergabe. Gerade für Erbengemeinschaften und auswärtige Eigentümer, die einen verlässlichen Partner vor Ort brauchen.',
+          'Erzählen Sie uns von dem Objekt – wir schauen es uns an, sagen ehrlich, was drinsteckt, und Sie entscheiden in Ruhe, wie es weitergeht.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
