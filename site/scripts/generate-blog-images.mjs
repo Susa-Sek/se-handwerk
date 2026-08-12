@@ -73,6 +73,10 @@ const ALL = [
     name: 'blog-fliesen.jpg',
     prompt: `${STYLE} Wide 16:9. Close-up of a freshly tiled floor with large-format matte porcelain tiles in a bright room, clean even grout lines, warm daylight raking across the surface, subtle real texture, shallow depth of field.`,
   },
+  {
+    name: 'blog-erben.jpg',
+    prompt: `${STYLE} Wide 16:9. Interior of an older inherited apartment mid-renovation: dated room with an old parquet floor and a large window letting in soft daylight, partly cleared, quiet and a little melancholic but full of potential, honest true-to-life light.`,
+  },
 ];
 // Only generate images that don't exist yet (pass names as args, or default to missing-only).
 const wanted = process.argv.slice(2);
