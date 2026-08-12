@@ -200,7 +200,7 @@ export const leistungenDetail: LeistungDetail[] = [
     keyword: 'Boden verlegen',
     metaTitle: 'Bodenleger Heilbronn – Vinyl, Laminat & Parkett | SE Handwerk',
     metaDescription:
-      'Boden verlegen im Raum Heilbronn: Vinyl, Laminat, Parkett & Fliesen inklusive Untergrundvorbereitung, Trittschalldämmung und Sockelleisten. Fair kalkuliert – jetzt anfragen.',
+      'Boden verlegen im Raum Heilbronn: Vinyl, Laminat, Parkett & Fliesen inklusive Untergrundvorbereitung, Trittschall und Sockelleisten. Jetzt anfragen.',
     h1: 'Bodenleger im Raum Heilbronn',
     kicker: 'Leistung 02 · Bodenarbeiten',
     intro:
@@ -278,7 +278,7 @@ export const leistungenDetail: LeistungDetail[] = [
     keyword: 'Handwerker für Einzelaufträge',
     metaTitle: 'Handwerker Heilbronn für Einzelaufträge & Montage | SE Handwerk',
     metaDescription:
-      'Einzelne Handwerksleistungen im Raum Heilbronn: Malerarbeiten, Bodenverlegung, Trockenbau, Möbelmontage und Wohnungsübergabe – zuverlässig und planbar. Jetzt anfragen.',
+      'Einzelne Handwerksleistungen im Raum Heilbronn: Maler, Bodenverlegung, Trockenbau, Möbelmontage und Wohnungsübergabe – zuverlässig und planbar.',
     h1: 'Handwerker im Raum Heilbronn für Einzelaufträge',
     kicker: 'Leistung 05 · Einzelgewerke',
     intro:
@@ -522,7 +522,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'wohnung-sanieren-vor-vermietung',
-    metaTitle: 'Wohnung sanieren vor Vermietung: Ablauf, Reihenfolge & Kosten | SE Handwerk',
+    metaTitle: 'Wohnung vor Vermietung sanieren: Kosten & Ablauf | SE Handwerk',
     metaDescription:
       'Wohnung vor der Vermietung sanieren: die richtige Reihenfolge der Gewerke, welche Arbeiten sich lohnen, Kostenfaktoren, realistischer Zeitplan und typische Fehler.',
     title: 'Wohnung sanieren vor der Vermietung: Ablauf & Reihenfolge',
@@ -627,7 +627,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'badsanierung-kosten',
     metaTitle: 'Badsanierung Kosten: Was ein neues Bad kostet 2026 | SE Handwerk',
     metaDescription:
-      'Was kostet eine Badsanierung? Richtwerte für kleines und großes Bad, die größten Kostentreiber, wo Sparen sich lohnt – und warum ein Festpreis vor bösen Überraschungen schützt.',
+      'Was kostet eine Badsanierung? Richtwerte für kleines und großes Bad, die größten Kostentreiber und wo Sparen sich lohnt – Raum Heilbronn.',
     title: 'Badsanierung Kosten: Was ein neues Bad wirklich kostet',
     excerpt:
       'Kein Gewerk sprengt das Budget so gern wie das Bad. Ich erkläre, was ein neues Bad realistisch kostet, wo das Geld hingeht – und an welcher Stelle Sparen sich später rächt.',
@@ -691,9 +691,9 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'trockenbau-kosten',
-    metaTitle: 'Trockenbau Kosten pro m²: Preise für Wände & Decken 2026 | SE Handwerk',
+    metaTitle: 'Trockenbau Kosten pro m² 2026 | SE Handwerk',
     metaDescription:
-      'Was kostet Trockenbau pro m²? Preise für Trennwände, Vorwände und abgehängte Decken, was den Preis treibt und wann sich Trockenbau lohnt – vom Handwerksbetrieb erklärt.',
+      'Was kostet Trockenbau pro m²? Preise für Trennwände, Vorwände und abgehängte Decken, was den Preis treibt und wann es sich lohnt.',
     title: 'Trockenbau Kosten pro m²: Wände und Decken im Überblick',
     excerpt:
       'Eine Wand versetzen, ohne die Statik anzufassen? Genau dafür ist Trockenbau da. Ich zeige, was Trennwände, Vorwände und abgehängte Decken pro Quadratmeter kosten.',
@@ -751,7 +751,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'sanierung-raum-heilbronn',
-    metaTitle: 'Sanierung im Raum Heilbronn: Ablauf, Kosten & Ansprechpartner | SE Handwerk',
+    metaTitle: 'Sanierung im Raum Heilbronn: Ablauf & Kosten | SE Handwerk',
     metaDescription:
       'Sanierung im Raum Heilbronn – von Neckarsulm bis Stuttgart: Ablauf, Kosten, regionale Besonderheiten und warum ein Ansprechpartner vor Ort Zeit und Nerven spart.',
     title: 'Sanierung im Raum Heilbronn: Was Eigentümer wissen sollten',
@@ -811,7 +811,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'generalunternehmer-sanierung',
-    metaTitle: 'Generalunternehmer für die Sanierung: Vorteile & Kosten | SE Handwerk',
+    metaTitle: 'Generalunternehmer Sanierung: Vorteile & Kosten | SE Handwerk',
     metaDescription:
       'Generalunternehmer für die Sanierung im Raum Heilbronn: alle Gewerke aus einer Hand, ein Ansprechpartner, ein Festpreis. Vorteile, Kosten und wann es sich lohnt.',
     title: 'Generalunternehmer für die Sanierung: Lohnt sich alles aus einer Hand?',
@@ -883,7 +883,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'sanieren-im-sommer',
-    metaTitle: 'Sanieren im Sommer: Warum die warme Jahreszeit ideal ist | SE Handwerk',
+    metaTitle: 'Sanieren im Sommer: die Vorteile | SE Handwerk',
     metaDescription:
       'Sanieren im Sommer: Estrich und Farbe trocknen schneller, durchgehend lüften, kürzere Bauzeit. Warum Sommer und Spätsommer gute Monate für die Renovierung sind.',
     title: 'Sanieren im Sommer: Die unterschätzte beste Jahreszeit',
@@ -943,7 +943,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'wohnung-sanieren-mieterwechsel',
-    metaTitle: 'Wohnung beim Mieterwechsel sanieren: Leerstand clever nutzen | SE Handwerk',
+    metaTitle: 'Wohnung beim Mieterwechsel sanieren | SE Handwerk',
     metaDescription:
       'Mieterwechsel im Sommer? Die Leerstandszeit zwischen zwei Mietern optimal für die Sanierung nutzen: Ablauf, was sich lohnt und wie Sie schnell wieder vermieten.',
     title: 'Wohnung beim Mieterwechsel sanieren: Leerstand clever nutzen',
@@ -1015,7 +1015,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'malerkosten-pro-qm',
-    metaTitle: 'Malerkosten pro m²: Was Wände streichen lassen kostet 2026 | SE Handwerk',
+    metaTitle: 'Malerkosten pro m²: Wände streichen 2026 | SE Handwerk',
     metaDescription:
       'Malerkosten pro m²: Was kostet es, Wände streichen zu lassen? Richtwerte für Streichen, Spachteln und Tapezieren, was den Preis treibt und wo Sie sparen können.',
     title: 'Malerkosten pro m²: Was Wände streichen lassen kostet',
@@ -1081,7 +1081,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'estrich-trocknungszeit',
-    metaTitle: 'Estrich Trocknungszeit: Wie lange muss Estrich trocknen? | SE Handwerk',
+    metaTitle: 'Estrich Trocknungszeit: wie lange? | SE Handwerk',
     metaDescription:
       'Estrich Trocknungszeit: Wie lange muss Estrich trocknen, bevor der Boden verlegt wird? Faustregeln, Einflussfaktoren und warum nur die gemessene Restfeuchte zählt.',
     title: 'Estrich Trocknungszeit: Wie lange muss Estrich wirklich trocknen?',
@@ -1213,7 +1213,7 @@ export const blogPosts: BlogPost[] = [
   },
   {
     slug: 'kernsanierung-kosten',
-    metaTitle: 'Kernsanierung Kosten: Was die Vollsanierung pro m² kostet | SE Handwerk',
+    metaTitle: 'Kernsanierung Kosten pro m² 2026 | SE Handwerk',
     metaDescription:
       'Kernsanierung Kosten: Was kostet eine Vollsanierung pro m²? Richtwerte, was alles dazugehört, die größten Kostentreiber und wie Sie das Budget im Griff behalten.',
     title: 'Kernsanierung Kosten: Was eine Vollsanierung wirklich kostet',
@@ -1282,7 +1282,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'wohnungsuebergabe-checkliste',
     metaTitle: 'Wohnungsübergabe: Checkliste für Eigentümer 2026 | SE Handwerk',
     metaDescription:
-      'Wohnungsübergabe-Checkliste für Vermieter und Eigentümer: Übergabeprotokoll, Zählerstände, Mängel dokumentieren, Schlüssel, Kaution. Was rein muss – und wie Sie die Wohnung vor der Übergabe herrichten.',
+      'Wohnungsübergabe-Checkliste für Vermieter: Übergabeprotokoll, Zählerstände, Mängel, Schlüssel, Kaution – was rein muss, plus Herrichten vor der Übergabe.',
     title: 'Wohnungsübergabe: die Checkliste für Eigentümer',
     excerpt:
       'Zwei Parteien, ein enger Termin, oft schlechte Laune – und am Ende streiten alle um die Kaution. Dabei entscheidet sich das meiste an einem Blatt Papier: dem Übergabeprotokoll. Hier steht, was wirklich reingehört, und wo die teuren Fehler passieren.',
@@ -1384,7 +1384,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'fliesen-verlegen-kosten',
     metaTitle: 'Fliesen verlegen: Kosten pro m² 2026 | SE Handwerk',
     metaDescription:
-      'Was kostet Fliesen verlegen pro m²? Preise für Material und Arbeit, Aufpreis für Großformat und Verlegemuster, Untergrund, Abdichtung im Bad und ein Rechenbeispiel – Raum Heilbronn.',
+      'Was kostet Fliesen verlegen pro m²? Preise für Material und Arbeit, Aufpreis für Format & Verlegemuster, Abdichtung im Bad – Raum Heilbronn.',
     title: 'Fliesen verlegen: Kosten pro m² im Überblick',
     excerpt:
       'Kaum ein Gewerk hat so eine Preisspanne wie Fliesen. Das gleiche Bad kann 2.000 Euro kosten oder das Doppelte – je nach Format, Muster und Untergrund. Hier sind ehrliche Zahlen, ein Rechenbeispiel und die Posten, an die kaum jemand denkt.',
@@ -1486,7 +1486,7 @@ export const blogPosts: BlogPost[] = [
     slug: 'geerbte-immobilie-sanieren',
     metaTitle: 'Geerbte Immobilie sanieren: Schritt für Schritt | SE Handwerk',
     metaDescription:
-      'Immobilie geerbt und sanieren? Bestandsaufnahme, Reihenfolge, realistische Kosten, Sanierung aus der Ferne und die typischen Stolpersteine bei Erbengemeinschaften – Raum Heilbronn.',
+      'Immobilie geerbt und sanieren? Bestandsaufnahme, Reihenfolge, realistische Kosten und Sanierung aus der Ferne – Raum Heilbronn.',
     title: 'Geerbte Immobilie sanieren – Schritt für Schritt',
     excerpt:
       'Ein Schlüssel, eine Wohnung voller Erinnerungen, oft mehrere Erben und niemand wohnt in der Nähe. Wer eine Immobilie erbt und sanieren will, steht vor vielen Fragen auf einmal. Hier ist eine ehrliche Reihenfolge, an der man sich festhalten kann.',
@@ -1637,14 +1637,14 @@ export const seitenSeo: Record<string, SeitenSeo> = {
   },
   impressum: {
     path: '/impressum',
-    title: 'Impressum | SE Handwerk',
-    description: 'Impressum und Anbieterkennzeichnung von SE Handwerk, Raum Heilbronn.',
+    title: 'Impressum – SE Handwerk, Sanierung Raum Heilbronn',
+    description: 'Impressum und Anbieterkennzeichnung von SE Handwerk – Sanierung und Renovierung aus einer Hand im Raum Heilbronn.',
     h1: 'Impressum',
   },
   datenschutz: {
     path: '/datenschutz',
-    title: 'Datenschutz | SE Handwerk',
-    description: 'Datenschutzerklärung von SE Handwerk — Informationen zum Umgang mit Ihren Daten.',
+    title: 'Datenschutz – SE Handwerk, Raum Heilbronn',
+    description: 'Datenschutzerklärung von SE Handwerk aus dem Raum Heilbronn — transparente Informationen zum Umgang mit Ihren Daten.',
     h1: 'Datenschutz',
   },
 };

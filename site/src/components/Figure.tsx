@@ -84,6 +84,8 @@ export default function Figure({ src, ratio, abb, caption, parallax = 0, style, 
           src={`${import.meta.env.BASE_URL}images/${src}`}
           alt={caption}
           loading="lazy"
+          width={1200}
+          height={750}
           onLoad={() => setLoaded(true)}
           onError={() => setFailed(true)}
           style={{

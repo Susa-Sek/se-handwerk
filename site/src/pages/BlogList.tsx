@@ -80,6 +80,8 @@ export default function BlogList() {
                         src={`/images/${p.bild}`}
                         alt={p.bildAlt}
                         loading="lazy"
+                        width={480}
+                        height={300}
                         style={{ width: '100%', aspectRatio: '16 / 10', objectFit: 'cover', display: 'block' }}
                       />
                       <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '24px 28px 28px' }}>
