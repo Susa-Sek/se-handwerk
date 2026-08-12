@@ -73,6 +73,9 @@ export default function VorherNachher() {
               src="/images/nachher.jpg"
               alt="Symbolbild: saniertes Zimmer nach der Sanierung"
               draggable={false}
+              loading="lazy"
+              width={1600}
+              height={1000}
               style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
             />
             {/* before — clipped from the left */}
@@ -88,6 +91,9 @@ export default function VorherNachher() {
                 src="/images/vorher.jpg"
                 alt="Symbolbild: unsaniertes Zimmer vor der Renovierung"
                 draggable={false}
+                loading="lazy"
+                width={1600}
+                height={1000}
                 style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.75)' }}
               />
             </div>

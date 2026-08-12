@@ -34,7 +34,10 @@ export default function Footer() {
           <div>
             <img
               src="/images/logo-white.png"
-              alt="SE Handwerk"
+              alt=""
+              aria-hidden="true"
+              width={480}
+              height={120}
               style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
             />
             <p style={{ fontFamily: mono, fontSize: 12, color: 'rgba(245,242,236,0.45)', lineHeight: 1.9 }}>
