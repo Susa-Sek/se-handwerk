@@ -51,13 +51,16 @@ export default function Nav() {
           aria-label="SE Handwerk — Startseite"
           style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#F5F2EC' }}
         >
-          <img
-            src="/images/logo-white.png"
-            alt="SE Handwerk – Startseite"
-            width={480}
-            height={120}
-            style={{ height: 30, width: 'auto', display: 'block' }}
-          />
+          <picture>
+            <source srcSet="/images/logo-white.webp" type="image/webp" />
+            <img
+              src="/images/logo-white.png"
+              alt="SE Handwerk – Startseite"
+              width={480}
+              height={120}
+              style={{ height: 30, width: 'auto', display: 'block' }}
+            />
+          </picture>
           <span
             className="nav-tag"
             style={{ fontFamily: mono, fontSize: 10.5, color: 'rgba(245,242,236,0.45)', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}

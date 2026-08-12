@@ -50,9 +50,14 @@ function render(
         .replace(/<meta\s+name="twitter:image"[^>]*>/, '')
     }
   }
-  return html
+  const out = html
     .replace('</head>', headExtra.join('\n') + '\n</head>')
     .replace('<div id="root"></div>', `<div id="root">${opts.body}</div>`)
+  // WebP-Fallback: jedes Prerender-Bild in <picture> mit WebP-Quelle + JPG/PNG-Fallback
+  return out.replace(
+    /<img\s+src="(\/images\/[^"]+?)\.(jpe?g|png)"([^>]*?)\s*\/?>/gi,
+    (_m, base, ext, rest) => `<picture><source srcset="${base}.webp" type="image/webp" /><img src="${base}.${ext}"${rest} /></picture>`,
+  )
 }
 
 const MAIN_OPEN = `<main role="main">`
@@ -301,6 +306,13 @@ ${blogGruppen.map((g) => `<section id="${g.t.key}"><h2><a href="/leistungen/${g.
 ${p.sections.map((sec) => `<section><h2>${esc(sec.h2)}</h2>${sec.paras.map((x) => `<p>${esc(x)}</p>`).join('')}${sec.list ? `<ul>${sec.list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>` : ''}${sec.bild ? `<figure><img src="/images/${sec.bild}" alt="${esc(sec.bildAlt ?? '')}" width="1200" height="675" loading="lazy" /><figcaption>Symbolbild</figcaption></figure>` : ''}</section>`).join('')}
 <p><small>Hinweis: Dieser Ratgeber bietet allgemeine, unverbindliche Informationen nach bestem Wissen (Stand 2026). Preisangaben sind grobe Richtwerte und kein Angebot; sie können je nach Objekt, Zustand, Region und Ausführung erheblich abweichen. Der Beitrag ersetzt keine individuelle Fach-, Steuer- oder Rechtsberatung.</small></p>
 ${p.relatedLeistung ? `<p><a href="/leistungen/${p.relatedLeistung}">Passende Leistung ansehen</a></p>` : ''}
+${(() => {
+  const rel = [
+    ...blogPosts.filter((x) => x.slug !== p.slug && x.relatedLeistung === p.relatedLeistung),
+    ...blogPosts.filter((x) => x.slug !== p.slug && x.relatedLeistung !== p.relatedLeistung),
+  ].slice(0, 3)
+  return rel.length ? `<section><h2>Weitere Artikel zum Thema</h2><ul>${rel.map((r) => `<li><a href="/blog/${r.slug}">${esc(r.title)}</a> — ${esc(r.excerpt)}</li>`).join('')}</ul></section>` : ''
+})()}
 <p><a href="/blog">Alle Beiträge</a> · <a href="/#kontakt">Projekt besprechen</a></p>
 </main>`
         write(path, render(shell, { title: p.metaTitle, description: p.metaDescription, url, body, jsonLd, image: SITE + '/images/' + p.bild }))

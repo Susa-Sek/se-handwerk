@@ -80,24 +80,27 @@ export default function Figure({ src, ratio, abb, caption, parallax = 0, style, 
           willChange: parallax ? 'transform' : undefined,
         }}
       >
-        <img
-          src={`${import.meta.env.BASE_URL}images/${src}`}
-          alt={caption}
-          loading="lazy"
-          width={1200}
-          height={750}
-          onLoad={() => setLoaded(true)}
-          onError={() => setFailed(true)}
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            opacity: showImg ? 1 : 0,
-            transition: 'opacity .6s ease',
-          }}
-        />
+        <picture>
+          <source srcSet={`${import.meta.env.BASE_URL}images/${src.replace(/\.(jpe?g|png)$/i, '.webp')}`} type="image/webp" />
+          <img
+            src={`${import.meta.env.BASE_URL}images/${src}`}
+            alt={caption}
+            loading="lazy"
+            width={1200}
+            height={750}
+            onLoad={() => setLoaded(true)}
+            onError={() => setFailed(true)}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              opacity: showImg ? 1 : 0,
+              transition: 'opacity .6s ease',
+            }}
+          />
+        </picture>
       </div>
 
       {/* subtle vignette + gold edge-light on the loaded photo, ties it to the

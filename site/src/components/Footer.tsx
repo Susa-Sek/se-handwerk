@@ -32,14 +32,17 @@ export default function Footer() {
           }}
         >
           <div>
-            <img
-              src="/images/logo-white.png"
-              alt=""
-              aria-hidden="true"
-              width={480}
-              height={120}
-              style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
-            />
+            <picture>
+              <source srcSet="/images/logo-white.webp" type="image/webp" />
+              <img
+                src="/images/logo-white.png"
+                alt=""
+                aria-hidden="true"
+                width={480}
+                height={120}
+                style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
+              />
+            </picture>
             <p style={{ fontFamily: mono, fontSize: 12, color: 'rgba(245,242,236,0.45)', lineHeight: 1.9 }}>
               SE Handwerk
               <br />
