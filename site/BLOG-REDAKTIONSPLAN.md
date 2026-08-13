@@ -26,10 +26,13 @@ ihn live und markiert ihn hier als `veröffentlicht`. Details im Job-Prompt.
 Wenn alle abgearbeitet sind: 2–3 neue, saisonal passende Themen ergänzen,
 bevor geschrieben wird.
 
-## Bereits veröffentlicht (17)
+> Hinweis: „Wohnung vermietbar machen" wurde wegen Themen-Überschneidung in
+> „Wohnung sanieren vor Vermietung" konsolidiert (301-Redirect). Künftig keine
+> weiteren „Wohnung-für-Vermietung-herrichten"-Themen anlegen.
+
+## Bereits veröffentlicht (16)
 Vinylboden-Kosten · Laminat vs. Vinyl · Wohnung sanieren vor Vermietung ·
 Badsanierung Kosten · Trockenbau Kosten · Sanierung im Raum Heilbronn ·
 Generalunternehmer Sanierung · Sanieren im Sommer · Wohnung Mieterwechsel ·
 Malerkosten pro m² · Estrich Trocknungszeit · Barrierefreies Bad · Kernsanierung Kosten ·
-Wohnungsübergabe-Checkliste · Fliesen verlegen Kosten · Geerbte Immobilie sanieren ·
-Wohnung vermietbar machen
+Wohnungsübergabe-Checkliste · Fliesen verlegen Kosten · Geerbte Immobilie sanieren
