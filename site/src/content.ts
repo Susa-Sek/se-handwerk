@@ -1576,6 +1576,98 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'wohnung-vermietbar-machen',
+    metaTitle: 'Wohnung vermietbar machen: was sich lohnt | SE Handwerk',
+    metaDescription:
+      'Wohnung vermietbar machen: Wo Vermieter ihr Geld am besten einsetzen, was Interessenten zuerst sehen, die Leerstand-Rechnung und wann sich Bad und Küche lohnen – Raum Heilbronn.',
+    title: 'Wohnung vermietbar machen: wo sich das Geld lohnt',
+    excerpt:
+      'Nicht jede Wohnung braucht die große Sanierung, um gut zu vermieten. Oft entscheiden ein paar günstige Hebel, ob eine Wohnung nach einer Woche weg ist oder nach zwei Monaten immer noch leer steht. Hier steht, wo Vermieter ihr Geld am besten einsetzen.',
+    datum: '2026-08-13',
+    kategorie: 'Vermietung',
+    lesezeit: '10 Min.',
+    bild: 'blog-vermietbar.jpg',
+    bildAlt: 'Symbolbild: helle, frisch hergerichtete Mietwohnung, bezugsfertig',
+    kurz: [
+      'Vermietbar machen heißt nicht kernsanieren – oft reichen gezielte, günstige Maßnahmen.',
+      'Interessenten entscheiden in den ersten Minuten: Licht, Boden, Bad und Geruch zählen am meisten.',
+      'Streichen und ein frischer Boden sind die Hebel mit dem besten Verhältnis von Aufwand zu Wirkung.',
+      'Jede Woche Leerstand ist Miete, die niemand zahlt – schnell fertig schlägt oft perfekt.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Wohnung vermietbar machen heißt nicht kernsanieren',
+        paras: [
+          'Der häufigste Denkfehler, den ich bei Vermietern sehe: Entweder wird gar nichts gemacht („geht schon so") oder gleich alles auf einmal, bis zur Kernsanierung. Beides kostet unnötig – das eine Nerven und Leerstand, das andere Geld, das sich nie über die Miete zurückholt.',
+          'Eine Wohnung vermietbar zu machen, ist eine Frage der richtigen Prioritäten. Es geht nicht darum, die schönste Wohnung im Haus zu bauen, sondern die, die schnell und zu einem fairen Preis einen guten Mieter findet. Und dafür zählen ein paar Dinge deutlich mehr als andere.',
+          'Damit das klar ist: Konkrete Zahlen in diesem Beitrag sind grobe Richtwerte zur Orientierung, kein Angebot. Was Ihre Wohnung braucht, sieht man erst vor Ort.',
+        ],
+      },
+      {
+        h2: 'Was Interessenten in den ersten Minuten sehen',
+        paras: [
+          'Ein Wohnungsinteressent entscheidet schneller, als man denkt. In den ersten Minuten zählt der Gesamteindruck, nicht das Detail. Vier Dinge fallen dabei sofort auf – im Guten wie im Schlechten:',
+        ],
+        list: [
+          'Licht und Helligkeit: saubere Fenster, helle Wände, nichts Dunkles im Weg',
+          'Der Boden: ein abgelaufener, fleckiger Boden zieht den ganzen Raum runter',
+          'Das Bad: alte Fugen und vergilbtes Silikon wirken sofort ungepflegt',
+          'Der Geruch: muffig oder nach Vormieter riecht nach Arbeit, die keiner will',
+        ],
+        bild: 'blog-sanierung.jpg',
+        bildAlt: 'Symbolbild: helle, aufgeräumte Wohnung, bereit zur Besichtigung',
+      },
+      {
+        h2: 'Die günstigen Hebel mit der größten Wirkung',
+        paras: [
+          'Wenn das Budget begrenzt ist – und das ist es fast immer –, stecken Sie es zuerst hier hinein. Frische Wände sind der stärkste Hebel überhaupt: Ein sauberer Anstrich lässt eine Wohnung heller, größer und gepflegter wirken, und er ist im Verhältnis günstig. Was Malerarbeiten ungefähr kosten, steht im Ratgeber zu den Malerkosten.',
+          'Der zweite große Hebel ist der Boden. Ist er durch, macht ein neuer Vinyl- oder Laminatboden optisch am meisten her – robust, pflegeleicht und für die Vermietung ideal. Und der dritte, oft unterschätzte Punkt: frische Silikonfugen im Bad und in der Küche. Das kostet wenig und nimmt sofort den „alt"-Eindruck.',
+        ],
+      },
+      {
+        h2: 'Wann sich Bad und Küche wirklich lohnen',
+        paras: [
+          'Bad und Küche sind die teuersten Räume – und die, bei denen man am genauesten rechnen sollte. Ein komplett neues Bad steigert die Vermietbarkeit spürbar, kostet aber auch am meisten. Die ehrliche Faustregel: Solange das Bad funktioniert und sauber wirkt, reicht oft Auffrischen – neue Fugen, ein neuer Spiegel, vielleicht eine moderne Armatur.',
+          'Erst wenn das Bad wirklich abgewohnt ist, lohnt die größere Lösung. Dann aber richtig, denn ein halbherzig renoviertes Bad bringt weder Miete noch Freude. Bei der Küche gilt Ähnliches: In vielen Regionen bringen Mieter ihre eigene Küche mit – dann muss der Vermieter hier gar nichts stellen.',
+        ],
+      },
+      {
+        h2: 'Die Leerstand-Rechnung: schnell schlägt perfekt',
+        paras: [
+          'Der Punkt, den viele Vermieter unterschätzen: Leerstand kostet echtes Geld, jede Woche. Bei einer Wohnung mit angenommenen 800 Euro Kaltmiete sind zwei Monate Leerstand rund 1.600 Euro, die nie wiederkommen. Diese Rechnung ändert den Blick auf „ich mach das dann mal, wenn ich Zeit habe".',
+          'Deshalb: Lieber die richtigen Dinge zügig erledigen und die Wohnung wieder an den Markt bringen, als monatelang auf die perfekte Rundum-Sanierung zu warten. Wer alles auf einmal koordiniert, statt Gewerk für Gewerk über Wochen, verkürzt den Leerstand spürbar. Genau dafür ist ein Ansprechpartner für alle Arbeiten Gold wert.',
+        ],
+      },
+      {
+        h2: 'Die richtige Reihenfolge – damit es schnell geht',
+        paras: [
+          'Wenn mehrere Arbeiten anstehen, entscheidet die Reihenfolge über das Tempo. Grob gilt: erst das Grobe und Staubige, dann das Feine. In dieser Reihenfolge ist eine Wohnung am schnellsten fertig:',
+        ],
+        list: [
+          'Reparaturen und alles, was Dreck macht (Bad, kleine Trockenbauarbeiten)',
+          'Wände spachteln und streichen',
+          'Boden verlegen',
+          'Endreinigung, Kleinigkeiten, Übergabe an den neuen Mieter',
+        ],
+      },
+      {
+        h2: 'Typische Vermieter-Fehler, die Geld kosten',
+        paras: [
+          'Zwei Fehler sehe ich immer wieder. Der erste: überrenovieren. Hochwertige Designböden und Luxusbäder in einer normalen Mietwohnung holen die Investition über die Miete meist nicht rein. Der zweite: unterrenovieren – die Wohnung „so lassen" und sich dann über wenige Interessenten und Preisdruck wundern.',
+          'Der richtige Weg liegt dazwischen: solide, sauber, hell und funktional. Genau das, was ein guter Mieter erwartet – nicht mehr, nicht weniger. Wer diese Balance trifft, vermietet schneller und ärgert sich weniger.',
+        ],
+      },
+      {
+        h2: 'Wohnung vermietbar machen im Raum Heilbronn',
+        paras: [
+          'Wir richten Mietwohnungen im gesamten Raum Heilbronn her – von der schnellen Auffrischung bis zur kompletten Herrichtung zwischen zwei Mietern. Malerarbeiten, Böden, Bad und Kleinreparaturen koordiniert, mit einem Ansprechpartner und einem Festpreis vor Baubeginn. Wenn Sie den ganzen Ablauf im Detail sehen wollen, hilft der Ratgeber zum Sanieren vor der Vermietung weiter.',
+          'Gerade für Kapitalanleger und Vermieter, die nicht vor Ort sind, übernehmen wir alles aus einer Hand und halten Sie mit Fotos auf dem Laufenden. Sagen Sie uns, bis wann die Wohnung wieder vermietbar sein soll – wir sagen ehrlich, ob das zu schaffen ist.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
