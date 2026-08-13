@@ -7,6 +7,7 @@
     { "source": "/ueber-uns.html", "destination": "/ueber-uns", "permanent": true },
     { "source": "/kontakt.html", "destination": "/kontakt", "permanent": true },
     { "source": "/danke", "destination": "/kontakt", "permanent": true },
+    { "source": "/blog/wohnung-vermietbar-machen", "destination": "/blog/wohnung-sanieren-vor-vermietung", "permanent": true },
     { "source": "/danke.html", "destination": "/kontakt", "permanent": true },
     { "source": "/bodenarbeiten{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
     { "source": "/bodenschutz-gummiboden{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
