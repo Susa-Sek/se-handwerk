@@ -74,6 +74,10 @@ const ALL = [
     prompt: `${STYLE} Wide 16:9. Close-up of a freshly tiled floor with large-format matte porcelain tiles in a bright room, clean even grout lines, warm daylight raking across the surface, subtle real texture, shallow depth of field.`,
   },
   {
+    name: 'blog-altbau.jpg',
+    prompt: `${STYLE} Wide 16:9. Interior of an older German period apartment (Altbau) mid-renovation: high ceilings, tall windows with soft daylight, original stucco cornices, bare plaster walls partly restored, wooden floor to be refurbished, honest true-to-life light, full of character and potential.`,
+  },
+  {
     name: 'blog-erben.jpg',
     prompt: `${STYLE} Wide 16:9. Interior of an older inherited apartment mid-renovation: dated room with an old parquet floor and a large window letting in soft daylight, partly cleared, quiet and a little melancholic but full of potential, honest true-to-life light.`,
   },

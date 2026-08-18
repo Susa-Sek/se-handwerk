@@ -1595,6 +1595,95 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'altbausanierung-worauf-achten',
+    metaTitle: 'Altbausanierung: Worauf achten? Die Praxis-Tipps | SE Handwerk',
+    metaDescription:
+      'Altbausanierung: worauf man wirklich achten sollte – Feuchtigkeit, alte Elektrik, Schadstoffe, tragende Wände, Energie und warum ein Puffer im Altbau Pflicht ist. Raum Heilbronn.',
+    title: 'Altbausanierung: Worauf man wirklich achten sollte',
+    excerpt:
+      'Altbau hat Charme – hohe Decken, dicke Wände, Stuck. Und er hat Überraschungen, fast immer hinter den Wänden. Wer einen Altbau saniert, sollte ein paar Dinge wissen, bevor der erste Hammer fällt. Hier sind die Punkte, an denen es in der Praxis wirklich hängt.',
+    datum: '2026-08-19',
+    kategorie: 'Sanierung',
+    lesezeit: '11 Min.',
+    bild: 'blog-gu.jpg',
+    bildAlt: 'Symbolbild: sanierter Altbau-Wohnraum mit hohen Decken',
+    kurz: [
+      'Vor allem anderen steht die Bestandsaufnahme: Feuchtigkeit, Substanz und alte Leitungen ehrlich prüfen.',
+      'Die teuren Überraschungen im Altbau stecken meist unsichtbar in Elektrik, Leitungen und feuchten Wänden.',
+      'Schadstoffe, Statik, Denkmal- und Energiethemen gehören in Fachhände – nicht ins Bauchgefühl.',
+      'Ein großzügiger Puffer ist im Altbau keine Vorsicht, sondern Pflicht.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Altbausanierung: Der Charme und das, was dahintersteckt',
+        paras: [
+          'Ich mag Altbauten. Hohe Decken, ordentliche Wandstärken, oft ein Stuck, den heute niemand mehr so macht. Aber ich habe auch gelernt: Der Charme steht vorne, die Arbeit steckt hinten – in den Wänden, unter dem Boden, im Keller. Kaum ein Altbau hält sich an das, was man von außen sieht.',
+          'Wer einen Altbau saniert, kauft immer ein Stück Ungewissheit mit. Das ist kein Grund zur Panik, sondern zur Vorbereitung. Wenn man weiß, worauf zu achten ist, wird aus der Überraschung ein eingeplanter Posten statt eines Schocks auf der Rechnung.',
+          'Ein Hinweis vorweg: Dieser Beitrag gibt allgemeine Praxis-Orientierung, keine Rechts-, Statik- oder Energieberatung. Wo es um Substanz, Schadstoffe oder Förderung geht, gehört ein Fachmann an den Tisch – das sage ich in diesem Artikel noch ein paarmal, und zwar ernst gemeint.',
+        ],
+      },
+      {
+        h2: 'Zuerst die Substanz: Feuchtigkeit ehrlich prüfen',
+        paras: [
+          'Die erste Frage bei jedem Altbau lautet: Ist er trocken? Feuchtigkeit ist im Altbau der Klassiker – aufsteigende Nässe im Keller, feuchte Außenwände, alte Wasserschäden, die nie richtig getrocknet sind. Wer darüber einfach neu verputzt und streicht, hat das Problem in ein, zwei Jahren wieder, dann teurer.',
+          'Deshalb: Bevor irgendetwas Schönes passiert, wird die Substanz angeschaut. Keller, Dachanschlüsse, Fensterlaibungen, die Ecken, in denen es klamm riecht. Bei ernsthafter Feuchtigkeit lohnt ein Blick vom Fachmann, der die Ursache findet – oberflächlich kaschieren ist beim Altbau rausgeworfenes Geld.',
+        ],
+      },
+      {
+        h2: 'Elektrik und Leitungen – der unsichtbare Kostenblock',
+        paras: [
+          'Das Zweite, was man im Altbau selten sieht und fast immer unterschätzt: die Technik. Elektrik aus den Sechzigern oder Siebzigern ist oft weder für die heutige Anzahl an Geräten ausgelegt noch auf dem heutigen Sicherheitsstand. Alte Wasser- und Abwasserleitungen sind ein ähnliches Thema.',
+          'Solange die Wände ohnehin offen sind, ist der richtige Moment, das mitzumachen. Später noch einmal aufzustemmen, was frisch verputzt und gestrichen ist, tut weh – im Geldbeutel und im Nervenkostüm. Diese Gewerke gehören zu den Dingen, die man im Altbau lieber einmal richtig macht.',
+        ],
+        bild: 'blog-detail.jpg',
+        bildAlt: 'Symbolbild: freigelegte Wand im Altbau während der Sanierung',
+      },
+      {
+        h2: 'Schadstoffe im Altbau: kein Bereich fürs Bauchgefühl',
+        paras: [
+          'Ein Punkt, den ich sehr ernst nehme: In älteren Gebäuden können Schadstoffe stecken – je nach Baujahr etwa in alten Bodenklebern, bestimmten Dämmstoffen, alten Anstrichen oder anderen Materialien. Das ist nichts, was man mal eben selbst herausreißt und in den Container wirft.',
+          'Wenn der Verdacht besteht, gehört das in die Hände eines Fachbetriebs, der prüft, fachgerecht entfernt und entsorgt. Hier geht es um Gesundheit, nicht um Kosten sparen. Klären Sie das früh – am besten schon bei der Aufnahme –, damit es später den Ablauf nicht sprengt.',
+        ],
+      },
+      {
+        h2: 'Tragende Wände und Statik – nicht einfach rausreißen',
+        paras: [
+          'Offene Grundrisse sind beliebt, und im Altbau steht oft eine Wand im Weg. Aber ob eine Wand tragend ist, sieht man ihr nicht immer an – gerade in alten Häusern mit gewachsenen Umbauten. Eine tragende Wand ohne Prüfung zu entfernen, ist keine gute Idee.',
+          'Vor solchen Eingriffen gehört ein Statiker gefragt. Er sagt, was geht und was es dafür braucht – etwa einen Sturz oder Träger. Das kostet erst einmal, verhindert aber genau die Fehler, die im Altbau richtig gefährlich und richtig teuer werden.',
+        ],
+      },
+      {
+        h2: 'Energetisch sanieren: Fenster, Dämmung, Heizung',
+        paras: [
+          'Altbau und Energie ist ein eigenes großes Thema. Alte Fenster, ungedämmte Wände und eine betagte Heizung sind oft die größten Energiefresser. Was sich lohnt, hängt stark vom einzelnen Gebäude ab – pauschale Versprechen sind hier fehl am Platz.',
+          'Für energetische Maßnahmen gibt es je nach Vorhaben Förderungen; die Bedingungen ändern sich aber immer wieder. Wer hier plant, spricht am besten mit einem Energieberater, bevor Geld fließt – der rechnet durch, was sich rechnet, und kennt die aktuellen Programme. Ich koordiniere die Bauarbeiten gerne parallel dazu.',
+        ],
+      },
+      {
+        h2: 'Denkmalschutz und Bestandsschutz kurz erklärt',
+        paras: [
+          'Steht das Gebäude unter Denkmalschutz, gelten eigene Regeln – von der Fensterform bis zur Fassade. Das ist kein Grund, die Finger davon zu lassen, aber ein Grund, früh mit der zuständigen Denkmalbehörde zu sprechen. Genehmigt wird vieles, nur eben nicht alles und nicht in jeder Ausführung.',
+          'Und dann gibt es den Bestandsschutz: Nicht jeder Altbau muss bei einer Sanierung komplett auf den heutigen Stand gebracht werden. Was konkret gilt, hängt vom Umfang der Maßnahmen ab – auch das klärt man besser vorher als hinterher.',
+        ],
+      },
+      {
+        h2: 'Warum ein Puffer im Altbau Pflicht ist',
+        paras: [
+          'Bei einem Neubau lässt sich vieles vorher berechnen. Beim Altbau nicht – jedenfalls nicht alles. Hinter der Wand kann altes Fachwerk stecken, ein früherer Umbau, eine Leitung, die niemand erwartet hat. Deshalb plane ich bei Altbauten immer einen Puffer ein, zeitlich und finanziell.',
+          'Das ist keine Schwarzmalerei, sondern Erfahrung. Wer mit einem realistischen Puffer startet, bleibt gelassen, wenn tatsächlich etwas auftaucht. Wer auf Kante plant, gerät schon bei der ersten Überraschung ins Rutschen. Ein aufgeschlüsseltes Angebot mit klarem Puffer ist im Altbau ehrlicher als eine schöne runde Zahl.',
+        ],
+      },
+      {
+        h2: 'Altbausanierung im Raum Heilbronn – aus einer Hand',
+        paras: [
+          'Wir sanieren Altbauten im Raum Heilbronn koordiniert: von der ehrlichen Bestandsaufnahme über die Abstimmung mit Statiker, Energieberater oder Fachbetrieben bis zur bezugsfertigen Übergabe – ein Ansprechpartner, ein Festpreis vor Baubeginn, ein realistischer Taktplan mit Puffer.',
+          'Gerade beim Altbau zahlt sich das aus: Statt fünf Gewerke selbst zu koordinieren und bei jeder Überraschung neu zu telefonieren, haben Sie uns. Erzählen Sie uns von Ihrem Objekt – wir schauen es uns an und sagen ehrlich, was drinsteckt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
