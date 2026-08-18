@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useSectionLink } from '../hooks/useSectionLink';
+import { leistungen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -31,11 +32,17 @@ export default function Footer() {
           }}
         >
           <div>
-            <img
-              src="/images/logo-white.png"
-              alt="SE Handwerk"
-              style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
-            />
+            <picture>
+              <source srcSet="/images/logo-white.webp" type="image/webp" />
+              <img
+                src="/images/logo-white.png"
+                alt=""
+                aria-hidden="true"
+                width={480}
+                height={120}
+                style={{ height: 34, width: 'auto', display: 'block', marginBottom: 16 }}
+              />
+            </picture>
             <p style={{ fontFamily: mono, fontSize: 12, color: 'rgba(245,242,236,0.45)', lineHeight: 1.9 }}>
               SE Handwerk
               <br />
@@ -44,6 +51,14 @@ export default function Footer() {
           </div>
           <div style={{ display: 'flex', gap: 56, flexWrap: 'wrap' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <span style={colLabel}>Leistungen</span>
+              {leistungen.map((l) => (
+                <Link key={l.slug} to={`/leistungen/${l.slug}`} className="footer-link" style={colLink}>
+                  {l.title}
+                </Link>
+              ))}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <span style={colLabel}>Seite</span>
               <a href="/#leistungen" onClick={onSection('#leistungen')} className="footer-link" style={colLink}>
                 Leistungen
@@ -51,6 +66,9 @@ export default function Footer() {
               <a href="/#ablauf" onClick={onSection('#ablauf')} className="footer-link" style={colLink}>
                 Ablauf
               </a>
+              <Link to="/blog" className="footer-link" style={colLink}>
+                Ratgeber
+              </Link>
               <Link to="/ueber-uns" className="footer-link" style={colLink}>
                 Über uns
               </Link>
@@ -66,6 +84,18 @@ export default function Footer() {
               <Link to="/datenschutz" className="footer-link" style={colLink}>
                 Datenschutz
               </Link>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <span style={colLabel}>Regional</span>
+              <a
+                href="https://www.hwk-heilbronn.de/"
+                target="_blank"
+                rel="noopener"
+                className="footer-link"
+                style={colLink}
+              >
+                Handwerkskammer Heilbronn-Franken
+              </a>
             </div>
           </div>
         </div>

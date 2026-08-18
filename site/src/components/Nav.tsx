@@ -51,11 +51,16 @@ export default function Nav() {
           aria-label="SE Handwerk — Startseite"
           style={{ display: 'flex', alignItems: 'center', gap: 14, color: '#F5F2EC' }}
         >
-          <img
-            src="/images/logo-white.png"
-            alt="SE Handwerk"
-            style={{ height: 30, width: 'auto', display: 'block' }}
-          />
+          <picture>
+            <source srcSet="/images/logo-white.webp" type="image/webp" />
+            <img
+              src="/images/logo-white.png"
+              alt="SE Handwerk – Startseite"
+              width={480}
+              height={120}
+              style={{ height: 30, width: 'auto', display: 'block' }}
+            />
+          </picture>
           <span
             className="nav-tag"
             style={{ fontFamily: mono, fontSize: 10.5, color: 'rgba(245,242,236,0.45)', letterSpacing: '0.06em', whiteSpace: 'nowrap' }}
@@ -75,6 +80,9 @@ RAUM HEILBRONN
             <a href="/#eigentuemer" onClick={go('#eigentuemer')} className="nav-link" style={linkStyle}>
               Für Eigentümer
             </a>
+            <Link to="/blog" className="nav-link" style={linkStyle} onClick={() => setOpen(false)}>
+              Ratgeber
+            </Link>
             <Link to="/ueber-uns" className="nav-link" style={linkStyle} onClick={() => setOpen(false)}>
               Über uns
             </Link>
@@ -158,6 +166,14 @@ RAUM HEILBRONN
             {l.label}
           </a>
         ))}
+        <Link
+          to="/blog"
+          onClick={() => setOpen(false)}
+          className="nav-link"
+          style={{ ...linkStyle, display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(245,242,236,0.06)' }}
+        >
+          Ratgeber
+        </Link>
         <Link
           to="/ueber-uns"
           onClick={() => setOpen(false)}

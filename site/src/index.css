@@ -38,6 +38,7 @@ a:hover{color:#8C5E12;}
 h1,h2,h3{margin:0;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-0.025em;line-height:1.0;}
 p{margin:0;}
 img{max-width:100%;}
+picture{display:contents;}
 
 /* film grain on dark sections — inline SVG noise, no external request */
 .grain{position:relative;isolation:isolate;}

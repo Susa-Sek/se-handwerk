@@ -355,8 +355,8 @@ export function RegionSection() {
               Im Raum Heilbronn und Umgebung.
             </Reveal>
             <Reveal as="p" delay={110} style={{ fontSize: 16.5, lineHeight: 1.7, color: 'var(--t-sub)', maxWidth: 400 }}>
-              Wir arbeiten im gesamten Raum Heilbronn und Umgebung — von Neckarsulm über Sinsheim
-              bis Stuttgart.
+              Wir arbeiten im gesamten Raum Heilbronn und Umgebung — von Neckarsulm und Weinsberg
+              über Öhringen bis Bietigheim und Sinsheim.
             </Reveal>
             <Reveal delay={170} style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginTop: 32 }}>
               {regionen.map((r) => (

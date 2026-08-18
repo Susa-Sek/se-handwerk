@@ -43,7 +43,7 @@ export default function VorherNachher() {
       <div style={{ maxWidth: 1240, margin: '0 auto', padding: '0 40px' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 44 }}>
           <div>
-            <SectionKicker dark>Das Ergebnis</SectionKicker>
+            <SectionKicker dark>Vorher / Nachher</SectionKicker>
             <Reveal as="h2" delay={40} style={{ fontSize: 'clamp(34px,5vw,68px)', color: '#F5F2EC' }}>
               Von Tag 0 bis zur Übergabe.
             </Reveal>
@@ -69,12 +69,18 @@ export default function VorherNachher() {
             }}
           >
             {/* after — full frame */}
-            <img
-              src="/images/nachher.jpg"
-              alt="Fertig saniertes Zimmer bei der Übergabe"
-              draggable={false}
-              style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
-            />
+            <picture>
+              <source srcSet="/images/nachher.webp" type="image/webp" />
+              <img
+                src="/images/nachher.jpg"
+                alt="Symbolbild: saniertes Zimmer nach der Sanierung"
+                draggable={false}
+                loading="lazy"
+                width={1600}
+                height={1000}
+                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }}
+              />
+            </picture>
             {/* before — clipped from the left */}
             <div
               aria-hidden
@@ -84,12 +90,18 @@ export default function VorherNachher() {
                 clipPath: `inset(0 ${(100 - pos).toFixed(2)}% 0 0)`,
               }}
             >
-              <img
-                src="/images/vorher.jpg"
-                alt=""
-                draggable={false}
-                style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.75)' }}
-              />
+              <picture>
+                <source srcSet="/images/vorher.webp" type="image/webp" />
+                <img
+                  src="/images/vorher.jpg"
+                  alt="Symbolbild: unsaniertes Zimmer vor der Renovierung"
+                  draggable={false}
+                  loading="lazy"
+                  width={1600}
+                  height={1000}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', filter: 'saturate(0.75)' }}
+                />
+              </picture>
             </div>
 
             {/* handle */}
@@ -179,8 +191,9 @@ export default function VorherNachher() {
         </Reveal>
 
         <Reveal as="p" delay={160} style={{ marginTop: 26, fontFamily: mono, fontSize: 12.5, lineHeight: 1.7, color: 'rgba(245,242,236,0.55)', maxWidth: 560 }}>
-          Ein Objekt, ein Taktplan — und dazwischen liegt unsere Arbeit.
+          Ein Ablauf, ein Taktplan — und dazwischen liegt unsere Arbeit.
           Wann es so weit ist, planen wir gemeinsam — realistisch statt schöngerechnet.
+          Alle Abbildungen auf dieser Seite sind Symbolbilder.
         </Reveal>
       </div>
     </section>
