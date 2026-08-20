@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>TikTok Login – Callback | SE Handwerk</title>
+<style>
+  :root { --ink:#152938; --muted:#5b6b78; --gold:#c8962e; --line:#e5e9ec; --err:#c8322e; --ok:#1c7c4a; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+         color:var(--ink); line-height:1.6; background:#fff; }
+  main { max-width:640px; margin:0 auto; padding:56px 24px 96px; }
+  header { border-bottom:3px solid var(--gold); padding-bottom:18px; margin-bottom:28px; }
+  h1 { font-size:1.5rem; margin:0 0 4px; }
+  .muted { color:var(--muted); font-size:.92rem; }
+  .box { background:#f4f6f7; border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin:18px 0; }
+  .label { font-size:.75rem; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:6px; }
+  code { display:block; word-break:break-all; font-size:.95rem; background:#fff; border:1px solid var(--line);
+         border-radius:6px; padding:10px 12px; }
+  button { margin-top:10px; background:var(--gold); color:#fff; border:0; border-radius:6px;
+           padding:8px 14px; font-weight:600; cursor:pointer; font-size:.9rem; }
+  button:hover { filter:brightness(.95); }
+  .status { font-weight:600; }
+  .status.ok { color:var(--ok); }
+  .status.err { color:var(--err); }
+  a { color:var(--gold); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>TikTok Login – Callback</h1>
+    <p class="muted">SE Handwerk App &middot; OAuth Redirect</p>
+  </header>
+
+  <p id="msg" class="status">Verarbeite Antwort von TikTok…</p>
+
+  <div id="ok" style="display:none">
+    <p>Autorisierung erfolgreich empfangen. Kopiere den Code und tausche ihn
+    <strong>server-seitig</strong> gegen ein Access-Token (der Client-Secret darf
+    niemals im Browser stehen).</p>
+
+    <div class="box">
+      <div class="label">Authorization Code</div>
+      <code id="code">–</code>
+      <button onclick="copyVal('code')">Code kopieren</button>
+    </div>
+
+    <div class="box">
+      <div class="label">State</div>
+      <code id="state">–</code>
+    </div>
+  </div>
+
+  <div id="err" style="display:none">
+    <div class="box">
+      <div class="label">Fehler</div>
+      <code id="errval">–</code>
+    </div>
+  </div>
+
+  <p class="muted" style="margin-top:32px">
+    <a href="./privacy.html">Datenschutz</a> &middot;
+    <a href="./terms.html">Nutzungsbedingungen</a>
+  </p>
+</main>
+
+<script>
+  var p = new URLSearchParams(location.search);
+  var code = p.get('code');
+  var state = p.get('state');
+  var error = p.get('error') || p.get('error_description');
+  var msg = document.getElementById('msg');
+
+  if (code) {
+    msg.textContent = '✓ Autorisierung empfangen';
+    msg.className = 'status ok';
+    document.getElementById('ok').style.display = 'block';
+    document.getElementById('code').textContent = code;
+    document.getElementById('state').textContent = state || '(kein state)';
+  } else if (error) {
+    msg.textContent = '✗ Autorisierung fehlgeschlagen';
+    msg.className = 'status err';
+    document.getElementById('err').style.display = 'block';
+    document.getElementById('errval').textContent = error;
+  } else {
+    msg.textContent = 'Kein Autorisierungscode in der URL. Diese Seite wird nach '
+      + 'dem TikTok-Login automatisch mit ?code=… aufgerufen.';
+    msg.className = 'status';
+  }
+
+  function copyVal(id) {
+    var t = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(t);
+  }
+</script>
+</body>
+</html>
