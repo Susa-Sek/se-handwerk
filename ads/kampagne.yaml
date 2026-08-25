@@ -129,4 +129,6 @@ anzeigengruppen:
       beschreibungen:
         - "Boden verlegen in Heilbronn & Umgebung. Festpreis vor Start, keine bösen Überraschungen."
         - "Laminat, Vinyl, Parkett — sauber verlegt. Kostenlose Besichtigung, Antwort in 24 Std."
-        - "Handwerker mit Festpreis-Garantie. Jetzt Anfrage stellen — wir melden uns innerhalb 24h."
+        # Bewusst "Festpreis" statt "Festpreis-Garantie": Eine Garantie ist ein
+        # eigener Rechtsbegriff. Ohne echte Garantieerklaerung waere das angreifbar.
+        - "Handwerker mit festem Preis vor Start. Jetzt anfragen — Antwort innerhalb 24 Std."

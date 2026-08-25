@@ -5,6 +5,7 @@ import { getLenis, scrollToId } from './lib/smoothScroll';
 import { trackEvent } from './lib/analytics';
 import { ScrollProvider } from './context/ScrollContext';
 import Cursor from './components/Cursor';
+import CookieBanner from './components/CookieBanner';
 import Preloader from './components/Preloader';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
@@ -61,6 +62,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <CookieBanner />
       </ScrollProvider>
     </BrowserRouter>
   );

@@ -1,7 +1,54 @@
+import { useEffect, useState } from 'react';
 import Reveal from '../components/Reveal';
 import { LegalHead, LegalSection, legalStyles as s } from '../components/legal';
 import { useSeo } from '../hooks/useSeo';
+import { CONSENT_EVENT, entscheidungLesen, entscheidungWiderrufen } from '../lib/consent';
 import { seitenSeo } from '../content';
+
+// Schaltflaeche zum Zuruecknehmen der Einwilligung. Zeigt den aktuellen Stand,
+// damit erkennbar ist, ob ueberhaupt etwas zu widerrufen ist.
+function ConsentWiderruf() {
+  const [stand, setStand] = useState<'granted' | 'denied' | null>(null);
+
+  useEffect(() => {
+    setStand(entscheidungLesen());
+    const beiAenderung = (e: Event) => setStand((e as CustomEvent).detail ?? null);
+    window.addEventListener(CONSENT_EVENT, beiAenderung);
+    return () => window.removeEventListener(CONSENT_EVENT, beiAenderung);
+  }, []);
+
+  const text =
+    stand === 'granted'
+      ? 'Aktueller Stand: Sie haben der Analyse zugestimmt.'
+      : stand === 'denied'
+        ? 'Aktueller Stand: Sie haben die Analyse abgelehnt. Es werden keine Analyse-Cookies gesetzt.'
+        : 'Aktueller Stand: Sie haben noch nicht entschieden. Es werden keine Analyse-Cookies gesetzt.';
+
+  return (
+    <div style={{ marginTop: 18 }}>
+      <p style={{ ...s.p, fontSize: 14.5 }}>{text}</p>
+      {stand !== null && (
+        <button
+          type="button"
+          onClick={() => entscheidungWiderrufen()}
+          style={{
+            fontFamily: "'IBM Plex Mono',monospace",
+            fontSize: 12.5,
+            letterSpacing: '0.04em',
+            padding: '11px 22px',
+            borderRadius: 100,
+            cursor: 'pointer',
+            background: 'transparent',
+            color: 'var(--t-ink)',
+            border: '1px solid var(--line-ink)',
+          }}
+        >
+          Entscheidung zurücknehmen
+        </button>
+      )}
+    </div>
+  );
+}
 
 // Ported from the live sehandwerk.de Datenschutzerklärung. Two clauses adapted
 // to the new site's stack: §4 (fonts are self-hosted here, not Google Fonts).
@@ -132,16 +179,108 @@ export default function Datenschutz() {
             </p>
           </LegalSection>
 
-          <LegalSection title="5. Cookies">
+          <LegalSection title="5. Cookies und Einwilligung">
             <p style={s.p}>
-              Unsere Website verwendet derzeit <strong style={s.strong}>keine Cookies</strong>. Wir setzen
-              weder eigene Cookies noch Cookies von Drittanbietern ein. Sollte sich dies in Zukunft ändern,
-              werden wir diese Datenschutzerklärung entsprechend aktualisieren und Sie ggf. um Ihre
-              Einwilligung bitten.
+              Für den reinen Betrieb der Website setzen wir{' '}
+              <strong style={s.strong}>keine Cookies</strong>. Sie können unsere Seiten vollständig
+              nutzen, ohne dass Cookies gespeichert werden.
+            </p>
+            <p style={s.p}>
+              Cookies werden ausschließlich gesetzt, wenn Sie der Analyse und Reichweitenmessung
+              ausdrücklich zustimmen (siehe Abschnitt 6). Beim ersten Besuch erscheint dafür ein
+              Hinweis mit den Schaltflächen „Ablehnen" und „Akzeptieren". Bis Sie zustimmen, bleiben
+              alle Analyse- und Werbedienste deaktiviert; technisch umgesetzt über den Google Consent
+              Mode. Lehnen Sie ab oder treffen Sie keine Auswahl, werden keine Analyse-Cookies gesetzt
+              und keine Daten an Google übertragen.
+            </p>
+            <p style={s.p}>
+              Ihre Entscheidung speichern wir lokal in Ihrem Browser, damit der Hinweis nicht bei
+              jedem Besuch erneut erscheint. Diese Speicherung erfolgt ausschließlich auf Ihrem Gerät.
             </p>
           </LegalSection>
 
-          <LegalSection title="6. Rechte der betroffenen Person">
+          <LegalSection title="6. Google Analytics 4 (nur mit Ihrer Einwilligung)">
+            <p style={s.p}>
+              Nach Ihrer Einwilligung nutzen wir Google Analytics 4, einen Webanalysedienst der
+              Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Zweck:</strong> Wir möchten verstehen, wie unsere Website
+              genutzt wird und über welchen Weg Besucher zu uns finden, um unser Angebot zu
+              verbessern. Erfasst werden dabei unter anderem aufgerufene Seiten, ungefährer Standort,
+              Gerätetyp und die Herkunft des Besuchs. Zusätzlich erfassen wir, ob eine Kontaktanfrage
+              abgesendet oder auf Telefon- bzw. WhatsApp-Kontakt geklickt wurde.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Rechtsgrundlage:</strong> Ihre Einwilligung nach Art. 6 Abs. 1
+              lit. a DSGVO sowie § 25 Abs. 1 TDDDG. Ohne Einwilligung findet keine Verarbeitung durch
+              Google Analytics statt.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Datenübermittlung:</strong> Eine Übermittlung in die USA kann
+              nicht ausgeschlossen werden. Google LLC ist unter dem EU-US Data Privacy Framework
+              zertifiziert. Die IP-Adresse wird von Google Analytics 4 vor einer Speicherung gekürzt.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Speicherdauer:</strong> Die Aufbewahrungsdauer für
+              nutzerbezogene Daten ist in Google Analytics auf maximal 14 Monate begrenzt.
+            </p>
+            <p style={s.p}>
+              Weitere Informationen finden Sie in der{' '}
+              <a
+                href="https://policies.google.com/privacy?hl=de"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={s.a}
+              >
+                Datenschutzerklärung von Google
+              </a>
+              .
+            </p>
+          </LegalSection>
+
+          <LegalSection title="7. Google Ads (nur mit Ihrer Einwilligung)">
+            <p style={s.p}>
+              Wir bewerben unsere Leistungen über Google Ads. Haben Sie eingewilligt, können wir
+              nachvollziehen, ob ein Besuch über eine unserer Anzeigen zustande kam und ob daraus eine
+              Kontaktanfrage entstanden ist (sogenanntes Conversion-Tracking). Anbieter ist die Google
+              Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.
+            </p>
+            <p style={s.p}>
+              Wir erfahren dabei lediglich die Gesamtzahl der Nutzer, die auf eine Anzeige geklickt
+              und anschließend Kontakt aufgenommen haben. Wir erhalten keine Informationen, mit denen
+              sich einzelne Personen identifizieren lassen.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Rechtsgrundlage:</strong> Ihre Einwilligung nach Art. 6 Abs. 1
+              lit. a DSGVO sowie § 25 Abs. 1 TDDDG. Ohne Einwilligung werden keine Werbe-Cookies
+              gesetzt.
+            </p>
+          </LegalSection>
+
+          <LegalSection title="8. Kontaktaufnahme über WhatsApp">
+            <p style={s.p}>
+              Auf unserer Website finden Sie einen Link, über den Sie uns per WhatsApp kontaktieren
+              können. Der Link führt zu einem Angebot der WhatsApp Ireland Limited, 4 Grand Canal
+              Square, Grand Canal Harbour, Dublin 2, Irland.
+            </p>
+            <p style={s.p}>
+              Solange Sie den Link nicht anklicken, werden{' '}
+              <strong style={s.strong}>keine Daten an WhatsApp übertragen</strong>. Klicken Sie ihn
+              an, öffnet sich WhatsApp, und es gelten die Datenschutzbestimmungen von WhatsApp bzw.
+              Meta. Nachrichteninhalte, Ihre Telefonnummer und Ihr Profilname werden dann dort
+              verarbeitet. Wenn Sie das vermeiden möchten, nutzen Sie bitte das Kontaktformular, die
+              E-Mail-Adresse oder rufen Sie uns an.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Rechtsgrundlage:</strong> Art. 6 Abs. 1 lit. b DSGVO
+              (vorvertragliche Maßnahmen) bzw. Art. 6 Abs. 1 lit. f DSGVO (unser berechtigtes
+              Interesse an unkomplizierter Erreichbarkeit).
+            </p>
+          </LegalSection>
+
+
+          <LegalSection title="9. Rechte der betroffenen Person">
             <p style={s.p}>Ihnen stehen folgende Rechte in Bezug auf Ihre personenbezogenen Daten zu:</p>
             <p style={s.sub}>a) Recht auf Auskunft (Art. 15 DSGVO)</p>
             <p style={s.p}>
@@ -181,7 +320,7 @@ export default function Datenschutz() {
             </p>
           </LegalSection>
 
-          <LegalSection title="7. Widerruf der Einwilligung">
+          <LegalSection title="10. Widerruf der Einwilligung">
             <p style={s.p}>
               Soweit die Verarbeitung Ihrer personenbezogenen Daten auf einer Einwilligung beruht, haben Sie
               das Recht, diese Einwilligung jederzeit zu widerrufen. Die Rechtmäßigkeit der aufgrund der
@@ -192,9 +331,15 @@ export default function Datenschutz() {
               </a>{' '}
               richten.
             </p>
+            <p style={s.p}>
+              Ihre Einwilligung in die Analyse und Reichweitenmessung (Abschnitte 6 und 7) können Sie
+              hier unmittelbar zurücknehmen. Der Hinweis erscheint dann beim nächsten Seitenaufruf
+              erneut, und Sie können neu entscheiden.
+            </p>
+            <ConsentWiderruf />
           </LegalSection>
 
-          <LegalSection title="8. Beschwerderecht bei einer Aufsichtsbehörde">
+          <LegalSection title="11. Beschwerderecht bei einer Aufsichtsbehörde">
             <p style={s.p}>
               Unbeschadet eines anderweitigen verwaltungsrechtlichen oder gerichtlichen Rechtsbehelfs steht
               Ihnen das Recht auf Beschwerde bei einer Aufsichtsbehörde zu, wenn Sie der Ansicht sind, dass die
@@ -221,7 +366,7 @@ export default function Datenschutz() {
             </p>
           </LegalSection>
 
-          <LegalSection title="9. Aktualität und Änderung dieser Datenschutzerklärung">
+          <LegalSection title="12. Aktualität und Änderung dieser Datenschutzerklärung">
             <p style={s.p}>
               Diese Datenschutzerklärung ist aktuell gültig und hat den Stand Januar 2025. Durch die
               Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher bzw. behördlicher

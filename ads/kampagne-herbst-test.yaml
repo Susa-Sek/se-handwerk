@@ -1,0 +1,96 @@
+# Kleiner Herbst-Test: 20 EUR im Monat, nur Website-Anfragen, kein Telefon.
+#
+#   python ads/kampagne_erstellen.py --config ads/kampagne-herbst-test.yaml
+#   python ads/kampagne_erstellen.py --config ads/kampagne-herbst-test.yaml --live
+#
+# Zweck: prüfen, ob die Mechanik von Anzeige bis gemessener Anfrage
+# durchläuft — nicht, ob Google Ads sich rechnet. Für eine belastbare
+# Aussage über Kosten pro Anfrage ist das Budget zu klein (siehe unten).
+#
+# Unterschied zur grossen kampagne.yaml:
+#   - eine statt zwei Anzeigengruppen (bei diesem Budget bekaeme eine zweite
+#     ohnehin keine verwertbaren Daten)
+#   - nur die Suchbegriffe mit der klarsten Kaufabsicht
+#   - saisonale Anzeigentexte: ehrliche Einordnung statt Herbst-Torschlusspanik
+
+kampagne:
+  name: "SE Handwerk – Herbst-Test (nur Website)"
+
+  # Google deckelt die Monatsausgaben bei rund dem 30,4-fachen des
+  # Tagesbudgets. 0,66 EUR/Tag entspricht also etwa 20 EUR im Monat.
+  #
+  # Ehrliche Einordnung: Bei ~2 EUR pro Klick sind das rund 10 Klicks im
+  # Monat. Damit laesst sich bestaetigen, dass Anzeige, Klick, Formular und
+  # Messung zusammenspielen. Fuer die Frage "bringen Anzeigen Auftraege?"
+  # braucht es spaeter die 8 EUR/Tag aus kampagne.yaml.
+  tagesbudget_euro: 0.66
+
+  gebotsstrategie: max_clicks
+  cpc_limit_euro: 1.50
+
+  suchnetzwerk_partner: false
+  displaynetzwerk: false
+
+  standort:
+    breitengrad: 49.1427
+    laengengrad: 9.2109
+    radius_km: 25
+    praesenz: true
+
+  # Weiter gefasst als bei der grossen Kampagne: Anfragen laufen ueber das
+  # Formular, das rund um die Uhr funktioniert — niemand muss ans Telefon.
+  zeitplan:
+    tage: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]
+    von_stunde: 7
+    bis_stunde: 23
+
+  ziel_url: "https://sehandwerk.de/kontakt"
+
+negative_keywords:
+  - { text: "kostenlos", match: BROAD }
+  - { text: "ausbildung", match: BROAD }
+  - { text: "jobs", match: BROAD }
+  - { text: "stellenangebot", match: BROAD }
+  - { text: "praktikum", match: BROAD }
+  - { text: "selbst", match: BROAD }
+  - { text: "selber", match: BROAD }
+  - { text: "anleitung", match: BROAD }
+  - { text: "youtube", match: BROAD }
+  - { text: "kurs", match: BROAD }
+  - { text: "gebraucht", match: BROAD }
+  - { text: "test", match: BROAD }
+  - { text: "vergleich", match: BROAD }
+  - { text: "rechner", match: BROAD }
+
+anzeigengruppen:
+  - name: "Renovierung Herbst"
+    startgebot_euro: 1.20
+    keywords:
+      # Nur Begriffe mit erkennbarer Beauftragungsabsicht. "lassen" und
+      # "firma" trennen Auftraggeber von Selbermachern.
+      - { text: "wohnung renovieren lassen", match: EXACT }
+      - { text: "trockenbau firma heilbronn", match: EXACT }
+      - { text: "handwerker heilbronn", match: EXACT }
+      - { text: "renovierung heilbronn", match: PHRASE }
+      - { text: "maler heilbronn", match: PHRASE }
+    anzeige:
+      # Der Hebel ist nicht Dringlichkeit, sondern ihr Gegenteil: Wer im
+      # Herbst sucht, rechnet mit Verkaufsdruck. Eine Anzeige, die von sich
+      # aus sagt "vielleicht wartet das besser", durchbricht die Erwartung
+      # und zieht die Kunden an, die eine ehrliche Einschaetzung wollen.
+      # Gedeckt vom eigenen Blogbeitrag "Sanieren vor dem Winter".
+      ueberschriften:
+        - "Renovierung Heilbronn"          # Relevanz zur Suchanfrage
+        - "Fertig vor der Heizsaison"      # echter Termin, keine erfundene Frist
+        - "Was lohnt sich vor Winter?"     # greift die Frage des Kunden auf
+        - "Ehrlich beraten statt gedrängt" # Kontrast zum Wettbewerb
+        - "Nicht alles muss jetzt sein"    # irritiert positiv, niemand wirbt so
+        - "Wir sagen, was warten kann"     # Vertrauen statt Verkaufsdruck
+        - "Festpreis vor Arbeitsbeginn"    # Risikoumkehr
+        - "Handwerker aus der Region"      # Naehe statt anonymer Plattform
+        - "Antwort in 24 Stunden"          # konkrete Zahl wirkt glaubwuerdiger
+        - "Anfrage online stellen"         # lenkt bewusst aufs Formular
+      beschreibungen:
+        - "Was lohnt sich noch vor dem Winter, was wartet besser? Wir sagen es Ihnen ehrlich."
+        - "Wand, Decke, Boden im Raum Heilbronn. Festpreis vor Start, ein Ansprechpartner."
+        - "Anfrage online stellen, Antwort in 24 Stunden. Kostenlose Besichtigung vor Ort."
