@@ -165,7 +165,11 @@ def main() -> int:
         if konto.test_account:
             print("    Achtung: Testkonto, hier laufen keine echten Anzeigen.")
 
-        (managerkonten if konto.manager else werbekonten).append((kid, name))
+        # Ein Unterkonto kann zweimal auftauchen: einmal über die Hierarchie des
+        # Manager-Kontos, einmal über die direkte Prüfung. Nur einmal listen.
+        ziel = managerkonten if konto.manager else werbekonten
+        if not any(vorhanden == kid for vorhanden, _ in ziel):
+            ziel.append((kid, name))
 
         if konto.manager:
             kinder = [k for k in kinder_abfragen(client, kid) if not k.manager]
