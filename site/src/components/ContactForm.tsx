@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { trackEvent } from '../lib/analytics';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -66,6 +67,7 @@ export default function ContactForm() {
       const json = await res.json().catch(() => ({}));
       if (res.ok && (json.success === 'true' || json.success === true)) {
         setStatus('sent');
+        trackEvent('generate_lead', { method: 'form' });
       } else {
         setStatus('error');
       }
@@ -178,7 +180,11 @@ export default function ContactForm() {
             >
               Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder erreichen Sie uns
               direkt:{' '}
-              <a href="tel:+491734536225" style={{ color: 'var(--gold-deep)' }}>
+              <a
+                href="tel:+491734536225"
+                onClick={() => trackEvent('generate_lead', { method: 'phone' })}
+                style={{ color: 'var(--gold-deep)' }}
+              >
                 +49&nbsp;173&nbsp;4536225
               </a>{' '}
               ·{' '}

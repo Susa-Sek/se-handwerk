@@ -4,6 +4,7 @@ import { useViewportProgress } from '../hooks/useViewportProgress';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useSectionLink } from '../hooks/useSectionLink';
 import { clamp } from '../lib/motion';
+import { trackEvent } from '../lib/analytics';
 import { ablauf, regionen, vorteile, zielgruppen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
@@ -507,7 +508,15 @@ export function KontaktSection() {
               einen Termin vor Ort.
             </Reveal>
             <Reveal delay={170} style={{ display: 'flex', flexDirection: 'column' }}>
-              <ContactRow label="TELEFON" value="+49 173 4536225" href="tel:+491734536225" top />
+              <ContactRow label="TELEFON" value="+49 173 4536225" href="tel:+491734536225" method="phone" top />
+              <ContactRow
+                label="WHATSAPP"
+                value="+49 173 4536225"
+                href="https://wa.me/491734536225"
+                method="whatsapp"
+                external
+                top
+              />
               <ContactRow label="E-MAIL" value="kontakt@sehandwerk.de" href="mailto:kontakt@sehandwerk.de" top />
               <div
                 style={{
@@ -535,10 +544,27 @@ export function KontaktSection() {
   );
 }
 
-function ContactRow({ label, value, href, top }: { label: string; value: string; href: string; top?: boolean }) {
+function ContactRow({
+  label,
+  value,
+  href,
+  top,
+  method,
+  external,
+}: {
+  label: string;
+  value: string;
+  href: string;
+  top?: boolean;
+  method?: 'phone' | 'whatsapp';
+  external?: boolean;
+}) {
   return (
     <a
       href={href}
+      target={external ? '_blank' : undefined}
+      rel={external ? 'noopener noreferrer' : undefined}
+      onClick={method ? () => trackEvent('generate_lead', { method }) : undefined}
       className="contact-line"
       style={{
         display: 'flex',
