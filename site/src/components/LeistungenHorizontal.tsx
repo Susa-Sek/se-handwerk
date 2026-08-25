@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { SectionKicker } from './sections';
@@ -84,7 +85,7 @@ export default function LeistungenHorizontal() {
 
         <div ref={trackRef} className="lhz-track">
           {leistungen.map((l) => (
-            <article key={l.code} className="lhz-card">
+            <Link key={l.code} to={`/leistungen/${l.slug}`} className="lhz-card" aria-label={`${l.title} – mehr erfahren`}>
               <span
                 aria-hidden
                 className="card-img"
@@ -104,10 +105,10 @@ export default function LeistungenHorizontal() {
                 {l.title}
               </h3>
               <p style={{ fontSize: 15.5, lineHeight: 1.65, color: 'rgba(245,242,236,0.62)' }}>{l.desc}</p>
-              <span style={{ marginTop: 'auto', paddingTop: 26, fontFamily: mono, fontSize: 10.5, color: 'rgba(224,168,60,0.8)', letterSpacing: '0.05em' }}>
-                {l.code} / 05
+              <span style={{ marginTop: 'auto', paddingTop: 26, fontFamily: mono, fontSize: 10.5, color: 'rgba(224,168,60,0.9)', letterSpacing: '0.05em' }}>
+                Mehr erfahren →
               </span>
-            </article>
+            </Link>
           ))}
         </div>
       </div>

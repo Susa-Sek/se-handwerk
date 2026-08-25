@@ -7,24 +7,26 @@
     { "source": "/ueber-uns.html", "destination": "/ueber-uns", "permanent": true },
     { "source": "/kontakt.html", "destination": "/kontakt", "permanent": true },
     { "source": "/danke", "destination": "/kontakt", "permanent": true },
+    { "source": "/blog/wohnung-vermietbar-machen", "destination": "/blog/wohnung-sanieren-vor-vermietung", "permanent": true },
+    { "source": "/blog/laminat-oder-vinyl.html", "destination": "/blog/laminat-oder-vinyl", "permanent": true },
+    { "source": "/blog/wohnungsuebergabe.html", "destination": "/blog/wohnungsuebergabe-checkliste", "permanent": true },
+    { "source": "/blog/index.html", "destination": "/blog", "permanent": true },
     { "source": "/danke.html", "destination": "/kontakt", "permanent": true },
-    { "source": "/blog", "destination": "/", "permanent": true },
-    { "source": "/blog/:path*", "destination": "/", "permanent": true },
-    { "source": "/bodenarbeiten{.html}?", "destination": "/", "permanent": true },
-    { "source": "/bodenschutz-gummiboden{.html}?", "destination": "/", "permanent": true },
-    { "source": "/wohnungsuebergabe{.html}?", "destination": "/", "permanent": true },
-    { "source": "/uebergabeservice{.html}?", "destination": "/", "permanent": true },
-    { "source": "/moebelmontage-allgemein{.html}?", "destination": "/", "permanent": true },
-    { "source": "/kraftstation-montage{.html}?", "destination": "/", "permanent": true },
-    { "source": "/power-rack-montage{.html}?", "destination": "/", "permanent": true },
-    { "source": "/multipress-montage{.html}?", "destination": "/", "permanent": true }
+    { "source": "/bodenarbeiten{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
+    { "source": "/bodenschutz-gummiboden{.html}?", "destination": "/leistungen/bodenarbeiten", "permanent": true },
+    { "source": "/wohnungsuebergabe{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/uebergabeservice{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/moebelmontage-allgemein{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/kraftstation-montage{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/power-rack-montage{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true },
+    { "source": "/multipress-montage{.html}?", "destination": "/leistungen/einzelgewerke", "permanent": true }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-XSS-Protection", "value": "1; mode=block" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
         { "key": "X-Frame-Options", "value": "SAMEORIGIN" },
         { "key": "Strict-Transport-Security", "value": "max-age=63072000; includeSubDomains; preload" }

@@ -12,6 +12,10 @@ import UeberUns from './pages/UeberUns';
 import Kontakt from './pages/Kontakt';
 import Impressum from './pages/Impressum';
 import Datenschutz from './pages/Datenschutz';
+import LeistungDetail from './pages/LeistungDetail';
+import BlogList from './pages/BlogList';
+import BlogArticle from './pages/BlogArticle';
+import NotFound from './pages/NotFound';
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
@@ -42,11 +46,14 @@ export default function App() {
         <ScrollManager />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/leistungen/:slug" element={<LeistungDetail />} />
+          <Route path="/blog" element={<BlogList />} />
+          <Route path="/blog/:slug" element={<BlogArticle />} />
           <Route path="/ueber-uns" element={<UeberUns />} />
           <Route path="/kontakt" element={<Kontakt />} />
           <Route path="/impressum" element={<Impressum />} />
           <Route path="/datenschutz" element={<Datenschutz />} />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
       </ScrollProvider>

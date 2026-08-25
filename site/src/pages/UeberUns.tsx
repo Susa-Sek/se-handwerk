@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
+import { useSeo } from '../hooks/useSeo';
+import { seitenSeo } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 const container: React.CSSProperties = { maxWidth: 1240, margin: '0 auto', padding: '0 40px' };
@@ -12,6 +14,7 @@ const kicker: React.CSSProperties = {
 };
 
 export default function UeberUns() {
+  useSeo(seitenSeo['ueber-uns']);
   return (
     <main>
       <section style={{ background: 'var(--paper)', padding: '150px 0 120px' }}>

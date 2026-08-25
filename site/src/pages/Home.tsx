@@ -12,8 +12,11 @@ import {
   RegionSection,
   WarumSESection,
 } from '../components/sections';
+import { useSeo } from '../hooks/useSeo';
+import { seitenSeo } from '../content';
 
 export default function Home() {
+  useSeo(seitenSeo.home);
   return (
     <main>
       <Hero />
