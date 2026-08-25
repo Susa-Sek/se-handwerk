@@ -12,7 +12,14 @@ The codebase is entirely in German (variable names, config keys, comments, UI te
 
 ```
 SE-handwerk/
-├── website/              ← Static landing page (HTML/CSS, deployed to Vercel)
+├── site/                 ← Live landing page (React/Vite SPA, deployed to Vercel)
+│   ├── index.html, src/pages/, src/components/
+│   ├── src/content.ts    ← Leistungen, Blog, Zielgruppen, Vorteile, Regionen
+│   └── src/lib/analytics.ts  ← GA4 trackEvent
+│
+├── ads/                  ← Google-Ads-Testkampagne (YAML + Python, siehe ads/README.md)
+│
+├── website/              ← Superseded static predecessor (not deployed)
 │   ├── index.html, *.html
 │   ├── styles.css
 │   ├── vercel.json
@@ -141,4 +148,12 @@ Documented in `ERWEITERN.md`. Four steps:
 
 ## Landing Page
 
-Static HTML/CSS pages in `website/` directory (`index.html`, service pages, `blog/`). Deployed to Vercel (`vercel.json` with `cleanUrls: true`). Vercel Root Directory must be set to `website/` in project settings. These are independent of the Python agent.
+The live site at sehandwerk.de is the React/Vite SPA in `site/` (`react-router-dom`, routes in `src/App.tsx`: `/`, `/leistungen/:slug`, `/blog`, `/blog/:slug`, `/ueber-uns`, `/kontakt`, `/impressum`, `/datenschutz`). Deployed to Vercel; the Vercel Root Directory must be set to `site/`. Copy and blog content live in `site/src/content.ts`. Lead capture is a client-side form (`src/components/ContactForm.tsx`) posting to FormSubmit.co.
+
+GA4 tracking is wired via `site/index.html` (gtag.js, measurement ID `G-8FEM0QHGZ1`) and `site/src/lib/analytics.ts` (`trackEvent`). It fires `generate_lead` on form submit and on phone/WhatsApp clicks, and `page_view` on every route change — `send_page_view` is disabled in the gtag config because the SPA handles it manually. These are independent of the Python agent.
+
+The `website/` directory (static HTML/CSS predecessor) is not deployed; `site/vercel.json` 301-redirects its old URLs. Treat it as historical reference, not a target for new work.
+
+## Google Ads (`ads/`)
+
+`ads/kampagne.yaml` holds the search campaign as editable data (keywords, ad copy, negative keywords, geo radius, ad schedule, bids). `ads/kampagne_erstellen.py` applies it in one atomic `GoogleAdsService.Mutate` request; campaigns are always created `PAUSED`. Three stages: `--check` (offline format validation), no flag (server-side `validate_only`, creates nothing), `--live` (creates). `ads/konto_pruefen.py` shows which accounts the credentials reach. Credentials come from `ads/.env` (gitignored) — see `ads/README.md`.
