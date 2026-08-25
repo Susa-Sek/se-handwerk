@@ -1684,6 +1684,85 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'sanieren-vor-dem-winter',
+    metaTitle: 'Sanieren vor dem Winter: Was jetzt zählt | SE Handwerk',
+    metaDescription:
+      'Sanieren vor dem Winter: Heizung rechtzeitig prüfen, schnelle Wärme-Hebel, ob man im Winter sanieren kann, Trocknung bei Kälte und was man besser aufschiebt. Raum Heilbronn.',
+    title: 'Sanieren vor dem Winter: Was jetzt wirklich zählt',
+    excerpt:
+      'Im Herbst kommen zwei Fragen auf jede Baustelle: Was muss noch fertig werden, bevor es kalt wird – und was geht auch im Winter noch? Hier ist eine ehrliche Einordnung, damit Sie die richtigen Dinge zur richtigen Zeit angehen.',
+    datum: '2026-08-25',
+    kategorie: 'Sanierung',
+    lesezeit: '9 Min.',
+    bild: 'blog-sanierung.jpg',
+    bildAlt: 'Symbolbild: warmer, frisch sanierter Wohnraum im Herbst',
+    kurz: [
+      'Die Heizung gehört vor die Heizsaison geprüft – nicht erst, wenn es beim ersten Kälteeinbruch kalt bleibt.',
+      'Kleine Wärme-Hebel (Dichtungen, Heizkörper entlüften) kosten wenig und wirken sofort.',
+      'Sanieren im Winter geht – braucht aber Wärme und Geduld, weil Estrich, Putz und Farbe langsamer trocknen.',
+      'Große energetische Maßnahmen plant man in Ruhe und mit Energieberater, statt sie im letzten Moment zu übers Knie zu brechen.',
+    ],
+    relatedLeistung: 'komplettsanierung',
+    sections: [
+      {
+        h2: 'Sanieren vor dem Winter: erst das, was kalt wird',
+        paras: [
+          'Es gibt einen Moment im Herbst, an dem sich auf jeder Baustelle die Prioritäten drehen. Solange es warm ist, ist alles möglich. Sobald die ersten kalten Nächte kommen, wird sortiert: Was muss jetzt fertig werden, und was hat Zeit bis zum Frühjahr?',
+          'Die Faustregel ist einfach: Zuerst das, was mit Kälte und Nässe ein Problem bekommt. Alles rund ums Warmwerden und ums Trockenbleiben hat im Herbst Vorrang – der schöne neue Boden kann notfalls warten, eine ausgefallene Heizung im Januar nicht.',
+        ],
+      },
+      {
+        h2: 'Zuerst die Heizung – bevor die Saison losgeht',
+        paras: [
+          'Der Klassiker, den viele verschieben, bis es zu spät ist: die Heizung. Läuft sie? Ist sie gewartet? Wer eine ältere Anlage hat oder gerade saniert, sollte das vor dem ersten richtigen Kälteeinbruch klären – nicht mittendrin, wenn alle Fachbetriebe ausgebucht sind.',
+          'Wartung, Prüfung und alles rund um die Heizungstechnik gehören in Fachhände – Heizungsbauer und, wo nötig, Schornsteinfeger. Ich koordiniere solche Termine gerne in den Bauablauf, aber die Anlage selbst macht der Fachmann. Gerade bei einer leerstehenden Wohnung gilt: Erst wenn sicher ist, dass geheizt werden kann, wird es innen ernst.',
+        ],
+      },
+      {
+        h2: 'Die schnellen Wärme-Hebel für den Herbst',
+        paras: [
+          'Bevor man über die große energetische Sanierung nachdenkt, gibt es ein paar kleine Dinge, die sofort Wärme halten und wenig kosten:',
+        ],
+        list: [
+          'Fenster- und Türdichtungen prüfen und erneuern – zieht es, geht Wärme raus',
+          'Heizkörper entlüften, damit sie wieder richtig warm werden',
+          'Rollladenkästen und kalte Nischen abdichten',
+          'Kellertür und Dachbodenluke schließen bzw. dichten',
+        ],
+        bild: 'blog-maler.jpg',
+        bildAlt: 'Symbolbild: frisch hergerichteter Innenraum vor der kalten Jahreszeit',
+      },
+      {
+        h2: 'Kann man im Winter überhaupt sanieren?',
+        paras: [
+          'Ja – aber mit Verstand. Innenarbeiten laufen im Winter weiter, sofern der Rohbau dicht ist und geheizt werden kann. Der Unterschied zum Sommer liegt in der Trocknung: Estrich, Putz, Spachtel und Farbe brauchen Wärme und den Abtransport der Feuchtigkeit. Bei Kälte dauert das länger, und man muss konsequent heizen und lüften.',
+          'Wer das einplant, kann den Winter gut nutzen – die Wohnung ist im Frühjahr fertig, wenn andere erst anfangen. Wer es ignoriert und im kalten, feuchten Raum einfach weitermacht, riskiert Schimmel und Bauschäden. Realistische Trocknungszeiten sind im Winter kein Luxus, sondern Pflicht.',
+        ],
+      },
+      {
+        h2: 'Was vor dem ersten Frost erledigt sein sollte',
+        paras: [
+          'Ein paar Dinge lassen sich später kaum oder nur mit Mehraufwand nachholen. Außenarbeiten und alles Wasserführende gehören dazu: offene Stellen an der Fassade oder am Dach, damit keine Nässe eindringt, und der Schutz von Wasserleitungen in unbeheizten Bereichen vor dem Einfrieren.',
+          'Steht ein Objekt leer und wird saniert, ist das Auskühlen der größte Feind. Eine leere Wohnung im Winter komplett kalt werden zu lassen, während drinnen frischer Putz trocknet, ist keine gute Idee. Ein Mindestmaß an Wärme hält Baustelle und Substanz gesund.',
+        ],
+      },
+      {
+        h2: 'Was man besser in Ruhe plant',
+        paras: [
+          'Nicht alles muss vor den Winter gezwängt werden. Große energetische Maßnahmen – neue Fenster, Dämmung, ein Heizungstausch – lohnen sich mehr, wenn sie sauber geplant statt in Panik entschieden werden. Was sich rechnet und welche Förderung es gerade gibt, hängt vom einzelnen Gebäude ab und ändert sich immer wieder; das klärt am besten ein Energieberater, bevor Geld fließt.',
+          'Ehrlich gesagt: Ein überstürzter Heizungstausch im November, nur weil der Winter vor der Tür steht, ist selten die klügste Lösung. Besser das Nötige jetzt absichern und die großen Schritte für den nächsten Frühling gut vorbereiten.',
+        ],
+      },
+      {
+        h2: 'Sanieren vor dem Winter im Raum Heilbronn',
+        paras: [
+          'Wir sanieren im Raum Heilbronn das ganze Jahr – und stimmen den Ablauf auf die Jahreszeit ab. Im Herbst heißt das: erst absichern, was mit Kälte und Nässe ein Problem bekommt, dann die Innenarbeiten mit realistischen Trocknungszeiten. Ein Ansprechpartner, ein Festpreis vor Baubeginn, ein Taktplan, der auch das Wetter mitdenkt.',
+          'Sie wollen wissen, was sich bei Ihrem Objekt noch vor dem Winter lohnt und was besser wartet? Erzählen Sie uns davon – wir schauen es uns an und sagen ehrlich, was Sinn ergibt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
