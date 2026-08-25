@@ -206,6 +206,13 @@ def operationen_bauen(client, kunden_id: str, cfg: dict[str, Any]) -> list:
     # Bewusst pausiert: nichts gibt Geld aus, bevor ein Mensch draufgeschaut hat.
     kampagne.status = client.enums.CampaignStatusEnum.PAUSED
 
+    # Pflichtangabe seit der EU-Verordnung über politische Werbung (TTPA):
+    # Jede Kampagne muss erklären, ob sie politische Werbung enthält.
+    # Für einen Handwerksbetrieb ist das eindeutig nein.
+    kampagne.contains_eu_political_advertising = (
+        client.enums.EuPoliticalAdvertisingStatusEnum.DOES_NOT_CONTAIN_EU_POLITICAL_ADVERTISING
+    )
+
     kampagne.network_settings.target_google_search = True
     kampagne.network_settings.target_search_network = bool(
         kampagne_cfg.get("suchnetzwerk_partner", False)
