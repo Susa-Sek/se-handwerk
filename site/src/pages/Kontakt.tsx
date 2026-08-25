@@ -1,5 +1,6 @@
 import Reveal from '../components/Reveal';
 import ContactForm from '../components/ContactForm';
+import { trackEvent } from '../lib/analytics';
 
 const mono = "'IBM Plex Mono',monospace";
 const container: React.CSSProperties = { maxWidth: 1240, margin: '0 auto', padding: '0 40px' };
@@ -12,8 +13,9 @@ const kicker: React.CSSProperties = {
 };
 
 const rows = [
-  { label: 'TELEFON', value: '+49 173 4536225', href: 'tel:+491734536225' },
-  { label: 'E-MAIL', value: 'kontakt@sehandwerk.de', href: 'mailto:kontakt@sehandwerk.de' },
+  { label: 'TELEFON', value: '+49 173 4536225', href: 'tel:+491734536225', method: 'phone' },
+  { label: 'WHATSAPP', value: '+49 173 4536225', href: 'https://wa.me/491734536225', method: 'whatsapp' },
+  { label: 'E-MAIL', value: 'kontakt@sehandwerk.de', href: 'mailto:kontakt@sehandwerk.de', method: null },
 ];
 
 export default function Kontakt() {
@@ -57,6 +59,9 @@ export default function Kontakt() {
                 <a
                   key={r.label}
                   href={r.href}
+                  target={r.method === 'whatsapp' ? '_blank' : undefined}
+                  rel={r.method === 'whatsapp' ? 'noopener noreferrer' : undefined}
+                  onClick={r.method ? () => trackEvent('generate_lead', { method: r.method }) : undefined}
                   className="contact-line"
                   style={{
                     display: 'flex',

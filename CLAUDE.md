@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-SE Handwerk is an autonomous lead acquisition agent for a German handcraft services company based in Heilbronn. It scrapes German marketplace platforms for service requests (flooring, furniture assembly, apartment handovers), scores them by relevance using 3 autonomous AI agents, and notifies via Telegram. A static HTML/CSS landing page is deployed separately on Vercel.
+SE Handwerk is an autonomous lead acquisition agent for a German handcraft services company based in Heilbronn. It scrapes German marketplace platforms for service requests (flooring, furniture assembly, apartment handovers), scores them by relevance using 3 autonomous AI agents, and notifies via Telegram. A React/Vite landing page (`site/`) is deployed separately on Vercel as sehandwerk.de.
 
 The codebase is entirely in German (variable names, config keys, comments, UI text). All new code should follow this convention.
 
@@ -12,7 +12,13 @@ The codebase is entirely in German (variable names, config keys, comments, UI te
 
 ```
 SE-handwerk/
-├── website/              ← Static landing page (HTML/CSS, deployed to Vercel)
+├── site/                 ← Live landing page (React/Vite SPA, deployed to Vercel as sehandwerk.de)
+│   ├── index.html, src/pages/, src/components/
+│   ├── src/content.ts    ← Leistungen, Ablauf, Zielgruppen, Vorteile, Regionen copy
+│   ├── vercel.json
+│   └── package.json
+│
+├── website/              ← Superseded static HTML/CSS predecessor (kept for reference, not deployed)
 │   ├── index.html, *.html
 │   ├── styles.css
 │   ├── vercel.json
@@ -141,4 +147,6 @@ Documented in `ERWEITERN.md`. Four steps:
 
 ## Landing Page
 
-Static HTML/CSS pages in `website/` directory (`index.html`, service pages, `blog/`). Deployed to Vercel (`vercel.json` with `cleanUrls: true`). Vercel Root Directory must be set to `website/` in project settings. These are independent of the Python agent.
+The live site at sehandwerk.de is the React/Vite SPA in `site/` (`react-router-dom`, routes defined in `src/App.tsx`: `/`, `/ueber-uns`, `/kontakt`, `/impressum`, `/datenschutz`). Deployed to Vercel; Vercel Root Directory must be set to `site/` in project settings. Copy content (Leistungen, Ablauf, Zielgruppen, Vorteile, Regionen) lives in `site/src/content.ts`. Lead capture is a client-side form (`src/components/ContactForm.tsx`) posting to FormSubmit.co. GA4 tracking is wired via `site/index.html` (gtag.js) and `site/src/lib/analytics.ts` (`trackEvent`), firing `generate_lead` on form submit / phone / WhatsApp clicks and `page_view` on route changes. These are independent of the Python agent.
+
+The `website/` directory (static HTML/CSS, per-service pages, blog) is a superseded predecessor — `site/vercel.json` now 301-redirects all of `website/`'s old URLs (e.g. `/bodenarbeiten.html`, `/kraftstation-montage.html`) to `site/`'s routes. It is not the deployed site; treat it as historical reference only, not a target for new work.

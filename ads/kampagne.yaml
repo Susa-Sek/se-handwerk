@@ -1,0 +1,132 @@
+# Definition der Google-Ads-Testkampagne für sehandwerk.de
+#
+# Diese Datei ist die einzige Stelle, an der Texte, Keywords, Gebote und Budget
+# geändert werden. Das Skript kampagne_erstellen.py liest sie aus und legt daraus
+# die Kampagne an — inhaltlich entspricht sie Akte 03-07 des Kampagnen-Dossiers.
+#
+# Nach jeder Änderung zuerst einen Probelauf machen:
+#   python kampagne_erstellen.py --dry-run
+
+kampagne:
+  name: "SE Handwerk – Handwerksleistungen Heilbronn (Test)"
+
+  # Tagesbudget in Euro. 5-10 EUR ist die abgestimmte Teststrecke.
+  tagesbudget_euro: 8.00
+
+  # max_clicks  = "Klicks maximieren" mit Obergrenze (Empfehlung für den Kaltstart:
+  #               sammelt am meisten Lerndaten pro Euro, solange es noch keine
+  #               Conversion-Historie gibt).
+  # manual_cpc  = feste Gebote von Hand. Nur nutzen, falls Google max_clicks
+  #               ablehnt oder du volle Kontrolle über jedes Gebot willst.
+  gebotsstrategie: max_clicks
+  cpc_limit_euro: 2.00
+
+  # Nur Google-Suche. Suchnetzwerk-Partner und Display sind bewusst aus:
+  # bei 8 EUR/Tag soll jeder Klick aus einer echten Suchanfrage kommen.
+  suchnetzwerk_partner: false
+  displaynetzwerk: false
+
+  # Radius-Targeting statt PLZ-Liste. "praesenz: true" entspricht der Einstellung
+  # "Personen an den Zielorten" — ohne das zahlst du auch für Leute, die sich nur
+  # für Heilbronn interessieren, aber woanders wohnen.
+  standort:
+    breitengrad: 49.1427
+    laengengrad: 9.2109
+    radius_km: 25
+    praesenz: true
+
+  # Anzeigen laufen nur, wenn ein Anruf auch angenommen werden kann.
+  # Nach zwei Wochen anhand des Tag-und-Uhrzeit-Berichts nachschärfen.
+  zeitplan:
+    tage: [MONDAY, TUESDAY, WEDNESDAY, THURSDAY, FRIDAY, SATURDAY, SUNDAY]
+    von_stunde: 7
+    bis_stunde: 21
+
+  # Kalter Anzeigen-Traffic landet direkt auf der Kontaktseite, nicht auf der
+  # langen redaktionellen Startseite.
+  ziel_url: "https://sehandwerk.de/kontakt"
+
+# Negativ-Keywords gelten für die gesamte Kampagne (beide Anzeigengruppen).
+# Diese Liste wöchentlich anhand des Suchbegriffe-Berichts erweitern —
+# das ist in Woche 1-2 die wirkungsvollste Optimierung überhaupt.
+negative_keywords:
+  - { text: "kostenlos", match: BROAD }
+  - { text: "ausbildung", match: BROAD }
+  - { text: "jobs", match: BROAD }
+  - { text: "stellenangebot", match: BROAD }
+  - { text: "mitarbeiter gesucht", match: PHRASE }
+  - { text: "praktikum", match: BROAD }
+  - { text: "selbst", match: BROAD }
+  - { text: "selber", match: BROAD }
+  - { text: "anleitung", match: BROAD }
+  - { text: "youtube", match: BROAD }
+  - { text: "kurs", match: BROAD }
+  - { text: "gebraucht", match: BROAD }
+  - { text: "test", match: BROAD }
+  - { text: "vergleich", match: BROAD }
+  - { text: "rechner", match: BROAD }
+
+anzeigengruppen:
+  # ----------------------------------------------------------------------
+  # Priorität: höheres Gebot, damit diese Gruppe den größeren Budgetanteil
+  # zieht (~60%). Google verteilt Budget auf Kampagnenebene, nicht pro Gruppe —
+  # die Steuerung läuft deshalb über die Gebotshöhe.
+  # ----------------------------------------------------------------------
+  - name: "Wand & Decke / Trockenbau / Renovierung"
+    startgebot_euro: 1.80
+    keywords:
+      - { text: "maler heilbronn", match: PHRASE }
+      - { text: "trockenbau heilbronn", match: PHRASE }
+      - { text: "trockenbau firma heilbronn", match: EXACT }
+      - { text: "wände verputzen heilbronn", match: PHRASE }
+      - { text: "handwerker heilbronn", match: EXACT }
+      - { text: "renovierung heilbronn", match: PHRASE }
+      - { text: "wohnung renovieren lassen", match: EXACT }
+      - { text: "haus renovieren heilbronn", match: PHRASE }
+    anzeige:
+      # Google-Limits: Überschrift max. 30 Zeichen, Beschreibung max. 90.
+      # Das Skript prüft das lokal, bevor überhaupt eine Anfrage rausgeht.
+      ueberschriften:
+        - "Renovierung Heilbronn"
+        - "Maler & Trockenbau Profi"
+        - "Wand & Decke vom Profi"
+        - "Festpreis vor Arbeitsbeginn"
+        - "Handwerker aus der Region"
+        - "Antwort in 24 Stunden"
+        - "Trockenbau zum Festpreis"
+        - "Renovieren zum Festpreis"
+        - "Wohnung renovieren lassen"
+        - "Kostenlose Besichtigung"
+      beschreibungen:
+        - "Trockenbau & Malerarbeiten in Heilbronn. Festpreis vor Start, ein Ansprechpartner."
+        - "Wand- & Deckenarbeiten vom Profi. Kostenlose Besichtigung, Antwort in 24 Stunden."
+        - "Renovierung geplant? Wir übernehmen Wand, Decke & mehr — zum Festpreis, ohne Stress."
+
+  # ----------------------------------------------------------------------
+  # Kleinerer Anteil (~40%) über das niedrigere Startgebot.
+  # ----------------------------------------------------------------------
+  - name: "Bodenarbeiten"
+    startgebot_euro: 1.30
+    keywords:
+      - { text: "boden verlegen heilbronn", match: PHRASE }
+      - { text: "laminat verlegen heilbronn", match: PHRASE }
+      - { text: "vinyl verlegen heilbronn", match: PHRASE }
+      - { text: "bodenleger heilbronn", match: EXACT }
+      - { text: "parkett verlegen lassen", match: EXACT }
+      - { text: "bodenarbeiten heilbronn", match: PHRASE }
+    anzeige:
+      ueberschriften:
+        - "Boden verlegen Heilbronn"
+        - "Laminat & Vinyl vom Profi"
+        - "Festpreis vor Start"
+        - "Antwort in 24 Stunden"
+        - "Kostenlose Besichtigung"
+        - "Handwerker aus der Region"
+        - "Boden verlegen zum Festpreis"
+        - "Vinyl, Laminat, Parkett"
+        - "Saubere Arbeit, fixer Preis"
+        - "Fragen kostet nichts"
+      beschreibungen:
+        - "Boden verlegen in Heilbronn & Umgebung. Festpreis vor Start, keine bösen Überraschungen."
+        - "Laminat, Vinyl, Parkett — sauber verlegt. Kostenlose Besichtigung, Antwort in 24 Std."
+        - "Handwerker mit Festpreis-Garantie. Jetzt Anfrage stellen — wir melden uns innerhalb 24h."
