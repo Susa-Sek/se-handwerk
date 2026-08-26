@@ -1,12 +1,16 @@
+import { getConsent } from './consent'
+
 declare global {
   interface Window {
-    gtag?: (...args: unknown[]) => void;
+    gtag?: (...args: unknown[]) => void
   }
 }
 
-// Fires a GA4 event via the gtag() loaded in index.html. No-ops silently if
-// gtag hasn't loaded yet (e.g. ad blockers, or before the script tag runs).
+// Feuert ein GA4-Event über das in index.html definierte gtag(). Sendet nur,
+// wenn der Nutzer eingewilligt hat (getConsent() === 'granted') und gtag
+// verfügbar ist. Ohne Einwilligung passiert nichts – kein Datenabfluss.
 export function trackEvent(name: string, params: Record<string, unknown> = {}): void {
-  if (typeof window === 'undefined' || !window.gtag) return;
-  window.gtag('event', name, params);
+  if (typeof window === 'undefined' || !window.gtag) return
+  if (getConsent() !== 'granted') return
+  window.gtag('event', name, params)
 }

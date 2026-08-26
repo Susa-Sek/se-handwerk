@@ -132,12 +132,50 @@ export default function Datenschutz() {
             </p>
           </LegalSection>
 
-          <LegalSection title="5. Cookies">
+          <LegalSection title="5. Cookies und Webanalyse (Google Analytics 4)">
             <p style={s.p}>
-              Unsere Website verwendet derzeit <strong style={s.strong}>keine Cookies</strong>. Wir setzen
-              weder eigene Cookies noch Cookies von Drittanbietern ein. Sollte sich dies in Zukunft ändern,
-              werden wir diese Datenschutzerklärung entsprechend aktualisieren und Sie ggf. um Ihre
-              Einwilligung bitten.
+              Technisch notwendige Speicherung: Für den Betrieb der Website speichern wir eine kleine
+              Information lokal in Ihrem Browser (z. B. ob die Startanimation bereits gezeigt wurde sowie
+              Ihre Cookie-Entscheidung). Diese Angaben sind für den Betrieb der Seite erforderlich, werden
+              nicht an Dritte übermittelt und bedürfen keiner Einwilligung.
+            </p>
+            <p style={{ ...s.sub, marginTop: 18 }}>a) Google Analytics 4 – nur mit Ihrer Einwilligung</p>
+            <p style={s.p}>
+              Sofern Sie über unser Einwilligungs-Banner zugestimmt haben, verwenden wir{' '}
+              <strong style={s.strong}>Google Analytics 4</strong>, einen Webanalysedienst der Google Ireland
+              Limited, Gordon House, Barrow Street, Dublin 4, Irland. Google Analytics verwendet Cookies
+              (u. a. <em>_ga</em>, <em>_ga_*</em>), die eine Analyse Ihrer Nutzung der Website ermöglichen.
+              Die erzeugten Informationen (z. B. aufgerufene Seiten, ungefährer Standort, Gerät/Browser)
+              werden in der Regel an einen Server von Google übertragen und dort gespeichert. Die
+              IP-Adresse wird von Google Analytics 4 gekürzt bzw. anonymisiert verarbeitet; eine
+              Zusammenführung mit anderen Daten findet durch uns nicht statt.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Rechtsgrundlage</strong> ist Ihre Einwilligung nach Art. 6 Abs. 1
+              lit. a DSGVO in Verbindung mit § 25 Abs. 1 TTDSG. Vor Ihrer Einwilligung werden{' '}
+              <strong style={s.strong}>keine</strong> Analyse-Cookies gesetzt und es wird kein Kontakt zu
+              Google-Servern hergestellt (Google Consent Mode v2, Standard „denied"). Der Analyse-Code wird
+              erst nach aktiver Zustimmung geladen.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Datenübermittlung in Drittländer:</strong> Dabei kann es zu einer
+              Verarbeitung in den USA durch die Google LLC kommen. Google stützt sich hierfür auf die
+              EU-Standardvertragsklauseln und das EU-US Data Privacy Framework.
+            </p>
+            <p style={s.p}>
+              <strong style={s.strong}>Widerruf:</strong> Sie können Ihre Einwilligung jederzeit mit Wirkung
+              für die Zukunft widerrufen – über den Link{' '}
+              <strong style={s.strong}>„Cookie-Einstellungen"</strong> im Seitenfuß. Weitere Informationen
+              zur Datenverarbeitung durch Google finden Sie unter{' '}
+              <a
+                href="https://policies.google.com/privacy"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={s.a}
+              >
+                https://policies.google.com/privacy
+              </a>
+              .
             </p>
           </LegalSection>
 

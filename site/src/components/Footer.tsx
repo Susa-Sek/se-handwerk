@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useSectionLink } from '../hooks/useSectionLink';
 import { leistungen } from '../content';
+import { reopenConsent } from '../lib/consent';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -84,6 +85,22 @@ export default function Footer() {
               <Link to="/datenschutz" className="footer-link" style={colLink}>
                 Datenschutz
               </Link>
+              <button
+                type="button"
+                onClick={reopenConsent}
+                className="footer-link"
+                style={{
+                  ...colLink,
+                  background: 'none',
+                  border: 'none',
+                  padding: 0,
+                  font: 'inherit',
+                  textAlign: 'left',
+                  cursor: 'pointer',
+                }}
+              >
+                Cookie-Einstellungen
+              </button>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               <span style={colLabel}>Regional</span>

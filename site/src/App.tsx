@@ -8,6 +8,7 @@ import Cursor from './components/Cursor';
 import Preloader from './components/Preloader';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import CookieBanner from './components/CookieBanner';
 import Home from './pages/Home';
 import UeberUns from './pages/UeberUns';
 import Kontakt from './pages/Kontakt';
@@ -61,6 +62,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <CookieBanner />
       </ScrollProvider>
     </BrowserRouter>
   );
