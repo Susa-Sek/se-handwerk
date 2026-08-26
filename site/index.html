@@ -48,13 +48,24 @@
       href="/fonts/ibm-plex-sans-400-latin.woff2"
       crossorigin
     />
-    <!-- Google Tag (GA4) — Datenstrom "SE Handwerk", sehandwerk.de.
-         send_page_view is disabled because App.tsx fires page_view manually on every
-         SPA route change (a plain page load only covers the very first route). -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FEM0QHGZ1"></script>
+    <!-- Google Consent Mode v2 bootstrap (GA4 "SE Handwerk", G-8FEM0QHGZ1).
+         Consent defaults to DENIED and gtag.js is NOT loaded here: no cookie is set
+         and no data reaches Google until the visitor actively opts in via the cookie
+         banner. src/lib/consent.ts then injects gtag.js and flips analytics_storage
+         to 'granted'. This keeps the site TTDSG-/GDPR-compliant.
+         send_page_view stays off because App.tsx fires page_view on every SPA route. -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag() { dataLayer.push(arguments); }
+      gtag('consent', 'default', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: 'denied',
+        functionality_storage: 'granted',
+        security_storage: 'granted',
+        wait_for_update: 500
+      });
       gtag('js', new Date());
       gtag('config', 'G-8FEM0QHGZ1', { send_page_view: false });
     </script>
