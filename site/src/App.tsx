@@ -2,11 +2,13 @@ import { useEffect } from 'react';
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { useSmoothScroll } from './hooks/useSmoothScroll';
 import { getLenis, scrollToId } from './lib/smoothScroll';
+import { trackEvent } from './lib/analytics';
 import { ScrollProvider } from './context/ScrollContext';
 import Cursor from './components/Cursor';
 import Preloader from './components/Preloader';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import CookieBanner from './components/CookieBanner';
 import Home from './pages/Home';
 import UeberUns from './pages/UeberUns';
 import Kontakt from './pages/Kontakt';
@@ -19,6 +21,10 @@ import NotFound from './pages/NotFound';
 
 function ScrollManager() {
   const { pathname, hash } = useLocation();
+
+  useEffect(() => {
+    trackEvent('page_view', { page_path: pathname });
+  }, [pathname]);
 
   useEffect(() => {
     if (hash) {
@@ -56,6 +62,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <CookieBanner />
       </ScrollProvider>
     </BrowserRouter>
   );
