@@ -194,6 +194,22 @@ picture{display:contents;}
   .nav-cta{display:none!important;}
   .nav-burger{display:flex!important;}
 }
+
+/* Mobile Sticky-Kontaktleiste — nur dort, wo der Header-CTA verschwindet */
+.mobile-contact-bar{display:none;}
+@media (max-width:760px){
+  .mobile-contact-bar{
+    display:flex;gap:10px;
+    position:fixed;left:0;right:0;bottom:0;z-index:1200;
+    padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px));
+    background:rgba(13,14,16,0.86);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border-top:1px solid var(--line-paper);
+  }
+  .mobile-contact-bar a:hover{color:inherit;}
+  /* Platz, damit die Leiste den Footer nicht verdeckt */
+  body{padding-bottom:72px;}
+}
 @media (max-width:560px){
   .nav-tag{display:none!important;}
 }

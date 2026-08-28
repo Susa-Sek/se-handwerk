@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { trackEvent } from '../lib/analytics';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -35,6 +36,14 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
+  const [started, setStarted] = useState(false);
+
+  // GA4 form_start – einmalig beim ersten Feld-Fokus (Abbruch-Funnel sichtbar).
+  function handleFirstFocus() {
+    if (started) return;
+    setStarted(true);
+    trackEvent('form_start', { form: 'kontakt' });
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -66,6 +75,7 @@ export default function ContactForm() {
       const json = await res.json().catch(() => ({}));
       if (res.ok && (json.success === 'true' || json.success === true)) {
         setStatus('sent');
+        trackEvent('generate_lead', { method: 'form' });
       } else {
         setStatus('error');
       }
@@ -131,7 +141,7 @@ export default function ContactForm() {
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ padding: 26 }}>
+        <form onSubmit={handleSubmit} onFocusCapture={handleFirstFocus} style={{ padding: 26 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
             <label style={{ display: 'block' }}>
               <span style={labelText}>Name</span>
@@ -178,7 +188,11 @@ export default function ContactForm() {
             >
               Das Senden hat leider nicht geklappt. Bitte versuchen Sie es erneut oder erreichen Sie uns
               direkt:{' '}
-              <a href="tel:+491734536225" style={{ color: 'var(--gold-deep)' }}>
+              <a
+                href="tel:+491734536225"
+                onClick={() => trackEvent('generate_lead', { method: 'phone' })}
+                style={{ color: 'var(--gold-deep)' }}
+              >
                 +49&nbsp;173&nbsp;4536225
               </a>{' '}
               ·{' '}
