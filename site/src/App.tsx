@@ -9,6 +9,8 @@ import Preloader from './components/Preloader';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import CookieBanner from './components/CookieBanner';
+import MobileContactBar from './components/MobileContactBar';
+import { useScrollDepth } from './hooks/useScrollDepth';
 import Home from './pages/Home';
 import UeberUns from './pages/UeberUns';
 import Kontakt from './pages/Kontakt';
@@ -25,6 +27,8 @@ function ScrollManager() {
   useEffect(() => {
     trackEvent('page_view', { page_path: pathname });
   }, [pathname]);
+
+  useScrollDepth(pathname);
 
   useEffect(() => {
     if (hash) {
@@ -62,6 +66,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Footer />
+        <MobileContactBar />
         <CookieBanner />
       </ScrollProvider>
     </BrowserRouter>

@@ -152,6 +152,31 @@ export interface FaqItem {
   frage: string;
   antwort: string;
 }
+
+// ── Social Proof (Kundenstimmen) ────────────────────────────────────────────
+// WICHTIG: Nur ECHTE Kundenzitate eintragen – nichts erfinden. Solange das Array
+// leer ist, wird die Testimonial-Sektion (components/Testimonials.tsx) NICHT
+// gerendert. Sobald hier echte Einträge stehen, erscheint sie automatisch.
+// `ort` optional; `initialen` z. B. „M. K." wenn der volle Name nicht öffentlich
+// gezeigt werden soll.
+export interface Testimonial {
+  zitat: string;
+  name: string;
+  ort?: string;
+  initialen?: string;
+  leistung?: string; // z. B. "Komplettsanierung"
+}
+export const testimonials: Testimonial[] = [];
+
+// Optionale Gesamtbewertung (z. B. aus dem Google-Unternehmensprofil). Nur setzen,
+// wenn real belegbar – sonst undefined lassen (kein erfundenes AggregateRating).
+export interface Bewertung {
+  schnitt: number; // z. B. 4.9
+  anzahl: number; // Anzahl Bewertungen
+  quelle: string; // z. B. "Google"
+  url?: string;
+}
+export const bewertung: Bewertung | undefined = undefined;
 export interface LeistungDetail {
   slug: string;
   code: string;
