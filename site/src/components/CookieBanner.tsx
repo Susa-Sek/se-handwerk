@@ -7,6 +7,8 @@ import {
   hasDecision,
   initConsent,
 } from '../lib/consent'
+import { PRELOADER_DONE_EVENT } from './Preloader'
+import { prefersReducedMotion } from '../lib/motion'
 
 // DSGVO-/TTDSG-konformes Opt-in-Banner für Google Analytics 4.
 // Erscheint nur, solange keine Entscheidung vorliegt (oder erneut geöffnet
@@ -17,11 +19,21 @@ export default function CookieBanner() {
   useEffect(() => {
     // Gespeicherte Einwilligung wiederherstellen (lädt gtag.js nur bei 'granted').
     initConsent()
-    if (!hasDecision()) setOpen(true)
+
+    // Banner erst zeigen, wenn der Preloader durch ist – sonst überlagert es den
+    // Zähler/Vorhang beim Seitenstart.
+    const show = () => {
+      if (!hasDecision()) setOpen(true)
+    }
+    if (window.__sePreloaderDone) show()
+    else window.addEventListener(PRELOADER_DONE_EVENT, show, { once: true })
 
     const reopen = () => setOpen(true)
     window.addEventListener(CONSENT_REOPEN_EVENT, reopen)
-    return () => window.removeEventListener(CONSENT_REOPEN_EVENT, reopen)
+    return () => {
+      window.removeEventListener(PRELOADER_DONE_EVENT, show)
+      window.removeEventListener(CONSENT_REOPEN_EVENT, reopen)
+    }
   }, [])
 
   if (!open) return null
@@ -37,7 +49,7 @@ export default function CookieBanner() {
 
   return (
     <div role="dialog" aria-label="Datenschutz-Einstellungen" aria-live="polite" style={wrap}>
-      <div style={card}>
+      <div style={{ ...card, animation: prefersReducedMotion() ? undefined : 'fadeUp .4s ease both' }}>
         <div style={textCol}>
           <p style={title}>Datenschutz &amp; Statistik</p>
           <p style={body}>
