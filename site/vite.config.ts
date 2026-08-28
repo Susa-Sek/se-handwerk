@@ -101,8 +101,18 @@ function prerenderSeo(): Plugin {
           email: 'kontakt@sehandwerk.de',
           telephone: '+49 173 4536225',
           priceRange: '€€',
+          slogan: 'Sanierung aus einer Hand — zum Festpreis. Raum Heilbronn.',
           areaServed: einsatzOrte.map((r) => ({ '@type': 'City', name: r })),
           knowsAbout: ['Komplettsanierung', 'Bodenarbeiten', 'Malerarbeiten', 'Badsanierung', 'Trockenbau', 'Wohnungsübergabe'],
+          memberOf: { '@type': 'Organization', name: 'Handwerkskammer Heilbronn-Franken', url: 'https://www.hwk-heilbronn.de/' },
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Leistungen',
+            itemListElement: leistungen.map((s) => ({
+              '@type': 'Offer',
+              itemOffered: { '@type': 'Service', name: s.title, url: `${SITE}/leistungen/${s.slug}` },
+            })),
+          },
           description: home.description,
         },
         { '@context': 'https://schema.org', '@type': 'WebSite', name: 'SE Handwerk', url: SITE, publisher: { '@id': `${SITE}/#business` }, author: { '@id': `${SITE}/#business` } },
@@ -243,6 +253,7 @@ ${standardExtra[key] ?? ''}
 <p>${esc(l.intro)}</p>
 <p><a href="/#kontakt">Kostenloses Festpreis-Angebot</a> · <a href="/#leistungen">Alle Leistungen</a></p>
 <p>Einsatzgebiet: ${regionen.map(esc).join(', ')}</p>
+<section><h2>Auf einen Blick</h2><p>SE Handwerk übernimmt ${esc(l.keyword)} im Raum Heilbronn — alles aus einer Hand, ein Ansprechpartner, verbindlicher Festpreis, Rückmeldung innerhalb von 24 Stunden.</p><ul><li>Leistung: ${esc(l.keyword)}</li><li>Einsatzgebiet: Raum Heilbronn und Umgebung</li><li>Preis: verbindlicher Festpreis vor Baubeginn</li><li>Ansprechpartner: einer, von der Begehung bis zur Übergabe</li><li>Rückmeldung: innerhalb von 24 Stunden</li></ul></section>
 <section><h2>${esc(l.keyword)} im Raum Heilbronn — was wir übernehmen.</h2><ul>${l.umfang.map((u) => `<li><h3>${esc(u.titel)}</h3><p>${esc(u.text)}</p></li>`).join('')}</ul></section>
 <section><h2>So läuft Ihr Projekt.</h2><ol>${ablauf.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p></li>`).join('')}</ol></section>
 <section><h2>${esc(l.keyword)}: Fragen &amp; Antworten</h2><dl>${l.faq.map((f) => `<dt>${esc(f.frage)}</dt><dd>${esc(f.antwort)}</dd>`).join('')}</dl></section>
