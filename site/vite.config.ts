@@ -282,8 +282,14 @@ ${blogGruppen.map((g) => `<section id="${g.t.key}"><h2><a href="/leistungen/${g.
             datePublished: p.datum,
             dateModified: p.datum,
             url,
-            author: { '@type': 'Organization', name: 'SE Handwerk' },
-            publisher: { '@type': 'Organization', name: 'SE Handwerk', url: SITE },
+            image: `${SITE}/images/${p.bild}`,
+            author: { '@type': 'Organization', name: 'SE Handwerk', url: SITE },
+            publisher: {
+              '@type': 'Organization',
+              name: 'SE Handwerk',
+              url: SITE,
+              logo: { '@type': 'ImageObject', url: `${SITE}/images/logo-dark.png` },
+            },
             mainEntityOfPage: url,
           },
           {
