@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 import { useSeo } from '../hooks/useSeo';
+import { trackEvent } from '../lib/analytics';
 import { seitenSeo } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
@@ -65,6 +66,7 @@ export default function UeberUns() {
           <Reveal delay={260} style={{ marginTop: 56 }}>
             <Link
               to="/kontakt"
+              onClick={() => trackEvent('cta_click', { location: 'ueber_uns', label: 'angebot' })}
               className="btn-primary"
               style={{
                 fontFamily: mono,
@@ -77,7 +79,7 @@ export default function UeberUns() {
                 display: 'inline-block',
               }}
             >
-              Projekt besprechen
+              Kostenloses Festpreis-Angebot
             </Link>
           </Reveal>
         </div>

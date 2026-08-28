@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useSectionLink } from '../hooks/useSectionLink';
+import { trackEvent } from '../lib/analytics';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -89,11 +90,14 @@ RAUM HEILBRONN
           </div>
           <a
             href="/#kontakt"
-            onClick={go('#kontakt')}
+            onClick={(e) => {
+              trackEvent('cta_click', { location: 'nav', label: 'angebot' });
+              go('#kontakt')(e);
+            }}
             className="btn-primary nav-cta"
             style={{ ...linkStyle, fontWeight: 500, padding: '11px 18px', borderRadius: 100, whiteSpace: 'nowrap' }}
           >
-            Projekt besprechen
+            Kostenloses Angebot
           </a>
 
           <button
@@ -184,11 +188,14 @@ RAUM HEILBRONN
         </Link>
         <a
           href="/#kontakt"
-          onClick={go('#kontakt')}
+          onClick={(e) => {
+            trackEvent('cta_click', { location: 'nav_mobile', label: 'angebot' });
+            go('#kontakt')(e);
+          }}
           className="btn-primary"
           style={{ ...linkStyle, fontWeight: 500, display: 'block', textAlign: 'center', marginTop: 18, padding: '15px 18px', borderRadius: 100 }}
         >
-          Projekt besprechen
+          Kostenloses Angebot
         </a>
       </div>
     </nav>

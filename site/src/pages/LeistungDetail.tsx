@@ -4,6 +4,7 @@ import { SectionKicker, CtaBand } from '../components/sections';
 import { useSectionLink } from '../hooks/useSectionLink';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useSeo, SEO_SITE } from '../hooks/useSeo';
+import { trackEvent } from '../lib/analytics';
 import { ablauf, einsatzOrte, getLeistung, leistungen, regionen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
@@ -102,8 +103,17 @@ export default function LeistungDetail() {
           </Reveal>
 
           <Reveal delay={170} style={{ display: 'flex', gap: 14, marginTop: 34, flexWrap: 'wrap' }}>
-            <a ref={ctaPrimary} href="/#kontakt" onClick={onSection('#kontakt')} className="btn-primary magnetic" style={ctaBase}>
-              Projekt besprechen
+            <a
+              ref={ctaPrimary}
+              href="/#kontakt"
+              onClick={(e) => {
+                trackEvent('cta_click', { location: 'leistung_hero', label: 'angebot' });
+                onSection('#kontakt')(e);
+              }}
+              className="btn-primary magnetic"
+              style={ctaBase}
+            >
+              Kostenloses Festpreis-Angebot
             </a>
             <a href="/#leistungen" onClick={onSection('#leistungen')} className="btn-ghost" style={ctaBase}>
               Alle Leistungen

@@ -3,6 +3,7 @@ import { useSectionLink } from '../hooks/useSectionLink';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useViewportProgress } from '../hooks/useViewportProgress';
 import { prefersReducedMotion } from '../lib/motion';
+import { trackEvent } from '../lib/analytics';
 
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
@@ -121,13 +122,34 @@ export default function Hero() {
           </p>
 
           <div style={{ display: 'flex', gap: 14, marginTop: 34, flexWrap: 'wrap', animation: 'fadeUp .8s ease 1.15s both' }}>
-            <a ref={ctaPrimary} href="/#kontakt" onClick={onSection('#kontakt')} className="btn-primary magnetic" style={ctaBase}>
-              Projekt besprechen
+            <a
+              ref={ctaPrimary}
+              href="/#kontakt"
+              onClick={(e) => {
+                trackEvent('cta_click', { location: 'hero', label: 'angebot' });
+                onSection('#kontakt')(e);
+              }}
+              className="btn-primary magnetic"
+              style={ctaBase}
+            >
+              Kostenloses Festpreis-Angebot
             </a>
             <a ref={ctaGhost} href="/#leistungen" onClick={onSection('#leistungen')} className="btn-ghost magnetic" style={ctaBase}>
               Unsere Leistungen
             </a>
           </div>
+          <p
+            style={{
+              fontFamily: mono,
+              fontSize: 11.5,
+              letterSpacing: '0.03em',
+              color: 'rgba(245,242,236,0.5)',
+              marginTop: 16,
+              animation: 'fadeUp .8s ease 1.25s both',
+            }}
+          >
+            Kostenlos &amp; unverbindlich · Rückmeldung &lt;&nbsp;24&nbsp;h
+          </p>
 
           <div style={{ display: 'flex', gap: 38, marginTop: 50, flexWrap: 'wrap', animation: 'fadeUp .8s ease 1.3s both' }}>
             <div>
