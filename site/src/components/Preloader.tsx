@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import { prefersReducedMotion } from '../lib/motion';
 
+// Signal, das andere UI (z. B. das Cookie-Banner) erst nach dem Preloader zeigt.
+export const PRELOADER_DONE_EVENT = 'se:preloader-done';
+declare global {
+  interface Window {
+    __sePreloaderDone?: boolean;
+  }
+}
+
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
 
@@ -34,6 +42,14 @@ export default function Preloader() {
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
   }, [skip]);
+
+  // „Fertig"-Signal: sofort wenn kein Preloader läuft (skip), sonst wenn der
+  // Vorhang oben ist. So erscheint das Cookie-Banner erst nach dem Preloader.
+  useEffect(() => {
+    if (!skip && !gone) return;
+    window.__sePreloaderDone = true;
+    window.dispatchEvent(new CustomEvent(PRELOADER_DONE_EVENT));
+  }, [skip, gone]);
 
   if (skip || gone) return null;
 
