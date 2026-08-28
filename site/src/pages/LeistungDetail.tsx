@@ -130,6 +130,44 @@ export default function LeistungDetail() {
         </div>
       </section>
 
+      {/* ── Auf einen Blick (extrahierbare Direkt-Antwort für Suche/KI) ───── */}
+      <section style={{ background: 'var(--paper)', padding: '72px 0 0' }}>
+        <div style={container}>
+          <div
+            style={{
+              background: 'var(--white, #FFFFFF)',
+              border: '1px solid var(--line-ink)',
+              borderLeft: '3px solid var(--gold)',
+              borderRadius: 12,
+              padding: '26px 28px',
+              maxWidth: 820,
+            }}
+          >
+            <div style={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.08em', color: 'var(--gold-deep)', marginBottom: 14 }}>
+              AUF EINEN BLICK
+            </div>
+            <p style={{ fontSize: 17.5, lineHeight: 1.6, color: 'var(--t-ink)', marginBottom: 18, maxWidth: 720 }}>
+              SE Handwerk übernimmt <strong>{data.keyword}</strong> im Raum Heilbronn — alles aus einer Hand,
+              ein Ansprechpartner, verbindlicher Festpreis, Rückmeldung innerhalb von 24 Stunden.
+            </p>
+            <dl style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gap: '8px 18px', margin: 0, fontSize: 14.5, lineHeight: 1.5 }}>
+              {[
+                ['Leistung', data.keyword],
+                ['Einsatzgebiet', 'Raum Heilbronn und Umgebung'],
+                ['Preis', 'verbindlicher Festpreis vor Baubeginn'],
+                ['Ansprechpartner', 'einer, von der Begehung bis zur Übergabe'],
+                ['Rückmeldung', 'innerhalb von 24 Stunden'],
+              ].map(([k, v]) => (
+                <div key={k} style={{ display: 'contents' }}>
+                  <dt style={{ fontFamily: mono, fontSize: 11.5, color: 'var(--t-dim)', letterSpacing: '0.03em', paddingTop: 2 }}>{k}</dt>
+                  <dd style={{ margin: 0, color: 'var(--t-sub)' }}>{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+        </div>
+      </section>
+
       {/* ── Leistungsumfang (paper) ──────────────────────────────────────── */}
       <section style={{ background: 'var(--paper)', padding: '104px 0' }}>
         <div style={container}>
