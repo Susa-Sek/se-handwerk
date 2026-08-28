@@ -241,7 +241,7 @@ ${standardExtra[key] ?? ''}
 <p>${esc(l.kicker)}</p>
 <h1>${esc(l.h1)}</h1>
 <p>${esc(l.intro)}</p>
-<p><a href="/#kontakt">Projekt besprechen</a> · <a href="/#leistungen">Alle Leistungen</a></p>
+<p><a href="/#kontakt">Kostenloses Festpreis-Angebot</a> · <a href="/#leistungen">Alle Leistungen</a></p>
 <p>Einsatzgebiet: ${regionen.map(esc).join(', ')}</p>
 <section><h2>${esc(l.keyword)} im Raum Heilbronn — was wir übernehmen.</h2><ul>${l.umfang.map((u) => `<li><h3>${esc(u.titel)}</h3><p>${esc(u.text)}</p></li>`).join('')}</ul></section>
 <section><h2>So läuft Ihr Projekt.</h2><ol>${ablauf.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p></li>`).join('')}</ol></section>
@@ -282,8 +282,14 @@ ${blogGruppen.map((g) => `<section id="${g.t.key}"><h2><a href="/leistungen/${g.
             datePublished: p.datum,
             dateModified: p.datum,
             url,
-            author: { '@type': 'Organization', name: 'SE Handwerk' },
-            publisher: { '@type': 'Organization', name: 'SE Handwerk', url: SITE },
+            image: `${SITE}/images/${p.bild}`,
+            author: { '@type': 'Organization', name: 'SE Handwerk', url: SITE },
+            publisher: {
+              '@type': 'Organization',
+              name: 'SE Handwerk',
+              url: SITE,
+              logo: { '@type': 'ImageObject', url: `${SITE}/images/logo-dark.png` },
+            },
             mainEntityOfPage: url,
           },
           {
@@ -313,7 +319,7 @@ ${(() => {
   ].slice(0, 3)
   return rel.length ? `<section><h2>Weitere Artikel zum Thema</h2><ul>${rel.map((r) => `<li><a href="/blog/${r.slug}">${esc(r.title)}</a> — ${esc(r.excerpt)}</li>`).join('')}</ul></section>` : ''
 })()}
-<p><a href="/blog">Alle Beiträge</a> · <a href="/#kontakt">Projekt besprechen</a></p>
+<p><a href="/blog">Alle Beiträge</a> · <a href="/#kontakt">Kostenloses Festpreis-Angebot</a></p>
 </main>`
         write(path, render(shell, { title: p.metaTitle, description: p.metaDescription, url, body, jsonLd, image: SITE + '/images/' + p.bild }))
       }

@@ -36,6 +36,14 @@ type Status = 'idle' | 'sending' | 'sent' | 'error';
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>('idle');
+  const [started, setStarted] = useState(false);
+
+  // GA4 form_start – einmalig beim ersten Feld-Fokus (Abbruch-Funnel sichtbar).
+  function handleFirstFocus() {
+    if (started) return;
+    setStarted(true);
+    trackEvent('form_start', { form: 'kontakt' });
+  }
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -133,7 +141,7 @@ export default function ContactForm() {
           </p>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} style={{ padding: 26 }}>
+        <form onSubmit={handleSubmit} onFocusCapture={handleFirstFocus} style={{ padding: 26 }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
             <label style={{ display: 'block' }}>
               <span style={labelText}>Name</span>

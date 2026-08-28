@@ -468,7 +468,10 @@ export function CtaBand() {
           <a
             ref={cta}
             href="/#kontakt"
-            onClick={onSection('#kontakt')}
+            onClick={(e) => {
+              trackEvent('cta_click', { location: 'cta_band', label: 'angebot' });
+              onSection('#kontakt')(e);
+            }}
             className="btn-primary magnetic"
             style={{
               fontFamily: mono,
@@ -481,8 +484,41 @@ export function CtaBand() {
               display: 'inline-block',
             }}
           >
-            Projekt besprechen
+            Kostenloses Festpreis-Angebot
           </a>
+        </Reveal>
+        <Reveal delay={200} style={{ marginTop: 18 }}>
+          <p style={{ fontFamily: mono, fontSize: 11.5, letterSpacing: '0.03em', color: 'rgba(245,242,236,0.5)' }}>
+            Kostenlos &amp; unverbindlich · Rückmeldung &lt;&nbsp;24&nbsp;h
+          </p>
+        </Reveal>
+        <Reveal delay={240} style={{ marginTop: 26 }}>
+          <p style={{ fontFamily: mono, fontSize: 12.5, letterSpacing: '0.03em', color: 'rgba(245,242,236,0.62)' }}>
+            Oder direkt:{' '}
+            <a
+              href="tel:+491734536225"
+              onClick={() => {
+                trackEvent('cta_click', { location: 'cta_band', label: 'phone' });
+                trackEvent('generate_lead', { method: 'phone' });
+              }}
+              style={{ color: 'var(--gold)' }}
+            >
+              +49&nbsp;173&nbsp;4536225
+            </a>{' '}
+            ·{' '}
+            <a
+              href="https://wa.me/491734536225"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => {
+                trackEvent('cta_click', { location: 'cta_band', label: 'whatsapp' });
+                trackEvent('generate_lead', { method: 'whatsapp' });
+              }}
+              style={{ color: 'var(--gold)' }}
+            >
+              WhatsApp
+            </a>
+          </p>
         </Reveal>
       </div>
     </section>
@@ -517,7 +553,7 @@ export function KontaktSection() {
                 external
                 top
               />
-              <ContactRow label="E-MAIL" value="kontakt@sehandwerk.de" href="mailto:kontakt@sehandwerk.de" top />
+              <ContactRow label="E-MAIL" value="kontakt@sehandwerk.de" href="mailto:kontakt@sehandwerk.de" method="email" top />
               <div
                 style={{
                   display: 'flex',
@@ -556,7 +592,7 @@ function ContactRow({
   value: string;
   href: string;
   top?: boolean;
-  method?: 'phone' | 'whatsapp';
+  method?: 'phone' | 'whatsapp' | 'email';
   external?: boolean;
 }) {
   return (

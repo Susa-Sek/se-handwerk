@@ -22,7 +22,7 @@ const rows = [
     href: 'https://wa.me/491734536225',
     method: 'whatsapp',
   },
-  { label: 'E-MAIL', value: 'kontakt@sehandwerk.de', href: 'mailto:kontakt@sehandwerk.de', method: null },
+  { label: 'E-MAIL', value: 'kontakt@sehandwerk.de', href: 'mailto:kontakt@sehandwerk.de', method: 'email' },
 ];
 
 export default function Kontakt() {

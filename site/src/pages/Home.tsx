@@ -12,8 +12,10 @@ import {
   RegionSection,
   WarumSESection,
 } from '../components/sections';
+import FaqSection from '../components/FaqSection';
+import Testimonials from '../components/Testimonials';
 import { useSeo } from '../hooks/useSeo';
-import { seitenSeo } from '../content';
+import { leistungenDetail, seitenSeo } from '../content';
 
 export default function Home() {
   useSeo(seitenSeo.home);
@@ -28,7 +30,9 @@ export default function Home() {
       <VorherNachher />
       <EigentuemerSection />
       <WarumSESection />
+      <Testimonials />
       <RegionSection />
+      <FaqSection faq={leistungenDetail[0].faq} title="Fragen &amp; Antworten zur Sanierung" />
       <CtaBand />
       <KontaktSection />
     </main>
