@@ -191,6 +191,22 @@ export interface LeistungDetail {
   faq: FaqItem[];
 }
 
+// Prompt-orientierte, für alle Leistungen gültige Fragen. Werden an die
+// seitenspezifische FAQ angehängt (sichtbar + FAQPage-Schema) → mehr
+// KI-beantwortbare, lokale Q&A ohne Duplikate pro Seite.
+export const leistungFaqGemeinsam: FaqItem[] = [
+  {
+    frage: 'Wie schnell melden Sie sich nach einer Anfrage?',
+    antwort:
+      'In der Regel innerhalb von 24 Stunden, oft noch am selben Tag. Die Erstberatung und die Aufnahme vor Ort sind kostenlos und unverbindlich.',
+  },
+  {
+    frage: 'In welchen Orten rund um Heilbronn sind Sie tätig?',
+    antwort:
+      'Im gesamten Raum Heilbronn und Umgebung – unter anderem Neckarsulm, Weinsberg, Öhringen, Bietigheim-Bissingen, Sinsheim, Bad Wimpfen, Eppingen, Lauffen am Neckar, Brackenheim, Bad Rappenau und Bad Friedrichshall.',
+  },
+]
+
 export const leistungenDetail: LeistungDetail[] = [
   {
     slug: 'komplettsanierung',

@@ -5,7 +5,7 @@ import { useSectionLink } from '../hooks/useSectionLink';
 import { useMagnetic } from '../hooks/useMagnetic';
 import { useSeo, SEO_SITE } from '../hooks/useSeo';
 import { trackEvent } from '../lib/analytics';
-import { ablauf, einsatzOrte, getLeistung, leistungen, regionen } from '../content';
+import { ablauf, einsatzOrte, getLeistung, leistungen, leistungFaqGemeinsam, regionen } from '../content';
 
 const mono = "'IBM Plex Mono',monospace";
 const bricolage = "'Bricolage Grotesque',sans-serif";
@@ -219,7 +219,7 @@ export default function LeistungDetail() {
           <Reveal as="h2" delay={40} style={{ fontSize: 'clamp(28px,3.6vw,48px)', letterSpacing: '-0.025em', color: 'var(--t-ink)', marginBottom: 40 }}>
             {data.keyword}: Fragen &amp; Antworten
           </Reveal>
-          {data.faq.map((f, i) => (
+          {[...data.faq, ...leistungFaqGemeinsam].map((f, i) => (
             <Reveal key={f.frage} delay={40 + i * 40}>
               <details style={{ borderTop: '1px solid var(--line-ink)', padding: '20px 0' }}>
                 <summary style={{ fontFamily: bricolage, fontWeight: 600, fontSize: 18, color: 'var(--t-ink)', cursor: 'pointer', listStyle: 'none', display: 'flex', justifyContent: 'space-between', gap: 20 }}>
