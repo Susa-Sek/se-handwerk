@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useSectionLink } from '../hooks/useSectionLink';
 import { leistungen } from '../content';
 import { reopenConsent } from '../lib/consent';
+import { trackEvent } from '../lib/analytics';
 
 const mono = "'IBM Plex Mono',monospace";
 
@@ -112,6 +113,16 @@ export default function Footer() {
                 style={colLink}
               >
                 Handwerkskammer Heilbronn-Franken
+              </a>
+              <a
+                href="https://share.google/xLpYn2YDSn6kpWKDj"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackEvent('review_click', { platform: 'google' })}
+                className="footer-link"
+                style={colLink}
+              >
+                Auf Google bewerten
               </a>
             </div>
           </div>
