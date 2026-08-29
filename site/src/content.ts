@@ -166,7 +166,18 @@ export interface Testimonial {
   initialen?: string;
   leistung?: string; // z. B. "Komplettsanierung"
 }
-export const testimonials: Testimonial[] = [];
+export const testimonials: Testimonial[] = [
+  {
+    zitat: 'Saubere Arbeit, zuverlässig und termintreu! Absolute Empfehlung.',
+    name: 'Herby Stuggi',
+  },
+  {
+    zitat:
+      'Top Arbeit im Badezimmer! Silikonfugen sauber erneuert, alle Fugen frisch gemacht und kleine Stellen perfekt ausgebessert. Sieht aus wie neu – absolut empfehlenswert!',
+    name: 'Orhan Samaras',
+    leistung: 'Badsanierung',
+  },
+];
 
 // Optionale Gesamtbewertung (z. B. aus dem Google-Unternehmensprofil). Nur setzen,
 // wenn real belegbar – sonst undefined lassen (kein erfundenes AggregateRating).
@@ -176,7 +187,12 @@ export interface Bewertung {
   quelle: string; // z. B. "Google"
   url?: string;
 }
-export const bewertung: Bewertung | undefined = undefined;
+export const bewertung: Bewertung | undefined = {
+  schnitt: 4.8,
+  anzahl: 4,
+  quelle: 'Google',
+  url: 'https://share.google/xLpYn2YDSn6kpWKDj',
+};
 export interface LeistungDetail {
   slug: string;
   code: string;
