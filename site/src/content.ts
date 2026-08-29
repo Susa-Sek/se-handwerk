@@ -170,11 +170,13 @@ export const testimonials: Testimonial[] = [
   {
     zitat: 'Saubere Arbeit, zuverlässig und termintreu! Absolute Empfehlung.',
     name: 'Herby Stuggi',
+    initialen: 'Herby S.',
   },
   {
     zitat:
       'Top Arbeit im Badezimmer! Silikonfugen sauber erneuert, alle Fugen frisch gemacht und kleine Stellen perfekt ausgebessert. Sieht aus wie neu – absolut empfehlenswert!',
     name: 'Orhan Samaras',
+    initialen: 'Orhan S.',
     leistung: 'Badsanierung',
   },
 ];
