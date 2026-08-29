@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { ablauf, blogPosts, blogThemen, einsatzOrte, leistungen, leistungenDetail, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
+import { ablauf, blogPosts, blogThemen, einsatzOrte, leistungen, leistungenDetail, leistungFaqGemeinsam, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
 
 const SITE = 'https://www.sehandwerk.de'
 const esc = (s: string) =>
@@ -101,6 +101,7 @@ function prerenderSeo(): Plugin {
           email: 'kontakt@sehandwerk.de',
           telephone: '+49 173 4536225',
           priceRange: '€€',
+          sameAs: ['https://share.google/xLpYn2YDSn6kpWKDj'],
           slogan: 'Sanierung aus einer Hand — zum Festpreis. Raum Heilbronn.',
           areaServed: einsatzOrte.map((r) => ({ '@type': 'City', name: r })),
           knowsAbout: ['Komplettsanierung', 'Bodenarbeiten', 'Malerarbeiten', 'Badsanierung', 'Trockenbau', 'Wohnungsübergabe'],
@@ -239,7 +240,14 @@ ${standardExtra[key] ?? ''}
           {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
-            mainEntity: l.faq.map((f) => ({ '@type': 'Question', name: f.frage, acceptedAnswer: { '@type': 'Answer', text: f.antwort } })),
+            mainEntity: [...l.faq, ...leistungFaqGemeinsam].map((f) => ({ '@type': 'Question', name: f.frage, acceptedAnswer: { '@type': 'Answer', text: f.antwort } })),
+          },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'HowTo',
+            name: `So läuft Ihre ${l.keyword} im Raum Heilbronn`,
+            description: `Ablauf einer ${l.keyword} bei SE Handwerk – von der Aufnahme vor Ort bis zur Übergabe.`,
+            step: ablauf.map((s, i) => ({ '@type': 'HowToStep', position: i + 1, name: s.title, text: s.desc })),
           },
         ]
         const related = leistungen
@@ -256,7 +264,7 @@ ${standardExtra[key] ?? ''}
 <section><h2>Auf einen Blick</h2><p>SE Handwerk übernimmt ${esc(l.keyword)} im Raum Heilbronn — alles aus einer Hand, ein Ansprechpartner, verbindlicher Festpreis, Rückmeldung innerhalb von 24 Stunden.</p><ul><li>Leistung: ${esc(l.keyword)}</li><li>Einsatzgebiet: Raum Heilbronn und Umgebung</li><li>Preis: verbindlicher Festpreis vor Baubeginn</li><li>Ansprechpartner: einer, von der Begehung bis zur Übergabe</li><li>Rückmeldung: innerhalb von 24 Stunden</li></ul></section>
 <section><h2>${esc(l.keyword)} im Raum Heilbronn — was wir übernehmen.</h2><ul>${l.umfang.map((u) => `<li><h3>${esc(u.titel)}</h3><p>${esc(u.text)}</p></li>`).join('')}</ul></section>
 <section><h2>So läuft Ihr Projekt.</h2><ol>${ablauf.map((s) => `<li><h3>${esc(s.title)}</h3><p>${esc(s.desc)}</p></li>`).join('')}</ol></section>
-<section><h2>${esc(l.keyword)}: Fragen &amp; Antworten</h2><dl>${l.faq.map((f) => `<dt>${esc(f.frage)}</dt><dd>${esc(f.antwort)}</dd>`).join('')}</dl></section>
+<section><h2>${esc(l.keyword)}: Fragen &amp; Antworten</h2><dl>${[...l.faq, ...leistungFaqGemeinsam].map((f) => `<dt>${esc(f.frage)}</dt><dd>${esc(f.antwort)}</dd>`).join('')}</dl></section>
 <section><h2>Weitere Leistungen</h2><ul>${related}</ul></section>
 </main>`
         write(path, render(shell, { title: l.metaTitle, description: l.metaDescription, url, body, jsonLd }))
