@@ -103,6 +103,10 @@ function prerenderSeo(): Plugin {
           priceRange: '€€',
           sameAs: ['https://share.google/xLpYn2YDSn6kpWKDj'],
           slogan: 'Sanierung aus einer Hand — zum Festpreis. Raum Heilbronn.',
+          openingHoursSpecification: [
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], opens: '08:00', closes: '17:00' },
+            { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '09:00', closes: '14:00' },
+          ],
           areaServed: einsatzOrte.map((r) => ({ '@type': 'City', name: r })),
           knowsAbout: ['Komplettsanierung', 'Bodenarbeiten', 'Malerarbeiten', 'Badsanierung', 'Trockenbau', 'Wohnungsübergabe'],
           memberOf: { '@type': 'Organization', name: 'Handwerkskammer Heilbronn-Franken', url: 'https://www.hwk-heilbronn.de/' },
