@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { ablauf, blogPosts, blogThemen, einsatzOrte, leistungen, leistungenDetail, leistungFaqGemeinsam, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
+import { ablauf, bewertung, blogPosts, blogThemen, einsatzOrte, leistungen, leistungenDetail, leistungFaqGemeinsam, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
 
 const SITE = 'https://www.sehandwerk.de'
 const esc = (s: string) =>
@@ -110,6 +110,7 @@ function prerenderSeo(): Plugin {
           areaServed: einsatzOrte.map((r) => ({ '@type': 'City', name: r })),
           knowsAbout: ['Komplettsanierung', 'Bodenarbeiten', 'Malerarbeiten', 'Badsanierung', 'Trockenbau', 'Wohnungsübergabe'],
           memberOf: { '@type': 'Organization', name: 'Handwerkskammer Heilbronn-Franken', url: 'https://www.hwk-heilbronn.de/' },
+          ...(bewertung ? { aggregateRating: { '@type': 'AggregateRating', ratingValue: String(bewertung.schnitt), reviewCount: String(bewertung.anzahl), bestRating: '5' } } : {}),
           hasOfferCatalog: {
             '@type': 'OfferCatalog',
             name: 'Leistungen',
