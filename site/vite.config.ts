@@ -172,7 +172,7 @@ ${homeFaq.map((f) => `<h3>${esc(f.frage)}</h3><p>${esc(f.antwort)}</p>`).join(''
 <p>Was kostet was, wie lange dauert es, worauf sollten Sie achten? Das schreiben wir ehrlich auf: ${ratgeberLinks} — oder ${il('/blog', 'alle Artikel ansehen', 'Alle Ratgeber-Artikel')}.</p>
 </aside>
 <footer role="contentinfo">
-<p>SE Handwerk — Sanierung und Renovierung im Raum Heilbronn. Inhaltlich verantwortet vom Team von SE Handwerk. ${il('/kontakt', 'Kontakt', 'Kontakt aufnehmen')} · ${il('/impressum', 'Impressum', 'Impressum')} · Regionale Handwerksinfos: <a href="https://www.hwk-heilbronn.de/" title="Handwerkskammer Heilbronn-Franken" rel="noopener nofollow">Handwerkskammer Heilbronn-Franken</a>.</p>
+<p>SE Handwerk — Sanierung und Renovierung im Raum Heilbronn. Inhaltlich verantwortet vom Team von SE Handwerk. ${il('/kontakt', 'Kontakt', 'Kontakt aufnehmen')} · ${il('/impressum', 'Impressum', 'Impressum')} · Regionale Handwerksinfos: <a href="https://www.hwk-heilbronn.de/" title="Handwerkskammer Heilbronn-Franken" rel="noopener nofollow">Handwerkskammer Heilbronn-Franken</a>. <a href="https://share.google/xLpYn2YDSn6kpWKDj" title="SE Handwerk auf Google bewerten" rel="noopener nofollow">Auf Google bewerten</a>.</p>
 </footer>
 </main>`
       write('/', render(shell, { title: home.title, description: home.description, url: SITE + '/', body: homeBody, jsonLd: homeJsonLd, keepHead: true }))
