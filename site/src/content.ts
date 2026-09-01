@@ -1822,6 +1822,91 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'schimmel-sanieren',
+    metaTitle: 'Schimmel sanieren: Ursache finden statt überstreichen | SE Handwerk',
+    metaDescription:
+      'Schimmel sanieren im Raum Heilbronn: warum Überstreichen nicht reicht, woher die Feuchtigkeit kommt, wann man selbst ran darf und wann der Fachbetrieb – und wie eine Sanierung wirklich abläuft.',
+    title: 'Schimmel sanieren: warum Überstreichen nichts bringt',
+    excerpt:
+      'Erst ist es ein dunkler Schatten hinter dem Schrank. Dann riecht das Zimmer muffig. Schimmel ist ärgerlich – aber vor allem ist er ein Hinweis. Wer nur die Wand streicht, behandelt das Symptom und lässt die Ursache weiterarbeiten. Hier steht, wie man es richtig macht.',
+    datum: '2026-09-01',
+    kategorie: 'Sanierung',
+    lesezeit: '8 Min.',
+    bild: 'blog-trockenbau.jpg',
+    bildAlt: 'Symbolbild: frisch verputzte, trockene Innenwand nach einer Sanierung',
+    kurz: [
+      'Schimmel ist ein Symptom, nicht die Ursache – die Ursache ist fast immer Feuchtigkeit.',
+      'Nur überstreichen bringt nichts: Anti-Schimmel-Farbe kaschiert, beseitigt aber weder Sporen noch die feuchte Stelle dahinter.',
+      'Kleine, klar begrenzte Flecken kann man oft selbst angehen. Bei großen Flächen, wiederkehrendem Befall oder empfindlichen Bewohnern gehört das in Fachhände.',
+      'Richtig ist: erst die Ursache finden und abstellen, dann das befallene Material fachgerecht entfernen und trocken neu aufbauen.',
+    ],
+    relatedLeistung: 'wand-decke',
+    sections: [
+      {
+        h2: 'Der Fleck hinter dem Schrank',
+        paras: [
+          'Meist fängt es unauffällig an. Ein dunkler Schatten in der Zimmerecke, hinter dem Schrank, unter der Fensterbank. Man wischt drüber, es kommt wieder. Irgendwann riecht der Raum muffig, auch wenn gelüftet wurde.',
+          'Schimmel ist unangenehm – aber er ist vor allem ein Bote. Er wächst nicht aus Zufall an dieser einen Stelle. Er zeigt an, dass dort Feuchtigkeit ist, die da nicht hingehört. Und genau das ist der Punkt, an dem die meisten den Fehler machen: Sie bekämpfen den Fleck und nicht das, was ihn füttert.',
+        ],
+      },
+      {
+        h2: 'Woher kommt der Schimmel? Fast immer Feuchtigkeit',
+        paras: [
+          'Schimmel braucht drei Dinge: etwas Organisches zum Wachsen (Tapete, Kleber, Staub reichen schon), Wärme – und Feuchtigkeit. Die ersten beiden hat jede Wohnung. Bleibt die Feuchtigkeit als der Hebel, an dem man drehen kann. Sie kommt typischerweise aus einer dieser Quellen:',
+        ],
+        list: [
+          'Kondensat: Warme, feuchte Raumluft schlägt sich an kalten Wandflächen nieder – oft in Ecken, hinter Möbeln, an Außenwänden.',
+          'Wärmebrücken: Bauteile, an denen die Wand innen deutlich kälter ist als drumherum – dort sammelt sich die Nässe zuerst.',
+          'Falsches oder zu seltenes Lüften – gerade in gut abgedichteten, neu sanierten Wohnungen.',
+          'Ein echter Wasserschaden: undichtes Rohr, Riss in der Fassade, aufsteigende Feuchte im Altbau.',
+        ],
+      },
+      {
+        h2: 'Warum Überstreichen nichts bringt',
+        paras: [
+          'Der häufigste Reflex: ab in den Baumarkt, Anti-Schimmel-Farbe holen, drüberstreichen, fertig. Sieht ein paar Wochen gut aus – und dann kommt der Fleck zurück, oft etwas größer.',
+          'Kein Wunder. Die Farbe legt sich über das Problem, aber das feuchte Mauerwerk dahinter bleibt feucht, und die Pilzstruktur sitzt tiefer, als man sieht. Solange die Ursache läuft, wächst der Schimmel weiter – jetzt nur unter einer frischen Schicht. Überstreichen ist Kosmetik, keine Sanierung.',
+        ],
+      },
+      {
+        h2: 'Selbst machen oder Fachbetrieb?',
+        paras: [
+          'Nicht jeder Fleck ist ein Fall für die Baustelle. Einen kleinen, frisch entstandenen und klar begrenzten Befall – Fachstellen nennen als groben Anhaltspunkt eine Handfläche bis etwa einen halben Quadratmeter – kann man unter Vorsicht oft selbst angehen: gute Belüftung, Schutzhandschuhe und Maske, und die Stelle mit einem geeigneten Mittel behandeln.',
+          'Ehrlich gesagt hört es da aber schnell auf. Ist die Fläche größer, kommt der Schimmel immer wieder, sitzt er im Putz oder hinter Trockenbau, oder leben empfindliche Personen im Haus – Kinder, Ältere, Menschen mit Atemwegs­problemen – dann gehört das fachlich beurteilt. Schimmel kann die Gesundheit belasten; das ist kein Punkt, an dem man sparen sollte. Im Zweifel lieber einmal zu früh jemanden draufschauen lassen als zu spät.',
+        ],
+        bild: 'blog-detail.jpg',
+        bildAlt: 'Symbolbild: Detail einer sauber sanierten Wand-Boden-Kante',
+      },
+      {
+        h2: 'So läuft eine Schimmelsanierung richtig ab',
+        paras: [
+          'Eine ordentliche Sanierung behandelt nicht den Fleck, sondern die Kette dahinter. Der Ablauf sieht im Kern so aus:',
+        ],
+        list: [
+          'Ursache finden: Woher kommt die Feuchtigkeit? Ohne diese Antwort ist alles andere verlorene Mühe.',
+          'Ursache abstellen: undichte Stelle reparieren, Wärmebrücke entschärfen, für trockene Verhältnisse sorgen.',
+          'Befallenes Material entfernen: Tapete, loser oder durchfeuchteter Putz, betroffener Trockenbau kommen raus – nicht nur an der Oberfläche.',
+          'Gründlich trocknen: Erst wenn die Bauteile wirklich trocken sind, geht es weiter. Das braucht Geduld, keine Abkürzung.',
+          'Neu aufbauen: fachgerecht verputzen bzw. Trockenbau erneuern, grundieren, streichen – mit einem Aufbau, der zur Wand passt.',
+        ],
+      },
+      {
+        h2: 'Vorbeugen: heizen, lüften, Möbel abrücken',
+        paras: [
+          'Ist die Wand saniert, entscheidet der Alltag, ob es dabei bleibt. Die Regeln sind unspektakulär, aber sie wirken: regelmäßig stoßlüften statt Fenster dauerhaft auf Kipp, gleichmäßig heizen (auch wenig genutzte Räume nicht auskühlen lassen) und große Möbel ein paar Zentimeter von kalten Außenwänden abrücken, damit die Luft dahinter zirkuliert.',
+          'Gerade nach einer Sanierung ist das wichtig: Frischer Putz und Estrich geben noch länger Feuchtigkeit ab. Wer da konsequent lüftet und heizt, gibt dem Schimmel gar keine Chance, sich wieder einzunisten.',
+        ],
+      },
+      {
+        h2: 'Schimmel sanieren im Raum Heilbronn',
+        paras: [
+          'Wir schauen uns Schimmel im Raum Heilbronn nicht als Fleck an, sondern als Frage: Wo kommt die Feuchtigkeit her, und was muss passieren, damit sie wegbleibt? Erst dann sanieren wir die Fläche fachgerecht – Putz, Trockenbau, Anstrich – aus einer Hand, mit einem Ansprechpartner und einem Festpreis vor Baubeginn.',
+          'Sie haben einen Fleck, der immer wiederkommt, und wollen Klarheit statt noch einer Schicht Farbe? Erzählen Sie uns davon – wir sehen uns die Stelle an und sagen ehrlich, was dahintersteckt und was zu tun ist.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
