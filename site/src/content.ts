@@ -1833,8 +1833,8 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-09-01',
     kategorie: 'Sanierung',
     lesezeit: '8 Min.',
-    bild: 'blog-trockenbau.jpg',
-    bildAlt: 'Symbolbild: frisch verputzte, trockene Innenwand nach einer Sanierung',
+    bild: 'blog-schimmel.jpg',
+    bildAlt: 'Symbolbild: Renovierungsarbeiten an einer Innenwand',
     kurz: [
       'Schimmel ist ein Symptom, nicht die Ursache – die Ursache ist fast immer Feuchtigkeit.',
       'Nur überstreichen bringt nichts: Anti-Schimmel-Farbe kaschiert, beseitigt aber weder Sporen noch die feuchte Stelle dahinter.',
