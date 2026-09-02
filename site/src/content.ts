@@ -838,8 +838,8 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-07-24',
     kategorie: 'Sanierung',
     lesezeit: '7 Min.',
-    bild: 'nachher.jpg',
-    bildAlt: 'Symbolbild: sanierter Wohnraum im Raum Heilbronn',
+    bild: 'blog-region.jpg',
+    bildAlt: 'Symbolbild: heller, frisch sanierter Wohnraum im Raum Heilbronn',
     kurz: [
       'Wir sanieren im gesamten Raum Heilbronn – von Neckarsulm über Sinsheim bis Stuttgart.',
       'Gerade auswärtige Eigentümer und Kapitalanleger profitieren von einem Ansprechpartner vor Ort.',
@@ -1030,7 +1030,7 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-07-28',
     kategorie: 'Sanierung',
     lesezeit: '6 Min.',
-    bild: 'nachher.jpg',
+    bild: 'blog-mieterwechsel.jpg',
     bildAlt: 'Symbolbild: leere, frisch hergerichtete Wohnung vor der Neuvermietung',
     kurz: [
       'Die Leerstandszeit beim Mieterwechsel ist das ideale Fenster für Renovierung.',
@@ -1234,7 +1234,7 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-07-29',
     kategorie: 'Bad & Sanitär',
     lesezeit: '7 Min.',
-    bild: 'blog-bad.jpg',
+    bild: 'blog-barrierefrei.jpg',
     bildAlt: 'Symbolbild: modernes Bad mit bodengleicher Dusche',
     kurz: [
       'Ein barrierearmer Badumbau beginnt grob ab einigen Tausend Euro, ein komplett barrierefreies Bad liegt deutlich höher.',
@@ -1300,8 +1300,8 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-07-29',
     kategorie: 'Sanierung',
     lesezeit: '7 Min.',
-    bild: 'nachher.jpg',
-    bildAlt: 'Symbolbild: fertig kernsanierte, bezugsfertige Wohnung',
+    bild: 'blog-kernsanierung.jpg',
+    bildAlt: 'Symbolbild: Gebäude während der Kernsanierung',
     kurz: [
       'Eine Kernsanierung kostet grob ab 600 bis über 1.500 Euro pro m² – je nach Zustand und Umfang.',
       'Bei einer Kernsanierung wird bis auf den Rohbau zurückgebaut.',
@@ -1571,8 +1571,8 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-08-12',
     kategorie: 'Sanierung',
     lesezeit: '11 Min.',
-    bild: 'blog-sanierung.jpg',
-    bildAlt: 'Symbolbild: geerbte Wohnung, bereit für die Sanierung',
+    bild: 'blog-erben.jpg',
+    bildAlt: 'Symbolbild: leere Wohnung mit Holzboden, bereit für die Sanierung',
     kurz: [
       'Zuerst eine ehrliche Bestandsaufnahme: Substanz, Zustand und grober Kostenrahmen – bevor irgendjemand streicht.',
       'Sanieren, vermieten oder verkaufen? Diese Entscheidung steht vor jedem Handwerker-Termin.',
@@ -1665,8 +1665,8 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-08-19',
     kategorie: 'Sanierung',
     lesezeit: '11 Min.',
-    bild: 'blog-gu.jpg',
-    bildAlt: 'Symbolbild: sanierter Altbau-Wohnraum mit hohen Decken',
+    bild: 'blog-altbau.jpg',
+    bildAlt: 'Symbolbild: großzügiger Altbau-Raum mit Parkettboden',
     kurz: [
       'Vor allem anderen steht die Bestandsaufnahme: Feuchtigkeit, Substanz und alte Leitungen ehrlich prüfen.',
       'Die teuren Überraschungen im Altbau stecken meist unsichtbar in Elektrik, Leitungen und feuchten Wänden.',
@@ -1754,8 +1754,8 @@ export const blogPosts: BlogPost[] = [
     datum: '2026-08-25',
     kategorie: 'Sanierung',
     lesezeit: '9 Min.',
-    bild: 'blog-sanierung.jpg',
-    bildAlt: 'Symbolbild: warmer, frisch sanierter Wohnraum im Herbst',
+    bild: 'blog-winter.jpg',
+    bildAlt: 'Symbolbild: heller, warmer Wohnraum in der kalten Jahreszeit',
     kurz: [
       'Die Heizung gehört vor die Heizsaison geprüft – nicht erst, wenn es beim ersten Kälteeinbruch kalt bleibt.',
       'Kleine Wärme-Hebel (Dichtungen, Heizkörper entlüften) kosten wenig und wirken sofort.',
@@ -1834,7 +1834,7 @@ export const blogPosts: BlogPost[] = [
     kategorie: 'Sanierung',
     lesezeit: '8 Min.',
     bild: 'blog-schimmel.jpg',
-    bildAlt: 'Symbolbild: Renovierungsarbeiten an einer Innenwand',
+    bildAlt: 'Symbolbild: fleckige Innenwand vor der Sanierung',
     kurz: [
       'Schimmel ist ein Symptom, nicht die Ursache – die Ursache ist fast immer Feuchtigkeit.',
       'Nur überstreichen bringt nichts: Anti-Schimmel-Farbe kaschiert, beseitigt aber weder Sporen noch die feuchte Stelle dahinter.',
