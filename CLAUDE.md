@@ -150,3 +150,15 @@ Documented in `ERWEITERN.md`. Four steps:
 The live site at sehandwerk.de is the React/Vite SPA in `site/` (`react-router-dom`, routes defined in `src/App.tsx`: `/`, `/ueber-uns`, `/kontakt`, `/impressum`, `/datenschutz`). Deployed to Vercel; Vercel Root Directory must be set to `site/` in project settings. Copy content (Leistungen, Ablauf, Zielgruppen, Vorteile, Regionen) lives in `site/src/content.ts`. Lead capture is a client-side form (`src/components/ContactForm.tsx`) posting to FormSubmit.co. GA4 tracking is wired via `site/index.html` (gtag.js) and `site/src/lib/analytics.ts` (`trackEvent`), firing `generate_lead` on form submit / phone / WhatsApp clicks and `page_view` on route changes. These are independent of the Python agent.
 
 The `website/` directory (static HTML/CSS, per-service pages, blog) is a superseded predecessor — `site/vercel.json` now 301-redirects all of `website/`'s old URLs (e.g. `/bodenarbeiten.html`, `/kraftstation-montage.html`) to `site/`'s routes. It is not the deployed site; treat it as historical reference only, not a target for new work.
+
+## Kaltakquise (Cold-Email) — Rahmenbedingungen
+
+Verbindliche Vorgaben für das Cold-Email-System (`Coldemailing/`, self-hosted **Warmbly** unter `localhost:8080` + Docker-Postgres). Diese Rahmenbedingungen sind hart einzuhalten:
+
+- **Standort-Radius: max. 50 km von Heilbronn** (07.09.2026 von 35 km erweitert — ≤35 km lieferte zu wenig valide Leads). Kernraum + 35–50-km-Band (Pforzheim, Ludwigsburg, Stuttgart, Karlsruhe, Heidelberg, Mannheim, Schwäbisch Hall). Klassifizierung über `contacts.custom_fields->>'stadt'` gegen die Whitelist `LOCAL50` in `leads/ingest-lokal.py`. Fernere Leads werden nicht angeschrieben.
+- **Sendevolumen: 20 E-Mails pro Absenderkonto pro Tag** (3 Konten `team@` / `hi@` / `info@se-handwerk.work` → max. 60/Tag gesamt).
+- **Abstand zwischen Mails: 10–20 Min** (harter Boden `min_wait_time=600s` pro Konto).
+- **Sendefenster: 08:00–16:00 Uhr** (Europe/Berlin), Mo–Sa.
+- **stop_on_reply an**, kein Link in Mail 1 (reply-gated). Angebot „Festpreis-Richtung aus 3 Fotos" erst nach Antwort.
+
+Warmbly-Betrieb, Kampagnen-IDs, Sende-/Sync-Bugs und -Fixes sind in den Memory-Dateien dokumentiert (`warmbly-cold-email-setup`, `warmbly-zwei-bekannte-bugs`, `akquise-50km-heilbronn`). Stand live: `cd Coldemailing/leads && python status.py`.
