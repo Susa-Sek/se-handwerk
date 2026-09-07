@@ -3,6 +3,7 @@
 #   -Mode kickoff   (08:10) Guten Morgen: heute geplant / gestern gelaufen / System-Health
 #   -Mode mittag    (12:30) Zwischenstand: bisher gesendet je Konto / Antworten / Rest-Queue
 #   -Mode puls      (stuendlich) kompakter Puls: bisher X/Ziel gesendet / Antworten / naechster Send
+#   -Mode detail    (12:30/16:20) je Kampagne: Leads gestartet/offen, Sends je Step, Antworten nach Step
 #   -Mode abschluss (16:15) Tagesabschluss: heute gesendet je Konto / Antworten / Kampagnen-Total
 # Liest direkt Postgres (kein Warmbly-API-Token noetig), pusht via notify.ps1.
 # Antwort-Zahlen kommen aus dem Postfach (unibox_emails, auf aktive Kampagnen gematcht) —
@@ -10,7 +11,7 @@
 # Bei Docker/Postgres-Ausfall -> [ALARM]-Push (Ausfaelle will man wissen). So = kein Versand -> skip.
 # Ausgeloest via Windows Task Scheduler (Mo-Sa). Manuell: powershell -File status-notify.ps1 -Mode mittag
 param(
-    [Parameter(Mandatory = $true)][ValidateSet('kickoff', 'mittag', 'puls', 'abschluss')][string]$Mode,
+    [Parameter(Mandatory = $true)][ValidateSet('kickoff', 'mittag', 'puls', 'detail', 'abschluss')][string]$Mode,
     [switch]$DryRun  # Nachricht auf Konsole ausgeben statt nach Telegram senden (Test ohne Spam).
 )
 $ErrorActionPreference = 'Continue'
@@ -140,6 +141,35 @@ WHERE $replFilter
            "Neue Antworten heute: $replToday | Bounces: $bounceToday`n" +
            "Naechster Send: $next"
     Push $msg
+}
+elseif ($Mode -eq 'detail') {
+    $uhr = DB "SELECT to_char(now() AT TIME ZONE 'Europe/Berlin','HH24:MI')"
+    # Je Kampagne: name|leads|gestartet|steps-sent|antw-total|antw-nach-step|steps-gesamt
+    $raw = DB @'
+SELECT split_part(c.name,' - ',1),
+  (SELECT count(*) FROM campaign_leads cl WHERE cl.campaign_id=c.id),
+  (SELECT count(DISTINCT p.contact_id) FROM campaign_contact_progress p WHERE p.campaign_id=c.id AND p.sent_at IS NOT NULL),
+  coalesce((SELECT string_agg('S'||s.position||' '||(SELECT count(*) FROM campaign_contact_progress p WHERE p.sequence_id=s.id AND p.sent_at IS NOT NULL), ' / ' ORDER BY s.position)
+     FROM sequences s WHERE s.campaign_id=c.id AND s.kind='email'
+       AND EXISTS (SELECT 1 FROM campaign_contact_progress p WHERE p.sequence_id=s.id AND p.sent_at IS NOT NULL)),'noch keiner'),
+  (SELECT count(*) FROM campaign_contact_progress p WHERE p.campaign_id=c.id AND p.replied_at IS NOT NULL),
+  coalesce((SELECT string_agg(x.cnt||'x n.S'||x.pos, ', ' ORDER BY x.pos) FROM (
+      SELECT s.position AS pos, count(*) AS cnt FROM campaign_contact_progress p JOIN sequences s ON s.id=p.sequence_id
+      WHERE p.campaign_id=c.id AND p.replied_at IS NOT NULL GROUP BY s.position) x),''),
+  (SELECT count(*) FROM sequences s WHERE s.campaign_id=c.id AND s.kind='email')
+FROM campaigns c WHERE c.name LIKE 'ICP%v3 (reply-gated)' ORDER BY c.name
+'@
+    $lines = @("[Detail] $heute $uhr"); $offenSum = 0; $antwSum = 0
+    foreach ($l in ($raw -split "`r?`n")) {
+        if ($l.Trim() -eq '') { continue }
+        $f = $l -split '\|'
+        $offen = (ToInt $f[1]) - (ToInt $f[2]); $offenSum += $offen; $antwSum += (ToInt $f[4])
+        $antwStr = if ((ToInt $f[4]) -gt 0 -and $f[5] -ne '') { "$($f[4]) ($($f[5]))" } else { "$($f[4])" }
+        $lines += "$($f[0]): $($f[2])/$($f[1]) gestartet, $offen offen"
+        $lines += "  Steps($($f[6])): $($f[3]) | Antw $antwStr"
+    }
+    $lines += "Gesamt: $offenSum Leads offen, $antwSum Antworten"
+    Push ($lines -join "`n")
 }
 else {
     $s = SendsHeuteJeKonto
