@@ -2,6 +2,7 @@
 # Damit man auch ohne offenes Claude Code sieht, was das System tut.
 #   -Mode kickoff   (08:10) Guten Morgen: heute geplant / gestern gelaufen / System-Health
 #   -Mode mittag    (12:30) Zwischenstand: bisher gesendet je Konto / Antworten / Rest-Queue
+#   -Mode puls      (stuendlich) kompakter Puls: bisher X/Ziel gesendet / Antworten / naechster Send
 #   -Mode abschluss (16:15) Tagesabschluss: heute gesendet je Konto / Antworten / Kampagnen-Total
 # Liest direkt Postgres (kein Warmbly-API-Token noetig), pusht via notify.ps1.
 # Antwort-Zahlen kommen aus dem Postfach (unibox_emails, auf aktive Kampagnen gematcht) —
@@ -9,7 +10,7 @@
 # Bei Docker/Postgres-Ausfall -> [ALARM]-Push (Ausfaelle will man wissen). So = kein Versand -> skip.
 # Ausgeloest via Windows Task Scheduler (Mo-Sa). Manuell: powershell -File status-notify.ps1 -Mode mittag
 param(
-    [Parameter(Mandatory = $true)][ValidateSet('kickoff', 'mittag', 'abschluss')][string]$Mode,
+    [Parameter(Mandatory = $true)][ValidateSet('kickoff', 'mittag', 'puls', 'abschluss')][string]$Mode,
     [switch]$DryRun  # Nachricht auf Konsole ausgeben statt nach Telegram senden (Test ohne Spam).
 )
 $ErrorActionPreference = 'Continue'
@@ -122,6 +123,22 @@ WHERE $replFilter
            "Bisher heute: $($s.sum)/$ziel gesendet ($($s.str))`n" +
            "Neue Antworten: $replToday | Bounces: $bounceToday`n" +
            "Rest-Queue heute: $queue Sends | naechster $next$stall"
+    Push $msg
+}
+elseif ($Mode -eq 'puls') {
+    $s = SendsHeuteJeKonto
+    $replToday = DB @"
+SELECT count(DISTINCT ct.id) FROM unibox_emails ue
+JOIN contacts ct ON lower(ct.email)=lower(substring(array_to_string(ue.from_addr,';') from '([A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,})'))
+JOIN campaign_leads cl ON cl.contact_id=ct.id
+JOIN campaigns c ON c.id=cl.campaign_id AND c.status='active'
+WHERE $replFilter
+  AND (ue.internal_date AT TIME ZONE 'Europe/Berlin')::date = (now() AT TIME ZONE 'Europe/Berlin')::date
+"@
+    $uhr = DB "SELECT to_char(now() AT TIME ZONE 'Europe/Berlin','HH24:MI')"
+    $msg = "[Puls] $uhr - $($s.sum)/$ziel gesendet ($($s.str))`n" +
+           "Neue Antworten heute: $replToday | Bounces: $bounceToday`n" +
+           "Naechster Send: $next"
     Push $msg
 }
 else {
