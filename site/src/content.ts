@@ -1907,6 +1907,97 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'keller-abdichten',
+    metaTitle: 'Keller abdichten: Ursachen für Feuchtigkeit & was hilft | SE Handwerk',
+    metaDescription:
+      'Feuchter Keller im Raum Heilbronn: woher die Nässe kommt, Innen- vs. Außenabdichtung ehrlich verglichen, wie eine Kellerabdichtung abläuft und wann der Fachbetrieb ran muss.',
+    title: 'Feuchter Keller: woher die Nässe kommt und was wirklich abdichtet',
+    excerpt:
+      'Man riecht ihn, bevor man ihn sieht: dieser klamme, modrige Geruch, wenn man die Kellertür aufmacht. Dann die weißen Ränder an der Wand, der abblätternde Putz. Ein feuchter Keller ist kein Schönheitsfehler – er ist ein bauliches Problem, das man an der Ursache packen muss, nicht mit einem Eimer Dichtfarbe.',
+    datum: '2026-09-09',
+    kategorie: 'Sanierung',
+    lesezeit: '9 Min.',
+    bild: 'blog-keller.jpg',
+    bildAlt: 'Symbolbild: massive Kellerwand aus Beton und Stein',
+    kurz: [
+      'Ein feuchter Keller hat fast immer eine bauliche Ursache – abdichten ohne Ursachensuche ist rausgeworfenes Geld.',
+      'Die entscheidende Frage: Kommt das Wasser von außen (drückend oder sickernd) oder entsteht es innen als Kondensat?',
+      'Außenabdichtung ist die gründlichere Lösung, aber aufwendig (aufgraben). Innenabdichtung ist günstiger und schneller, behandelt bei drückendem Wasser aber oft nur die Folgen.',
+      'Bei durchgehender Nässe, Salzausblühungen oder Rissen gehört das fachlich beurteilt – hier wird sonst teuer improvisiert.',
+    ],
+    relatedLeistung: 'wand-decke',
+    sections: [
+      {
+        h2: 'Der Geruch verrät ihn zuerst',
+        paras: [
+          'Bei den meisten fängt es nicht mit einer Pfütze an, sondern mit der Nase. Die Kellertür geht auf, und es riecht klamm und muffig. Kartons werden von unten weich, an der Wand zeigen sich weiße, pelzige Ränder – Salze, die das Wasser aus dem Mauerwerk mitgebracht und dort abgelegt hat.',
+          'Viele leben jahrelang damit, bis der Keller ausgebaut werden soll oder der Schimmel nach oben wandert. Dann wird es ernst. Und dann macht fast jeder denselben Fehler: Er kauft Dichtfarbe und streicht die Wand. Das hält den Winter, vielleicht. Danach drückt die Feuchtigkeit an der nächsten Stelle wieder durch.',
+        ],
+      },
+      {
+        h2: 'Woher kommt die Feuchtigkeit im Keller?',
+        paras: [
+          'Bevor irgendetwas abgedichtet wird, muss klar sein, woher das Wasser kommt. Es gibt im Wesentlichen vier Verdächtige – oft treten sie kombiniert auf:',
+        ],
+        list: [
+          'Drückendes Wasser: Grund- oder Hangwasser steht von außen an der Kellerwand und drückt aktiv hinein. Der anspruchsvollste Fall.',
+          'Sickerwasser (nicht drückend): Regenwasser läuft an der Wand herunter, ohne Druck – meist wegen fehlender Drainage oder Gefälle zum Haus hin.',
+          'Aufsteigende Feuchte: Wasser zieht kapillar von unten ins Mauerwerk, wenn die waagerechte Sperrschicht fehlt oder alt ist – typisch im Altbau.',
+          'Kondensat: Warme, feuchte Luft schlägt sich an den kühlen Kellerwänden nieder – oft hausgemacht durch falsches Lüften.',
+        ],
+      },
+      {
+        h2: 'Erst messen, dann abdichten',
+        paras: [
+          'Die vier Ursachen sehen an der Wand ähnlich aus, verlangen aber völlig unterschiedliche Lösungen. Gegen drückendes Wasser hilft kein Sperrputz von innen, und gegen Kondensat nützt die teuerste Außenabdichtung nichts. Deshalb steht am Anfang die Diagnose, nicht der Baumarkt.',
+          'Eine Feuchtemessung und ein prüfender Blick auf Gelände, Drainage und Bausubstanz zeigen, worum es wirklich geht. Bei unklarer oder starker Durchfeuchtung würde ich das immer fachlich beurteilen lassen, bevor Geld in eine Maßnahme fließt, die vielleicht am eigentlichen Problem vorbeigeht.',
+        ],
+      },
+      {
+        h2: 'Außen oder innen abdichten?',
+        paras: [
+          'Das ist die Gretchenfrage jeder Kellersanierung – und die ehrliche Antwort lautet: Es kommt auf die Ursache an.',
+          'Die Außenabdichtung ist die gründliche Lösung: Die Kellerwand wird freigelegt, gereinigt, neu abgedichtet und meist mit einer Drainage versehen. Sie packt das Problem dort, wo das Wasser ankommt. Der Haken ist der Aufwand – aufgraben, Erdarbeiten, je nach Zugang und Tiefe eine größere Baustelle.',
+          'Die Innenabdichtung (Sperrputz, Dichtschlämme, bei aufsteigender Feuchte eine nachträgliche Horizontalsperre) ist günstiger und schneller, weil nichts ausgegraben wird. Bei drückendem Wasser behandelt sie aber eher die Folgen als die Ursache – das Wasser steht weiter an der Wand. Sie ist stark bei Kondensat und leichteren Fällen, kein Allheilmittel bei nassem Erdreich. Was fachlich zulässig und sinnvoll ist, hängt vom Einzelfall ab.',
+        ],
+      },
+      {
+        h2: 'So läuft eine Kellerabdichtung ab',
+        paras: [
+          'Im Kern folgt eine ordentliche Abdichtung – innen wie außen – derselben Logik:',
+        ],
+        list: [
+          'Ursache klären: Feuchtemessung, Blick auf Drainage, Gefälle und Bausubstanz.',
+          'Alten, durchfeuchteten oder salzbelasteten Putz entfernen – bis auf den tragfähigen Untergrund.',
+          'Untergrund trocknen und vorbereiten; Risse und Fehlstellen schließen.',
+          'Abdichtung aufbringen: außen die Dichtung plus Drainage, innen Sperrputz bzw. Dichtschlämme, bei Bedarf eine nachträgliche Horizontalsperre.',
+          'Neu verputzen mit einem geeigneten, feuchteverträglichen Aufbau – und danach richtig lüften.',
+        ],
+      },
+      {
+        h2: 'Kondensat: der hausgemachte Fall',
+        paras: [
+          'Nicht jeder feuchte Keller braucht die große Baustelle. Häufig ist es Kondensat – und das ist oft ein Lüftungsfehler. Der Klassiker: An einem warmen Sommertag wird der kühle Keller weit aufgemacht, um ihn zu „lüften". Genau falsch. Die warme, feuchte Außenluft strömt hinein und schlägt sich an den kalten Wänden nieder. Man lüftet die Feuchtigkeit also hinein, nicht hinaus.',
+          'Besser: im Sommer eher nachts oder in den kühlen Morgenstunden lüften, wenn die Außenluft kühler und trockener ist. Wer das beherzigt, spart sich im günstigsten Fall die halbe Sanierung.',
+        ],
+      },
+      {
+        h2: 'Wann Sie einen Fachbetrieb holen sollten',
+        paras: [
+          'Ein bisschen Kondensat bekommt man mit richtigem Lüften selbst in den Griff. Sobald aber Wasser aktiv eindringt, sich großflächige Salzausblühungen zeigen, der Putz reihenweise abfällt oder gar Risse im Mauerwerk auftauchen, ist Schluss mit Selbstversuch. Dann geht es um Bausubstanz und manchmal um Statik – da wird an der falschen Stelle gespartes Geld schnell zum teuersten Posten.',
+          'Ehrlich gesagt: Eine Kellerabdichtung ist keine Wochenend-Bastelei. Lieber einmal richtig beurteilen lassen und gezielt das Nötige machen, als dreimal die Wand zu streichen und beim vierten Mal doch aufzugraben.',
+        ],
+      },
+      {
+        h2: 'Keller abdichten im Raum Heilbronn',
+        paras: [
+          'Wir gehen einen feuchten Keller im Raum Heilbronn von der Ursache her an: erst klären, woher das Wasser kommt, dann die passende Abdichtung – innen, außen oder die Kombination – und den fachgerechten Neuaufbau von Putz und Oberfläche. Alles aus einer Hand, ein Ansprechpartner, ein Festpreis vor Baubeginn.',
+          'Ihr Keller riecht muffig, oder die Wand zeigt Ränder, die immer wiederkommen? Erzählen Sie uns davon – wir sehen es uns an und sagen ehrlich, was dahintersteckt und welche Lösung wirklich Sinn ergibt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
