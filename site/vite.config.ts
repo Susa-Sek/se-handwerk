@@ -325,6 +325,13 @@ ${blogGruppen.map((g) => `<section id="${g.t.key}"><h2><a href="/leistungen/${g.
               { '@type': 'ListItem', position: 3, name: p.title, item: url },
             ],
           },
+          ...(p.faq && p.faq.length
+            ? [{
+                '@context': 'https://schema.org',
+                '@type': 'FAQPage',
+                mainEntity: p.faq.map((f) => ({ '@type': 'Question', name: f.frage, acceptedAnswer: { '@type': 'Answer', text: f.antwort } })),
+              }]
+            : []),
         ]
         const body = `${MAIN_OPEN}
 <nav aria-label="Brotkrumen"><a href="/">Start</a> / <a href="/blog">Ratgeber</a> / <span>${esc(p.title)}</span></nav>
@@ -334,6 +341,7 @@ ${blogGruppen.map((g) => `<section id="${g.t.key}"><h2><a href="/leistungen/${g.
 <p>${esc(p.excerpt)}</p>
 <section><h2>Das Wichtigste in Kürze</h2><ul>${p.kurz.map((k) => `<li>${esc(k)}</li>`).join('')}</ul></section>
 ${p.sections.map((sec) => `<section><h2>${esc(sec.h2)}</h2>${sec.paras.map((x) => `<p>${esc(x)}</p>`).join('')}${sec.list ? `<ul>${sec.list.map((li) => `<li>${esc(li)}</li>`).join('')}</ul>` : ''}${sec.bild ? `<figure><img src="/images/${sec.bild}" alt="${esc(sec.bildAlt ?? '')}" width="1200" height="675" loading="lazy" /><figcaption>Symbolbild</figcaption></figure>` : ''}</section>`).join('')}
+${p.faq && p.faq.length ? `<section><h2>Häufige Fragen</h2><dl>${p.faq.map((f) => `<dt>${esc(f.frage)}</dt><dd>${esc(f.antwort)}</dd>`).join('')}</dl></section>` : ''}
 <p><small>Hinweis: Dieser Ratgeber bietet allgemeine, unverbindliche Informationen nach bestem Wissen (Stand 2026). Preisangaben sind grobe Richtwerte und kein Angebot; sie können je nach Objekt, Zustand, Region und Ausführung erheblich abweichen. Der Beitrag ersetzt keine individuelle Fach-, Steuer- oder Rechtsberatung.</small></p>
 ${p.relatedLeistung ? `<p><a href="/leistungen/${p.relatedLeistung}">Passende Leistung ansehen</a></p>` : ''}
 ${(() => {

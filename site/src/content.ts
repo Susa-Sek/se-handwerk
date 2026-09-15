@@ -384,6 +384,7 @@ export interface BlogPost {
   kurz: string[]; // "Das Wichtigste in Kürze" — Vorspann-Kernaussagen
   sections: BlogSection[];
   relatedLeistung?: string;
+  faq?: FaqItem[]; // optionale FAQ → sichtbare FAQ-Sektion + FAQPage-Schema (GEO)
 }
 
 export const blogPosts: BlogPost[] = [
@@ -400,6 +401,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '10 Min.',
     bild: 'blog-vinyl.jpg',
     bildAlt: 'Symbolbild: frisch verlegter Vinyl-Designboden in einem hellen Wohnraum',
+    faq: [
+      { frage: 'Was kostet Vinylboden verlegen pro m²?', antwort: 'Als grober Richtwert liegen Material und Verlegung zusammen bei etwa 30–70 € pro m² – das Material allein bei rund 15–40 €/m², die Verlegung bei 15–30 €/m². Der genaue Preis hängt von Untergrund und Qualität ab und ist kein Angebot.' },
+      { frage: 'Was ist günstiger: Klick-Vinyl oder verklebtes Vinyl?', antwort: 'Klick-Vinyl ist günstiger und schneller verlegt. Vollflächig verklebtes Vinyl ist robuster und besser für Fußbodenheizung geeignet, aber aufwendiger in der Verlegung.' },
+      { frage: 'Welche Zusatzkosten werden beim Vinylboden oft vergessen?', antwort: 'Vor allem die Untergrundvorbereitung, Trittschalldämmung, Sockelleisten, der Rückbau des alten Bodens und das Kürzen von Türblättern.' },
+    ],
     kurz: [
       'Vinylboden verlegen kostet als Richtwert etwa 30–70 € pro m² (Material + Arbeit).',
       'Das Material allein liegt bei rund 15–40 €/m², die Verlegung bei 15–30 €/m².',
@@ -503,6 +509,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '8 Min.',
     bild: 'blog-laminat-vinyl.jpg',
     bildAlt: 'Symbolbild: Laminat- und Vinyl-Boden im Vergleich',
+    faq: [
+      { frage: 'Was ist besser: Laminat oder Vinyl?', antwort: 'Das hängt vom Einsatz ab: Vinyl ist unempfindlicher gegen Feuchtigkeit und leiser, Laminat oft günstiger und kratzfester. Für Bad, Küche und die Vermietung ist Vinyl meist die sicherere Wahl.' },
+      { frage: 'Ist Vinyl teurer als Laminat?', antwort: 'Tendenziell ja, aber die Preisspannen überschneiden sich stark – günstiges Vinyl kann billiger sein als hochwertiges Laminat.' },
+      { frage: 'Welcher Boden eignet sich für Feuchträume?', antwort: 'Vinyl, weil es Feuchtigkeit deutlich besser verträgt als Laminat.' },
+    ],
     kurz: [
       'Vinyl ist wasserfest und leise – die robustere Wahl für Vermietung und Feuchträume.',
       'Laminat ist etwas günstiger, quillt aber bei stehendem Wasser auf.',
@@ -714,6 +725,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '7 Min.',
     bild: 'blog-bad.jpg',
     bildAlt: 'Symbolbild: frisch saniertes modernes Badezimmer',
+    faq: [
+      { frage: 'Was kostet eine Badsanierung?', antwort: 'Als grober Richtwert liegt ein komplett saniertes Bad je nach Größe und Ausstattung meist im mittleren vierstelligen bis unteren fünfstelligen Bereich. Den verbindlichen Preis gibt es erst nach einer Aufnahme vor Ort.' },
+      { frage: 'Was treibt die Kosten im Bad am stärksten?', antwort: 'Vor allem Fliesenmenge und -format, das Verlegen der Leitungen, hochwertige Sanitärobjekte und eine bodengleiche Dusche.' },
+      { frage: 'Wo lohnt sich Sparen im Bad – und wo nicht?', antwort: 'An sichtbaren Oberflächen lässt sich sparen, an Abdichtung und verdeckten Installationen nicht – dort rächt sich Sparen später teuer.' },
+    ],
     kurz: [
       'Eine Badsanierung kostet je nach Größe und Ausstattung grob 8.000 bis 25.000 Euro.',
       'Die größten Kostentreiber sind Fliesen, Sanitärobjekte und das Verlegen von Leitungen.',
@@ -780,6 +796,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '6 Min.',
     bild: 'blog-trockenbau.jpg',
     bildAlt: 'Symbolbild: Trockenbau-Ständerwand in der Renovierung',
+    faq: [
+      { frage: 'Was kostet Trockenbau pro m²?', antwort: 'Als grober Richtwert liegt eine einfache Trockenbauwand oft bei etwa 40–80 € pro m² – je nach Dämmung, Beplankung und Aufwand. Das ist ein Richtwert, kein Angebot.' },
+      { frage: 'Wovon hängen die Trockenbaukosten ab?', antwort: 'Vom Wand- oder Deckenaufbau, der Dämmung, der Anzahl der Beplankungslagen, Aussparungen und dem Spachtelaufwand.' },
+      { frage: 'Ist Trockenbau günstiger als eine gemauerte Wand?', antwort: 'In der Regel ja, und er ist schneller und leichter – dafür weniger massiv als eine gemauerte Wand.' },
+    ],
     kurz: [
       'Eine einfache Trockenbauwand kostet grob 40 bis 80 Euro pro m², fertig verspachtelt.',
       'Abgehängte Decken liegen meist bei rund 40 bis 70 Euro pro m².',
@@ -1104,6 +1125,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '6 Min.',
     bild: 'blog-maler.jpg',
     bildAlt: 'Symbolbild: frisch gestrichene weiße Wand mit sauberer Kante',
+    faq: [
+      { frage: 'Was kostet Wände streichen pro m²?', antwort: 'Als grober Richtwert rechnet man fürs reine Streichen oft etwa 8–15 € pro m² Wandfläche; mit Spachteln und Vorarbeiten entsprechend mehr. Der Wert ist ein Richtwert, kein Angebot.' },
+      { frage: 'Warum schwanken Malerkosten so stark?', antwort: 'Wegen des Untergrunds, der nötigen Vorarbeit (Spachteln, Grundieren), der Anzahl der Anstriche und der Farbqualität.' },
+      { frage: 'Rechnet man Malerkosten nach Wand- oder Bodenfläche?', antwort: 'Nach Wandfläche. Als Faustregel ist die zu streichende Fläche ein Mehrfaches der Bodenfläche.' },
+    ],
     kurz: [
       'Wände streichen lassen kostet grob 8 bis 20 Euro pro m² Wandfläche.',
       'Spachteln, Grundieren und Vorarbeiten kommen je nach Zustand obendrauf.',
@@ -1170,6 +1196,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '6 Min.',
     bild: 'blog-estrich.jpg',
     bildAlt: 'Symbolbild: frischer Zementestrich in einem leeren Raum beim Trocknen',
+    faq: [
+      { frage: 'Wie lange muss Estrich trocknen?', antwort: 'Als Faustregel rechnet man bei Zementestrich grob eine Woche pro Zentimeter Dicke für die ersten Zentimeter, darüber hinaus länger – bis zur Belegreife oft mehrere Wochen.' },
+      { frage: 'Wann ist Estrich belegreif?', antwort: 'Wenn die Restfeuchte den zulässigen Wert unterschreitet. Das wird gemessen (z. B. CM-Messung), nicht geschätzt.' },
+      { frage: 'Kann man die Estrich-Trocknung beschleunigen?', antwort: 'Durch kontrolliertes Heizen und Lüften oder Bautrockner – aber behutsam, denn zu schnelles Trocknen kann Risse verursachen.' },
+    ],
     kurz: [
       'Faustregel Zementestrich: rund 1 Woche pro Zentimeter – aber nur für die ersten 4 cm.',
       'Ab etwa 6 cm Dicke dauert es überproportional länger.',
@@ -1236,6 +1267,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '7 Min.',
     bild: 'blog-barrierefrei.jpg',
     bildAlt: 'Symbolbild: modernes Bad mit bodengleicher Dusche',
+    faq: [
+      { frage: 'Was kostet ein barrierefreies Bad?', antwort: 'Als grober Richtwert liegt ein barrierefreier Umbau je nach Umfang meist im mittleren vierstelligen bis fünfstelligen Bereich. Den genauen Preis gibt es nach einer Aufnahme vor Ort – der Wert ist kein Angebot.' },
+      { frage: 'Gibt es Zuschüsse für ein barrierefreies Bad?', antwort: 'Bei anerkanntem Pflegegrad ist ein Zuschuss der Pflegekasse für wohnumfeldverbessernde Maßnahmen möglich. Höhe und Voraussetzungen hängen vom Einzelfall ab und sollten aktuell geprüft werden.' },
+      { frage: 'Was gehört zu einem barrierefreien Bad?', antwort: 'Vor allem eine bodengleiche Dusche, ausreichend Bewegungsfläche, Haltegriffe und rutschhemmende Fliesen.' },
+    ],
     kurz: [
       'Ein barrierearmer Badumbau beginnt grob ab einigen Tausend Euro, ein komplett barrierefreies Bad liegt deutlich höher.',
       'Kernstück ist fast immer die bodengleiche, schwellenlose Dusche.',
@@ -1302,6 +1338,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '7 Min.',
     bild: 'blog-kernsanierung.jpg',
     bildAlt: 'Symbolbild: Gebäude während der Kernsanierung',
+    faq: [
+      { frage: 'Was kostet eine Kernsanierung pro m²?', antwort: 'Als grober Richtwert bewegt sich eine Kernsanierung in einer breiten Spanne pro m² Wohnfläche. Der verbindliche Preis ergibt sich erst nach einer Aufnahme von Objekt und Zustand vor Ort.' },
+      { frage: 'Was umfasst eine Kernsanierung?', antwort: 'Das Entkernen bis auf den Rohbau und den kompletten Neuaufbau: Leitungen, Böden, Wände, Bad und Oberflächen.' },
+      { frage: 'Wann lohnt sich eine Kernsanierung?', antwort: 'Wenn Substanz und Technik am Ende sind und viele Einzelmaßnahmen zusammen teurer würden als ein sauberer Komplett-Neuaufbau.' },
+    ],
     kurz: [
       'Eine Kernsanierung kostet grob ab 600 bis über 1.500 Euro pro m² – je nach Zustand und Umfang.',
       'Bei einer Kernsanierung wird bis auf den Rohbau zurückgebaut.',
@@ -1369,6 +1410,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '10 Min.',
     bild: 'blog-uebergabe.jpg',
     bildAlt: 'Symbolbild: leere frisch renovierte Wohnung bei der Übergabe, Schlüssel auf der Fensterbank',
+    faq: [
+      { frage: 'Was gehört in eine Wohnungsübergabe?', antwort: 'Ein gemeinsamer Rundgang, das Ablesen aller Zählerstände, die Prüfung auf Schäden, die Schlüsselübergabe und ein von beiden Seiten unterschriebenes Übergabeprotokoll.' },
+      { frage: 'Warum ist das Übergabeprotokoll so wichtig?', antwort: 'Es hält den Zustand mit Zählerständen und Mängeln fest und ist später der entscheidende Beweis bei Streit um Kaution oder Schäden.' },
+      { frage: 'Wer sollte bei der Übergabe dabei sein?', antwort: 'Beide Parteien oder Bevollmächtigte – idealerweise mit genug Zeit für einen gründlichen Rundgang statt zwischen Tür und Angel.' },
+    ],
     kurz: [
       'Das Übergabeprotokoll ist das wichtigste Dokument – ohne Unterschrift beider Seiten wird es im Streitfall wertlos.',
       'Zählerstände (Strom, Gas, Wasser) mit Zählernummer notieren und am besten fotografieren.',
@@ -1471,6 +1517,11 @@ export const blogPosts: BlogPost[] = [
     lesezeit: '10 Min.',
     bild: 'blog-fliesen.jpg',
     bildAlt: 'Symbolbild: frisch verlegter großformatiger Fliesenboden in einem hellen Raum',
+    faq: [
+      { frage: 'Was kostet Fliesen verlegen pro m²?', antwort: 'Als grober Richtwert liegt das reine Verlegen (ohne Material) oft bei etwa 30–60 € pro m². Großformatige Fliesen und aufwendige Verlegemuster kosten mehr – der Wert ist ein Richtwert, kein Angebot.' },
+      { frage: 'Wovon hängen die Fliesenkosten ab?', antwort: 'Vom Format, dem Verlegemuster, dem Untergrund, dem Fugenbild und dem Aufwand für Zuschnitte.' },
+      { frage: 'Sind große Fliesen teurer zu verlegen?', antwort: 'Ja, sie brauchen einen sehr ebenen Untergrund und mehr Sorgfalt, was den Verlegepreis erhöht.' },
+    ],
     kurz: [
       'Fliesen verlegen kostet als grober Richtwert etwa 40–100 € pro m² (Material + Arbeit).',
       'Die reine Verlegung liegt bei rund 30–60 €/m², das Material fängt bei ca. 15 €/m² an – nach oben offen.',

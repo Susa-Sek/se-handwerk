@@ -1,6 +1,7 @@
 import { Link, Navigate, useParams } from 'react-router-dom';
 import Reveal from '../components/Reveal';
 import { CtaBand } from '../components/sections';
+import FaqSection from '../components/FaqSection';
 import { useSeo, SEO_SITE } from '../hooks/useSeo';
 import { blogPosts, getLeistung, getPost } from '../content';
 
@@ -166,6 +167,8 @@ export default function BlogArticle() {
           </div>
         </div>
       </article>
+
+      {post.faq && post.faq.length > 0 && <FaqSection faq={post.faq} title="Häufige Fragen" />}
 
       {relatedPosts.length > 0 && (
         <section style={{ background: 'var(--paper)', borderTop: '1px solid var(--line-ink)', padding: '72px 0 90px' }}>
