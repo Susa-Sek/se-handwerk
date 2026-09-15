@@ -2049,6 +2049,88 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'wand-verputzen-kosten',
+    metaTitle: 'Wände verputzen: Kosten pro m² und was den Preis bestimmt | SE Handwerk',
+    metaDescription:
+      'Was kostet Wände verputzen pro m²? Innenputz vs. Glätten, die Qualitätsstufen Q1–Q4, Untergrund als Kostentreiber, Neubau vs. Altbau – ehrliche Richtwerte für den Raum Heilbronn.',
+    title: 'Wände verputzen: Was es pro m² kostet – und warum',
+    excerpt:
+      'Eine frisch verputzte Wand sieht erst mal perfekt aus. Bis die Sonne flach durchs Fenster fällt und plötzlich jede Welle und jede Kelle sichtbar wird. Genau hier entscheidet sich, was Verputzen kostet – nicht am Quadratmeter allein, sondern daran, wie glatt es am Ende werden soll.',
+    datum: '2026-09-15',
+    kategorie: 'Sanierung',
+    lesezeit: '8 Min.',
+    bild: 'blog-verputzen.jpg',
+    bildAlt: 'Symbolbild: Innenraum in Renovierung mit frisch verputzten Wänden',
+    kurz: [
+      'Als grober Richtwert kostet Wände verputzen oft etwa 15–40 € pro m² – je nach Putzart, Untergrund und Qualitätsstufe.',
+      'Der größte Preishebel ist die geforderte Oberflächenqualität (Q1 bis Q4): je glatter und lichtechter, desto mehr Aufwand.',
+      'Der Untergrund entscheidet mit – alte, unebene oder saugende Wände brauchen Vorarbeit, Grundierung oder ein Armierungsgewebe.',
+      'Neu verputzen und nur spachteln/glätten sind zwei Paar Schuhe und kosten unterschiedlich.',
+    ],
+    relatedLeistung: 'wand-decke',
+    faq: [
+      { frage: 'Was kostet Wände verputzen pro m²?', antwort: 'Als grober Richtwert liegt Wände verputzen oft bei etwa 15–40 € pro m² – abhängig von Putzart, Untergrund und geforderter Qualitätsstufe. Der Wert ist ein Richtwert, kein Angebot.' },
+      { frage: 'Was bedeuten die Qualitätsstufen Q1 bis Q4?', antwort: 'Q1 ist eine grob verspachtelte Fläche, Q4 die höchste, vollflächig geglättete Oberfläche, die auch im Streiflicht makellos wirkt. Je höher die Stufe, desto mehr Arbeitsgänge und desto höher die Kosten.' },
+      { frage: 'Was ist der Unterschied zwischen Verputzen und Spachteln?', antwort: 'Verputzen bringt eine tragende Putzschicht auf den rohen Untergrund. Spachteln oder Glätten optimiert eine bereits vorhandene Fläche. Das ist unterschiedlicher Aufwand – und deshalb ein anderer Preis.' },
+    ],
+    sections: [
+      {
+        h2: 'Die Wand, die erst im Streiflicht ehrlich wird',
+        paras: [
+          'Es gibt einen Moment, den jeder Maler und Verputzer kennt: Die Wand ist fertig, sieht glatt aus, alle sind zufrieden. Dann fällt nachmittags die Sonne flach durchs Fenster – und auf einmal wirft jede kleine Unebenheit einen Schatten. Was eben noch perfekt war, sieht plötzlich wellig aus.',
+          'Das ist kein Pfusch, sondern eine Frage der vereinbarten Qualitätsstufe. Und genau die ist der Grund, warum „Wände verputzen" mal 18 und mal 40 Euro pro Quadratmeter kostet. Der Quadratmeterpreis allein sagt wenig – entscheidend ist, wie glatt und lichtecht das Ergebnis sein soll.',
+        ],
+      },
+      {
+        h2: 'Was kostet Wände verputzen pro m²?',
+        paras: [
+          'Als grober Richtwert – und ausdrücklich kein Angebot – liegt das Verputzen von Innenwänden oft irgendwo zwischen 15 und 40 Euro pro Quadratmeter. Die Spanne ist so groß, weil sich dahinter zwei ganz verschiedene Dinge verstecken: einmal frisch verputzen auf rohem Mauerwerk, einmal eine vorhandene Wand spachteln und glätten.',
+          'Was der einzelne Quadratmeter wirklich kostet, hängt an drei Stellschrauben: der Qualitätsstufe, dem Untergrund und dem Putzsystem. Wer eine ehrliche Zahl will, kommt um einen Blick auf die konkrete Wand nicht herum.',
+        ],
+      },
+      {
+        h2: 'Q1 bis Q4 – der eigentliche Preistreiber',
+        paras: [
+          'Für die Oberflächenqualität von Innenputz und Spachtelung gibt es vier Stufen. Sie klingen technisch, entscheiden aber über den halben Preis:',
+        ],
+        list: [
+          'Q1: nur das Nötigste – Stöße und Schraubenlöcher gefüllt. Für Flächen, die eh verfliest oder verkleidet werden.',
+          'Q2: die Standardqualität für normal gestrichene oder tapezierte Wände.',
+          'Q3: erhöhte Anforderung, zusätzlich breit verspachtelt – für glatte Anstriche und feine Tapeten.',
+          'Q4: die Königsklasse, vollflächig geglättet. Auch im Streiflicht makellos – und der teuerste Aufwand.',
+        ],
+      },
+      {
+        h2: 'Der Untergrund entscheidet mit',
+        paras: [
+          'Die zweite große Stellschraube sieht man der fertigen Wand später nicht an: den Untergrund. Eine gerade, tragfähige Wand ist schnell verputzt. Eine alte, wellige oder stark saugende Wand braucht Vorarbeit – ausgleichen, grundieren, bei Bedarf ein Armierungsgewebe einbetten, damit später keine Risse durchschlagen.',
+          'Diese Vorarbeit taucht auf keinem Online-Rechner auf, macht aber oft den Unterschied zwischen einem günstigen und einem realistischen Preis. Wer sie weglässt, spart am Anfang und ärgert sich, wenn nach einem Jahr die ersten Risse kommen.',
+        ],
+      },
+      {
+        h2: 'Neu verputzen oder nur spachteln?',
+        paras: [
+          'Die beiden Begriffe werden oft in einen Topf geworfen, meinen aber Verschiedenes. Verputzen heißt, eine neue, tragende Putzschicht auf den rohen Untergrund aufzubringen – etwa nach einer Entkernung oder bei einer neuen Wand. Spachteln oder Glätten setzt auf einer schon vorhandenen Fläche auf und macht sie glatt.',
+          'Für die Kosten ist das wichtig: Frisch verputzen ist der größere Posten, Glätten der kleinere. Wer beim Angebot Äpfel mit Birnen vergleicht, wundert sich sonst über scheinbar völlig unterschiedliche Preise für „dasselbe".',
+        ],
+      },
+      {
+        h2: 'Neubau oder Altbau – wo die Überraschungen lauern',
+        paras: [
+          'Im Neubau sind die Wände gerade und der Aufbau bekannt – da ist Verputzen gut kalkulierbar. Im Altbau wird es spannender: krumme Wände, alte Putzschichten, die erst runter müssen, mal ein Stück Lehm, mal eine Wand, die den Putz nicht richtig annimmt. Solche Dinge zeigen sich oft erst, wenn der alte Belag ab ist.',
+          'Deshalb halten wir es im Altbau mit ehrlichen Richtwerten statt schöner Rundungen: Erst schauen wir uns die Wände an, dann steht der Preis – und der hält dann auch.',
+        ],
+      },
+      {
+        h2: 'Wände verputzen im Raum Heilbronn',
+        paras: [
+          'Wir verputzen und glätten Wände im Raum Heilbronn als Teil der Sanierung oder als eigenes Gewerk – von Q2 für den normalen Anstrich bis Q4 für die makellose Fläche. Sie sagen uns, wie glatt es werden soll, wir sagen ehrlich, was das an Aufwand bedeutet. Ein Ansprechpartner, ein Festpreis vor Baubeginn.',
+          'Sie wissen nicht, welche Qualitätsstufe Sie wirklich brauchen? Erzählen Sie uns von Ihrem Projekt – wir schauen uns die Wände an und sagen Ihnen, was sinnvoll ist und was es kostet.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
