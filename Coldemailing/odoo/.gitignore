@@ -1,0 +1,3 @@
+# Secrets — nie committen.
+.env
+config/odoo.conf

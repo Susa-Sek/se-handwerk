@@ -162,3 +162,7 @@ Verbindliche Vorgaben für das Cold-Email-System (`Coldemailing/`, self-hosted *
 - **stop_on_reply an**, kein Link in Mail 1 (reply-gated). Angebot „Festpreis-Richtung aus 3 Fotos" erst nach Antwort.
 
 Warmbly-Betrieb, Kampagnen-IDs, Sende-/Sync-Bugs und -Fixes sind in den Memory-Dateien dokumentiert (`warmbly-cold-email-setup`, `warmbly-zwei-bekannte-bugs`, `akquise-50km-heilbronn`). Stand live: `cd Coldemailing/leads && python status.py`.
+
+### CRM: Odoo Community (Lead-Status-Spiegel)
+
+Odoo 19 Community (`Coldemailing/odoo/`, eigenes Docker-Compose, eigene Postgres, **localhost:8069**) spiegelt alle Warmbly-Leads als `crm.lead` (type=opportunity) in eine Arbeits-Pipeline. Sync ist **einseitig Warmbly → Odoo**, read-only gegen `warmbly_dev`: `leads/odoo-sync.py` (stdlib, `--dry-run` default / `--apply`), getaktet per Windows-Task `Warmbly-Odoo-Sync` (Mo–Sa alle 30 Min via `leads/odoo-sync.ps1`). Stages laufen automatisch mit dem Warmbly-Status vor (Pool→Verifiziert→In Kampagne→Kontaktiert→Geantwortet); manuelle Stages (Qualifiziert/Angebot/Gewonnen) und jede Handarbeit bleiben durch einen Hands-off-Guard unangetastet. Details in Memory `odoo-crm-warmbly-sync`. Zugang/Owner in `leads/odoo-sync.env` (gitignored).

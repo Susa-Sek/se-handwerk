@@ -1,0 +1,6 @@
+# Secrets + local runtime artifacts — never commit.
+notify.env
+*.env
+*.log
+*.state
+*.lock
