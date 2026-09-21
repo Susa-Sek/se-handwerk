@@ -11,7 +11,7 @@
 # Nutzung: python odoo-sync.py            (Dry-Run: KEINE Schreibzugriffe, zeigt nur Zahlen)
 #          python odoo-sync.py --apply    (fuehrt aus, inkl. idempotentem Bootstrap)
 # Credentials: leads/odoo-sync.env (ODOO_URL, ODOO_DB, ODOO_LOGIN, ODOO_API_KEY)
-import subprocess, sys, json, os, html, xmlrpc.client
+import subprocess, sys, json, os, html, datetime, xmlrpc.client
 
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 sys.stderr.reconfigure(encoding="utf-8", errors="replace")
@@ -131,6 +131,11 @@ LOST_REASONS = {
     "bounce":  "Hard Bounce",
     "invalid": "E-Mail ungueltig",
 }
+# Aktivitaetstypen fuer die CRM-Wiedervorlage (name, Default-Frist in Tagen):
+#  - "Antworten": wird automatisch beim Reply-Eingang faellig HEUTE gesetzt (To-Do zu antworten)
+#  - "Nachfassen": manuell per Klick, wenn nach eigener Antwort keine Reaktion kommt (Default +3 Tage)
+ACTIVITY_TYPES = [("Antworten", 0), ("Nachfassen", 3)]
+
 # reply_class-Werte, die NICHT als echte Antwort zaehlen
 NON_REPLIES = {"auto_reply", "out_of_office"}
 # suppressed_recipients.source -> Lost-Grund ('manual' = bewusst gesperrt -> wie negativ)
@@ -299,6 +304,20 @@ def ensure_tags(o, names):
             out[n] = sentinel; sentinel -= 1
     return out
 
+def ensure_activity_types(o):
+    """mail.activity.type 'Antworten'/'Nachfassen'; legt Fehlende nur mit --apply an."""
+    existing = {t["name"]: t["id"] for t in o.search_read("mail.activity.type", [], ["name"])}
+    out = {}
+    for name, delay in ACTIVITY_TYPES:
+        if name in existing:
+            out[name] = existing[name]
+        elif APPLY:
+            out[name] = o.create("mail.activity.type",
+                {"name": name, "delay_count": delay, "delay_unit": "days", "category": "default"})
+        else:
+            out[name] = None
+    return out
+
 # ---------------------------------------------------------------- Lead-Aufbau
 def lead_title(c):
     base = (c.get("company") or "").strip() \
@@ -393,6 +412,12 @@ def main():
         if not owner_uid:
             print(f"WARN: ODOO_OWNER_LOGIN '{owner_login}' nicht gefunden -> Leads gehoeren Sync-Account")
 
+    # Aktivitaetstypen fuer die Wiedervorlage; "Antworten"-To-Do wird bei neuem Reply faellig.
+    act_types = ensure_activity_types(o)
+    answer_type = act_types.get("Antworten")
+    lead_model_id = (o.search("ir.model", [("model","=","crm.lead")]) or [None])[0]
+    TODAY = datetime.date.today().isoformat()
+
     # Ohne x_-Felder (frisches Odoo im Dry-Run) gibt es auch keine synchronisierten Leads.
     leads = []
     if fields_ready:
@@ -433,11 +458,13 @@ def main():
         if diff:
             mirror_updates.append((lead["id"], diff))
 
-        # Neue Replies -> Chatter (immer erlaubt, auch bei lost/handsoff)
+        # Neue Replies -> Chatter (immer erlaubt, auch bei lost/handsoff).
+        # wants_answer: aktiver, nicht verlorener Lead -> "Antworten"-To-Do faellig.
         seen = set((lead.get("x_warmbly_reply_keys") or "").split(","))
         new_replies = [r for r in real_replies(c) if r["key"] not in seen]
         if new_replies:
-            chatter.append((lead["id"], new_replies, (lead.get("x_warmbly_reply_keys") or "")))
+            wants_answer = bool(lead["active"]) and not lost_key
+            chatter.append((lead["id"], new_replies, (lead.get("x_warmbly_reply_keys") or ""), wants_answer))
 
         # Hands-off-Guard
         cur_stage = lead["stage_id"][0] if lead["stage_id"] else None
@@ -456,12 +483,15 @@ def main():
             stage_moves.append((lead["id"], tgt_stage))
 
     n_lost = len(lost_sets) + sum(1 for _, _, lk, _ in creates if lk)
-    n_chat = sum(len(r) for _, r, _ in chatter) + sum(len(r) for _, _, _, r in creates)
+    n_chat = sum(len(r) for _, r, _, _ in chatter) + sum(len(r) for _, _, _, r in creates)
+    # "Antworten"-To-Dos: aktive, nicht verlorene Leads mit neuem Reply (bestehend + neu angelegt)
+    n_todo = sum(1 for *_, w in chatter if w) + sum(1 for _, _, lk, r in creates if r and not lk)
     print(f"\n{'APPLY' if APPLY else 'DRY-RUN'}:")
     print(f"  Anlegen:        {len(creates)}")
     print(f"  Stage-Moves:    {len(stage_moves)}")
     print(f"  Lost setzen:    {n_lost}")
     print(f"  Chatter-Posts:  {n_chat}")
+    print(f"  Antworten-ToDo: {n_todo}")
     print(f"  Spiegel-Update: {len(mirror_updates)}")
     print(f"  Hands-off:      {handsoff}")
 
@@ -477,7 +507,7 @@ def main():
         ids = o.create("crm.lead", [v for _, v, _, _ in batch])
         for (c, _v, lost_key, replies), lid in zip(batch, ids):
             if lost_key: lost_sets.append((lid, lost_key))
-            if replies:  chatter.append((lid, replies, ""))
+            if replies:  chatter.append((lid, replies, "", not lost_key))
         print(f"  angelegt: {min(i+200, len(creates))}/{len(creates)}")
 
     # --- Stage-Moves, gruppiert nach Zielstage ---
@@ -503,12 +533,26 @@ def main():
         o.write("crm.lead", ids, {"active": False, "lost_reason_id": reasons[lkey],
                                   "x_warmbly_lost": lkey, "probability": 0})
 
-    # --- Chatter-Posts, Reply-Keys erst NACH erfolgreichem Post fortschreiben ---
-    for lid, replies, oldkeys in chatter:
+    # --- Chatter-Posts + "Antworten"-To-Do; Reply-Keys erst NACH Post fortschreiben ---
+    n_todo_created = 0
+    for lid, replies, oldkeys, wants_answer in chatter:
         for r in replies:
             post_note(o, lid, reply_body(r))
+        # To-Do "Antworten" faellig heute, zugewiesen an den Bearbeiter. Dedup: nur, wenn
+        # nicht schon eine offene "Antworten"-Aktivitaet dranhaengt (idempotent bei Re-Runs).
+        if wants_answer and answer_type and lead_model_id:
+            offen = o.search("mail.activity", [("res_model","=","crm.lead"),
+                             ("res_id","=",lid), ("activity_type_id","=",answer_type)])
+            if not offen:
+                o.create("mail.activity", {
+                    "res_model_id": lead_model_id, "res_id": lid,
+                    "activity_type_id": answer_type, "summary": "Antworten (Prospect hat geantwortet)",
+                    "date_deadline": TODAY, "user_id": owner_uid or o.uid})
+                n_todo_created += 1
         allkeys = [k for k in oldkeys.split(",") if k] + [r["key"] for r in replies]
         o.write("crm.lead", [lid], {"x_warmbly_reply_keys": ",".join(allkeys)})
+    if n_todo_created:
+        print(f"  Antworten-ToDo angelegt: {n_todo_created}")
 
     print("\nFertig.")
 
