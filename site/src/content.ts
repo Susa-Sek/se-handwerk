@@ -2131,6 +2131,89 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'innentueren-austauschen',
+    metaTitle: 'Innentüren austauschen: Kosten, Ablauf & worauf achten | SE Handwerk',
+    metaDescription:
+      'Innentüren austauschen im Raum Heilbronn: nur Türblatt oder komplette Tür, Renovierungszarge, Standardmaße, Kostentreiber und wann sich der Fachbetrieb lohnt – ehrliche Richtwerte.',
+    title: 'Innentüren austauschen: Was es kostet und worauf es ankommt',
+    excerpt:
+      'Es sind selten die großen Dinge, die eine Wohnung alt aussehen lassen. Oft sind es die Türen: vergilbtes Weiß aus den Achtzigern, eine Klinke, die wackelt, ein Blatt, das schleift. Neue Innentüren sind einer der Handgriffe mit dem besten Verhältnis von Aufwand zu Wirkung – wenn man ein paar Dinge vorher weiß.',
+    datum: '2026-09-22',
+    kategorie: 'Sanierung',
+    lesezeit: '7 Min.',
+    bild: 'blog-mieterwechsel.jpg',
+    bildAlt: 'Symbolbild: heller, leerer Wohnraum mit neuen Innentüren',
+    kurz: [
+      'Als grober Richtwert kostet eine neue Innentür montiert (Türblatt + Zarge) oft etwa 250–600 € pro Tür – je nach Qualität und Aufwand.',
+      'Nur das Türblatt tauschen ist deutlich günstiger, geht aber nur, wenn die alte Zarge maßlich passt und intakt ist.',
+      'Eine Renovierungszarge spart das Herausstemmen der alten Zarge – weniger Dreck, weniger Aufwand.',
+      'Standardmaße machen alles einfacher und günstiger; Sondermaße kosten Aufschlag und Lieferzeit.',
+    ],
+    relatedLeistung: 'einzelgewerke',
+    faq: [
+      { frage: 'Was kostet es, eine Innentür auszutauschen?', antwort: 'Als grober Richtwert liegt eine neue Innentür montiert – also Türblatt plus Zarge – oft bei etwa 250–600 € pro Tür, je nach Qualität und Aufwand. Der Wert ist ein Richtwert, kein Angebot.' },
+      { frage: 'Kann man nur das Türblatt austauschen?', antwort: 'Ja, wenn die vorhandene Zarge maßlich passt und intakt ist – das ist deutlich günstiger. Wichtig ist, dass Bänder und Beschläge zueinander passen.' },
+      { frage: 'Was ist eine Renovierungszarge?', antwort: 'Eine Zarge, die über die alte, im Mauerwerk verbleibende Zarge gesetzt wird. Das erspart das Herausstemmen der alten Zarge und hält Dreck und Aufwand gering.' },
+    ],
+    sections: [
+      {
+        h2: 'Die Tür, an der man das Alter der Wohnung sieht',
+        paras: [
+          'Man richtet die Wohnung her, streicht die Wände, legt neuen Boden – und dann steht da noch die alte Tür. Vergilbtes Weiß, eine Klinke, die sich locker anfühlt, vielleicht ein Blatt, das über den neuen Boden schleift. Nichts zieht den frischen Eindruck so leise nach unten wie die alten Türen.',
+          'Dabei sind neue Innentüren einer der dankbarsten Handgriffe: überschaubarer Aufwand, große Wirkung. Man muss nur vorher wissen, ob man die ganze Tür ersetzt oder nur das Blatt – und was die alte Zarge zulässt.',
+        ],
+      },
+      {
+        h2: 'Was kostet eine Innentür austauschen?',
+        paras: [
+          'Als grober Richtwert – und ausdrücklich kein Angebot – liegt eine neue Innentür komplett montiert oft zwischen 250 und 600 Euro pro Tür. Die Spanne kommt von der Qualität des Türblatts, der Art der Zarge und dem Montageaufwand.',
+          'Wer nur das Türblatt tauscht, ist deutlich günstiger unterwegs. Wer im ganzen Haus neue Türen inklusive Zargen setzt, landet in Summe entsprechend höher. Eine ehrliche Zahl gibt es erst, wenn man weiß, was vor Ort steht.',
+        ],
+      },
+      {
+        h2: 'Nur das Türblatt oder die ganze Tür?',
+        paras: [
+          'Das ist die erste und wichtigste Frage. Ist die vorhandene Zarge – der feste Rahmen in der Wand – gerade, unbeschädigt und in einem Standardmaß, kann oft nur das Türblatt getauscht werden. Das ist günstig, schnell und macht kaum Dreck.',
+          'Ist die Zarge schief, beschädigt, verzogen oder aus der Mode, führt an der kompletten Tür kein Weg vorbei. Dann kommt die alte Zarge raus oder eine neue kommt darüber – und genau da hilft die Renovierungszarge.',
+        ],
+      },
+      {
+        h2: 'Die Renovierungszarge – der Trick gegen den Dreck',
+        paras: [
+          'Die alte Zarge sitzt fest im Mauerwerk. Sie herauszustemmen bedeutet Lärm, Bauschutt und Ausbesserungen an Wand und Putz. Die Renovierungszarge umgeht das: Sie wird von beiden Seiten über die vorhandene Zarge gesetzt und verkleidet sie.',
+          'Das Ergebnis sieht aus wie neu, spart aber den ganzen Stemm- und Putzaufwand. Gerade wenn nur die Türen erneuert werden und der Rest der Wohnung bleibt, ist das oft die klügste Lösung.',
+        ],
+      },
+      {
+        h2: 'Warum Standardmaße Gold wert sind',
+        paras: [
+          'Innentüren gibt es in gängigen Standardmaßen. Wer die hat, bekommt Türen ab Lager, günstig und schnell. Sondermaße – etwa in manchen Altbauten – müssen angefertigt werden, kosten spürbar mehr und haben Lieferzeit.',
+          'Deshalb steht am Anfang immer das Ausmessen: Breite, Höhe, Wandstärke und die Anschlagrichtung. Ein falsch gemessenes Maß ist der teuerste Fehler beim Türentausch.',
+        ],
+        list: [
+          'Türblattbreite und -höhe (lichtes Durchgangsmaß)',
+          'Wandstärke – entscheidend für die Zarge',
+          'Anschlagrichtung: Öffnet die Tür nach links oder rechts?',
+          'Zustand der alten Zarge: bleibt sie oder kommt sie raus?',
+        ],
+      },
+      {
+        h2: 'Selbst tauschen oder Fachbetrieb?',
+        paras: [
+          'Ein Türblatt in eine passende, gute Zarge einhängen ist mit etwas Geschick machbar. Sobald aber die Zarge dran ist – ausrichten, einschäumen, dicht und im Lot montieren – wird es fummelig. Eine schief sitzende Zarge sieht man später an jeder Fuge, und die Tür schließt nicht sauber.',
+          'Ehrlich gesagt: Bei einer einzelnen Tür kann man es versuchen. Bei mehreren Türen oder wenn Zargen neu gesetzt werden, spart der Fachbetrieb Zeit, Nerven und meist auch das Ergebnis, das man eigentlich wollte.',
+        ],
+      },
+      {
+        h2: 'Innentüren austauschen im Raum Heilbronn',
+        paras: [
+          'Wir tauschen Innentüren im Raum Heilbronn – einzeln oder gleich für die ganze Wohnung, mit passender Zarge oder als Renovierungslösung über den Bestand. Wir messen sauber aus, sagen ehrlich, was Türblatt-Tausch reicht und wo die komplette Tür sinnvoller ist, und montieren, dass die Fugen stimmen. Ein Ansprechpartner, ein Festpreis vor Baubeginn.',
+          'Sie wollen frische Türen, ohne die halbe Wohnung aufzureißen? Erzählen Sie uns davon – wir schauen es uns an und sagen Ihnen, welche Lösung bei Ihnen am meisten Sinn ergibt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {
