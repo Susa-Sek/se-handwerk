@@ -1,0 +1,17 @@
+# Persoenlicher Handwerk-Assistent (Telegram + Claude), spricht Odoo/Warmbly/IMAP nur ueber TCP.
+# Start: docker compose -f Coldemailing/assistant/docker-compose.yml up -d
+name: assistant
+
+services:
+  assistant:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      # Im Container erreichen wir Host-Dienste ueber host.docker.internal
+      WARMBLY_PG_HOST: host.docker.internal
+      ODOO_URL: http://host.docker.internal:8069
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./state:/app/state

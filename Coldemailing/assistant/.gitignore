@@ -1,0 +1,3 @@
+# Secrets + lokaler Laufzeit-State
+.env
+state/
