@@ -529,7 +529,7 @@ def main():
             ["x_warmbly_id","stage_id","active","email_from",
              "x_warmbly_stage_id","x_warmbly_lost","x_warmbly_email","x_warmbly_reply_keys",
              "x_warmbly_verification","x_warmbly_campaign","x_warmbly_step",
-             "x_warmbly_versand","x_warmbly_versand_msg"])
+             "x_warmbly_versand","x_warmbly_versand_msg","x_kontakt_typ"])
     by_wid = {l["x_warmbly_id"]: l for l in leads}
     print(f"Odoo: {len(leads)} bestehende Warmbly-Leads")
 
@@ -560,6 +560,12 @@ def main():
             diff["x_warmbly_email"] = wb_email
             if (lead.get("email_from") or "") in ("", old_mirror):
                 diff["email_from"] = wb_email
+        # Kontakt-Typ-Automatik: wer in Warmbly antwortet, wird "Potenzieller Kunde" -
+        # aber nur wenn noch KEIN Typ gesetzt ist. Manuelle Einstufungen (kunde/
+        # nachunternehmer/partner/sonstig) bleiben unberuehrt; kalte Leads ruehrt der
+        # Sync nicht an (die behalten ihren prospect-Default).
+        if real_replies(c) and not lead.get("x_kontakt_typ"):
+            diff["x_kontakt_typ"] = "prospect"
         if diff:
             mirror_updates.append((lead["id"], diff))
 
