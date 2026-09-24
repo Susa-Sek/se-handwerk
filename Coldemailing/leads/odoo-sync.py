@@ -25,12 +25,19 @@ APPLY = "--apply" in sys.argv
 # ---------------------------------------------------------------- Single-Instance-Lock
 # Verhindert Doppel-Lauf (30-Min-Cron + manueller Start) -> doppelte Leads beim Create.
 def acquire_lock():
-    import msvcrt
     f = open(os.path.join(HERE, "odoo-sync.lock"), "w")
     try:
-        msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
-    except OSError:
-        sys.exit("odoo-sync laeuft bereits -> Abbruch")
+        import fcntl  # Linux/macOS
+        try:
+            fcntl.flock(f.fileno(), fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except OSError:
+            sys.exit("odoo-sync laeuft bereits -> Abbruch")
+    except ImportError:
+        import msvcrt  # Windows
+        try:
+            msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK, 1)
+        except OSError:
+            sys.exit("odoo-sync laeuft bereits -> Abbruch")
     return f  # offen halten; OS gibt Lock bei Prozessende frei
 
 # ---------------------------------------------------------------- Konfiguration
@@ -72,6 +79,10 @@ SELECT COALESCE(json_agg(row_to_json(x)), '[]') FROM (
            WHERE p.contact_id = co.id AND p.sent_at IS NOT NULL)                   AS sent_steps,
          (SELECT to_char(max(p.sent_at) AT TIME ZONE 'Europe/Berlin','DD.MM.YYYY HH24:MI')
             FROM campaign_contact_progress p WHERE p.contact_id = co.id)           AS last_sent,
+         (SELECT string_agg('Mail ' || s.position || ' «' || coalesce(nullif(s.subject,''),'(kein Betreff)') || '» — ' ||
+                   to_char(p.sent_at AT TIME ZONE 'Europe/Berlin','DD.MM.YYYY'), ' | ' ORDER BY s.position)
+            FROM campaign_contact_progress p JOIN sequences s ON s.id = p.sequence_id
+           WHERE p.contact_id = co.id AND p.sent_at IS NOT NULL)                   AS versand_verlauf,
          (SELECT count(*) FROM campaign_contact_progress p
            WHERE p.contact_id = co.id AND p.bounced_at IS NOT NULL)                AS bounced,
          (SELECT sr.source FROM suppressed_recipients sr
@@ -201,6 +212,8 @@ CUSTOM_FIELDS = [
     ("x_warmbly_verification", "char",    "Warmbly Verifikation",  {}),
     ("x_warmbly_campaign",     "char",    "Warmbly Kampagne",      {}),
     ("x_warmbly_step",         "char",    "Warmbly Fortschritt",   {}),
+    ("x_warmbly_versand",      "text",    "Versand-Verlauf",       {}),
+    ("x_warmbly_versand_msg",  "integer", "Versand-Notiz-ID",      {}),
     ("x_warmbly_reply_keys",   "text",    "Warmbly Reply-Keys",    {}),
 ]
 # Odoo-Default-Stages werden beim ersten Lauf adoptiert (umbenannt), nicht geloescht.
@@ -289,6 +302,27 @@ def bootstrap(o):
             o.write("res.users", [o.uid], {"lang":"de_DE","tz":"Europe/Berlin"})
         except Exception:
             pass
+
+    # 5) Vererbte Form-View: Versand-Verlauf + Kampagne/Schritt am Lead sichtbar (idempotent).
+    if APPLY and not xmlid_lookup(o, "warmbly_sync", "lead_form_versand"):
+        base = None
+        for cand in ("crm.crm_lead_view_form", "crm.crm_case_form_view_oppor"):
+            base = xmlid_lookup(o, *cand.split(".", 1))
+            if base:
+                break
+        if base:
+            arch = ("<data><xpath expr=\"//field[@name='email_from']\" position=\"after\">"
+                    "<field name='x_warmbly_campaign' readonly='1'/>"
+                    "<field name='x_warmbly_step' readonly='1'/>"
+                    "<field name='x_warmbly_versand' readonly='1' widget='text'/>"
+                    "</xpath></data>")
+            try:
+                vid = o.create("ir.ui.view", {"name": "crm.lead Versand-Verlauf (Warmbly)",
+                    "model": "crm.lead", "inherit_id": base, "arch": arch})
+                xmlid_register(o, "lead_form_versand", "ir.ui.view", vid)
+                created.append("form-view")
+            except Exception as ex:
+                print("Form-View nicht angelegt (xpath/Basis?):", str(ex)[:120])
     return stages, reasons, fields_ready, created
 
 def ensure_tags(o, names):
@@ -344,7 +378,15 @@ def mirror_vals(c):
         "x_warmbly_verification": c.get("verification_status") or "",
         "x_warmbly_campaign":     c.get("campaigns") or "",
         "x_warmbly_step":         step_info(c),
+        "x_warmbly_versand":      c.get("versand_verlauf") or "",
     }
+
+def versand_body(verlauf):
+    """HTML-Protokoll-Notiz aus dem Versand-Verlauf (eine Zeile je Mail, mit Betreff)."""
+    lines = [html.escape(x.strip()) for x in (verlauf or "").split(" | ") if x.strip()]
+    if not lines:
+        return ""
+    return "<p><b>Versand-Verlauf</b><br/>" + "<br/>".join(lines) + "</p>"
 
 def contact_vals(c, tags, owner_uid=None):
     tag_ids = [tags[n] for n in (c.get("icp"), c.get("segment")) if n and n in tags]
@@ -425,11 +467,13 @@ def main():
             ["&", ("x_warmbly_id","!=",False), "|", ("active","=",True), ("active","=",False)],
             ["x_warmbly_id","stage_id","active","email_from",
              "x_warmbly_stage_id","x_warmbly_lost","x_warmbly_email","x_warmbly_reply_keys",
-             "x_warmbly_verification","x_warmbly_campaign","x_warmbly_step"])
+             "x_warmbly_verification","x_warmbly_campaign","x_warmbly_step",
+             "x_warmbly_versand","x_warmbly_versand_msg"])
     by_wid = {l["x_warmbly_id"]: l for l in leads}
     print(f"Odoo: {len(leads)} bestehende Warmbly-Leads")
 
     creates, stage_moves, lost_sets, chatter, mirror_updates = [], [], [], [], []
+    versand_notes = []   # (lead_id, alte_msg_id|0, html_body) - eine Verlaufs-Notiz je Lead
     handsoff = 0
 
     for c in contacts:
@@ -457,6 +501,11 @@ def main():
                 diff["email_from"] = wb_email
         if diff:
             mirror_updates.append((lead["id"], diff))
+
+        # Versand-Verlauf-Notiz im Protokoll: wenn Verlauf geaendert ODER Notiz fehlt (Backfill-sicher).
+        verlauf = c.get("versand_verlauf") or ""
+        if verlauf and ("x_warmbly_versand" in diff or not (lead.get("x_warmbly_versand_msg") or 0)):
+            versand_notes.append((lead["id"], lead.get("x_warmbly_versand_msg") or 0, versand_body(verlauf)))
 
         # Neue Replies -> Chatter (immer erlaubt, auch bei lost/handsoff).
         # wants_answer: aktiver, nicht verlorener Lead -> "Antworten"-To-Do faellig.
@@ -490,8 +539,10 @@ def main():
     print(f"  Anlegen:        {len(creates)}")
     print(f"  Stage-Moves:    {len(stage_moves)}")
     print(f"  Lost setzen:    {n_lost}")
+    n_versand = len(versand_notes) + sum(1 for cc, _v, _lk, _r in creates if cc.get("versand_verlauf"))
     print(f"  Chatter-Posts:  {n_chat}")
     print(f"  Antworten-ToDo: {n_todo}")
+    print(f"  Versand-Notiz:  {n_versand}")
     print(f"  Spiegel-Update: {len(mirror_updates)}")
     print(f"  Hands-off:      {handsoff}")
 
@@ -508,6 +559,8 @@ def main():
         for (c, _v, lost_key, replies), lid in zip(batch, ids):
             if lost_key: lost_sets.append((lid, lost_key))
             if replies:  chatter.append((lid, replies, "", not lost_key))
+            if c.get("versand_verlauf"):
+                versand_notes.append((lid, 0, versand_body(c["versand_verlauf"])))
         print(f"  angelegt: {min(i+200, len(creates))}/{len(creates)}")
 
     # --- Stage-Moves, gruppiert nach Zielstage ---
@@ -553,6 +606,28 @@ def main():
         o.write("crm.lead", [lid], {"x_warmbly_reply_keys": ",".join(allkeys)})
     if n_todo_created:
         print(f"  Antworten-ToDo angelegt: {n_todo_created}")
+
+    # --- Versand-Verlauf-Notiz je Lead: bestehende in-place updaten, sonst posten + Merker ---
+    n_vn = 0
+    for lid, msg_id, body in versand_notes:
+        if not body:
+            continue
+        try:
+            if msg_id:
+                try:
+                    o.write("mail.message", [msg_id], {"body": body}); n_vn += 1; continue
+                except Exception:
+                    msg_id = 0   # Notiz weg -> neu posten
+            posted = o.call("crm.lead", "message_post", [[lid]],
+                            {"body": body, "message_type": "comment",
+                             "subtype_xmlid": "mail.mt_note", "body_is_html": True})
+            mid = posted[0] if isinstance(posted, (list, tuple)) else posted
+            o.write("crm.lead", [lid], {"x_warmbly_versand_msg": mid})
+            n_vn += 1
+        except Exception as ex:
+            print(f"  WARN Versand-Notiz Lead {lid}: {str(ex)[:80]}")
+    if n_vn:
+        print(f"  Versand-Notizen gesetzt: {n_vn}")
 
     print("\nFertig.")
 
