@@ -79,10 +79,14 @@ SELECT COALESCE(json_agg(row_to_json(x)), '[]') FROM (
            WHERE p.contact_id = co.id AND p.sent_at IS NOT NULL)                   AS sent_steps,
          (SELECT to_char(max(p.sent_at) AT TIME ZONE 'Europe/Berlin','DD.MM.YYYY HH24:MI')
             FROM campaign_contact_progress p WHERE p.contact_id = co.id)           AS last_sent,
-         (SELECT string_agg('Mail ' || s.position || ' «' || coalesce(nullif(s.subject,''),'(kein Betreff)') || '» — ' ||
-                   to_char(p.sent_at AT TIME ZONE 'Europe/Berlin','DD.MM.YYYY'), ' | ' ORDER BY s.position)
+         (SELECT COALESCE(json_agg(json_build_object(
+                   'pos',     s.position,
+                   'subject', coalesce(nullif(s.subject,''),'(kein Betreff)'),
+                   'ts',      to_char(p.sent_at,'YYYY-MM-DD"T"HH24:MI:SS'),
+                   'disp',    to_char(p.sent_at AT TIME ZONE 'Europe/Berlin','DD.MM.YYYY')
+                 ) ORDER BY p.sent_at), '[]')
             FROM campaign_contact_progress p JOIN sequences s ON s.id = p.sequence_id
-           WHERE p.contact_id = co.id AND p.sent_at IS NOT NULL)                   AS versand_verlauf,
+           WHERE p.contact_id = co.id AND p.sent_at IS NOT NULL)                   AS sends,
          (SELECT count(*) FROM campaign_contact_progress p
            WHERE p.contact_id = co.id AND p.bounced_at IS NOT NULL)                AS bounced,
          (SELECT sr.source FROM suppressed_recipients sr
@@ -93,6 +97,7 @@ SELECT COALESCE(json_agg(row_to_json(x)), '[]') FROM (
          (SELECT COALESCE(json_agg(json_build_object(
                    'key',     p.campaign_id::text || ':' || p.sequence_id::text,
                    'at',      to_char(p.replied_at AT TIME ZONE 'Europe/Berlin','DD.MM.YYYY HH24:MI'),
+                   'ts',      to_char(p.replied_at,'YYYY-MM-DD"T"HH24:MI:SS'),
                    'class',   COALESCE(p.reply_class,''),
                    'subject', ue.subject,
                    'snippet', ue.snippet
@@ -303,26 +308,8 @@ def bootstrap(o):
         except Exception:
             pass
 
-    # 5) Vererbte Form-View: Versand-Verlauf + Kampagne/Schritt am Lead sichtbar (idempotent).
-    if APPLY and not xmlid_lookup(o, "warmbly_sync", "lead_form_versand"):
-        base = None
-        for cand in ("crm.crm_lead_view_form", "crm.crm_case_form_view_oppor"):
-            base = xmlid_lookup(o, *cand.split(".", 1))
-            if base:
-                break
-        if base:
-            arch = ("<data><xpath expr=\"//field[@name='email_from']\" position=\"after\">"
-                    "<field name='x_warmbly_campaign' readonly='1'/>"
-                    "<field name='x_warmbly_step' readonly='1'/>"
-                    "<field name='x_warmbly_versand' readonly='1' widget='text'/>"
-                    "</xpath></data>")
-            try:
-                vid = o.create("ir.ui.view", {"name": "crm.lead Versand-Verlauf (Warmbly)",
-                    "model": "crm.lead", "inherit_id": base, "arch": arch})
-                xmlid_register(o, "lead_form_versand", "ir.ui.view", vid)
-                created.append("form-view")
-            except Exception as ex:
-                print("Form-View nicht angelegt (xpath/Basis?):", str(ex)[:120])
+    # (Kein Formularfeld mehr: der Verlauf steht als Chatter-Notiz im Protokoll — das
+    #  Textfeld im Formular rendert auf Mobil ueberlappend/unleserlich.)
     return stages, reasons, fields_ready, created
 
 def ensure_tags(o, names):
@@ -373,20 +360,37 @@ def step_info(c):
     if c.get("last_sent"): s += " · zuletzt " + c["last_sent"]
     return s
 
+def timeline_lines(c):
+    """Chronologische Kommunikations-Zeilen: gesendete Mails + echte Antworten, nach Zeitstempel."""
+    items = []
+    for s in c.get("sends") or []:
+        items.append((s.get("ts") or "", "send", s))
+    for r in real_replies(c):
+        items.append((r.get("ts") or "", "reply", r))
+    items.sort(key=lambda x: x[0])
+    out = []
+    for _ts, kind, it in items:
+        if kind == "send":
+            out.append(f"Mail {it.get('pos')} «{it.get('subject') or '(kein Betreff)'}» — {it.get('disp','')}")
+        else:
+            subj = it.get("subject") or ""
+            out.append(f"Antwort erhalten — {it.get('at','')}" + (f" (Betreff: {subj})" if subj else ""))
+    return out
+
 def mirror_vals(c):
     return {
         "x_warmbly_verification": c.get("verification_status") or "",
         "x_warmbly_campaign":     c.get("campaigns") or "",
         "x_warmbly_step":         step_info(c),
-        "x_warmbly_versand":      c.get("versand_verlauf") or "",
+        "x_warmbly_versand":      " | ".join(timeline_lines(c)),
     }
 
-def versand_body(verlauf):
-    """HTML-Protokoll-Notiz aus dem Versand-Verlauf (eine Zeile je Mail, mit Betreff)."""
-    lines = [html.escape(x.strip()) for x in (verlauf or "").split(" | ") if x.strip()]
+def versand_body(c):
+    """HTML-Protokoll-Notiz: chronologischer Kommunikations-Verlauf (Mails + Antworten)."""
+    lines = timeline_lines(c)
     if not lines:
         return ""
-    return "<p><b>Versand-Verlauf</b><br/>" + "<br/>".join(lines) + "</p>"
+    return "<p><b>Kommunikations-Verlauf</b><br/>" + "<br/>".join(html.escape(l) for l in lines) + "</p>"
 
 def contact_vals(c, tags, owner_uid=None):
     tag_ids = [tags[n] for n in (c.get("icp"), c.get("segment")) if n and n in tags]
@@ -502,10 +506,9 @@ def main():
         if diff:
             mirror_updates.append((lead["id"], diff))
 
-        # Versand-Verlauf-Notiz im Protokoll: wenn Verlauf geaendert ODER Notiz fehlt (Backfill-sicher).
-        verlauf = c.get("versand_verlauf") or ""
-        if verlauf and ("x_warmbly_versand" in diff or not (lead.get("x_warmbly_versand_msg") or 0)):
-            versand_notes.append((lead["id"], lead.get("x_warmbly_versand_msg") or 0, versand_body(verlauf)))
+        # Kommunikations-Verlauf-Notiz: wenn Verlauf geaendert (Send ODER Antwort) ODER Notiz fehlt.
+        if timeline_lines(c) and ("x_warmbly_versand" in diff or not (lead.get("x_warmbly_versand_msg") or 0)):
+            versand_notes.append((lead["id"], lead.get("x_warmbly_versand_msg") or 0, versand_body(c)))
 
         # Neue Replies -> Chatter (immer erlaubt, auch bei lost/handsoff).
         # wants_answer: aktiver, nicht verlorener Lead -> "Antworten"-To-Do faellig.
@@ -539,7 +542,7 @@ def main():
     print(f"  Anlegen:        {len(creates)}")
     print(f"  Stage-Moves:    {len(stage_moves)}")
     print(f"  Lost setzen:    {n_lost}")
-    n_versand = len(versand_notes) + sum(1 for cc, _v, _lk, _r in creates if cc.get("versand_verlauf"))
+    n_versand = len(versand_notes) + sum(1 for cc, _v, _lk, _r in creates if timeline_lines(cc))
     print(f"  Chatter-Posts:  {n_chat}")
     print(f"  Antworten-ToDo: {n_todo}")
     print(f"  Versand-Notiz:  {n_versand}")
@@ -559,8 +562,8 @@ def main():
         for (c, _v, lost_key, replies), lid in zip(batch, ids):
             if lost_key: lost_sets.append((lid, lost_key))
             if replies:  chatter.append((lid, replies, "", not lost_key))
-            if c.get("versand_verlauf"):
-                versand_notes.append((lid, 0, versand_body(c["versand_verlauf"])))
+            if timeline_lines(c):
+                versand_notes.append((lid, 0, versand_body(c)))
         print(f"  angelegt: {min(i+200, len(creates))}/{len(creates)}")
 
     # --- Stage-Moves, gruppiert nach Zielstage ---
