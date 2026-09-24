@@ -151,6 +151,15 @@ LOST_REASONS = {
 #  - "Antworten": wird automatisch beim Reply-Eingang faellig HEUTE gesetzt (To-Do zu antworten)
 #  - "Nachfassen": manuell per Klick, wenn nach eigener Antwort keine Reaktion kommt (Default +3 Tage)
 ACTIVITY_TYPES = [("Antworten", 0), ("Nachfassen", 3)]
+# Manuelle Lead-Klassifizierung (Reiter/Kategorien im CRM). Vom Sync NIE geschrieben -
+# reine Handarbeit des Nutzers. Neue Leads defaulten auf "prospect" (ir.default).
+KONTAKT_TYP_OPTS = [
+    ("prospect",        "Potenzieller Kunde"),
+    ("kunde",           "Kunde"),
+    ("nachunternehmer", "Nachunternehmer"),
+    ("partner",         "Partner"),
+    ("sonstig",         "Sonstiger Kontakt"),
+]
 
 # reply_class-Werte, die NICHT als echte Antwort zaehlen
 NON_REPLIES = {"auto_reply", "out_of_office"}
@@ -261,6 +270,54 @@ def bootstrap(o):
     elif missing:
         created.extend(f[0] + " (wuerde)" for f in missing)
     fields_ready = not missing or APPLY
+
+    # 1b) Manuelles Klassifizierungs-Feld "Kontakt-Typ" (Selection). NICHT x_warmbly_%,
+    #     daher eigener Existenz-Check (sonst wuerde die x_warmbly_%-Query es jeden Lauf
+    #     neu anlegen wollen). Vom Sync nie geschrieben.
+    kt = o.search("ir.model.fields", [("model","=","crm.lead"),("name","=","x_kontakt_typ")])
+    if not kt and APPLY:
+        crm_model = o.search("ir.model", [("model","=","crm.lead")])[0]
+        fid = o.create("ir.model.fields", {"name":"x_kontakt_typ","model_id":crm_model,
+                "ttype":"selection","field_description":"Kontakt-Typ","state":"manual"})
+        for i, (val, lab) in enumerate(KONTAKT_TYP_OPTS):
+            o.create("ir.model.fields.selection",
+                     {"field_id":fid,"value":val,"name":lab,"sequence":i*10})
+        try:                                 # neue Leads defaulten auf "Potenzieller Kunde"
+            o.call("ir.default", "set", ["crm.lead", "x_kontakt_typ", "prospect"])
+        except Exception:
+            pass
+        created.append("x_kontakt_typ")
+    elif not kt:
+        created.append("x_kontakt_typ (wuerde)")
+
+    # 1c) Reiter: searchPanel-Kategorie (klickbare Tabs mit Zaehlern) auf der Opportunity-
+    #     Suche + kompaktes Feld im Formular zum Setzen. Beide per NAME-Guard idempotent
+    #     (nicht nur xmlid - eine fehlgeschlagene xmlid-Registrierung war die Ursache der
+    #     8 duplizierten Form-Views/Mobil-Garble).
+    if APPLY:
+        sbase = xmlid_lookup(o, "crm", "view_crm_case_opportunities_filter")
+        if sbase and not o.search("ir.ui.view",
+                [("model","=","crm.lead"),("name","=","crm.lead Kontakt-Typ Reiter (Warmbly)")]):
+            arch = ("<data><xpath expr=\"//search\" position=\"inside\">"
+                    "<searchpanel><field name=\"x_kontakt_typ\" string=\"Kontakt-Typ\" "
+                    "select=\"one\" enable_counters=\"1\"/></searchpanel></xpath></data>")
+            try:
+                o.create("ir.ui.view", {"name":"crm.lead Kontakt-Typ Reiter (Warmbly)",
+                        "model":"crm.lead","inherit_id":sbase,"arch":arch})
+                created.append("searchpanel-typ")
+            except Exception as ex:
+                print("SearchPanel nicht angelegt:", str(ex)[:120])
+        fbase = xmlid_lookup(o, "crm", "crm_lead_view_form")
+        if fbase and not o.search("ir.ui.view",
+                [("model","=","crm.lead"),("name","=","crm.lead Kontakt-Typ Feld (Warmbly)")]):
+            farch = ("<data><xpath expr=\"//field[@name='email_from']\" position=\"after\">"
+                     "<field name=\"x_kontakt_typ\"/></xpath></data>")
+            try:
+                o.create("ir.ui.view", {"name":"crm.lead Kontakt-Typ Feld (Warmbly)",
+                        "model":"crm.lead","inherit_id":fbase,"arch":farch})
+                created.append("form-feld-typ")
+            except Exception as ex:
+                print("Form-Feld nicht angelegt:", str(ex)[:120])
 
     # 2) Stages (adoptieren oder anlegen), registriert unter warmbly_sync.stage_<key>
     stages = {}
