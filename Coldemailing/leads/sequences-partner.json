@@ -1,0 +1,130 @@
+{
+  "_comment": "Partner-/Empfehlungskanal (komplementaere Gewerke). Reply-gated, kein Link in Mail 1. Mail 1 = weiche Vorstellung ohne Ask; Absage-Option nur in der letzten Mail. Signatur = live SE Handwerk. Follow-ups mit leerem subject => selber Thread (Re:). wait_after = Tage NACH diesem Step.",
+  "signatur": "Beste Gruesse\nEmre Tuzcuoglu\n\nSE Handwerk · Steinsfeldstr. 21 · 74626 Bretzfeld\nTel. & WhatsApp: +49 173 4536225\nkontakt@sehandwerk.de · sehandwerk.de",
+  "campaigns": [
+    {
+      "gewerk": "elektriker",
+      "campaign_id": "4390a801-e5b2-417f-88ff-aee7f935ba90",
+      "campaign_name": "Partner Elektriker",
+      "steps": [
+        {
+          "position": 1,
+          "subject": "Kurz vorgestellt",
+          "wait_after": 3,
+          "body_plain": "{{if .LastName}}Guten Tag {{.FirstName}} {{.LastName}},{{else}}Guten Tag,{{end}}\n\nals Elektriker sind Sie ständig in Wohnungen, die gerade renoviert werden - und bekommen sicher öfter Sachen mit, die gar nicht Ihr Gewerk sind: neuer Boden, Wände, Bad, Malerarbeiten.\n\nGenau das machen wir. SE Handwerk ist ein Generalunternehmen aus Bretzfeld und übernimmt solche Ausbau- und Renovierungsarbeiten aus einer Hand - Boden, Bad, Trockenbau, Maler, Festpreis, ein Ansprechpartner. Elektro fassen wir nie an, das ist Ihr Gebiet.\n\nIch wollte mich einfach mal vorstellen - falls bei {{.Company}} mal jemand nach so etwas fragt, haben Sie einen verlässlichen Namen zur Hand.\n\nBeste Gruesse\nEmre Tuzcuoglu\n\nSE Handwerk · Steinsfeldstr. 21 · 74626 Bretzfeld\nTel. & WhatsApp: +49 173 4536225\nkontakt@sehandwerk.de · sehandwerk.de"
+        },
+        {
+          "position": 2,
+          "subject": "",
+          "wait_after": 4,
+          "body_plain": "kurz konkret, wie ich mir das vorstelle - ohne Aufwand fuer Sie:\n\nFragt einer Ihrer Kunden nach Boden, Bad oder Maler, geben Sie einfach unseren Namen weiter. Mehr nicht. Und wenn wir bei einem Auftrag einen zuverlässigen Elektriker brauchen, denken wir an Sie.\n\nUnter Kollegen, die sich Arbeit zuschieben statt sie abzulehnen. Wäre das fuer Sie grundsätzlich interessant?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 3,
+          "subject": "",
+          "wait_after": 5,
+          "body_plain": "noch ein Gedanke, dann lasse ich Sie in Ruhe:\n\nViele Betriebe verlieren kleine Aufträge, weil der Kunde am Ende \"alles aus einer Hand\" will. Genau da sind wir Ihr Ausbau-Teil - Sie machen Ihr Gewerk, wir Boden, Bad und Maler, der Kunde hat trotzdem einen Ansprechpartner. Sie können uns dafuer auch direkt als Nachunternehmer buchen.\n\nWenn Sie mögen, telefonieren wir mal 15 Minuten - unverbindlich. Passt Ihnen diese Woche etwas?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 4,
+          "subject": "",
+          "wait_after": 0,
+          "body_plain": "ich will nicht nerven. Wenn eine Zusammenarbeit fuer Sie gerade kein Thema ist, sagen Sie einfach kurz Nein - oder ignorieren Sie die Mail. Dann melde ich mich nicht mehr.\n\nFalls doch mal jemand bei Ihnen nach Boden, Bad oder Maler fragt: hier mein direkter Draht.\n\nBeste Gruesse\nEmre Tuzcuoglu\nTel. & WhatsApp: +49 173 4536225"
+        }
+      ]
+    },
+    {
+      "gewerk": "shk",
+      "campaign_id": "d717099b-047e-4db3-8d98-0d271ec2d2d8",
+      "campaign_name": "Partner SHK",
+      "steps": [
+        {
+          "position": 1,
+          "subject": "Kurz vorgestellt",
+          "wait_after": 3,
+          "body_plain": "{{if .LastName}}Guten Tag {{.FirstName}} {{.LastName}},{{else}}Guten Tag,{{end}}\n\nals Heizungs- und Sanitärbetrieb sind Sie dauernd in Bädern und Wohnungen, die hergerichtet werden. Die Installation ist Ihr Gebiet - den Ausbau drumherum machen aber andere: Fliesen, Boden, Trockenbau, Maler.\n\nGenau das machen wir. SE Handwerk ist ein Generalunternehmen aus Bretzfeld und übernimmt solche Ausbau- und Renovierungsarbeiten aus einer Hand - Boden, Bad, Trockenbau, Maler, Festpreis, ein Ansprechpartner. Die Installation fassen wir nie an, die bleibt bei Ihnen.\n\nIch wollte mich einfach mal vorstellen - falls bei {{.Company}} mal jemand nach so etwas fragt, haben Sie einen verlässlichen Namen zur Hand.\n\nBeste Gruesse\nEmre Tuzcuoglu\n\nSE Handwerk · Steinsfeldstr. 21 · 74626 Bretzfeld\nTel. & WhatsApp: +49 173 4536225\nkontakt@sehandwerk.de · sehandwerk.de"
+        },
+        {
+          "position": 2,
+          "subject": "",
+          "wait_after": 4,
+          "body_plain": "kurz konkret, wie ich mir das vorstelle - ohne Aufwand fuer Sie:\n\nFragt einer Ihrer Kunden nach Boden, Fliesen oder Maler, geben Sie einfach unseren Namen weiter. Mehr nicht. Und wenn wir bei einem Auftrag einen zuverlässigen Heizungs- oder Sanitärbetrieb brauchen, denken wir an Sie.\n\nUnter Kollegen, die sich Arbeit zuschieben statt sie abzulehnen. Wäre das fuer Sie grundsätzlich interessant?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 3,
+          "subject": "",
+          "wait_after": 5,
+          "body_plain": "noch ein Gedanke, dann lasse ich Sie in Ruhe:\n\nViele Betriebe verlieren kleine Aufträge, weil der Kunde am Ende \"alles aus einer Hand\" will. Genau da sind wir Ihr Ausbau-Teil - Sie machen Ihr Gewerk, wir Boden, Bad und Maler, der Kunde hat trotzdem einen Ansprechpartner. Sie können uns dafuer auch direkt als Nachunternehmer buchen.\n\nWenn Sie mögen, telefonieren wir mal 15 Minuten - unverbindlich. Passt Ihnen diese Woche etwas?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 4,
+          "subject": "",
+          "wait_after": 0,
+          "body_plain": "ich will nicht nerven. Wenn eine Zusammenarbeit fuer Sie gerade kein Thema ist, sagen Sie einfach kurz Nein - oder ignorieren Sie die Mail. Dann melde ich mich nicht mehr.\n\nFalls doch mal jemand bei Ihnen nach Boden, Fliesen oder Maler fragt: hier mein direkter Draht.\n\nBeste Gruesse\nEmre Tuzcuoglu\nTel. & WhatsApp: +49 173 4536225"
+        }
+      ]
+    },
+    {
+      "gewerk": "entruempler",
+      "campaign_id": "4bd2802a-0699-42bd-86b0-639435c01555",
+      "campaign_name": "Partner Entruempler",
+      "steps": [
+        {
+          "position": 1,
+          "subject": "Kurz vorgestellt",
+          "wait_after": 3,
+          "body_plain": "{{if .LastName}}Guten Tag {{.FirstName}} {{.LastName}},{{else}}Guten Tag,{{end}}\n\nnach einer Entruempelung oder Haushaltsauflösung ist die Wohnung selten übergabefertig - Boden, Wände und Bad müssen meist noch gemacht werden, bevor neu vermietet oder verkauft wird.\n\nGenau diese Herrichtung übernehmen wir. SE Handwerk ist ein Generalunternehmen aus Bretzfeld und macht Boden, Bad, Trockenbau und Maler aus einer Hand - Festpreis, ein Ansprechpartner. Das Räumen selbst fassen wir nie an, das ist Ihr Gebiet.\n\nIch wollte mich einfach mal vorstellen - falls bei {{.Company}} mal ein Kunde nach so etwas fragt, haben Sie einen verlässlichen Namen zur Hand.\n\nBeste Gruesse\nEmre Tuzcuoglu\n\nSE Handwerk · Steinsfeldstr. 21 · 74626 Bretzfeld\nTel. & WhatsApp: +49 173 4536225\nkontakt@sehandwerk.de · sehandwerk.de"
+        },
+        {
+          "position": 2,
+          "subject": "",
+          "wait_after": 4,
+          "body_plain": "kurz konkret, wie ich mir das vorstelle - ohne Aufwand fuer Sie:\n\nWill ein Kunde nach der Räumung die Wohnung noch hergerichtet haben - Boden, Bad, Maler - geben Sie einfach unseren Namen weiter. Und wenn bei uns mal eine Wohnung erst leergeräumt werden muss, denken wir an Sie.\n\nUnter Kollegen, die sich Arbeit zuschieben statt sie abzulehnen. Wäre das fuer Sie grundsätzlich interessant?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 3,
+          "subject": "",
+          "wait_after": 5,
+          "body_plain": "noch ein Gedanke, dann lasse ich Sie in Ruhe:\n\nGerade bei Auflösungen will der Kunde am Ende oft \"alles aus einer Hand\" - räumen und herrichten. Genau da sind wir Ihr Ausbau-Teil: Sie räumen, wir machen Boden, Bad und Maler, der Kunde hat trotzdem einen Ansprechpartner. Sie können uns dafuer auch direkt als Nachunternehmer buchen.\n\nWenn Sie mögen, telefonieren wir mal 15 Minuten - unverbindlich. Passt Ihnen diese Woche etwas?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 4,
+          "subject": "",
+          "wait_after": 0,
+          "body_plain": "ich will nicht nerven. Wenn eine Zusammenarbeit fuer Sie gerade kein Thema ist, sagen Sie einfach kurz Nein - oder ignorieren Sie die Mail. Dann melde ich mich nicht mehr.\n\nFalls doch mal ein Kunde nach dem Räumen die Wohnung hergerichtet haben will: hier mein direkter Draht.\n\nBeste Gruesse\nEmre Tuzcuoglu\nTel. & WhatsApp: +49 173 4536225"
+        }
+      ]
+    },
+    {
+      "gewerk": "hausmeister",
+      "campaign_id": "a3bfa397-a1a4-4de7-aec4-5ecfabffb20f",
+      "campaign_name": "Partner Hausmeister",
+      "steps": [
+        {
+          "position": 1,
+          "subject": "Kurz vorgestellt",
+          "wait_after": 3,
+          "body_plain": "{{if .LastName}}Guten Tag {{.FirstName}} {{.LastName}},{{else}}Guten Tag,{{end}}\n\nals Hausmeister- und Facility-Betrieb bekommen Sie öfter Renovierungswünsche, die über die laufende Betreuung hinausgehen - eine Wohnung komplett herrichten, Bad, Boden, Maler.\n\nGenau solche größeren Ausbau-Sachen übernehmen wir. SE Handwerk ist ein Generalunternehmen aus Bretzfeld und macht das aus einer Hand - Boden, Bad, Trockenbau, Maler, Festpreis, ein Ansprechpartner. Ihre laufende Betreuung bleibt bei Ihnen.\n\nIch wollte mich einfach mal vorstellen - falls bei {{.Company}} mal so etwas ansteht, haben Sie einen verlässlichen Namen zur Hand.\n\nBeste Gruesse\nEmre Tuzcuoglu\n\nSE Handwerk · Steinsfeldstr. 21 · 74626 Bretzfeld\nTel. & WhatsApp: +49 173 4536225\nkontakt@sehandwerk.de · sehandwerk.de"
+        },
+        {
+          "position": 2,
+          "subject": "",
+          "wait_after": 4,
+          "body_plain": "kurz konkret, wie ich mir das vorstelle - ohne Aufwand fuer Sie:\n\nSteht bei einem Ihrer Objekte eine größere Herrichtung an - Boden, Bad, Maler - geben Sie das einfach an uns ab. Und wenn unsere Kunden jemanden fuer die laufende Objektbetreuung oder Kleinreparaturen brauchen, empfehlen wir Sie.\n\nUnter Kollegen, die sich Arbeit zuschieben statt sie abzulehnen. Wäre das fuer Sie grundsätzlich interessant?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 3,
+          "subject": "",
+          "wait_after": 5,
+          "body_plain": "noch ein Gedanke, dann lasse ich Sie in Ruhe:\n\nGrößere Renovierungen kosten Sie Zeit und Koordination, die neben der laufenden Betreuung schwer reinpasst. Genau da sind wir Ihr Ausbau-Teil - Sie behalten das Objekt, wir machen Boden, Bad und Maler, der Kunde hat trotzdem einen Ansprechpartner. Sie können uns dafuer auch direkt als Nachunternehmer buchen.\n\nWenn Sie mögen, telefonieren wir mal 15 Minuten - unverbindlich. Passt Ihnen diese Woche etwas?\n\nBeste Gruesse\nEmre Tuzcuoglu"
+        },
+        {
+          "position": 4,
+          "subject": "",
+          "wait_after": 0,
+          "body_plain": "ich will nicht nerven. Wenn eine Zusammenarbeit fuer Sie gerade kein Thema ist, sagen Sie einfach kurz Nein - oder ignorieren Sie die Mail. Dann melde ich mich nicht mehr.\n\nFalls doch mal eine größere Herrichtung ansteht: hier mein direkter Draht.\n\nBeste Gruesse\nEmre Tuzcuoglu\nTel. & WhatsApp: +49 173 4536225"
+        }
+      ]
+    }
+  ]
+}

@@ -470,6 +470,8 @@ def contact_vals(c, tags, owner_uid=None):
     if owner_uid:
         v["user_id"] = owner_uid   # Lead-Eigentuemer = menschlicher Bearbeiter (nicht der Sync-Account)
     v.update(mirror_vals(c))
+    if "partner" in (c.get("campaigns") or "").lower():
+        v["x_kontakt_typ"] = "partner"   # Leads aus Partner-Kampagnen direkt als "Partner"
     return v
 
 def reply_body(r):
@@ -560,12 +562,15 @@ def main():
             diff["x_warmbly_email"] = wb_email
             if (lead.get("email_from") or "") in ("", old_mirror):
                 diff["email_from"] = wb_email
-        # Kontakt-Typ-Automatik: wer in Warmbly antwortet, wird "Potenzieller Kunde" -
-        # aber nur wenn noch KEIN Typ gesetzt ist. Manuelle Einstufungen (kunde/
-        # nachunternehmer/partner/sonstig) bleiben unberuehrt; kalte Leads ruehrt der
-        # Sync nicht an (die behalten ihren prospect-Default).
-        if real_replies(c) and not lead.get("x_kontakt_typ"):
-            diff["x_kontakt_typ"] = "prospect"
+        # Kontakt-Typ-Automatik (nur wenn noch KEIN Typ gesetzt ist; manuelle Werte bleiben):
+        #  - Leads aus Partner-Kampagnen -> "partner" (vorrangig, auch wenn sie antworten)
+        #  - sonst: wer in Warmbly antwortet -> "prospect"
+        # Kalte Kunden-Leads ruehrt der Sync nicht an (behalten prospect-Default).
+        if not lead.get("x_kontakt_typ"):
+            if "partner" in (c.get("campaigns") or "").lower():
+                diff["x_kontakt_typ"] = "partner"
+            elif real_replies(c):
+                diff["x_kontakt_typ"] = "prospect"
         if diff:
             mirror_updates.append((lead["id"], diff))
 
