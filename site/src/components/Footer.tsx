@@ -71,6 +71,9 @@ export default function Footer() {
               <Link to="/blog" className="footer-link" style={colLink}>
                 Ratgeber
               </Link>
+              <Link to="/wissen" className="footer-link" style={colLink}>
+                Wissen
+              </Link>
               <Link to="/ueber-uns" className="footer-link" style={colLink}>
                 Über uns
               </Link>

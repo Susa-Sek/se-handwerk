@@ -84,6 +84,9 @@ RAUM HEILBRONN
             <Link to="/blog" className="nav-link" style={linkStyle} onClick={() => setOpen(false)}>
               Ratgeber
             </Link>
+            <Link to="/wissen" className="nav-link" style={linkStyle} onClick={() => setOpen(false)}>
+              Wissen
+            </Link>
             <Link to="/ueber-uns" className="nav-link" style={linkStyle} onClick={() => setOpen(false)}>
               Über uns
             </Link>
@@ -177,6 +180,14 @@ RAUM HEILBRONN
           style={{ ...linkStyle, display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(245,242,236,0.06)' }}
         >
           Ratgeber
+        </Link>
+        <Link
+          to="/wissen"
+          onClick={() => setOpen(false)}
+          className="nav-link"
+          style={{ ...linkStyle, display: 'block', padding: '14px 0', borderBottom: '1px solid rgba(245,242,236,0.06)' }}
+        >
+          Wissen
         </Link>
         <Link
           to="/ueber-uns"
