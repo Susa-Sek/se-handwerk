@@ -2286,3 +2286,58 @@ export const seitenSeo: Record<string, SeitenSeo> = {
     h1: 'Datenschutz',
   },
 };
+
+// ── Wissens-Hub (/wissen): Glossar + FAQ-Aggregation ────────────────────────
+export interface GlossarBegriff {
+  begriff: string;
+  definition: string;
+  mehr?: { text: string; href: string }; // optionaler Verweis auf Artikel/Leistung
+}
+
+// Ehrliche, knappe Definitionen – Grundlage für "Was ist …?"-Suchen und KI-Antworten.
+export const glossar: GlossarBegriff[] = [
+  { begriff: 'Armierungsgewebe', definition: 'Ein Gewebe (meist Glasfaser), das in Putz oder Spachtel eingebettet wird, damit an Übergängen und Rissen keine Risse durchschlagen.', mehr: { text: 'Wände verputzen', href: '/blog/wand-verputzen-kosten' } },
+  { begriff: 'Belegreife', definition: 'Der Zustand, in dem Estrich trocken genug ist, um einen Bodenbelag zu verlegen. Wird gemessen (z. B. CM-Messung), nicht geschätzt.', mehr: { text: 'Estrich-Trocknungszeit', href: '/blog/estrich-trocknungszeit' } },
+  { begriff: 'Bodengleiche Dusche', definition: 'Eine Dusche ohne Stufe, ebenerdig in den Boden integriert. Standard beim barrierefreien Bad und optisch beliebt.', mehr: { text: 'Barrierefreies Bad', href: '/blog/barrierefreies-bad-kosten' } },
+  { begriff: 'Drückendes Wasser', definition: 'Grund- oder Hangwasser, das von außen aktiv gegen die Kellerwand drückt – der anspruchsvollste Fall bei feuchten Kellern.', mehr: { text: 'Keller abdichten', href: '/blog/keller-abdichten' } },
+  { begriff: 'Entkernung', definition: 'Das Herausreißen von Böden, Wänden, Bädern und Installationen bis auf den tragenden Rohbau – der Start einer Kernsanierung.', mehr: { text: 'Kernsanierung', href: '/blog/kernsanierung-kosten' } },
+  { begriff: 'Estrich', definition: 'Die tragende, ausgleichende Schicht auf dem Rohboden, auf die später der Bodenbelag kommt. Muss vor dem Belegen ausreichend trocknen.', mehr: { text: 'Estrich-Trocknungszeit', href: '/blog/estrich-trocknungszeit' } },
+  { begriff: 'Festpreis', definition: 'Ein vor Baubeginn verbindlich vereinbarter Gesamtpreis für den besprochenen Umfang – ohne Nachträge aus dem Nichts.', mehr: { text: 'Generalunternehmer', href: '/blog/generalunternehmer-sanierung' } },
+  { begriff: 'Gewerk', definition: 'Ein abgegrenzter Handwerksbereich einer Baustelle, z. B. Boden, Malerarbeiten, Trockenbau oder Sanitär.', mehr: { text: 'Einzelgewerke', href: '/leistungen/einzelgewerke' } },
+  { begriff: 'Horizontalsperre', definition: 'Eine nachträglich eingebrachte Sperrschicht, die aufsteigende Feuchtigkeit im Mauerwerk stoppt – typisch bei Altbau-Kellern.', mehr: { text: 'Keller abdichten', href: '/blog/keller-abdichten' } },
+  { begriff: 'Kernsanierung', definition: 'Die Sanierung bis auf den Rohbau mit anschließendem kompletten Neuaufbau von Leitungen, Böden, Wänden und Bad.', mehr: { text: 'Kernsanierung Kosten', href: '/blog/kernsanierung-kosten' } },
+  { begriff: 'Klick-Vinyl', definition: 'Vinyl-Dielen, die ohne Kleber ineinander „klicken". Günstiger und schneller verlegt als vollflächig verklebtes Vinyl.', mehr: { text: 'Vinylboden', href: '/blog/vinylboden-verlegen-kosten' } },
+  { begriff: 'Kondensat', definition: 'Feuchtigkeit, die entsteht, wenn warme, feuchte Raumluft auf kalte Flächen trifft – häufige Ursache für Schimmel und feuchte Keller.', mehr: { text: 'Schimmel sanieren', href: '/blog/schimmel-sanieren' } },
+  { begriff: 'Qualitätsstufen Q1–Q4', definition: 'Vier Stufen für die Oberflächenqualität von Innenputz/Spachtelung: Q1 grob bis Q4 vollflächig geglättet und streiflichttauglich. Je höher, desto mehr Aufwand.', mehr: { text: 'Wände verputzen', href: '/blog/wand-verputzen-kosten' } },
+  { begriff: 'Renovierungszarge', definition: 'Ein Türrahmen, der über die alte, im Mauerwerk verbleibende Zarge gesetzt wird – erspart das Herausstemmen und hält den Dreck klein.', mehr: { text: 'Innentüren austauschen', href: '/blog/innentueren-austauschen' } },
+  { begriff: 'Sockelleiste', definition: 'Die Leiste am Übergang von Boden zu Wand. Deckt die Dehnungsfuge ab und gibt dem Boden einen sauberen Abschluss.', mehr: { text: 'Vinylboden', href: '/blog/vinylboden-verlegen-kosten' } },
+  { begriff: 'Sperrputz', definition: 'Ein spezieller Putz, der Feuchtigkeit von innen zurückhält – eine Möglichkeit der Innenabdichtung im Keller.', mehr: { text: 'Keller abdichten', href: '/blog/keller-abdichten' } },
+  { begriff: 'Taktplan', definition: 'Die zeitliche Abfolge der Gewerke auf einer Baustelle. Ein realistischer Taktplan verhindert, dass Handwerker sich gegenseitig blockieren.', mehr: { text: 'Generalunternehmer', href: '/blog/generalunternehmer-sanierung' } },
+  { begriff: 'Trittschalldämmung', definition: 'Eine Schicht unter dem Bodenbelag, die Gehgeräusche in darunterliegende Räume dämpft. Bei schwimmender Verlegung Pflicht.', mehr: { text: 'Vinylboden', href: '/blog/vinylboden-verlegen-kosten' } },
+  { begriff: 'Übergabeprotokoll', definition: 'Das schriftliche Protokoll bei der Wohnungsübergabe mit Zählerständen und Mängeln – der entscheidende Beweis bei späterem Streit.', mehr: { text: 'Wohnungsübergabe-Checkliste', href: '/blog/wohnungsuebergabe-checkliste' } },
+  { begriff: 'Wärmebrücke', definition: 'Eine Stelle im Bauteil, an der die Wand innen deutlich kälter ist als drumherum. Dort sammelt sich Feuchtigkeit zuerst – Schimmelgefahr.', mehr: { text: 'Schimmel sanieren', href: '/blog/schimmel-sanieren' } },
+  { begriff: 'Zarge', definition: 'Der feste Türrahmen, der in der Wand sitzt und in den das Türblatt eingehängt wird.', mehr: { text: 'Innentüren austauschen', href: '/blog/innentueren-austauschen' } },
+];
+
+// Aggregiert alle FAQ der Website (Leistungen, gemeinsame, Ratgeber) für den
+// Wissens-Hub. Dedupliziert nach Frage. Genutzt von der Seite UND dem Prerender.
+export interface WissensFrage {
+  frage: string;
+  antwort: string;
+  gruppe: string;
+  href: string;
+}
+export function alleWissensFragen(): WissensFrage[] {
+  const out: WissensFrage[] = [];
+  const seen = new Set<string>();
+  const add = (frage: string, antwort: string, gruppe: string, href: string) => {
+    const k = frage.toLowerCase().trim();
+    if (seen.has(k)) return;
+    seen.add(k);
+    out.push({ frage, antwort, gruppe, href });
+  };
+  for (const l of leistungenDetail) for (const f of l.faq) add(f.frage, f.antwort, l.navTitle, `/leistungen/${l.slug}`);
+  for (const f of leistungFaqGemeinsam) add(f.frage, f.antwort, 'Allgemein', '/kontakt');
+  for (const p of blogPosts) if (p.faq) for (const f of p.faq) add(f.frage, f.antwort, 'Ratgeber', `/blog/${p.slug}`);
+  return out;
+}
