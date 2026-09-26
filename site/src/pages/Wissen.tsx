@@ -79,16 +79,22 @@ export default function Wissen() {
           <Reveal as="p" delay={110} style={{ fontSize: 18, lineHeight: 1.65, color: 'rgba(245,242,236,0.66)', maxWidth: 640, marginTop: 26 }}>
             Alle häufigen Fragen an einem Ort — plus ein Lexikon der Begriffe, über die auf jeder Baustelle geredet wird. Durchsuchbar, ohne Fachchinesisch. Raum Heilbronn.
           </Reveal>
-          <Reveal delay={160} style={{ marginTop: 34, maxWidth: 520 }}>
-            <label style={{ display: 'block' }}>
-              <span style={{ position: 'absolute', width: 1, height: 1, overflow: 'hidden', clip: 'rect(0 0 0 0)' }}>Wissen durchsuchen</span>
+          <Reveal delay={160} style={{ marginTop: 34, maxWidth: 560 }}>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                document.getElementById('wissen-fragen')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }}
+              style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}
+            >
               <input
                 type="search"
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
+                aria-label="Wissen durchsuchen"
                 placeholder="Suchen: z. B. Estrich, Kosten, Zarge …"
                 style={{
-                  width: '100%',
+                  flex: '1 1 260px',
                   background: 'rgba(245,242,236,0.06)',
                   border: '1px solid rgba(245,242,236,0.22)',
                   borderRadius: 10,
@@ -99,7 +105,24 @@ export default function Wissen() {
                   outlineColor: 'var(--gold)',
                 }}
               />
-            </label>
+              <button
+                type="submit"
+                className="btn-primary"
+                style={{
+                  fontFamily: mono,
+                  fontSize: 13,
+                  fontWeight: 500,
+                  letterSpacing: '0.04em',
+                  textTransform: 'uppercase',
+                  padding: '14px 24px',
+                  borderRadius: 10,
+                  cursor: 'pointer',
+                  border: 'none',
+                }}
+              >
+                Suchen
+              </button>
+            </form>
             <p style={{ fontFamily: mono, fontSize: 11.5, color: 'rgba(245,242,236,0.45)', marginTop: 10 }}>
               {fragenGefiltert.length} Fragen · {glossarGefiltert.length} Begriffe
             </p>
@@ -108,7 +131,7 @@ export default function Wissen() {
       </section>
 
       {/* ── Häufige Fragen (gebündelt) ────────────────────────────────────── */}
-      <section style={{ background: 'var(--paper)', padding: '80px 0' }}>
+      <section id="wissen-fragen" style={{ background: 'var(--paper)', padding: '80px 0', scrollMarginTop: 80 }}>
         <div style={{ ...container, maxWidth: 900 }}>
           <SectionKicker>Häufige Fragen</SectionKicker>
           <Reveal as="h2" delay={40} style={{ fontFamily: bricolage, fontWeight: 800, fontSize: 'clamp(26px,3.4vw,44px)', letterSpacing: '-0.025em', color: 'var(--t-ink)', margin: '6px 0 34px' }}>
