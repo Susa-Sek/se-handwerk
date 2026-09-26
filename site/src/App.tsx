@@ -19,6 +19,7 @@ import Datenschutz from './pages/Datenschutz';
 import LeistungDetail from './pages/LeistungDetail';
 import BlogList from './pages/BlogList';
 import BlogArticle from './pages/BlogArticle';
+import Wissen from './pages/Wissen';
 import NotFound from './pages/NotFound';
 
 function ScrollManager() {
@@ -59,6 +60,7 @@ export default function App() {
           <Route path="/leistungen/:slug" element={<LeistungDetail />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogArticle />} />
+          <Route path="/wissen" element={<Wissen />} />
           <Route path="/ueber-uns" element={<UeberUns />} />
           <Route path="/kontakt" element={<Kontakt />} />
           <Route path="/impressum" element={<Impressum />} />

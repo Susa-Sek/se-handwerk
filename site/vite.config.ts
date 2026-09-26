@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite'
 import react from '@vitejs/plugin-react'
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { resolve } from 'node:path'
-import { ablauf, bewertung, blogPosts, blogThemen, einsatzOrte, leistungen, leistungenDetail, leistungFaqGemeinsam, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
+import { ablauf, bewertung, blogPosts, blogThemen, einsatzOrte, leistungen, leistungenDetail, leistungFaqGemeinsam, glossar, alleWissensFragen, regionen, seitenSeo, vorteile, zielgruppen } from './src/content.js'
 
 const SITE = 'https://www.sehandwerk.de'
 const esc = (s: string) =>
@@ -216,6 +216,47 @@ ${standardExtra[key] ?? ''}
 <footer role="contentinfo"><p>${il('/#leistungen', 'Leistungen', 'Unsere Leistungen')} · ${il('/#kontakt', 'Kontakt aufnehmen', 'Kontakt zu SE Handwerk')} · ${il('/', 'Startseite', 'Zur Startseite')}</p></footer>
 </main>`
         write(s.path, render(shell, { title: s.title, description: s.description, url, body }))
+      }
+
+      // ── Wissens-Hub /wissen (Fragen gebündelt + Lexikon) ──────────────────
+      {
+        const url = SITE + '/wissen'
+        const wTitle = 'Sanierungs-Wissen & Lexikon: Fragen und Begriffe erklärt | SE Handwerk'
+        const wDesc = 'Wissens-Hub rund um Sanierung und Renovierung: alle häufigen Fragen gebündelt und durchsuchbar, plus ein Lexikon der wichtigsten Begriffe – von Estrich bis Renovierungszarge. Raum Heilbronn.'
+        const fragen = alleWissensFragen()
+        const gruppen: string[] = []
+        for (const f of fragen) if (!gruppen.includes(f.gruppe)) gruppen.push(f.gruppe)
+        const faqHtml = gruppen
+          .map((gr) => `<section><h2>${esc(gr)}</h2>${fragen.filter((f) => f.gruppe === gr).map((f) => `<h3>${esc(f.frage)}</h3><p>${esc(f.antwort)} ${il(f.href, 'Mehr dazu', f.frage)}</p>`).join('')}</section>`)
+          .join('')
+        const glossarHtml = `<section><h2>Sanierungs-Lexikon: Begriffe von A bis Z</h2><dl>${glossar.map((g) => `<dt>${esc(g.begriff)}</dt><dd>${esc(g.definition)}${g.mehr ? ` ${il(g.mehr.href, g.mehr.text, g.mehr.text)}` : ''}</dd>`).join('')}</dl></section>`
+        const jsonLd = [
+          {
+            '@context': 'https://schema.org',
+            '@type': 'DefinedTermSet',
+            name: 'Sanierungs-Lexikon',
+            url,
+            hasDefinedTerm: glossar.map((g) => ({ '@type': 'DefinedTerm', name: g.begriff, description: g.definition, ...(g.mehr ? { url: SITE + g.mehr.href } : {}) })),
+          },
+          { '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Sanierungs-Wissen & Lexikon', url, description: wDesc },
+          {
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Start', item: SITE + '/' },
+              { '@type': 'ListItem', position: 2, name: 'Wissen', item: url },
+            ],
+          },
+        ]
+        const body = `${MAIN_OPEN}
+<nav role="navigation" aria-label="Brotkrumen">${il('/', 'Start', 'Zur Startseite')} / <span>Wissen</span></nav>
+<header role="banner"><h1>Sanierungs-Wissen, ehrlich erklärt</h1>
+<p>Alle häufigen Fragen an einem Ort — plus ein Lexikon der Begriffe, über die auf jeder Baustelle geredet wird. Raum Heilbronn.</p></header>
+${faqHtml}
+${glossarHtml}
+<footer role="contentinfo"><p>${il('/blog', 'Ratgeber', 'Alle Ratgeber-Artikel')} · ${il('/#kontakt', 'Kontakt aufnehmen', 'Kontakt zu SE Handwerk')} · ${il('/', 'Startseite', 'Zur Startseite')}</p></footer>
+</main>`
+        write('/wissen', render(shell, { title: wTitle, description: wDesc, url, body, jsonLd }))
       }
 
       // ── Leistungs-Unterseiten (voller Inhalt) ─────────────────────────────
