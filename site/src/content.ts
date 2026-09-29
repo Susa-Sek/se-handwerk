@@ -2214,6 +2214,93 @@ export const blogPosts: BlogPost[] = [
       },
     ],
   },
+  {
+    slug: 'fenster-tueren-abdichten',
+    metaTitle: 'Fenster & Türen abdichten: Zugluft stoppen | SE Handwerk',
+    metaDescription:
+      'Zugluft am Fenster oder unter der Tür? So finden Sie undichte Stellen im Raum Heilbronn, welche Dichtungen wirklich helfen, was Selbermachen kann und wann Fenster oder Tür getauscht werden müssen.',
+    title: 'Fenster & Türen abdichten: Zugluft stoppen, bevor es kalt wird',
+    excerpt:
+      'Man merkt es zuerst an den Füßen. Man sitzt abends auf dem Sofa, und über den Boden zieht es kühl herüber – obwohl die Heizung läuft. Zugluft an Fenstern und Türen ist einer der größten stillen Wärmefresser. Die gute Nachricht: Die meisten undichten Stellen bekommt man mit wenig Aufwand in den Griff.',
+    datum: '2026-09-29',
+    kategorie: 'Sanierung',
+    lesezeit: '8 Min.',
+    bild: 'blog-winter.jpg',
+    bildAlt: 'Symbolbild: heller, warmer Wohnraum mit Fenster in der kalten Jahreszeit',
+    kurz: [
+      'Zugluft kommt fast immer von müden Dichtungen an Fenster und Tür – nicht von der ganzen Fensterscheibe.',
+      'Der einfachste Test: eine Kerze oder ein feuchter Handrücken am Rahmen entlang – wo es flackert oder kühl zieht, ist die Stelle.',
+      'Selbstklebende Dichtbänder, eine neue Fensterfalzdichtung und eine Türbodendichtung lösen die meisten Fälle günstig.',
+      'Klemmt das Fenster dauerhaft, ist die Scheibe innen beschlagen oder das Holz morsch, hilft Abdichten nicht mehr – dann ist Tausch das Thema.',
+    ],
+    relatedLeistung: 'wand-decke',
+    faq: [
+      { frage: 'Wie finde ich undichte Stellen an Fenster und Tür?', antwort: 'Am einfachsten mit einer Kerzenflamme oder dem befeuchteten Handrücken langsam am Rahmen entlangfahren: Wo die Flamme flackert oder es spürbar kühl zieht, ist die undichte Stelle. Meist sind es der umlaufende Fensterfalz und der Spalt unter der Tür.' },
+      { frage: 'Was kostet es, Fenster und Türen abzudichten?', antwort: 'Selbst gemacht ist es günstig: Dichtbänder und Türbodendichtungen liegen als grober Richtwert oft im kleinen zweistelligen Bereich pro Fenster oder Tür. Der Wert ist ein Richtwert, kein Angebot – bei größeren Undichtigkeiten kann mehr nötig sein.' },
+      { frage: 'Wann reicht Abdichten nicht mehr?', antwort: 'Wenn das Fenster sich nicht mehr sauber schließen lässt, die Scheibe innen dauerhaft beschlägt, sich Kondenswasser oder Schimmel am Rahmen bildet oder das Holz morsch ist. Dann ist die Undichtigkeit ein Bauteilproblem und ein Austausch die sinnvollere Lösung.' },
+    ],
+    sections: [
+      {
+        h2: 'Es fängt an den Füßen an',
+        paras: [
+          'Die Heizung läuft, der Raum sollte warm sein – und trotzdem zieht es kühl über den Boden. Man rückt näher an die Heizung, dreht höher, und die Wärme verpufft trotzdem. Der Grund sitzt fast immer am Fenster oder unter der Tür: undichte Stellen, durch die warme Luft raus und kalte Luft reinzieht.',
+          'Das Ärgerliche daran: Man heizt gegen ein offenes Fenster, ohne es zu sehen. Das Gute: Die meisten dieser Stellen sind kein Fall für Handwerker mit Spezialwerkzeug, sondern für einen ruhigen Nachmittag – wenn man weiß, wo man suchen muss.',
+        ],
+      },
+      {
+        h2: 'Woher die Zugluft wirklich kommt',
+        paras: [
+          'Zugluft kommt selten durch die Glasscheibe selbst. Die Schwachstellen sind die beweglichen Teile und ihre Dichtungen:',
+        ],
+        list: [
+          'Der umlaufende Fensterfalz: Die Gummidichtung wird mit den Jahren hart und spröde und schließt nicht mehr sauber.',
+          'Der Spalt unter der Wohnungs- oder Zimmertür: oft ein fingerbreiter Kanal für kalte Luft.',
+          'Alte Fenster mit verzogenen Flügeln, die nicht mehr richtig andrücken.',
+          'Rollladenkästen und der Übergang Fensterrahmen–Wand, wenn dort die Abdichtung fehlt.',
+        ],
+      },
+      {
+        h2: 'Der einfache Test: Kerze oder Handrücken',
+        paras: [
+          'Bevor man irgendetwas kauft, findet man die Stellen. Bei geschlossenem Fenster eine Kerze oder ein Feuerzeug langsam am Rahmen entlangführen – flackert die Flamme, zieht dort Luft. Wer es ohne Flamme mag: den leicht befeuchteten Handrücken am Falz und an der Türkante entlangbewegen, kühle Zugluft spürt man sofort.',
+          'So weiß man vorher genau, wo gedichtet werden muss, statt blind das ganze Fenster zu bekleben. Das spart Material und bringt am Ende mehr.',
+        ],
+      },
+      {
+        h2: 'Was gegen Zugluft wirklich hilft',
+        paras: [
+          'Für die allermeisten Fälle reichen ein paar einfache Mittel, die es im Baumarkt gibt:',
+        ],
+        list: [
+          'Selbstklebende Dichtbänder (Schaumstoff oder Gummi) für den Fensterfalz – sauber, trocken aufkleben, damit sie halten.',
+          'Eine neue Fensterfalzdichtung, wenn die alte Gummilippe hart geworden ist.',
+          'Eine Türbodendichtung oder Bürstendichtung gegen den Spalt unter der Tür.',
+          'Gegen Zugluft an der Haustür hilft übergangsweise ein Zugluftstopper, dauerhaft eine ordentliche Dichtung.',
+        ],
+      },
+      {
+        h2: 'Wann Abdichten nicht mehr reicht',
+        paras: [
+          'Abdichten ist die günstige Lösung – aber nicht für jedes Problem. Wenn ein Fenster sich nicht mehr sauber schließen lässt, die Scheibe innen dauerhaft beschlägt, sich Kondenswasser oder gar Schimmel am Rahmen bildet oder das Holz weich und morsch ist, dann ist die Undichtigkeit ein Bauteilproblem. Ein Dichtband überklebt das nur.',
+          'Ehrlich gesagt: In so einem Fall ist der Austausch von Fenster oder Tür auf Dauer die klügere Investition – neue Fenster sparen spürbar Energie. Das plant man in Ruhe, am besten mit Blick auf mögliche Förderungen, statt es im ersten Kälteeinbruch zu übers Knie zu brechen.',
+        ],
+      },
+      {
+        h2: 'Lüften nicht vergessen',
+        paras: [
+          'Ein kurzer, wichtiger Nachsatz: Ein dicht gemachtes Fenster heißt nicht, dass gar keine Luft mehr rein soll. Ganz im Gegenteil – je dichter die Wohnung, desto wichtiger ist bewusstes Stoßlüften. Sonst bleibt die Feuchtigkeit drin und sucht sich die kälteste Wand für Schimmel.',
+          'Die Regel bleibt: dicht gegen Zugluft, aber mehrmals täglich kurz und kräftig durchlüften. Das eine schließt das andere nicht aus.',
+        ],
+      },
+      {
+        h2: 'Fenster & Türen abdichten im Raum Heilbronn',
+        paras: [
+          'Die kleinen Abdichtungen macht man gut selbst. Wenn aber Fenster oder Türen ausgetauscht werden sollen, undichte Anschlüsse zur Wand hin auftauchen oder sich schon Feuchte und Schimmel am Rahmen zeigen, schauen wir uns das im Raum Heilbronn an und sagen ehrlich, was nötig ist – von der Dichtung bis zum Austausch, aus einer Hand und mit Festpreis vor Baubeginn.',
+          'Bei Ihnen zieht es, und Sie wissen nicht, ob Dichten reicht oder der Tausch ansteht? Erzählen Sie uns davon – wir sehen es uns an und sagen Ihnen, was sich wirklich lohnt.',
+        ],
+      },
+    ],
+  },
 ];
 
 export function getPost(slug: string | undefined): BlogPost | undefined {

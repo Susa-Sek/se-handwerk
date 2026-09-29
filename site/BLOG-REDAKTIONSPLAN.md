@@ -19,9 +19,8 @@ ihn live und markiert ihn hier als `veröffentlicht`. Details im Job-Prompt.
 ## Warteschlange (oben = als Nächstes)
 | # | Thema | Ziel-Keyword | Leistung | Saison | Status |
 |---|---|---|---|---|---|
-| 1 | Fenster & Türen gegen Zugluft abdichten | zugluft fenster abdichten | wand-decke | Herbst/Winter | geplant |
-| 2 | Wohnung streichen: Reihenfolge & Tipps | wohnung streichen | wand-decke | ganzjährig | geplant |
-| 3 | Sockelleisten erneuern: Kosten & Montage | sockelleisten erneuern | bodenarbeiten | ganzjährig | geplant |
+| 1 | Wohnung streichen: Reihenfolge & Tipps | wohnung streichen | wand-decke | ganzjährig | geplant |
+| 2 | Sockelleisten erneuern: Kosten & Montage | sockelleisten erneuern | bodenarbeiten | ganzjährig | geplant |
 
 Wenn alle abgearbeitet sind: 2–3 neue, saisonal passende Themen ergänzen,
 bevor geschrieben wird.
@@ -30,10 +29,10 @@ bevor geschrieben wird.
 > „Wohnung sanieren vor Vermietung" konsolidiert (301-Redirect). Künftig keine
 > weiteren „Wohnung-für-Vermietung-herrichten"-Themen anlegen.
 
-## Bereits veröffentlicht (22)
+## Bereits veröffentlicht (23)
 Vinylboden-Kosten · Laminat vs. Vinyl · Wohnung sanieren vor Vermietung ·
 Badsanierung Kosten · Trockenbau Kosten · Sanierung im Raum Heilbronn ·
 Generalunternehmer Sanierung · Sanieren im Sommer · Wohnung Mieterwechsel ·
 Malerkosten pro m² · Estrich Trocknungszeit · Barrierefreies Bad · Kernsanierung Kosten ·
 Wohnungsübergabe-Checkliste · Fliesen verlegen Kosten · Geerbte Immobilie sanieren ·
-Altbausanierung worauf achten · Sanieren vor dem Winter · Schimmel sanieren · Keller abdichten · Wände verputzen Kosten · Innentüren austauschen
+Altbausanierung worauf achten · Sanieren vor dem Winter · Schimmel sanieren · Keller abdichten · Wände verputzen Kosten · Innentüren austauschen · Fenster & Türen abdichten
